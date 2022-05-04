@@ -4,6 +4,7 @@ import { Client } from 'src/app/shared/Client';
 import { Router } from '@angular/router';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-client-update',
@@ -48,10 +49,21 @@ export class ClientUpdateComponent implements OnInit {
     {
       this.ventrixdbservice.updateClient(this.clientform.value).subscribe();
       //redirects back to data table and refreshes page
-      this.router.navigate(['/read-client']).then(() => {
-        window.location.reload();
-      });
-    
+      //Sweet alerts are used as notifications
+      Swal.fire({
+        icon: 'success',
+        title: 'Client Updated Successfully',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#077bff',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/read-client']).then(() => {
+            window.location.reload();
+          });
+        }
+      })  
     }
 
     //When Cancel button clicked returns to Read Client screen
