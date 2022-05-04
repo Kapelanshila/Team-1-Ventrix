@@ -12,7 +12,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./create-client.component.css']
 })
 export class CreateClientComponent implements OnInit {
-
   clientform : FormGroup;
   submitted = false;
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
@@ -21,9 +20,9 @@ export class CreateClientComponent implements OnInit {
       this.clientform = fbuilder.group({
       contactPersonName: new FormControl ('',[Validators.required]),
       contactPersonSurname: new FormControl ('',[Validators.required,]),
-      contactPersonNumber: new FormControl ('',[Validators.required,]),
+      contactPersonNumber: new FormControl ('',[Validators.required]),
       workAddress: new FormControl ('',[Validators.required,]),
-      emailAddress: new FormControl ('',[Validators.required,]),
+      emailAddress: new FormControl ('',[Validators.required,Validators.email]),
     });
   }
 
@@ -33,26 +32,31 @@ export class CreateClientComponent implements OnInit {
   //Form submit calls add client function
   addClient()
   {
-    console.log(this.clientform.value);
-    this.ventrixdbservice.createClient(this.clientform.value).subscribe()
-      //redirects back to data table and refreshes
-      //Sweet alerts are used as notifications
-      Swal.fire({
-        icon: 'success',
-        title: 'Client Added Successfully',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#077bff',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigate(['/read-client']).then(() => {
-            window.location.reload();
-          });
-        }
-      })  
+    this.submitted = true;
+    if (this.clientform.valid) {
+      console.log(this.clientform.value);
+      this.ventrixdbservice.createClient(this.clientform.value).subscribe()
+        //redirects back to data table and refreshes
+        //Sweet alerts are used as notifications
+        Swal.fire({
+          icon: 'success',
+          title: 'Client Added Successfully',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/read-client']).then(() => {
+              window.location.reload();
+            });
+          }
+        })  
+    }
   }
 
+  // Get value of formcontrol name to return it to api
+  get f() { return this.clientform.controls!; }
 
   //When Cancel button clicked returns to Read Client screen
   returnDataTable()
