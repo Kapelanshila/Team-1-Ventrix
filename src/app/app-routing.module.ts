@@ -10,7 +10,9 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'create-client', component: CreateClientComponent },
 { path: 'read-client', component: ReadClientComponent },
 { path: 'update-client', component: ClientUpdateComponent },
-{ path: 'dashboard', component: DashboardComponent },];
+{ path: 'dashboard', component: DashboardComponent },
+
+];
 // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }];
 
 @NgModule({
