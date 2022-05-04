@@ -67,12 +67,12 @@
     text-align: right;
     padding-left: 10px;
   }
-  .navbar-top
+  /* .navbar-top
   {
     padding:7%;
     padding-bottom:4%;
     color: white;
-  }
+  } */
   
   .xyz :hover
   {
@@ -88,4 +88,3 @@
     position: absolute; 
     z-index: 1;
 }
-   

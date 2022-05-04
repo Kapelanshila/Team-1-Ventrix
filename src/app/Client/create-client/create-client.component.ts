@@ -4,6 +4,7 @@ import { Client } from 'src/app/shared/Client';
 import { Router } from '@angular/router';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-client',
@@ -34,10 +35,22 @@ export class CreateClientComponent implements OnInit {
   {
     console.log(this.clientform.value);
     this.ventrixdbservice.createClient(this.clientform.value).subscribe()
-        //redirects back to data table and refreshes
-        this.router.navigate(['/read-client']).then(() => {
-          window.location.reload();
-        });
+      //redirects back to data table and refreshes
+      //Sweet alerts are used as notifications
+      Swal.fire({
+        icon: 'success',
+        title: 'Client Added Successfully',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#077bff',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/read-client']).then(() => {
+            window.location.reload();
+          });
+        }
+      })  
   }
 
 

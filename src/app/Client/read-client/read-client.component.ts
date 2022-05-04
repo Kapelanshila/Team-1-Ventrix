@@ -3,6 +3,9 @@ import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.ser
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Client } from 'src/app/shared/Client';
 import { Router } from '@angular/router';
+//Make sure swal is imported
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-read-client',
   templateUrl: './read-client.component.html',
@@ -34,8 +37,24 @@ export class ReadClientComponent implements OnInit {
 
   //Delete Client Function 
   deleteClient(selectedclient: Client)
-  {
-    this.ventrixdbservice.deleteClient(selectedclient).subscribe();
-    location.reload();
+  { 
+      //Sweet alerts are used as notifications
+      Swal.fire({
+        icon: 'warning',
+        title: 'Are you sure you want to delete this client?',
+        showDenyButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+        confirmButtonColor: '#077bff',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.ventrixdbservice.deleteClient(selectedclient).subscribe();
+          this.router.navigate(['/read-client']).then(() => {
+          window.location.reload();
+          });
+        }
+      })  
   }
 }
