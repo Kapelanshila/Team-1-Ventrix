@@ -1,1 +1,52 @@
-<p>create-supplier works!</p>
+
+<div class="body">
+    <app-navigation></app-navigation>
+    <div class="card">
+        <!--Form group linking input values to typescript -->
+        <form class="form"  [formGroup]="supplierform" (ngSubmit)="addSupplier()"><span class="reauth-email"> </span>					
+            <h4 class="card-title">Add Supplier</h4>
+            <hr>
+            <br>
+            <div class="form-group">
+                <label>Supplier Name</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['SupplierName'].errors?.['required'] || f['SupplierName'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a supplier name</span>
+                </div>
+                <input type="text" class="form-control" formControlName="SupplierName" placeholder="Enter Supplier Name" required>
+            </div>
+            <div class="form-group">
+                <label>Contact Person Surname</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['contactPersonSurname'].errors?.['required'] || f['contactPersonSurname'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a contact person surname</span>
+                </div>
+                <input type="text" class="form-control" formControlName="contactPersonSurname" placeholder="Enter Contact Person Surname" required>
+            </div>
+            <div class="form-group">     
+                <label>Contact Number</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['contactPersonNumber'].errors?.['required']" class="text-danger" >Please enter a contact number</span>
+                </div>
+                <input type="text" class="form-control" formControlName="contactPersonNumber" placeholder="Enter Client Contact Number" required>
+            </div>	
+            <div class="form-group">
+                <label>Work Address</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['workAddress'].errors?.['required'] || f['workAddress'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a work address</span>
+                </div>
+                <textarea class="form-control" formControlName = "workAddress" placeholder="Enter Supplier Work Address" required></textarea>
+            </div>	
+            <div class="form-group">
+                <label>Supplier Email Address</label>
+                      <div *ngIf="submitted">
+                        <span *ngIf="f['emailAddress'].errors?.['required'] || f['emailAddress'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an email</span>
+                    </div>
+                    <div>
+                        <span *ngIf="f['emailAddress'].errors?.['email'] && (f['emailAddress'].touched || f['emailAddress'].dirty)" class="text-danger" >Please enter a valid email address</span>
+                    </div>
+                <input type="email" class="form-control" formControlName = "emailAddress" placeholder="Enter Client Email" required>
+            </div>
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Create">
+        </form>
+    </div>
+</div>
