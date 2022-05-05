@@ -20,9 +20,9 @@ export class CreateClientComponent implements OnInit {
       this.clientform = fbuilder.group({
       contactPersonName: new FormControl ('',[Validators.required]),
       contactPersonSurname: new FormControl ('',[Validators.required,]),
-      contactPersonNumber: new FormControl ('',[Validators.required,]),
+      contactPersonNumber: new FormControl ('',[Validators.required,Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       workAddress: new FormControl ('',[Validators.required,]),
-      emailAddress: new FormControl ('',[Validators.required,]),
+      emailAddress: new FormControl ('',[Validators.required,Validators.email]),
     });
   }
 
@@ -40,10 +40,16 @@ export class CreateClientComponent implements OnInit {
         });
   }
 
-
   //When Cancel button clicked returns to Read Client screen
   returnDataTable()
   {
     this.router.navigate(['/read-client']);
+  }
+
+  //whitespace validation
+  public noWhitespaceValidator(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : {'whitespace': true}
   }
 }
