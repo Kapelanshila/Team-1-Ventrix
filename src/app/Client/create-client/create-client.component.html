@@ -9,7 +9,7 @@
             <div class="form-group">
                 <label>Name</label>
                 <div *ngIf="submitted">
-                    <span *ngIf="f['contactPersonName'].errors?.['required']" class="text-danger" >Please enter a contact person name</span>
+                    <span *ngIf="f['contactPersonName'].errors?.['required'] || f['contactPersonName'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a contact person name</span>
                 </div>
                 <input type="text" class="form-control" formControlName="contactPersonName" placeholder="Enter Client Name" required>
             </div>
@@ -17,7 +17,7 @@
                 <label>Surname</label>
                    <!-- Error messages -->
                 <div *ngIf="submitted">
-                    <span *ngIf="f['contactPersonSurname'].errors?.['required']" class="text-danger" >Please enter a contact person surname</span>
+                    <span *ngIf="f['contactPersonSurname'].errors?.['required'] || f['contactPersonSurname'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a contact person surname</span>
                 </div>
                 <input type="text" class="form-control" formControlName="contactPersonSurname" placeholder="Enter Client Surname" required>
             </div>
@@ -36,7 +36,7 @@
                 <label>Address</label>
                 <!-- Error messages -->
                 <div *ngIf="submitted">
-                    <span *ngIf="f['workAddress'].errors?.['required']" class="text-danger" >Please enter a work address</span>
+                    <span *ngIf="f['workAddress'].errors?.['required'] || f['workAddress'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a work address</span>
                 </div>
                 <textarea class="form-control" formControlName = "workAddress" placeholder="Enter Client Address" required></textarea>
             </div>	
@@ -44,10 +44,10 @@
                 <label>Email</label>
                       <!-- Error messages -->
                       <div *ngIf="submitted">
-                        <span *ngIf="f['emailAddress'].errors?.['required']" class="text-danger" >Please enter an email</span>
+                        <span *ngIf="f['emailAddress'].errors?.['required'] || f['emailAddress'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an email</span>
                     </div>
                     <div>
-                        <span *ngIf="f['emailAddress'].errors?.['email'] && (f['emailAddress'].touched || f['emailAddress'].dirty)" class="text-danger" >Please enter a email address</span>
+                        <span *ngIf="f['emailAddress'].errors?.['email'] && (f['emailAddress'].touched || f['emailAddress'].dirty)" class="text-danger" >Please enter a valid email address</span>
                     </div>
                 <input type="email" class="form-control" formControlName = "emailAddress" placeholder="Enter Client Email" required>
             </div>

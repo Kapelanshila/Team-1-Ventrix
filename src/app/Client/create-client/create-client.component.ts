@@ -18,11 +18,11 @@ export class CreateClientComponent implements OnInit {
   {
       //Additional Validation can be added here
       this.clientform = fbuilder.group({
-      contactPersonName: new FormControl ('',[Validators.required]),
-      contactPersonSurname: new FormControl ('',[Validators.required,]),
-      contactPersonNumber: new FormControl ('',[Validators.required]),
-      workAddress: new FormControl ('',[Validators.required,]),
-      emailAddress: new FormControl ('',[Validators.required,Validators.email]),
+      contactPersonName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      contactPersonSurname: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      contactPersonNumber: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      workAddress: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      emailAddress: new FormControl ('',[Validators.required,Validators.email,this.noWhitespaceValidator]),
     });
   }
 
@@ -62,5 +62,21 @@ export class CreateClientComponent implements OnInit {
   returnDataTable()
   {
     this.router.navigate(['/read-client']);
+  }
+
+  public noWhitespaceValidator(control: FormControl) {
+    var iCount = 0;
+    for(var i = 0; i < control.value.length; i++)
+    {
+      if (control.value[i] == " ")
+      {
+        iCount += 1
+      }
+    }
+    if (iCount != control.value.length)
+    {
+      return  null
+    }
+    return {'noWhitespaceValidator' : true}
   }
 }
