@@ -27,10 +27,7 @@
                 <div *ngIf="submitted">
                     <span *ngIf="f['contactPersonNumber'].errors?.['required']" class="text-danger" >Please enter a contact number</span>
                 </div>
-                <!-- <div>
-                    <span *ngIf="f['contactPersonNumber'].invalid && (f['contactPersonNumber'].touched || f['contactPersonNumber'].dirty)" class="text-danger" >Please enter a valid phone number</span>
-                </div> -->
-                <input type="text" class="form-control" formControlName="contactPersonNumber" placeholder="Enter Client Contact Number" required>
+                <input type="number" class="form-control" formControlName="contactPersonNumber" placeholder="Enter Client Contact Number" required>
             </div>	
             <div class="form-group">
                 <label>Address</label>
