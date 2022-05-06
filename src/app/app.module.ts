@@ -9,6 +9,7 @@ import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
 import { CreateClientComponent } from './Client/create-client/create-client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientUpdateComponent } from './Client/update-client/client-update.component';
+import { DepreciationComponent } from './Depreciation/depreciation/depreciation.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ClientUpdateComponent } from './Client/update-client/client-update.comp
     DashboardComponent,
     CreateClientComponent,
     ClientUpdateComponent,
+    DepreciationComponent
   ],
   imports: [
     BrowserModule,

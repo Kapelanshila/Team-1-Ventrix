@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Client } from '../shared/Client';
+import { DepreciationComponent } from '../Depreciation/depreciation/depreciation.component';
+import { Depreciation } from '../shared/Depreciation';
 @Injectable({
   providedIn: 'root'
 })
@@ -49,7 +51,23 @@ export class VentrixDBServiceService {
       this.selectedClient = undefined;
     }
 
+    createDepreciation(obj:any): Observable<any[]> {
+      return this.http.post<any>('https://localhost:44317/api/Depreciation/createDepreciation',obj)
+    }
 
-
+    //Returns Depreciation from API
+    readDepreciation(): Observable<Depreciation> {
+      return this.http.get<Depreciation>('https://localhost:44317/api/Depreciation/getDepreciation')
+    }
     
+    //Updates Depreciation from API
+    updateDepreciation(obj:any): Observable<any[]> {
+      return this.http.post<any>('https://localhost:44317/api/Depreciation/updateDepreciation',obj)
+    }
+
+    //Deletes Depreciation from API
+    deleteDepreciation(obj:any): Observable<any[]> {
+      return this.http.post<any>('https://localhost:44317/api/Depreciation/deleteDepreciation',obj)
+    }
+
 }

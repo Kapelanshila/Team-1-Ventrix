@@ -1,0 +1,20 @@
+<div class="body">
+    <app-navigation></app-navigation>
+    <form class="admin-form"  [formGroup]="depreciationform"><span class="reauth-email"></span>		
+        <div class="admin-card">	
+            <h4>Depreciation</h4>
+            <hr>
+            <button type="button" class="btn btn-primary" (click)="createDepreciation()"><i class="fa fa-plus"></i> Add New</button>
+            <br>
+            <br>
+            <div class="form-group">
+                <div *ngIf="submitted">
+                    <span *ngIf="f['Percentage'].errors?.['required']" class="text-danger" >Please enter a valid percentage</span>
+                </div>
+                    <input class = "number" type="number" class="form-control" required step=".1" mr-1  formControlName = "Percentage"> 
+                <input type="button" class="btn btn-secondary" value="Update" (click)="updateDepreciation()">
+                <input type="button" class="btn btn-danger" value="Delete" (click)="deleteDepreciation()">
+            </div>
+        </div>
+    </form>
+</div>
