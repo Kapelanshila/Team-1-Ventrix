@@ -1,0 +1,18 @@
+<div class = "body">
+<div class="warranty-card">
+    <app-navigation></app-navigation>
+    <div class="card">
+ <!--Form group linking input values to typescript -->
+        <form class="form-warranty-period"  [formGroup]="warrantyPeriodForm" (ngSubmit)="updateWarrantyPeriod()"><span class="reauth-email"> </span>					
+            <h4 class="card-title">Update Warranty Period</h4>
+            <hr>
+            <br>
+            <div class="form-group">
+                <input type="text" class="form-control" formControlName="Description" placeholder="Enter a warranty period" required>
+            </div>
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Save">
+        </form>
+</div>
+</div>
+</div>

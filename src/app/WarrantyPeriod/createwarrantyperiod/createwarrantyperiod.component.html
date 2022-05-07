@@ -1,0 +1,18 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class ="warranty-period-card">
+        <form class="form-warranty-period"><span class="reauth-email"> </span>					
+            <h4 class="card-title">Create Warranty Period</h4>
+            <hr>
+            <br>
+            <label>Warranty period </label>
+            <div class="form-group">
+                <label></label>
+                <input type="number" min="1" class="form-control" formControlName="Description" placeholder="Enter a warranty period" required>
+            </div>
+
+            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Add">
+        </form>
+    </div>
+</div>
