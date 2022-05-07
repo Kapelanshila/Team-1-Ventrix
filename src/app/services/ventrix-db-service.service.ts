@@ -9,28 +9,28 @@ import { Deliverystatus } from '../shared/Deliverystatus';
 })
 export class VentrixDBServiceService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
     selectedClient: Client | undefined;
     //Client CRUD:
     //Creates client from API
     createClient(obj:any): Observable<any[]> {
-      return this.httpClient.post<any>('https://localhost:44317/api/Client/createClient',obj)
+      return this.http.post<any>('https://localhost:44317/api/Client/createClient',obj)
     }
 
     //Returns clients from API
     readClient(): Observable<Client[]> {
-      return this.httpClient.get<Client[]>('https://localhost:44317/api/Client/getClients')
+      return this.http.get<Client[]>('https://localhost:44317/api/Client/getClients')
     }
     
     //Updates clients from API
     updateClient(obj:any): Observable<any[]> {
-      return this.httpClient.post<any>('https://localhost:44317/api/Client/updateClient',obj)
+      return this.http.post<any>('https://localhost:44317/api/Client/updateClient',obj)
     }
 
     //Deletes client from API
     deleteClient(obj:any): Observable<any[]> {
-      return this.httpClient.post<any>('https://localhost:44317/api/Client/deleteClient',obj)
+      return this.http.post<any>('https://localhost:44317/api/Client/deleteClient',obj)
     }
 
     //Get Selected client so it can be either updated or deleted
@@ -50,16 +50,9 @@ export class VentrixDBServiceService {
     {
       this.selectedClient = undefined;
     }
-<<<<<<< Updated upstream
-=======
 
     createDepreciation(obj:any): Observable<any[]> {
       return this.http.post<any>('https://localhost:44317/api/Depreciation/createDepreciation',obj)
-    }
-
-    //Returns Depreciation from API
-    readDepreciation(): Observable<Depreciation> {
-      return this.http.get<Depreciation>('https://localhost:44317/api/Depreciation/getDepreciation')
     }
     
     //Updates Depreciation from API
@@ -153,5 +146,4 @@ export class VentrixDBServiceService {
     }
 
 
->>>>>>> Stashed changes
 }
