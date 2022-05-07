@@ -2,13 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Client } from '../shared/Client';
-<<<<<<< Updated upstream
-=======
-import { DepreciationComponent } from '../Depreciation/depreciation/depreciation.component';
-import { Depreciation } from '../shared/Depreciation';
 import { Securityquestion } from '../shared/Securityquestion';
 import { Deliverystatus } from '../shared/Deliverystatus';
->>>>>>> Stashed changes
 @Injectable({
   providedIn: 'root'
 })
