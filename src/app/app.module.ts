@@ -25,7 +25,8 @@ import { DepreciationComponent } from './Depreciation/depreciation/depreciation.
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

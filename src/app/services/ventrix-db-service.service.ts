@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Client } from '../shared/Client';
 import { DepreciationComponent } from '../Depreciation/depreciation/depreciation.component';
 import { Depreciation } from '../shared/Depreciation';
+import { param } from 'jquery';
+import { Query } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
@@ -50,6 +52,11 @@ export class VentrixDBServiceService {
     clearClient()
     {
       this.selectedClient = undefined;
+    }
+
+    //Searches Client through use if the api
+    searchClient(value:string){
+      return this.http.get<any>('https://localhost:44317/api/Client/searchClients?search='+value)
     }
 
     createDepreciation(obj:any): Observable<any[]> {
