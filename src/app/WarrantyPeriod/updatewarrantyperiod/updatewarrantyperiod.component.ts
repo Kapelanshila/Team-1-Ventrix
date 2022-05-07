@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-updatewarrantyperiod',
@@ -39,12 +40,24 @@ export class UpdatewarrantyperiodComponent implements OnInit {
     updateWarrantyPeriod()
     {
       this.ventrixdbservice.updateWarrantyPeriod(this.warrantyPeriodForm.value).subscribe();
-      //redirects back to data table and refreshes page
+      
+      Swal.fire({
+        icon: 'success',
+        heading: 'Update warranty period',
+        title: 'The warranty period has been successfully updated',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#077bff',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      })then((result) => {
+        if (result.isConfirmed) {
+ //redirects back to data table and refreshes page
       this.router.navigate(['/read-warranty-period']).then(() => {
         window.location.reload();
       });
-    
     }
+  })  
+}
 
     //When Cancel button clicked returns to Read WarrantyPeriod screen
     returnDataTable()

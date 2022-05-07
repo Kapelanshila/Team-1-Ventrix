@@ -3,6 +3,7 @@ import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.ser
 import { BehaviorSubject, Observable } from 'rxjs';
 import { WarrantyPeriod} from 'src/app/shared/WarrantyPeriod';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-readwarrantyperiod',
@@ -37,9 +38,23 @@ export class ReadwarrantyperiodComponent implements OnInit {
   //Delete WarrantyPeriod 
   deleteWarrantyPeriod(selectedWarrantyPeriod: WarrantyPeriod)
   {
+    Swal.fire({
+      icon: 'warning',
+      heading: 'Delete warranty period',
+      title: 'Are you sure you would like to delete this warranty period?',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: `No`,
+      confirmButtonColor: '#077bff',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then((result) => {
+      if (result.isConfirmed) {
     this.ventrixdbservice.deleteWarrantyPeriod(selectedWarrantyPeriod).subscribe();
-    location.reload();
+    this.router.navigate(['/read-warranty-period']).then(() => {
+      window.location.reload();
+    });
   }
-
+})  
 }
-
+}

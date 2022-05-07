@@ -4,6 +4,7 @@ import { Warehouse } from 'src/app/shared/Warehouse';
 import { Router } from '@angular/router';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-warehouse',
@@ -28,14 +29,29 @@ export class CreateWarehouseComponent implements OnInit {
   //Form submit calls add warehouse function
   addWarehouse()
   {
+    this.submitted = true;
+    if (this.warehouseForm.valid) {
     console.log(this.warehouseForm.value);
     this.ventrixdbservice.createClient(this.warehouseForm.value).subscribe()
+
+    Swal.fire({
+      icon: 'success',
+      heading:'Create warehouse',
+      title: 'The warehouse has been successfully created and saved.',
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#077bff',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then((result) => {
+      if (result.isConfirmed) {
         //redirects back to data table and refreshes
         this.router.navigate(['/read-warehouse']).then(() => {
           window.location.reload();
         });
+      }
+    })
   }
-
+  }
 
   //When Cancel button clicked returns to Read Client screen
   returnDataTable()

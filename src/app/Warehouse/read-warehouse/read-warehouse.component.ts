@@ -3,6 +3,7 @@ import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.ser
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Warehouse} from 'src/app/shared/Warehouse';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-read-warehouse',
@@ -37,8 +38,23 @@ export class ReadWarehouseComponent implements OnInit {
   //Delete Warehouse Function 
   deleteWarehouse(selectedWarehouse: Warehouse)
   {
-    this.ventrixdbservice.deleteWarehouse(selectedWarehouse).subscribe();
-    location.reload();
-  }
-
+    Swal.fire({
+      icon: 'warning',
+      heading: 'Delete warehouse',
+      title: 'Are you sure you would like to delete this warehouse?',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: `No`,
+      confirmButtonColor: '#077bff',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ventrixdbservice.deleteWarrantyPeriod(selectedWarehouse).subscribe();
+        this.router.navigate(['/read-warehouse']).then(() => {
+          window.location.reload();
+  });
+}
+})  
+}
 }
