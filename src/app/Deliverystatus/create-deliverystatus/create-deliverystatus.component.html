@@ -1,0 +1,21 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="Deliverystatus-card">
+        <!--Form group linking input values to typescript -->
+        <form class="form-Deliverystatus"  [formGroup]="Deliverystatusform" (ngSubmit)="addDeliverystatus()"><span class="reauth-email"> </span>					
+            <h4 class="card-title">Add Delivery Status</h4>
+            <hr>
+            <br>
+            <div class="form-group">
+                <label>Enter Delivery Status</label>
+                   <!-- Error messages -->
+                <div *ngIf="submitted">
+                    <span *ngIf="f['Description'].errors?.['required']" class="text-danger" >Please enter a delivery status</span>
+                </div>
+                <input type="text" class="form-control" formControlName="Description" placeholder="Enter Delivery Status" required>
+            </div>
+                     
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Add">
+        </form>
+</div>
