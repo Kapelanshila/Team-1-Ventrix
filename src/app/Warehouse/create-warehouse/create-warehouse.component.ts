@@ -4,7 +4,7 @@ import { Warehouse } from 'src/app/shared/Warehouse';
 import { Router } from '@angular/router';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
+import  Swal  from 'sweetalert2';
 
 @Component({
   selector: 'app-create-warehouse',
@@ -20,6 +20,7 @@ export class CreateWarehouseComponent implements OnInit {
       //Additional Validation can be added here
       this.warehouseForm = fbuilder.group({
       Name: new FormControl ('',[Validators.required]),
+      Address: new FormControl ('',[Validators.required])
     });
   }
 
@@ -32,11 +33,10 @@ export class CreateWarehouseComponent implements OnInit {
     this.submitted = true;
     if (this.warehouseForm.valid) {
     console.log(this.warehouseForm.value);
-    this.ventrixdbservice.createClient(this.warehouseForm.value).subscribe()
+    this.ventrixdbservice.createWarehouse(this.warehouseForm.value).subscribe()
 
     Swal.fire({
       icon: 'success',
-      heading:'Create warehouse',
       title: 'The warehouse has been successfully created and saved.',
       confirmButtonText: 'OK',
       confirmButtonColor: '#077bff',
@@ -52,6 +52,9 @@ export class CreateWarehouseComponent implements OnInit {
     })
   }
   }
+
+   // Get value of formcontrol name to return it to api
+   get f() { return this.warehouseForm.controls!; }
 
   //When Cancel button clicked returns to Read Client screen
   returnDataTable()

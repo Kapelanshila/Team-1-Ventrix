@@ -45,13 +45,12 @@ export class UpdateWarehouseComponent implements OnInit {
       
       Swal.fire({
         icon: 'success',
-        heading: 'Update warehouse',
         title: 'The warehouse has been successfully updated',
         confirmButtonText: 'OK',
         confirmButtonColor: '#077bff',
         allowOutsideClick: false,
         allowEscapeKey: false
-      })then((result) => {
+      }).then((result) => {
         if (result.isConfirmed) {
       //redirects back to data table and refreshes page
       this.router.navigate(['/read-warehouse']).then(() => {

@@ -1,7 +1,7 @@
 <div class = "body">
     <app-navigation></app-navigation>
     <div class ="warranty-period-card">
-        <form class="form-warranty-period"><span class="reauth-email"> </span>					
+        <form class="form-warranty-period" [formGroup]="warrantyPeriodForm" (ngSubmit)="addWarrantyPeriod()"><span class="reauth-email"> </span>					
             <h4 class="card-title">Create Warranty Period</h4>
             <hr>
             <br>

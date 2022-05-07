@@ -1,17 +1,17 @@
 <div class = "body">
     <app-navigation></app-navigation>
     <div class ="warehouse-card">
-        <form class="form"><span class="reauth-email"> </span>					
+        <form class="form-warehouse" [formGroup]="warehouseForm" (ngSubmit)="addWarehouse()"><span class="reauth-email"> </span>					
             <h4 class="card-title">Create warehouse</h4>
             <hr>
             <br>
             <div class="form-group">
                 <label>Name</label>
-                <input type="text" class="form-control" placeholder="Enter name of the warehouse" required>
+                <input type="text" class="form-control" formControlName="Name" placeholder="Enter name of the warehouse" required>
             </div>
             <div class="form-group">
                 <label>Address</label>
-                <input type="text" placeholder = "Enter the address of the warehouse" class="form-control" required>
+                <input type="text" formControlName="Address"placeholder = "Enter the address of the warehouse" class="form-control" required>
             </div>
             <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
             <input type="submit" class="btn btn-primary" value="Add">

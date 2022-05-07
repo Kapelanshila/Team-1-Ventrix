@@ -32,11 +32,10 @@ export class CreatewarrantyperiodComponent implements OnInit {
     this.submitted = true;
     if (this.warrantyPeriodForm.valid) {
     console.log(this.warrantyPeriodForm.value);
-    this.ventrixdbservice.createClient(this.warrantyPeriodForm.value).subscribe()
+    this.ventrixdbservice.createWarrantyPeriod(this.warrantyPeriodForm.value).subscribe()
 
     Swal.fire({
       icon: 'success',
-      heading:'Create warranty period',
       title: 'The warranty period has been successfully created and saved.',
       confirmButtonText: 'OK',
       confirmButtonColor: '#077bff',
@@ -52,6 +51,10 @@ export class CreatewarrantyperiodComponent implements OnInit {
     })
   }
   }
+
+   // Get value of formcontrol name to return it to api
+   get f() { return this.warrantyPeriodForm.controls!; }
+
 
 
   //When Cancel button clicked returns to Read Warranty Period screen

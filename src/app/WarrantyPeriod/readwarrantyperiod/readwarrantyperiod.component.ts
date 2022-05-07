@@ -40,7 +40,6 @@ export class ReadwarrantyperiodComponent implements OnInit {
   {
     Swal.fire({
       icon: 'warning',
-      heading: 'Delete warranty period',
       title: 'Are you sure you would like to delete this warranty period?',
       showDenyButton: true,
       confirmButtonText: 'Yes',

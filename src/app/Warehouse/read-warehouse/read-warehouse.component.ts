@@ -40,7 +40,6 @@ export class ReadWarehouseComponent implements OnInit {
   {
     Swal.fire({
       icon: 'warning',
-      heading: 'Delete warehouse',
       title: 'Are you sure you would like to delete this warehouse?',
       showDenyButton: true,
       confirmButtonText: 'Yes',
@@ -50,7 +49,7 @@ export class ReadWarehouseComponent implements OnInit {
       allowEscapeKey: false
     }).then((result) => {
       if (result.isConfirmed) {
-        this.ventrixdbservice.deleteWarrantyPeriod(selectedWarehouse).subscribe();
+        this.ventrixdbservice.deleteWarehouse(selectedWarehouse).subscribe();
         this.router.navigate(['/read-warehouse']).then(() => {
           window.location.reload();
   });
