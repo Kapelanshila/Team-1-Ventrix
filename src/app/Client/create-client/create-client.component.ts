@@ -20,8 +20,8 @@ export class CreateClientComponent implements OnInit {
       this.clientform = fbuilder.group({
       contactPersonName: new FormControl ('',[Validators.required]),
       contactPersonSurname: new FormControl ('',[Validators.required,]),
-      contactPersonNumber: new FormControl ('',[Validators.required]),
-      workAddress: new FormControl ('',[Validators.required,]),
+      contactPersonNumber: new FormControl ('',[Validators.required,Validators.pattern("[0-9 ]{11}")]),
+      workAddress: new FormControl ('',[Validators.required]),
       emailAddress: new FormControl ('',[Validators.required,Validators.email]),
     });
   }

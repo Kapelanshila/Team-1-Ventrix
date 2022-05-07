@@ -1,5 +1,5 @@
 export interface Depreciation {
-    DepreciationId: Number
-    Percentage: Number
-    DateTime: Date
+    depreciationId: Number
+    percentage: Number
+    date: Date
 }

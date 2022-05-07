@@ -13,15 +13,16 @@ import Swal from 'sweetalert2';
 })
 export class DepreciationComponent implements OnInit {
   depreciationform : FormGroup;
-  depreciations:Depreciation | undefined;
+  depreciations:any[] = [];
+  newDepreciation!:Depreciation;
   submitted = false;
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
   {
       //Additional Validation can be added here
       this.depreciationform = fbuilder.group({
-      DepreciationId: new FormControl (''),
-      Percentage: new FormControl ('',[Validators.required]),
-      DateTime: new FormControl (''),
+      depreciationId: new FormControl (''),
+      percentage: new FormControl ('',[Validators.required]),
+      date: new FormControl (''),
     });
   }
 
@@ -32,27 +33,23 @@ export class DepreciationComponent implements OnInit {
 
     this.ventrixdbservice.readDepreciation()
     .subscribe(response => {
-      this.depreciations = response;
-      console.log(this.depreciations)
+       this.depreciations = response
+       console.log(this.depreciations)
     })
-
-    if (this.depreciations != undefined)
-    {
-      this.depreciationform.patchValue({
-      DepreciationId: this.depreciations?.DepreciationId,
-      Percentage : this.depreciations?.Percentage,
-      DateTime: this.depreciations?.DateTime 
-      })  
-    }
   }
-
 
   createDepreciation()
   {
-    this.submitted = true;
+      
+    this.newDepreciation = 
+    {
+      depreciationId: 0,
+      percentage: this.depreciationform.get('percentage')?.value,
+      date: new Date(0)
+    }
     if (this.depreciationform.valid) {
-      console.log(this.depreciationform.value);
-      this.ventrixdbservice.createDepreciation(this.depreciationform.value).subscribe()
+      console.log(this.newDepreciation);
+      this.ventrixdbservice.createDepreciation(this.newDepreciation).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications
         Swal.fire({
@@ -73,32 +70,51 @@ export class DepreciationComponent implements OnInit {
   }
 
   
-  updateDepreciation()
+  updateDepreciation(selectedDepreciation: Depreciation)
   {
-    this.submitted = true;
     if (this.depreciationform.valid) {
-      console.log(this.depreciationform.value);
-      this.ventrixdbservice.updateDepreciation(this.depreciationform.value).subscribe()
-        //redirects back to data table and refreshes
-        //Sweet alerts are used as notifications
+      if (selectedDepreciation.percentage == this.depreciationform.get('percentage')?.value)
+      {
         Swal.fire({
-          icon: 'success',
-          title: 'Depreciation Added Successfully',
+          icon: 'error',
+          title: 'Depreciation already exists',
           confirmButtonText: 'OK',
           confirmButtonColor: '#077bff',
           allowOutsideClick: false,
           allowEscapeKey: false
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.router.navigate(['/depreciation']).then(() => {
-              window.location.reload();
-            });
-          }
-        })  
-    }
-  }
+        })
+      }
+      else
+      {
+        this.newDepreciation = 
+        {
+          depreciationId: selectedDepreciation.depreciationId,
+          percentage: this.depreciationform.get('percentage')?.value,
+          date: new Date(0)
+        }
+        console.log(this.newDepreciation);
+        this.ventrixdbservice.updateDepreciation(this.newDepreciation).subscribe()
+          //redirects back to data table and refreshes
+          //Sweet alerts are used as notifications
+          Swal.fire({
+            icon: 'success',
+            title: 'Depreciation Added Successfully',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#077bff',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['/depreciation']).then(() => {
+                window.location.reload();
+              });
+            }
+          })  
+        }
+      }  
+   }
 
-  deleteDepreciation()
+  deleteDepreciation(selectedDepreciation: Depreciation)
   {
     //Sweet alerts are used as notifications
     Swal.fire({
@@ -112,7 +128,7 @@ export class DepreciationComponent implements OnInit {
       allowEscapeKey: false
     }).then((result) => {
       if (result.isConfirmed) {
-        this.ventrixdbservice.deleteDepreciation(this.depreciationform.value).subscribe();
+        this.ventrixdbservice.deleteDepreciation(selectedDepreciation).subscribe();
         this.router.navigate(['/depreciation']).then(() => {
         window.location.reload();
         });

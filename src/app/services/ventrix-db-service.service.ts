@@ -12,6 +12,7 @@ export class VentrixDBServiceService {
   constructor(private http: HttpClient) { }
 
     selectedClient: Client | undefined;
+    depreciationValue: Depreciation | undefined;
     //Client CRUD:
     //Creates client from API
     createClient(obj:any): Observable<any[]> {
@@ -56,8 +57,8 @@ export class VentrixDBServiceService {
     }
 
     //Returns Depreciation from API
-    readDepreciation(): Observable<Depreciation> {
-      return this.http.get<Depreciation>('https://localhost:44317/api/Depreciation/getDepreciation')
+    readDepreciation(): Observable<Depreciation[]> {
+      return this.http.get<Depreciation[]>('https://localhost:44317/api/Depreciation/getDepreciation')
     }
     
     //Updates Depreciation from API
@@ -70,4 +71,15 @@ export class VentrixDBServiceService {
       return this.http.post<any>('https://localhost:44317/api/Depreciation/deleteDepreciation',obj)
     }
 
+
+    setDepreciation(value : Depreciation)
+    {
+      this.depreciationValue = value;
+    }
+
+    //Returns selected client so it can be used on potentially other pages
+    getDepreciation()
+    {
+      return this.depreciationValue;
+    }
 }
