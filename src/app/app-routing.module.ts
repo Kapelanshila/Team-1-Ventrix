@@ -18,14 +18,17 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'update-client', component: ClientUpdateComponent },
 { path: 'dashboard', component: DashboardComponent },
 { path: 'create-securityquestion', component: CreateSecurityquestionComponent },
+{ path: 'read-securityquestion', component: ReadSecurityquestionComponent },
 { path: 'update-securityquestion', component: UpdateSecurityquestionComponent },
 { path: 'create-deliverystatus', component: CreateDeliverystatusComponent },
 { path: 'read-deliverystatus', component: ReadDeliverystatusComponent },
 { path: 'update-deliverystatus', component: UpdateDeliverystatusComponent },
-{ path: 'dashboard', component: DashboardComponent },];
+
+];
 // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
