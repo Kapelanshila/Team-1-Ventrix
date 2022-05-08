@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class ReadUserComponent implements OnInit {
 
   users:any[] = [];
+  query:string = '';
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) { }
 
   ngOnInit(): void 
@@ -57,5 +58,50 @@ export class ReadUserComponent implements OnInit {
           });
         }
       })  
+  }
+
+  searchUser()
+  {
+    if (this.query == '' || this.query.replace(/\s/g,'').length == 0)
+    {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Search',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#077bff',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/read-user']).then(() => {
+            window.location.reload();
+          });
+        }
+      })
+    }
+    else
+    {
+      this.ventrixdbservice.searchUser(this.query.toString()).subscribe(response => {
+        this.users = response;
+        if (this.users.length == 0)
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'No Results Found',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#077bff',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['read-user']).then(() => {
+                window.location.reload();
+              });
+            }
+          })
+        }
+        console.log(this.users)
+      })
+    }
   }
 }

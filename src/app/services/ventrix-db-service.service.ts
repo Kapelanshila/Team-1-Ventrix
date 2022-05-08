@@ -52,22 +52,22 @@ export class VentrixDBServiceService {
       this.selectedClient = undefined;
     }
 
-     selectedUser: User | undefined;
-     //User CRUD:
-     //Creates user from API
-     createUser(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44317/api/User/createUser',obj)
-     }
+    selectedUser: User | undefined;
+    //User CRUD:
+    //Creates user from API
+    createUser(obj:any): Observable<any[]> {
+      return this.http.post<any>('https://localhost:44317/api/User/createUser',obj)
+    }
 
-     //Returns users from API
-     readUser(): Observable<User[]> {
-       return this.http.get<User[]>('https://localhost:44317/api/User/getUsers')
-     }
+    //Returns users from API
+    readUser(): Observable<User[]> {
+      return this.http.get<User[]>('https://localhost:44317/api/User/getUsers')
+    }
     
-     //Updates users from API
-     updateUser(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44317/api/User/updateUser',obj)
-     }
+    //Updates users from API
+    updateUser(obj:any): Observable<any[]> {
+      return this.http.post<any>('https://localhost:44317/api/User/updateUser',obj)
+    }
 
      //Deletes user from API
      deleteUser(obj:any): Observable<any[]> {
@@ -90,6 +90,11 @@ export class VentrixDBServiceService {
      clearUser()
      {
        this.selectedUser = undefined;
+     }
+
+     //Searches User through use of the api
+     searchUser(value:string){
+       return this.http.get<any>('https://localhost:44317/api/User/searchUsers?search='+value)
      }
 
      selectedSupplier: Supplier | undefined;
@@ -131,6 +136,11 @@ export class VentrixDBServiceService {
      {
        this.selectedSupplier = undefined;
      }
+
+     //Searches Supplier through use of the api
+     searchSupplier(value:string){
+      return this.http.get<any>('https://localhost:44317/api/Supplier/searchSuppliers?search='+value)
+    }
 
     
 }

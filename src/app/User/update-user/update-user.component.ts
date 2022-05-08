@@ -38,25 +38,31 @@ export class UpdateUserComponent implements OnInit {
     this.ventrixdbservice.clearClient();
   }
 
+  get f() { return this.userform.controls!;}
+
   updateUser()
   {
-    this.ventrixdbservice.updateUser(this.userform.value).subscribe();
-    //redirects back to data table and refreshes page
-    //Sweet alerts are used as notifications
-    Swal.fire({
-      icon: 'success',
-      title: 'User Updated Successfully',
-      confirmButtonText: 'OK',
-      confirmButtonColor: '#077bff',
-      allowOutsideClick: false,
-      allowEscapeKey: false
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.router.navigate(['/read-user']).then(() => {
-          window.location.reload();
-        });
-      }
-    })  
+    this.submitted = true;
+    if (this.userform.valid)
+    {
+      this.ventrixdbservice.updateUser(this.userform.value).subscribe();
+      //redirects back to data table and refreshes page
+      //Sweet alerts are used as notifications
+      Swal.fire({
+        icon: 'success',
+        title: 'User Updated Successfully',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#077bff',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/read-user']).then(() => {
+           window.location.reload();
+          });
+        }
+      })  
+    } 
   }
 
   //When Cancel button clicked returns to Read User screen

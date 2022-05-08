@@ -45,25 +45,31 @@ export class UpdateSupplierComponent implements OnInit {
     this.ventrixdbservice.clearClient();
   }
 
+  get f() { return this.supplierform.controls!;}
+
   updateSupplier()
     {
-      this.ventrixdbservice.updateSupplier(this.supplierform.value).subscribe();
-      //redirects back to data table and refreshes page
-      //Sweet alerts are used as notifications
-      Swal.fire({
-        icon: 'success',
-        title: 'Supplier Updated Successfully',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#077bff',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigate(['/read-supplier']).then(() => {
-            window.location.reload();
-          });
-        }
-      })  
+      this.submitted = true;
+      if (this.supplierform.valid)
+      {
+        this.ventrixdbservice.updateSupplier(this.supplierform.value).subscribe();
+        //redirects back to data table and refreshes page
+        //Sweet alerts are used as notifications
+        Swal.fire({
+          icon: 'success',
+          title: 'Supplier Updated Successfully',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/read-supplier']).then(() => {
+              window.location.reload();
+            });
+          }
+        }) 
+      } 
     }
 
     //When Cancel button clicked returns to Read Supplier screen
