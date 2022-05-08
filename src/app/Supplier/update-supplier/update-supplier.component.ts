@@ -75,7 +75,7 @@ export class UpdateSupplierComponent implements OnInit {
           allowEscapeKey: false
         }).then((result) => {
           if (result.isConfirmed) {
-            this.router.navigate(['/create-supplier']).then(() => {
+            this.router.navigate(['/read-supplier']).then(() => {
               window.location.reload();
             })
           }
@@ -83,7 +83,7 @@ export class UpdateSupplierComponent implements OnInit {
       }
     });
 
-      if (this.supplierform.valid)
+      if (this.supplierform.valid && this.find == false)
       {
         this.ventrixdbservice.updateSupplier(this.supplierform.value).subscribe();
         //redirects back to data table and refreshes page

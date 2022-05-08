@@ -9,14 +9,12 @@ import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
 import { CreateClientComponent } from './Client/create-client/create-client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientUpdateComponent } from './Client/update-client/client-update.component';
-import { CreateUserComponent } from './create-user/create-user.component';
-import { ReadUserComponent } from './read-user/read-user.component';
-import { UpdateUserComponent } from './update-user/update-user.component';
-import { CreateSupplierComponent } from './create-supplier/create-supplier.component';
-import { ReadSupplierComponent } from './read-supplier/read-supplier.component';
-import { UpdateSupplierComponent } from './update-supplier/update-supplier.component';
-import { RegisterUserComponent } from './register-user/register-user.component';
-import { UpdateUserDetailsComponent } from './update-user-details/update-user-details.component';
+import { CreateUserComponent } from './User/create-user/create-user.component';
+import { ReadUserComponent } from './User/read-user/read-user.component';
+import { UpdateUserComponent } from './User/update-user/update-user.component';
+import { CreateSupplierComponent } from './Supplier/create-supplier/create-supplier.component';
+import { ReadSupplierComponent } from './Supplier/read-supplier/read-supplier.component';
+import { UpdateSupplierComponent } from './Supplier/update-supplier/update-supplier.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +30,6 @@ import { UpdateUserDetailsComponent } from './update-user-details/update-user-de
     CreateSupplierComponent,
     ReadSupplierComponent,
     UpdateSupplierComponent,
-    RegisterUserComponent,
-    UpdateUserDetailsComponent,
   ],
   imports: [
     BrowserModule,
