@@ -1,5 +1,5 @@
 export interface Warehouse {
-    WarehouseId: Number
-    Name :String 
-    Address: String
+    warehouseId: Number
+    name :String 
+    address: String
 }

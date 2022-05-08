@@ -1,4 +1,4 @@
 export interface WarrantyPeriod {
-    WarrantyPeriodId: Number
-    Description:String 
+    warrantyPeriodId: Number
+    description: String 
 }

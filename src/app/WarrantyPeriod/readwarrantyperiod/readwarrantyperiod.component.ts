@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { WarrantyPeriod} from 'src/app/shared/WarrantyPeriod';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,7 +14,16 @@ import Swal from 'sweetalert2';
 })
 export class ReadwarrantyperiodComponent implements OnInit {
   warrantyPeriods:any[] = [];
-  constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) { }
+  p: number = 1;
+  config: any; 
+  noOfRows = 10;
+  constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
+  { 
+    this.config = {
+      currentPage: 1,
+      itemsPerPage: 2
+    };
+  }
 
 
   ngOnInit(): void 
@@ -24,10 +35,15 @@ export class ReadwarrantyperiodComponent implements OnInit {
     })
   }
 
-  addWarrantyPeriod()
+  createWarrantyPeriod()
   {
     this.router.navigate(['/create-warranty-period']);
   }
+
+  pageChange(newPage: number) {
+		this.router.navigate(['/read-warranty-period'], { queryParams: { page: newPage } })
+  }
+
 
   editWarrantyPeriod(selectedWarrantyPeriod: WarrantyPeriod)
   {
@@ -38,6 +54,7 @@ export class ReadwarrantyperiodComponent implements OnInit {
   //Delete WarrantyPeriod 
   deleteWarrantyPeriod(selectedWarrantyPeriod: WarrantyPeriod)
   {
+    
     Swal.fire({
       icon: 'warning',
       title: 'Are you sure you would like to delete this warranty period?',
@@ -49,11 +66,11 @@ export class ReadwarrantyperiodComponent implements OnInit {
       allowEscapeKey: false
     }).then((result) => {
       if (result.isConfirmed) {
-    this.ventrixdbservice.deleteWarrantyPeriod(selectedWarrantyPeriod).subscribe();
-    this.router.navigate(['/read-warranty-period']).then(() => {
-      window.location.reload();
-    });
-  }
+        this.ventrixdbservice.deleteWarrantyPeriod(selectedWarrantyPeriod).subscribe();
+        this.router.navigate(['/read-warranty-period']).then(() => {
+          window.location.reload();
+  });
+}
 })  
 }
 }

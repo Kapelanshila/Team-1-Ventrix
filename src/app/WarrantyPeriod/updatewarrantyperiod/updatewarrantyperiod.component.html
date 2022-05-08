@@ -9,7 +9,11 @@
             <hr>
             <br>
             <div class="form-group">
-                <input type="text" class="form-control" formControlName="Description" placeholder="Enter a warranty period" required>
+                <!-- Error messages -->
+                <div *ngIf="submitted">
+                    <span *ngIf="f['description'].errors?.['required'] || f['description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a warranty period</span>
+                </div>
+                <input type="text" class="form-control" formControlName="description" placeholder="Enter a warranty period" required>
             </div>
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
             <input type="submit" class="btn btn-primary" value="Save">

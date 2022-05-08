@@ -15,6 +15,8 @@ import { UpdateWarehouseComponent } from './Warehouse/update-warehouse/update-wa
 import { CreatewarrantyperiodComponent } from './WarrantyPeriod/createwarrantyperiod/createwarrantyperiod.component';
 import { ReadwarrantyperiodComponent } from './WarrantyPeriod/readwarrantyperiod/readwarrantyperiod.component';
 import { UpdatewarrantyperiodComponent } from './WarrantyPeriod/updatewarrantyperiod/updatewarrantyperiod.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -30,12 +32,16 @@ import { UpdatewarrantyperiodComponent } from './WarrantyPeriod/updatewarrantype
     CreatewarrantyperiodComponent,
     ReadwarrantyperiodComponent,
     UpdatewarrantyperiodComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

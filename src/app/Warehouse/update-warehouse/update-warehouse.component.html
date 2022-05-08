@@ -8,15 +8,23 @@
     <br>
     <div class="form-group">
         <label>Name</label>
-        <input type="text" class="form-control" formControlName="Name" placeholder="Enter warehouse name" required>
+        <!-- Error messages -->
+        <div *ngIf="submitted">
+            <span *ngIf="f['name'].errors?.['required'] || f['name'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a name</span>
+        </div>
+        <input type="text" class="form-control" formControlName="name" placeholder="Enter the warehouse name" required>
     </div>
     <div class="form-group">
-        <label>Surname</label>
-        <input type="text" class="form-control" formControlName="Address" placeholder="Enter warehouse address" required>
+        <label>Address</label>
+           <!-- Error messages -->
+        <div *ngIf="submitted">
+            <span *ngIf="f['address'].errors?.['required'] || f['address'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an address</span>
+        </div>
+        <input type="text" class="form-control" formControlName="address" placeholder="Enter the warehouse address" required>
     </div>
 
     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
     <input type="submit" class="btn btn-primary" value="Save">
 </form>
 </div>
-</div>
+

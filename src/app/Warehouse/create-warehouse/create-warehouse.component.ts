@@ -15,43 +15,75 @@ export class CreateWarehouseComponent implements OnInit {
 
   warehouseForm : FormGroup;
   submitted = false;
+  find=false;
+  warehouses:any[] = [];
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
   {
       //Additional Validation can be added here
       this.warehouseForm = fbuilder.group({
-      Name: new FormControl ('',[Validators.required]),
-      Address: new FormControl ('',[Validators.required])
+      name: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      address: new FormControl ('',[Validators.required,this.noWhitespaceValidator])
     });
   }
 
   ngOnInit(): void {
-  }
+    
+    this.ventrixdbservice.readWarehouse()
+    .subscribe(response => {
+      this.warehouses = response;
+      console.log(this.warehouses)
+  })
+}
   
   //Form submit calls add warehouse function
-  addWarehouse()
+createWarehouse()
   {
     this.submitted = true;
-    if (this.warehouseForm.valid) {
-    console.log(this.warehouseForm.value);
-    this.ventrixdbservice.createWarehouse(this.warehouseForm.value).subscribe()
-
-    Swal.fire({
-      icon: 'success',
-      title: 'The warehouse has been successfully created and saved.',
-      confirmButtonText: 'OK',
-      confirmButtonColor: '#077bff',
-      allowOutsideClick: false,
-      allowEscapeKey: false
-    }).then((result) => {
-      if (result.isConfirmed) {
-        //redirects back to data table and refreshes
-        this.router.navigate(['/read-warehouse']).then(() => {
-          window.location.reload();
-        });
+    //Check if warehouse does not already exsist
+    this.warehouses.forEach(element => {
+      if (element.name == this.warehouseForm.get('name')?.value 
+      && element.address == this.warehouseForm.get('address')?.value) 
+      {
+        this.find = true;
+        Swal.fire({
+          icon: 'error',
+          title: 'This warehouse already exists',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+              this.router.navigate(['/create-warehouse']).then(() => {
+              window.location.reload();
+            });
+          }
+        })  
       }
-    })
+    });
+
+    if (this.warehouseForm.valid && this.find == false) {
+      console.log(this.warehouseForm.value);
+      this.ventrixdbservice.createWarehouse(this.warehouseForm.value).subscribe()
+        //redirects back to data table and refreshes
+        //Sweet alerts are used as notifications
+        Swal.fire({
+          icon: 'success',
+          title: 'The warehouse has been added successfully',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/read-warehouse']).then(() => {
+              window.location.reload();
+            });
+          }
+        })  
+    }
   }
-  }
+   
 
    // Get value of formcontrol name to return it to api
    get f() { return this.warehouseForm.controls!; }
@@ -61,5 +93,24 @@ export class CreateWarehouseComponent implements OnInit {
   {
     this.router.navigate(['/read-warehouse']);
   }
+
+  //Check no white spaces
+  public noWhitespaceValidator(someFormControl: FormControl) 
+  {
+    var iCount = 0;
+    for(var i = 0; i < someFormControl.value.length; i++)
+    {
+      if (someFormControl.value[i] == " ")
+      {
+        iCount += 1
+      }
+    }
+    if (iCount != someFormControl.value.length)
+    {
+      return  null
+    }
+    return {'noWhitespaceValidator' : true}
+
+}
 
 }

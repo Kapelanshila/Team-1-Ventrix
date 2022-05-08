@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Warehouse} from 'src/app/shared/Warehouse';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,7 +14,16 @@ import Swal from 'sweetalert2';
 })
 export class ReadWarehouseComponent implements OnInit {
   warehouses:any[] = [];
-  constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) { }
+  p: number = 1;
+  config: any; 
+  noOfRows = 10;
+  constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
+  {
+    this.config = {
+      currentPage: 1,
+      itemsPerPage: 2
+    };
+   }
 
 
   ngOnInit(): void 
@@ -24,9 +35,13 @@ export class ReadWarehouseComponent implements OnInit {
     })
   }
 
-  addWarehouse()
+  createWarehouse()
   {
     this.router.navigate(['/create-warehouse']);
+  }
+
+  pageChange(newPage: number) {
+		this.router.navigate(['/read-warehouse'], { queryParams: { page: newPage } })
   }
 
   editWarehouse(selectedWarehouse: Warehouse)
@@ -38,6 +53,7 @@ export class ReadWarehouseComponent implements OnInit {
   //Delete Warehouse Function 
   deleteWarehouse(selectedWarehouse: Warehouse)
   {
+    
     Swal.fire({
       icon: 'warning',
       title: 'Are you sure you would like to delete this warehouse?',
