@@ -9,6 +9,10 @@ import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
 import { CreateClientComponent } from './Client/create-client/create-client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientUpdateComponent } from './Client/update-client/client-update.component';
+import { DepreciationComponent } from './Depreciation/depreciation/depreciation.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+
 
 @NgModule({
   declarations: [
@@ -18,12 +22,16 @@ import { ClientUpdateComponent } from './Client/update-client/client-update.comp
     DashboardComponent,
     CreateClientComponent,
     ClientUpdateComponent,
+    DepreciationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
