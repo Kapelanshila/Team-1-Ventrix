@@ -6,7 +6,6 @@ import { Warehouse } from '../shared/Warehouse';
 import { param } from 'jquery';
 import { WarrantyPeriod } from '../shared/WarrantyPeriod';
 import { Depreciation } from '../shared/Depreciation';
-import { param } from 'jquery';
 import { Query } from '@angular/core';
 
 @Injectable({
@@ -175,3 +174,4 @@ export class VentrixDBServiceService {
        this.selectedWarrantyPeriod = undefined;
      }
 
+    }

@@ -18,8 +18,8 @@ import { UpdatewarrantyperiodComponent } from './WarrantyPeriod/updatewarrantype
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DepreciationComponent } from './Depreciation/depreciation/depreciation.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+
+
 
 @NgModule({
   declarations: [
