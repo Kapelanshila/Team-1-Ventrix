@@ -10,6 +10,9 @@ import { CreateClientComponent } from './Client/create-client/create-client.comp
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientUpdateComponent } from './Client/update-client/client-update.component';
 import { DepreciationComponent } from './Depreciation/depreciation/depreciation.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { DepreciationComponent } from './Depreciation/depreciation/depreciation.
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

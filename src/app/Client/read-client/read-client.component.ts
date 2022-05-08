@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Client } from 'src/app/shared/Client';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Query } from 'src/app/shared/Query';
-
 //Make sure swal is imported
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-read-client',
@@ -17,9 +17,20 @@ import Swal from 'sweetalert2';
 })
 export class ReadClientComponent implements OnInit {
   clients:any[] = [];
+  p: number = 1;
+  config: any; 
+  noOfRows = 10;
   //Search query 
   query:string = '';
-  constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) { }
+  constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
+  { 
+    this.config = {
+      currentPage: 1,
+      itemsPerPage: 2
+    };
+
+
+  }
 
   ngOnInit(): void 
   {
@@ -33,6 +44,11 @@ export class ReadClientComponent implements OnInit {
   addClient()
   {
     this.router.navigate(['/create-client']);
+  }
+
+  
+  pageChange(newPage: number) {
+		this.router.navigate(['/read-client'], { queryParams: { page: newPage } })
   }
 
   editClient(selectedclient: Client)
