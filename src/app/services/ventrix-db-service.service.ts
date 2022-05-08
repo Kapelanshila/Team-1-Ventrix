@@ -5,6 +5,10 @@ import { Client } from '../shared/Client';
 import { Warehouse } from '../shared/Warehouse';
 import { param } from 'jquery';
 import { WarrantyPeriod } from '../shared/WarrantyPeriod';
+import { Depreciation } from '../shared/Depreciation';
+import { param } from 'jquery';
+import { Query } from '@angular/core';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +17,7 @@ export class VentrixDBServiceService {
   constructor(private http: HttpClient) { }
 
     selectedClient: Client | undefined;
+    depreciationValue: Depreciation | undefined;
     //Client CRUD:
     //Creates client from API
     createClient(obj:any): Observable<any[]> {
@@ -51,9 +56,42 @@ export class VentrixDBServiceService {
     {
       this.selectedClient = undefined;
     }
+  
+  //Searches Client through use if the api
+    searchClient(value:string){
+      return this.http.get<any>('https://localhost:44317/api/Client/searchClients?search='+value)
+    }
+
+    createDepreciation(obj:any): Observable<any[]> {
+      return this.http.post<any>('https://localhost:44317/api/Depreciation/createDepreciation',obj)
+    }
+
+    //Returns Depreciation from API
+    readDepreciation(): Observable<Depreciation[]> {
+      return this.http.get<Depreciation[]>('https://localhost:44317/api/Depreciation/getDepreciation')
+    }
+    
+    //Updates Depreciation from API
+    updateDepreciation(obj:any): Observable<any[]> {
+      return this.http.post<any>('https://localhost:44317/api/Depreciation/updateDepreciation',obj)
+    }
+
+    //Deletes Depreciation from API
+    deleteDepreciation(obj:any): Observable<any[]> {
+      return this.http.post<any>('https://localhost:44317/api/Depreciation/deleteDepreciation',obj)
+    }
 
 
+    setDepreciation(value : Depreciation)
+    {
+      this.depreciationValue = value;
+    }
 
+    //Returns selected client so it can be used on potentially other pages
+    getDepreciation()
+    {
+      return this.depreciationValue;
+    }
 
     ///// Warehouse
     selectedWarehouse: Warehouse | undefined;
@@ -136,4 +174,4 @@ export class VentrixDBServiceService {
      {
        this.selectedWarrantyPeriod = undefined;
      }
-}
+
