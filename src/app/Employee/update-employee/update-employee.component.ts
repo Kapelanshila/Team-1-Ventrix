@@ -19,14 +19,15 @@ export class UpdateEmployeeComponent implements OnInit {
       //Additional Validation can be added here
       this.employeeform = fbuilder.group({
       //Employee ID is not displayed but is neccessary for the API to update
-      employeeid: new FormControl('',[Validators.required]),
+      employeeId: new FormControl('',[Validators.required]),
+      userId: new FormControl ('',[Validators.required]),
       name: new FormControl ('',[Validators.required]),
       surname: new FormControl ('',[Validators.required,]),
-      idNumber: new FormControl ('',[Validators.required]),
+      idnumber: new FormControl ('',[Validators.required]),
       phoneNumber: new FormControl ('',[Validators.required]),
       homeAddress: new FormControl ('',[Validators.required]),
       emailAddress: new FormControl ('',[Validators.required]),
-      title: new FormControl ('',[Validators.required]),
+      titleId: new FormControl ('',[Validators.required]),
     });
   }
 
@@ -35,16 +36,17 @@ export class UpdateEmployeeComponent implements OnInit {
     {
       this.employee = this.ventrixdbservice.getEmployee();
       this.employeeform.patchValue({
-      EmployeeId: this.employee?.employeeId,
-      Name: this.employee?.name,
-      Surname: this.employee?.surname,
-      IdNumber: this.employee?.idNumber,
-      PhoneNumber: this.employee?.phoneNumber,
-      HomeAddress: this.employee?.homeAddress,
-      EmailAddress: this.employee?.emailAddress,
-      Title: this.employee?.title,
+      employeeId: this.employee?.employeeId,
+      name: this.employee?.name,
+      surname: this.employee?.surname,
+      idnumber: this.employee?.idnumber,
+      phoneNumber: this.employee?.phoneNumber,
+      homeAddress: this.employee?.homeAddress,
+      emailAddress: this.employee?.emailAddress,
+      titleId: this.employee?.titleId,
+      userId: this.employee?.userId,
       })
-
+      console.log(this.employeeform.value)
       this.ventrixdbservice.clearEmployee();
     }
 

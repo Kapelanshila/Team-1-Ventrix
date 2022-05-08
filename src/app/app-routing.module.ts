@@ -15,7 +15,7 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'update-client', component: ClientUpdateComponent },
 { path: 'dashboard', component: DashboardComponent },
 { path: 'create-employee', component: CreateEmployeeComponent},
-{ path: 'update-empoyee', component: UpdateEmployeeComponent},
+{ path: 'update-employee', component: UpdateEmployeeComponent},
 { path: 'read-employee', component: ReadEmployeeComponent}];
 // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }];
 

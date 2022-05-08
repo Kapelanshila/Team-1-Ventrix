@@ -18,12 +18,12 @@ export class CreateEmployeeComponent implements OnInit {
   {
       //Additional Validation can be added here
       this.employeeform = fbuilder.group({
-      Name: new FormControl ('',[Validators.required]),
-      Surname: new FormControl ('',[Validators.required]),
-      IdNumber: new FormControl ('',[Validators.required]),
-      PhoneNumber: new FormControl ('',[Validators.required]),
-      HomeAddress: new FormControl ('',[Validators.required]),
-      EmailAddress: new FormControl ('',[Validators.required]),
+      name: new FormControl ('',[Validators.required]),
+      surname: new FormControl ('',[Validators.required]),
+      idNumber: new FormControl ('',[Validators.required]),
+      phoneNumber: new FormControl ('',[Validators.required]),
+      homeAddress: new FormControl ('',[Validators.required]),
+      emailAddress: new FormControl ('',[Validators.required]),
     });
   }
 

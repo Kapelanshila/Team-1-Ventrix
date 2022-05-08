@@ -66,12 +66,12 @@ export class VentrixDBServiceService {
 
     //Updates employee from API
     updateEmployee(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost44317/api/Employee/updateEmployee', obj)
+      return this.http.post<any>('https://localhost:44317/api/Employee/updateEmployee', obj)
     }
 
     //Deletes employee from api
     deleteEmployee(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost44317/api/Employee/deleteEmployee',obj)
+      return this.http.post<any>('https://localhost:44317/api/Employee/deleteEmployee',obj)
     }
 
     //Get Selected employee so it can be either updated or deleted
