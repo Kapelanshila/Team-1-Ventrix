@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Client } from '../shared/Client';
-import { DepreciationComponent } from '../Depreciation/depreciation/depreciation.component';
 import { Depreciation } from '../shared/Depreciation';
 import { param } from 'jquery';
 import { Query } from '@angular/core';
