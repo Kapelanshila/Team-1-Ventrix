@@ -4,6 +4,7 @@ import { Employee } from 'src/app/shared/Employee';
 import { Router } from '@angular/router';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-update-employee',
@@ -14,6 +15,8 @@ export class UpdateEmployeeComponent implements OnInit {
   employeeform : FormGroup;
   employee: Employee|undefined;
   submitted = false;
+  titles:any[] = [];
+  selectedTitle:Title|undefined;
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
   {
       //Additional Validation can be added here
@@ -48,6 +51,12 @@ export class UpdateEmployeeComponent implements OnInit {
       })
       console.log(this.employeeform.value)
       this.ventrixdbservice.clearEmployee();
+
+      this.ventrixdbservice.readEmployee()
+      .subscribe(response => {
+        this.titles = response;
+        console.log(this.titles)
+      })
     }
 
     updateEmployee()
@@ -64,5 +73,10 @@ export class UpdateEmployeeComponent implements OnInit {
     returnDataTable()
     {
       this.router.navigate(['/read-employee']);
+    }
+
+    setTitle(value:Title)
+    {
+      this.selectedTitle = value;
     }
 }

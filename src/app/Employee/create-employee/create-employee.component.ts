@@ -11,7 +11,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./create-employee.component.css']
 })
 export class CreateEmployeeComponent implements OnInit {
-
+  titles:any[] = [];
   employeeform : FormGroup;
   submitted = false;
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
@@ -28,6 +28,11 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.ventrixdbservice.readEmployee()
+    .subscribe(response => {
+      this.titles = response;
+      console.log(this.titles)
+    })
   }
   
   //Form submit calls add employee function

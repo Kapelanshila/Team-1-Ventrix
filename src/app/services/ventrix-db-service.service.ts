@@ -92,8 +92,10 @@ export class VentrixDBServiceService {
       this.selectedEmployee = undefined;
     }
 
+    readTitle(): Observable<Employee[]>{
+      return this.http.get<Employee[]>('https://localhost:44317/api/Employee/getTitles')
+    }
 
-  
 }
 
 
