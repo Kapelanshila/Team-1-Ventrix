@@ -114,5 +114,6 @@ export class CreateClientComponent implements OnInit {
         return  null
       }
       return {'noWhitespaceValidator' : true}
+
   }
 }

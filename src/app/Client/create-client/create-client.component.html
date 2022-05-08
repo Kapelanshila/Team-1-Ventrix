@@ -47,7 +47,7 @@
                         <span *ngIf="f['emailAddress'].errors?.['required'] || f['emailAddress'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an email</span>
                     </div>
                     <div>
-                        <span *ngIf="f['emailAddress'].errors?.['email'] && (f['emailAddress'].touched || f['emailAddress'].dirty)" class="text-danger" >Please enter a email address</span>
+                        <span *ngIf="f['emailAddress'].errors?.['email'] && (f['emailAddress'].touched || f['emailAddress'].dirty)" class="text-danger" >Please enter a valid email address</span>
                     </div>
                 <input type="email" class="form-control" formControlName = "emailAddress" placeholder="Enter Client Email" required>
             </div>
