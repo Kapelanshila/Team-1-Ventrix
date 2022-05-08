@@ -23,7 +23,7 @@ export class UpdateSupplierComponent implements OnInit {
       supplierId: new FormControl ('',[Validators.required]),
       SupplierName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
       contactPersonSurname: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
-      contactPersonNumber: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      contactPersonNumber: new FormControl ('',[Validators.required,this.noWhitespaceValidator,Validators.pattern("[0-9]{10}")]),
       workAddress: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
       emailAddress: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
     });

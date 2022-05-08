@@ -20,7 +20,7 @@ export class CreateSupplierComponent implements OnInit {
       this.supplierform = fbuilder.group({
       SupplierName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
       contactPersonName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
-      contactPersonNumber: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      contactPersonNumber: new FormControl ('',[Validators.required,this.noWhitespaceValidator,Validators.pattern("[0-9]{10}")]),
       workAddress: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
       emailAddress: new FormControl ('',[Validators.required,Validators.email,this.noWhitespaceValidator]),
     });
