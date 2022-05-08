@@ -21,11 +21,11 @@ export class UpdateSupplierComponent implements OnInit {
       this.supplierform = fbuilder.group({
       //Supplier ID is not displayed but is neccessary for the API to update
       supplierId: new FormControl ('',[Validators.required]),
-      SupplierName: new FormControl ('',[Validators.required]),
-      contactPersonSurname: new FormControl ('',[Validators.required,]),
-      contactPersonNumber: new FormControl ('',[Validators.required,]),
-      workAddress: new FormControl ('',[Validators.required,]),
-      emailAddress: new FormControl ('',[Validators.required,]),
+      SupplierName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      contactPersonSurname: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      contactPersonNumber: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      workAddress: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      emailAddress: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
     });
   }
 
@@ -70,5 +70,21 @@ export class UpdateSupplierComponent implements OnInit {
     returnDataTable()
     {
       this.router.navigate(['/read-supplier']);
+    }
+
+    public noWhitespaceValidator(control: FormControl) {
+      var iCount = 0;
+      for(var i = 0; i < control.value.length; i++)
+      {
+        if (control.value[i] == " ")
+        {
+          iCount += 1
+        }
+      }
+      if (iCount != control.value.length)
+      {
+        return  null
+      }
+      return {'noWhitespaceValidator' : true}
     }
 }
