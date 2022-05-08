@@ -21,11 +21,11 @@ export class ClientUpdateComponent implements OnInit {
       this.clientform = fbuilder.group({
       //Client ID is not displayed but is neccessary for the API to update
       clientId: new FormControl ('',[Validators.required]),
-      contactPersonName: new FormControl ('',[Validators.required]),
-      contactPersonSurname: new FormControl ('',[Validators.required,]),
-      contactPersonNumber: new FormControl ('',[Validators.required,]),
-      workAddress: new FormControl ('',[Validators.required,]),
-      emailAddress: new FormControl ('',[Validators.required,]),
+      contactPersonName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      contactPersonSurname: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      contactPersonNumber: new FormControl ('',[Validators.required,Validators.pattern("[0-9 ]{10}"),this.noWhitespaceValidator]),
+      workAddress: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      emailAddress: new FormControl ('',[Validators.required,Validators.email,this.noWhitespaceValidator]),
     });
   }
 
@@ -44,6 +44,9 @@ export class ClientUpdateComponent implements OnInit {
 
       this.ventrixdbservice.clearClient();
     }
+
+    // Get value of formcontrol name to return it to api
+    get f() { return this.clientform.controls!; }
 
     updateClient()
     {
@@ -71,4 +74,22 @@ export class ClientUpdateComponent implements OnInit {
     {
       this.router.navigate(['/read-client']);
     }
+
+        //Check no white spaces
+        public noWhitespaceValidator(someFormControl: FormControl) 
+        {
+          var iCount = 0;
+          for(var i = 0; i < someFormControl.value.length; i++)
+          {
+            if (someFormControl.value[i] == " ")
+            {
+              iCount += 1
+            }
+          }
+          if (iCount != someFormControl.value.length)
+          {
+            return  null
+          }
+          return {'noWhitespaceValidator' : true}
+      }
 }
