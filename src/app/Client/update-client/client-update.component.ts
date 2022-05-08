@@ -23,7 +23,7 @@ export class ClientUpdateComponent implements OnInit {
       clientId: new FormControl ('',[Validators.required]),
       contactPersonName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
       contactPersonSurname: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
-      contactPersonNumber: new FormControl ('',[Validators.required,Validators.pattern("[0-9 ]{10}"),this.noWhitespaceValidator]),
+      contactPersonNumber: new FormControl ('',[Validators.required,Validators.pattern("[0-9]{10}"),this.noWhitespaceValidator]),
       workAddress: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
       emailAddress: new FormControl ('',[Validators.required,Validators.email,this.noWhitespaceValidator]),
     });
@@ -50,23 +50,27 @@ export class ClientUpdateComponent implements OnInit {
 
     updateClient()
     {
-      this.ventrixdbservice.updateClient(this.clientform.value).subscribe();
-      //redirects back to data table and refreshes page
-      //Sweet alerts are used as notifications
-      Swal.fire({
-        icon: 'success',
-        title: 'Client Updated Successfully',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#077bff',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigate(['/read-client']).then(() => {
-            window.location.reload();
-          });
-        }
-      })  
+      this.submitted = true;
+      if (this.clientform.valid) 
+      { 
+        this.ventrixdbservice.updateClient(this.clientform.value).subscribe();
+        //redirects back to data table and refreshes page
+        //Sweet alerts are used as notifications
+        Swal.fire({
+          icon: 'success',
+          title: 'Client Updated Successfully',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/read-client']).then(() => {
+              window.location.reload();
+            });
+          }
+        })   
+      }
     }
 
     //When Cancel button clicked returns to Read Client screen
@@ -75,21 +79,21 @@ export class ClientUpdateComponent implements OnInit {
       this.router.navigate(['/read-client']);
     }
 
-        //Check no white spaces
-        public noWhitespaceValidator(someFormControl: FormControl) 
+      //Check no white spaces
+      public noWhitespaceValidator(someFormControl: FormControl) 
+      {
+        var iCount = 0;
+        for(var i = 0; i < someFormControl.value.length; i++)
         {
-          var iCount = 0;
-          for(var i = 0; i < someFormControl.value.length; i++)
+          if (someFormControl.value[i] == " ")
           {
-            if (someFormControl.value[i] == " ")
-            {
-              iCount += 1
-            }
+            iCount += 1
           }
-          if (iCount != someFormControl.value.length)
-          {
-            return  null
-          }
-          return {'noWhitespaceValidator' : true}
-      }
+        }
+        if (iCount != someFormControl.value.length)
+        {
+          return  null
+        }
+        return {'noWhitespaceValidator' : true}
+    }
 }

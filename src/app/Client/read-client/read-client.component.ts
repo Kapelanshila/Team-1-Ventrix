@@ -17,7 +17,6 @@ import Swal from 'sweetalert2';
 })
 export class ReadClientComponent implements OnInit {
   clients:any[] = [];
-  search: Query | undefined;
   //Search query 
   query:string = '';
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) { }
