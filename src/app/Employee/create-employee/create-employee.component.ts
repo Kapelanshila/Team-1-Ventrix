@@ -13,6 +13,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class CreateEmployeeComponent implements OnInit {
   titles:any[] = [];
   employeeform : FormGroup;
+  employee:Employee | undefined;
   submitted = false;
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
   {
@@ -24,11 +25,12 @@ export class CreateEmployeeComponent implements OnInit {
       phoneNumber: new FormControl ('',[Validators.required]),
       homeAddress: new FormControl ('',[Validators.required]),
       emailAddress: new FormControl ('',[Validators.required]),
+      titleId: new FormControl ('',[Validators.required]),   
     });
   }
 
   ngOnInit(): void {
-    this.ventrixdbservice.readEmployee()
+    this.ventrixdbservice.readTitle()
     .subscribe(response => {
       this.titles = response;
       console.log(this.titles)
@@ -38,8 +40,22 @@ export class CreateEmployeeComponent implements OnInit {
   //Form submit calls add employee function
   addEmployee()
   {
-    console.log(this.employeeform.value);
-    this.ventrixdbservice.createEmployee(this.employeeform.value).subscribe()
+     //Creates new employee object
+    const value = { ...this.employeeform.value, titleId: +this.employeeform.value.titleId };
+    this.employee = 
+    {
+      employeeId:0,
+      name:this.employeeform.get('name')?.value,
+      surname:this.employeeform.get('surname')?.value,
+      idnumber:this.employeeform.get('idNumber')?.value,
+      phoneNumber:this.employeeform.get('phoneNumber')?.value,
+      homeAddress:this.employeeform.get('homeAddress')?.value,
+      emailAddress:this.employeeform.get('emailAddress')?.value,
+      titleId:Number(this.employeeform.get('titleId')?.value),
+      userId:0
+    }
+    console.log(this.employee);
+    this.ventrixdbservice.createEmployee(this.employee).subscribe()
         //redirects back to data table and refreshes
         this.router.navigate(['/read-employee']).then(() => {
           window.location.reload();

@@ -8,7 +8,10 @@
             <br>
             <div class="form-group">
                 <label>Title</label>
-                <input type="text" class="form-control" formControlName="name" placeholder="Enter Employee Name" required>
+                <select  class="form-control" formControlName="titleId">
+                    <option selected=""> </option>
+                    <option *ngFor="let title of titles" [value]=title.titleId>{{title.description}}</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>Name</label>
@@ -24,7 +27,7 @@
             </div>	
             <div class="form-group">
                 <label>Phone Number</label>
-                <textarea class="form-control" formControlName = "phoneNumber" placeholder="Enter Employee Phone Number" required></textarea>
+                <input class="form-control" formControlName = "phoneNumber" placeholder="Enter Employee Phone Number" required>
             </div>	
             <div class="form-group">
                 <label>Home Address</label>

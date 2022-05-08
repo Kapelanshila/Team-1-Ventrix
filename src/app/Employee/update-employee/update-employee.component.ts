@@ -14,9 +14,11 @@ import { Title } from '@angular/platform-browser';
 export class UpdateEmployeeComponent implements OnInit {
   employeeform : FormGroup;
   employee: Employee|undefined;
+  updatedemployee: Employee|undefined;
   submitted = false;
   titles:any[] = [];
   selectedTitle:Title|undefined;
+  
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
   {
       //Additional Validation can be added here
@@ -26,7 +28,7 @@ export class UpdateEmployeeComponent implements OnInit {
       userId: new FormControl ('',[Validators.required]),
       name: new FormControl ('',[Validators.required]),
       surname: new FormControl ('',[Validators.required,]),
-      idnumber: new FormControl ('',[Validators.required]),
+      idNumber: new FormControl ('',[Validators.required]),
       phoneNumber: new FormControl ('',[Validators.required]),
       homeAddress: new FormControl ('',[Validators.required]),
       emailAddress: new FormControl ('',[Validators.required]),
@@ -42,7 +44,7 @@ export class UpdateEmployeeComponent implements OnInit {
       employeeId: this.employee?.employeeId,
       name: this.employee?.name,
       surname: this.employee?.surname,
-      idnumber: this.employee?.idnumber,
+      idNumber: this.employee?.idnumber,
       phoneNumber: this.employee?.phoneNumber,
       homeAddress: this.employee?.homeAddress,
       emailAddress: this.employee?.emailAddress,
@@ -52,7 +54,7 @@ export class UpdateEmployeeComponent implements OnInit {
       console.log(this.employeeform.value)
       this.ventrixdbservice.clearEmployee();
 
-      this.ventrixdbservice.readEmployee()
+      this.ventrixdbservice.readTitle()
       .subscribe(response => {
         this.titles = response;
         console.log(this.titles)
@@ -61,7 +63,21 @@ export class UpdateEmployeeComponent implements OnInit {
 
     updateEmployee()
     {
-      this.ventrixdbservice.updateEmployee(this.employeeform.value).subscribe();
+    //Creates new employee object
+    this.updatedemployee = 
+    {
+      employeeId:this.employee!.employeeId,
+      name:this.employeeform.get('name')?.value,
+      surname:this.employeeform.get('surname')?.value,
+      idnumber:this.employeeform.get('idNumber')?.value,
+      phoneNumber:this.employeeform.get('phoneNumber')?.value,
+      homeAddress:this.employeeform.get('homeAddress')?.value,
+      emailAddress:this.employeeform.get('emailAddress')?.value,
+      titleId:Number(this.employeeform.get('titleId')?.value),
+      userId:0
+    }
+    console.log(this.updateEmployee)
+      this.ventrixdbservice.updateEmployee(this.updatedemployee).subscribe();
       //redirects back to data table and refreshes page
       this.router.navigate(['/read-employee']).then(() => {
         window.location.reload();
