@@ -14,6 +14,8 @@ import Swal from 'sweetalert2';
 export class CreateSupplierComponent implements OnInit {
   supplierform : FormGroup;
   submitted = false;
+  find = false;
+  suppliers:any[] = [];
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
   {
       //Additional Validation can be added here
@@ -27,13 +29,43 @@ export class CreateSupplierComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.ventrixdbservice.readSupplier().subscribe(response => {
+      this.suppliers = response;
+      console.log(this.suppliers)
+    })
   }
 
   //Form submit calls add supplier function
   addSupplier()
   {
     this.submitted = true;
-    if (this.supplierform.valid) {
+    //Check if supplier does not already exist
+    this.suppliers.forEach(element => {
+      if (element.supplierName == this.supplierform.get('supplierName')?.value
+      && element.contactPersonSurname == this.supplierform.get('contactPersonSurname')?.value
+      && element.contactPersonNumber == this.supplierform.get('ContactPersonNumber')?.value
+      && element.workAddress == this.supplierform.get('workAddress')?.value
+      && element.emailAddress == this.supplierform.get('emailAddress')?.value)
+      {
+        this.find = true;
+        Swal.fire({
+          icon: 'error',
+          title: 'Supplier Already Exists',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/create-supplier']).then(() => {
+              window.location.reload();
+            })
+          }
+        })
+      }
+    });
+
+    if (this.supplierform.valid && this.find == false) {
       console.log(this.supplierform.value);
       this.ventrixdbservice.createSupplier(this.supplierform.value).subscribe()
         //redirects back to data table and refreshes
