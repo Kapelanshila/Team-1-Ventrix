@@ -15,6 +15,16 @@ import { UpdateSecurityquestionComponent } from './Securityquestion/update-secur
 import { CreateDeliverystatusComponent } from './Deliverystatus/create-deliverystatus/create-deliverystatus.component';
 import { ReadDeliverystatusComponent } from './Deliverystatus/read-deliverystatus/read-deliverystatus.component';
 import { UpdateDeliverystatusComponent } from './Deliverystatus/update-deliverystatus/update-deliverystatus.component';
+import { CreateWarehouseComponent } from './Warehouse/create-warehouse/create-warehouse.component';
+import { ReadWarehouseComponent } from './Warehouse/read-warehouse/read-warehouse.component';
+import { UpdateWarehouseComponent } from './Warehouse/update-warehouse/update-warehouse.component';
+import { CreatewarrantyperiodComponent } from './WarrantyPeriod/createwarrantyperiod/createwarrantyperiod.component';
+import { ReadwarrantyperiodComponent } from './WarrantyPeriod/readwarrantyperiod/readwarrantyperiod.component';
+import { UpdatewarrantyperiodComponent } from './WarrantyPeriod/updatewarrantyperiod/updatewarrantyperiod.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DepreciationComponent } from './Depreciation/depreciation/depreciation.component';
+
 
 @NgModule({
   declarations: [
@@ -30,12 +40,22 @@ import { UpdateDeliverystatusComponent } from './Deliverystatus/update-deliverys
     CreateDeliverystatusComponent,
     ReadDeliverystatusComponent,
     UpdateDeliverystatusComponent
+    CreateWarehouseComponent,
+    ReadWarehouseComponent,
+    UpdateWarehouseComponent,
+    CreatewarrantyperiodComponent,
+    ReadwarrantyperiodComponent,
+    UpdatewarrantyperiodComponent,
+    DepreciationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
