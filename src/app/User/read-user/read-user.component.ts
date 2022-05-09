@@ -23,12 +23,13 @@ export class ReadUserComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    this.ventrixdbservice.readUser()
+    this.ventrixdbservice.readRole()
     .subscribe(response => {
-      this.users = response;
-      this.ventrixdbservice.readRole()
+      this.roles = response;
+      console.log(this.users)
+      this.ventrixdbservice.readUser()
       .subscribe(response => {
-        this.roles = response;
+        this.users = response;
         console.log(this.roles)
         this.users.forEach(element => {
           this.roles.forEach(data =>{
