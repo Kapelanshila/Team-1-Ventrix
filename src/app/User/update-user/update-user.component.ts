@@ -31,8 +31,8 @@ export class UpdateUserComponent implements OnInit {
   {
     this.user = this.ventrixdbservice.getUser();
     this.userform.patchValue({
-    userId: this.user?.UserId,
-    userRoleId: this.user?.UserRoleId,
+    userId: this.user?.userId,
+    userRoleId: this.user?.userRoleId,
     })
 
     this.ventrixdbservice.clearClient();

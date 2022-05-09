@@ -29,13 +29,14 @@ import { UpdateSupplierComponent } from './Supplier/update-supplier/update-suppl
     UpdateUserComponent,
     CreateSupplierComponent,
     ReadSupplierComponent,
-    UpdateSupplierComponent,
+    UpdateSupplierComponent,   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

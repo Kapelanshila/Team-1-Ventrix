@@ -1,4 +1,4 @@
 export interface User {
-    UserId: Number
-    UserRoleId : Number 
+    userId: Number
+    userRoleId : Number 
 }

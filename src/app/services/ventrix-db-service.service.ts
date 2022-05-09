@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Client } from '../shared/Client';
 import { User } from '../shared/User';
 import { Supplier } from '../shared/Supplier';
+import { UserVM } from '../shared/UserVM';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,7 @@ export class VentrixDBServiceService {
       this.selectedClient = undefined;
     }
 
-    selectedUser: User | undefined;
+    selectedUser: UserVM | undefined;
     //User CRUD:
     //Creates user from API
     createUser(obj:any): Observable<any[]> {
@@ -75,7 +76,7 @@ export class VentrixDBServiceService {
      }
 
      //Get Selected user so it can be either updated or deleted
-     setUser(value : User)
+     setUser(value : UserVM)
      {
        this.selectedUser = value;
      }
@@ -141,6 +142,9 @@ export class VentrixDBServiceService {
      searchSupplier(value:string){
       return this.http.get<any>('https://localhost:44317/api/Supplier/searchSuppliers?search='+value)
     }
-
-    
+       //Returns Suppliers from API
+       readRole(): Observable<Supplier[]> {
+        return this.http.get<Supplier[]>('https://localhost:44317/api/User/getRoles')
+      }
+         
 }

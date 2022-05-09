@@ -23,8 +23,8 @@ export class UpdateSupplierComponent implements OnInit {
       this.supplierform = fbuilder.group({
       //Supplier ID is not displayed but is neccessary for the API to update
       supplierId: new FormControl ('',[Validators.required]),
-      SupplierName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
-      contactPersonSurname: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      supplierName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      contactPersonName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
       contactPersonNumber: new FormControl ('',[Validators.required,this.noWhitespaceValidator,Validators.pattern("[0-9]{10}")]),
       workAddress: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
       emailAddress: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
@@ -36,9 +36,9 @@ export class UpdateSupplierComponent implements OnInit {
   {
     this.supplier = this.ventrixdbservice.getSupplier();
     this.supplierform.patchValue({
-    clientId: this.supplier?.supplierId,
-    supplierName: this.supplier?.SupplierName,
-    contactPersonSurname: this.supplier?.contactPersonName,
+    supplierId: this.supplier?.supplierId,
+    supplierName: this.supplier?.supplierName,
+    contactPersonName: this.supplier?.contactPersonName,
     contactPersonNumber: this.supplier?.contactPersonNumber,
     workAddress: this.supplier?.workAddress,
     emailAddress: this.supplier?.emailAddress
@@ -60,8 +60,8 @@ export class UpdateSupplierComponent implements OnInit {
       //Check if supplier does not already exist
     this.suppliers.forEach(element => {
       if (element.supplierName == this.supplierform.get('supplierName')?.value
-      && element.contactPersonSurname == this.supplierform.get('contactPersonSurname')?.value
-      && element.contactPersonNumber == this.supplierform.get('ContactPersonNumber')?.value
+      && element.contactPersonName == this.supplierform.get('contactPersonName')?.value
+      && element.contactPersonNumber == this.supplierform.get('contactPersonNumber')?.value
       && element.workAddress == this.supplierform.get('workAddress')?.value
       && element.emailAddress == this.supplierform.get('emailAddress')?.value)
       {

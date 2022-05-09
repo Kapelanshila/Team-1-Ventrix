@@ -5,6 +5,7 @@ import { User } from 'src/app/shared/User';
 import { Router } from '@angular/router';
 //Make sure swal is imported
 import Swal from 'sweetalert2';
+import { UserVM } from 'src/app/shared/UserVM';
 
 @Component({
   selector: 'app-read-user',
@@ -13,7 +14,10 @@ import Swal from 'sweetalert2';
 })
 export class ReadUserComponent implements OnInit {
 
-  users:any[] = [];
+  users:User[] = [];
+  roles:any[] = [];
+  values:any[] = [];
+  uservm:UserVM | undefined;
   query:string = '';
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) { }
 
@@ -22,8 +26,29 @@ export class ReadUserComponent implements OnInit {
     this.ventrixdbservice.readUser()
     .subscribe(response => {
       this.users = response;
-      console.log(this.users)
+      this.ventrixdbservice.readRole()
+      .subscribe(response => {
+        this.roles = response;
+        console.log(this.roles)
+        this.users.forEach(element => {
+          this.roles.forEach(data =>{
+            if (element.userId == data.userId)
+            {
+              this.uservm = 
+              {
+                userId:element.userId,
+                description:data.description,
+                userRoleId : element.userRoleId
+              }
+            }
+          })
+          this.values.push(this.uservm)
+        });
+      })
+  
     })
+
+
   }
 
   addUser()
@@ -31,14 +56,14 @@ export class ReadUserComponent implements OnInit {
     this.router.navigate(['/create-user']);
   }
 
-  editUser(selecteduser: User)
+  editUser(selecteduser: UserVM)
   {
       this.ventrixdbservice.setUser(selecteduser);
       this.router.navigate(['/update-user']);
   }
 
   //Delete User Function 
-  deleteUser(selecteduser: User)
+  deleteUser(selecteduser: UserVM)
   { 
       //Sweet alerts are used as notifications
       Swal.fire({

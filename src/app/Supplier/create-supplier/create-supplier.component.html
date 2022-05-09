@@ -10,16 +10,16 @@
             <div class="form-group">
                 <label>Supplier Name</label>
                 <div *ngIf="submitted">
-                    <span *ngIf="f['SupplierName'].errors?.['required'] || f['SupplierName'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a supplier name</span>
+                    <span *ngIf="f['supplierName'].errors?.['required'] || f['supplierName'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a supplier name</span>
                 </div>
-                <input type="text" class="form-control" formControlName="SupplierName" placeholder="Enter Supplier Name" required>
+                <input type="text" class="form-control" formControlName="supplierName" placeholder="Enter Supplier Name" required>
             </div>
             <div class="form-group">
                 <label>Contact Person Surname</label>
                 <div *ngIf="submitted">
-                    <span *ngIf="f['contactPersonSurname'].errors?.['required'] || f['contactPersonSurname'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a contact person surname</span>
+                    <span *ngIf="f['contactPersonName'].errors?.['required'] || f['contactPersonName'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a contact person surname</span>
                 </div>
-                <input type="text" class="form-control" formControlName="contactPersonSurname" placeholder="Enter Contact Person Surname" required>
+                <input type="text" class="form-control" formControlName="contactPersonName" placeholder="Enter Contact Person Surname" required>
             </div>
             <div class="form-group">     
                 <label>Contact Number</label>
@@ -27,7 +27,7 @@
                     <span *ngIf="f['contactPersonNumber'].errors?.['required'] || f['workAddress'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a contact number</span>
                 </div>
                 <div>
-                    <span *ngIf="f['contactPersonNumber'].invalid && (f[contactPersonNumber].touched || f[contactPersonNumber].dirty)" class="text-danger" >Please enter valid contact number</span>
+                    <span *ngIf="f['contactPersonNumber'].invalid && (f['contactPersonNumber'].touched || f['contactPersonNumber'].dirty)" class="text-danger" >Please enter valid contact number</span>
                 </div>
                 <input type="text" class="form-control" formControlName="contactPersonNumber" placeholder="Enter Client Contact Number" required>
             </div>	

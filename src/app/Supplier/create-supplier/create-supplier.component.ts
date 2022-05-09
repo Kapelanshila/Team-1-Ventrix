@@ -20,8 +20,8 @@ export class CreateSupplierComponent implements OnInit {
   {
       //Additional Validation can be added here
       this.supplierform = fbuilder.group({
-      SupplierName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
-      contactPersonSurname: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      supplierName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
+      contactPersonName: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
       contactPersonNumber: new FormControl ('',[Validators.required,this.noWhitespaceValidator,Validators.pattern("[0-9]{10}")]),
       workAddress: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
       emailAddress: new FormControl ('',[Validators.required,Validators.email,this.noWhitespaceValidator]),
@@ -41,8 +41,8 @@ export class CreateSupplierComponent implements OnInit {
     this.submitted = true;
     //Check if supplier does not already exist
     this.suppliers.forEach(element => {
-      if (element.supplierName == this.supplierform.get('SupplierName')?.value
-      && element.contactPersonSurname == this.supplierform.get('contactPersonSurname')?.value
+      if (element.supplierName == this.supplierform.get('supplierName')?.value
+      && element.contactPersonName == this.supplierform.get('contactPersonName')?.value
       && element.contactPersonNumber == this.supplierform.get('contactPersonNumber')?.value
       && element.workAddress == this.supplierform.get('workAddress')?.value
       && element.emailAddress == this.supplierform.get('emailAddress')?.value)

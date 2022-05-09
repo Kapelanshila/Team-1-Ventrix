@@ -1,7 +1,7 @@
 export interface Supplier {
     supplierId: Number
-    SupplierName :String 
-    contactPersonSurname: String
+    supplierName :String 
+    contactPersonName: String
     contactPersonNumber: String
     workAddress: String
     emailAddress: String
