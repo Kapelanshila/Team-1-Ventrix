@@ -1,0 +1,71 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="employee-card">
+        <!--Form group linking input values to typescript -->
+        <form class="form-employee"  [formGroup]="employeeform" (ngSubmit)="addEmployee()"><span class="reauth-email"> </span>					
+            <h4 class="card-title">Add Employee</h4>
+            <hr>
+            <br>
+            <div class="form-group">
+                <label>Title</label>
+                <select  class="form-control" formControlName="titleId">
+                    <option selected=""> </option>
+                    <option *ngFor="let title of titles" [value]=title.titleId>{{title.description}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['name'].errors?.['required'] || f['name'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter an employee name</span>
+                </div>
+                <input type="text" class="form-control" formControlName="name" placeholder="Enter Employee Name" required>
+            </div>
+            <div class="form-group">
+                <label>Surname</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['surname'].errors?.['required'] || f['surname'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter an employee surname</span>
+                </div>
+                <input type="text" class="form-control" formControlName="surname" placeholder="Enter Employee Surname" required>
+            </div>
+            <div class="form-group">
+                <label>ID Number</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['idNumber'].errors?.['required'] || f['idNumber'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter an employee ID number</span>
+                </div>
+                <div>
+                    <span *ngIf="f['idNumber'].invalid && (f['idNumber'].touched || f['idNumber'].dirty)" class="text-danger">Please enter a valid id number</span>
+                </div>
+                <input type="text" class="form-control" formControlName="idNumber" placeholder="Enter Employee ID Number" required>
+            </div>	
+            <div class="form-group">
+                <label>Phone Number</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['phoneNumber'].errors?.['required'] || f['phoneNumber'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter an employee phone number</span>
+                </div>
+                <div>
+                    <span *ngIf="f['phoneNumber'].invalid && (f['phoneNumber'].touched || f['phoneNumber'].dirty)" class="text-danger">Please enter a valid phone number</span>
+                </div>
+                <input class="form-control" formControlName = "phoneNumber" placeholder="Enter Employee Phone Number" required>
+            </div>	
+            <div class="form-group">
+                <label>Home Address</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['homeAddress'].errors?.['required'] || f['homeAddress'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter an employee home address</span>
+                </div>
+                <input type="text" class="form-control" formControlName = "homeAddress" placeholder="Enter Employee Home Address" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['emailAddress'].errors?.['required'] || f['emailAddress'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter an employee email address</span>
+                </div>
+                <div>
+                    <span *ngIf="f['emailAddress'].invalid && (f['emailAddress'].touched || f['emailAddress'].dirty)" class="text-danger">Please enter a valid email address</span>
+                </div>
+                <input type="email" class="form-control" formControlName = "emailAddress" placeholder="Enter Employee Email Address" required>
+            </div>
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Save">
+        </form>
+
+</div>
