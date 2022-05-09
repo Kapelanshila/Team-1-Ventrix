@@ -1,0 +1,22 @@
+<div class="body">
+    <app-navigation></app-navigation>
+    <div class="user-card">
+        <form class="form-user"  [formGroup]="userform" (ngSubmit)="updateUser()"><span class="reauth-email"> </span>					
+            <h4 class="card-title">Update User</h4>
+            <hr>
+            <br>
+            <p class="form-group text-center">Select User Role:&nbsp;&nbsp;</p>
+            <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Administration</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Administration</a>
+                    <a class="dropdown-item" href="#">Management</a>
+                    <a class="dropdown-item" href="#">Driver</a>
+                    <a class="dropdown-item" href="#">Warehouse</a>
+                </div>
+            </div>
+        <br>
+        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+        <input type="submit" class="btn btn-primary" value="Save">
+    </form>
+    </div>
+</div>

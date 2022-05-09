@@ -9,6 +9,12 @@ import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
 import { CreateClientComponent } from './Client/create-client/create-client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientUpdateComponent } from './Client/update-client/client-update.component';
+import { CreateUserComponent } from './User/create-user/create-user.component';
+import { ReadUserComponent } from './User/read-user/read-user.component';
+import { UpdateUserComponent } from './User/update-user/update-user.component';
+import { CreateSupplierComponent } from './Supplier/create-supplier/create-supplier.component';
+import { ReadSupplierComponent } from './Supplier/read-supplier/read-supplier.component';
+import { UpdateSupplierComponent } from './Supplier/update-supplier/update-supplier.component';
 import { CreateEmployeeComponent } from './Employee/create-employee/create-employee.component';
 import { ReadEmployeeComponent } from './Employee/read-employee/read-employee.component';
 import { UpdateEmployeeComponent } from './Employee/update-employee/update-employee.component';
@@ -29,7 +35,6 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DepreciationComponent } from './Depreciation/depreciation/depreciation.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +43,12 @@ import { DepreciationComponent } from './Depreciation/depreciation/depreciation.
     DashboardComponent,
     CreateClientComponent,
     ClientUpdateComponent,
+    CreateUserComponent,
+    ReadUserComponent,
+    UpdateUserComponent,
+    CreateSupplierComponent,
+    ReadSupplierComponent,
+    UpdateSupplierComponent,   
     CreateEmployeeComponent,
     ReadEmployeeComponent,
     UpdateEmployeeComponent,

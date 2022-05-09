@@ -12,6 +12,12 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
 import { CreateClientComponent } from './Client/create-client/create-client.component';
 import { ClientUpdateComponent } from './Client/update-client/client-update.component';
+import { CreateSupplierComponent } from './Supplier/create-supplier/create-supplier.component';
+import { UpdateSupplierComponent } from './Supplier/update-supplier/update-supplier.component';
+import { CreateUserComponent } from './User/create-user/create-user.component';
+import { UpdateUserComponent } from './User/update-user/update-user.component';
+import { ReadUserComponent } from './User/read-user/read-user.component';
+import { ReadSupplierComponent } from './Supplier/read-supplier/read-supplier.component';
 import { CreateEmployeeComponent } from './Employee/create-employee/create-employee.component';
 import { UpdateEmployeeComponent } from './Employee/update-employee/update-employee.component';
 import { ReadEmployeeComponent } from './Employee/read-employee/read-employee.component';
@@ -34,6 +40,12 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'read-employee', component: ReadEmployeeComponent},
 {path: 'otp-timer', component: OtpTimerComponent},
 { path: 'dashboard', component: DashboardComponent },
+{ path: 'create-supplier', component: CreateSupplierComponent },
+{ path: 'update-supplier', component: UpdateSupplierComponent },
+{ path: 'create-user', component: CreateUserComponent },
+{ path: 'update-user', component: UpdateUserComponent },
+{ path: 'read-user', component: ReadUserComponent },
+{ path: 'read-supplier', component: ReadSupplierComponent },
 { path: 'create-securityquestion', component: CreateSecurityquestionComponent },
 { path: 'read-securityquestion', component: ReadSecurityquestionComponent },
 { path: 'update-securityquestion', component: UpdateSecurityquestionComponent },
@@ -49,7 +61,6 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'dashboard', component: DashboardComponent },
 { path: 'login', component: LoginComponent },
 { path: 'depreciation', component: DepreciationComponent }];
-
 
 // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }];
 

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Client } from '../shared/Client';
+import { User } from '../shared/User';
+import { Supplier } from '../shared/Supplier';
+import { UserVM } from '../shared/UserVM';
 import { Employee } from '../shared/Employee';
 import { OtpTimer } from '../shared/OtpTimer';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
@@ -12,6 +15,7 @@ import { param } from 'jquery';
 import { WarrantyPeriod } from '../shared/WarrantyPeriod';
 import { Depreciation } from '../shared/Depreciation';
 import { Query } from '@angular/core';
+
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +67,100 @@ export class VentrixDBServiceService {
       this.selectedClient = undefined;
     }
 
+    selectedUser: UserVM | undefined;
+    //User CRUD:
+    //Creates user from API
+    createUser(obj:any): Observable<any[]> {
+      return this.http.post<any>('https://localhost:44317/api/User/createUser',obj)
+    }
+
+    //Returns users from API
+    readUser(): Observable<User[]> {
+      return this.http.get<User[]>('https://localhost:44317/api/User/getUsers')
+    }
+    
+    //Updates users from API
+    updateUser(obj:any): Observable<any[]> {
+      return this.http.post<any>('https://localhost:44317/api/User/updateUser',obj)
+    }
+
+     //Deletes user from API
+     deleteUser(obj:any): Observable<any[]> {
+       return this.http.post<any>('https://localhost:44317/api/User/deleteUser',obj)
+     }
+
+     //Get Selected user so it can be either updated or deleted
+     setUser(value : UserVM)
+     {
+       this.selectedUser = value;
+     }
+
+     //Returns selected user so it can be used on potentially other pages
+     getUser()
+     {
+       return this.selectedUser;
+     }
+
+     //Clears selectedClient value so it ready to read again
+     clearUser()
+     {
+       this.selectedUser = undefined;
+     }
+
+     //Searches User through use of the api
+     searchUser(value:string){
+       return this.http.get<any>('https://localhost:44317/api/User/searchUsers?search='+value)
+     }
+
+     selectedSupplier: Supplier | undefined;
+     //User CRUD:
+     //Creates Supplier from API
+     createSupplier(obj:any): Observable<any[]> {
+       return this.http.post<any>('https://localhost:44317/api/Supplier/createSupplier',obj)
+     }
+
+     //Returns Suppliers from API
+     readSupplier(): Observable<Supplier[]> {
+       return this.http.get<Supplier[]>('https://localhost:44317/api/Supplier/getSuppliers')
+     }
+    
+     //Updates Supplier from API
+     updateSupplier(obj:any): Observable<any[]> {
+       return this.http.post<any>('https://localhost:44317/api/Supplier/updateSupplier',obj)
+     }
+
+     //Deletes Supplier from API
+     deleteSupplier(obj:any): Observable<any[]> {
+       return this.http.post<any>('https://localhost:44317/api/Supplier/deleteSupplier',obj)
+     }
+
+     //Get Selected Supplier so it can be either updated or deleted
+     setSupplier(value : Supplier)
+     {
+       this.selectedSupplier = value;
+     }
+
+     //Returns selected Supplier so it can be used on potentially other pages
+     getSupplier()
+     {
+       return this.selectedSupplier;
+     }
+
+     //Clears selectedSupplier value so it ready to read again
+     clearSupplier()
+     {
+       this.selectedSupplier = undefined;
+     }
+
+     //Searches Supplier through use of the api
+     searchSupplier(value:string){
+      return this.http.get<any>('https://localhost:44317/api/Supplier/searchSuppliers?search='+value)
+    }
+       //Returns Suppliers from API
+       readRole(): Observable<Supplier[]> {
+        return this.http.get<Supplier[]>('https://localhost:44317/api/User/getRoles')
+      }
+         
     selectedEmployee: Employee | undefined;
     //Employee CRUD
     //Creates Employee from API
