@@ -14,6 +14,8 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { CreateEmployeeComponent } from './Employee/create-employee/create-employee.component';
 import { ReadEmployeeComponent } from './Employee/read-employee/read-employee.component';
 import { UpdateEmployeeComponent } from './Employee/update-employee/update-employee.component';
+import { OtpTimerComponent } from './otp-timer/otp-timer.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { UpdateEmployeeComponent } from './Employee/update-employee/update-emplo
     ClientUpdateComponent,
     CreateEmployeeComponent,
     ReadEmployeeComponent,
-    UpdateEmployeeComponent
+    UpdateEmployeeComponent,
+    OtpTimerComponent,
+    
   ],
   imports: [
     BrowserModule,

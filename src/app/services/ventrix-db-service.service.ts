@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Client } from '../shared/Client';
 import { Employee } from '../shared/Employee';
+import { OtpTimer } from '../shared/OtpTimer';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class VentrixDBServiceService {
   constructor(private http: HttpClient) { }
 
     selectedClient: Client | undefined;
+    otpTimerValue: OtpTimer | undefined;
     //Client CRUD:
     //Creates client from API
     createClient(obj:any): Observable<any[]> {
@@ -92,9 +94,43 @@ export class VentrixDBServiceService {
       this.selectedEmployee = undefined;
     }
 
+    searchEmployee(value:string){
+      return this.http.get<any>('https://localhost:44317/api/Employee/searchEmployees?search='+value)
+    }
+
     readTitle(): Observable<Employee[]>{
       return this.http.get<Employee[]>('https://localhost:44317/api/Employee/getTitles')
     }
+
+    createOtpTimer(obj:any): Observable<any[]>{
+      return this.http.post<any>('https://localhost:44317/api/Otp-timer/createOtpTimer',obj)
+    }
+
+    readOtpTimer(): Observable<OtpTimer[]>{
+      return this.http.get<OtpTimer[]>('https://localhost:44317/api/Otp-timer/getOtpTimer')
+    }
+
+    updateOtpTimer(obj:any): Observable<any[]>{
+      return this.http.post<any>('https://localhost:44317/api/Otp-timer/updateOtpTimer',obj)
+    }
+
+    deleteOtpTimer(obj:any): Observable<any[]>{
+      return this.http.post<any>('https://localhost:44317/api/Otp-timer/deleteOtpTimer',obj)
+    }
+
+    setOtpTimer(value: OtpTimer)
+    {
+      this.otpTimerValue = value;
+    }
+
+    getOtpTimer()
+    {
+      return this.otpTimerValue;
+    }
+
+    
+
+
 
 }
 

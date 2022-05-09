@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateOtpTimerComponent } from './create-otp-timer.component';
+import { OtpTimerComponent } from './otp-timer.component';
 
-describe('CreateOtpTimerComponent', () => {
-  let component: CreateOtpTimerComponent;
-  let fixture: ComponentFixture<CreateOtpTimerComponent>;
+describe('OtpTimerComponent', () => {
+  let component: OtpTimerComponent;
+  let fixture: ComponentFixture<OtpTimerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateOtpTimerComponent ]
+      declarations: [ OtpTimerComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateOtpTimerComponent);
+    fixture = TestBed.createComponent(OtpTimerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

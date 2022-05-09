@@ -1,0 +1,32 @@
+<div class="body">
+    <app-navigation></app-navigation>
+    <form class="admin-form" [formGroup]="otpTimerform"><span class="reauth-email"></span>
+        <div class="admin-card">
+            <h4>OTP Timer</h4>
+            <hr>
+            <div *ngIf="otpTimers.length == 0">
+                <button type="button" class="btn btn-primary" (click)="createOtpTimer()"><i class="fa fa-plus"></i>Add New</button>
+            </div>
+            <br>
+            <div class="form-group">
+                <div *ngIf="otpTimers.length > 0">
+                    <div *ngFor="let otpTimer of otpTimers">
+                        <h5>Current OTP Timers: {{otpTimer.time}}%</h5>
+                        <div *ngIf="submitted">
+                            <span *ngIf="f['time'].errors?.['required']" class="text-danger">Please enter a time</span>
+                        </div>
+                        <input type = "number" style = "width:20%; padding: 4.85px;" formControlName="Time" required step=".1" mr-1 formControlName="time">
+                    <input type="button" class="btn btn-secondary" style="margin: 0.25%;" value="Update" (click)="updateOtpTimer(otpTimer)">
+                    <input type="button" class="btn btn-danger" style="margin: 0.25%;" value="Delete" (click)="deleteOtpTimer(otpTimer)">
+                    </div>
+                </div>
+                <div *ngIf="otpTimers.length == 0">
+                    <div *ngIf="submitted">
+                        <span *ngIf="f['time'].errors?.['required']" class="text-danger">Please enter a valid time</span>
+                    </div>
+                        <input type="number" style="width:20%; padding:4.85px;" formControlName="Time" required step=".1" mr-1 formControlName="time">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -8,6 +8,7 @@ import { ClientUpdateComponent } from './Client/update-client/client-update.comp
 import { CreateEmployeeComponent } from './Employee/create-employee/create-employee.component';
 import { UpdateEmployeeComponent } from './Employee/update-employee/update-employee.component';
 import { ReadEmployeeComponent } from './Employee/read-employee/read-employee.component';
+import { OtpTimerComponent } from './otp-timer/otp-timer.component';
 
 const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'create-client', component: CreateClientComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'dashboard', component: DashboardComponent },
 { path: 'create-employee', component: CreateEmployeeComponent},
 { path: 'update-employee', component: UpdateEmployeeComponent},
-{ path: 'read-employee', component: ReadEmployeeComponent}];
+{ path: 'read-employee', component: ReadEmployeeComponent},
+{path: 'otp-timer', component: OtpTimerComponent}];
 // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }];
 
 @NgModule({
