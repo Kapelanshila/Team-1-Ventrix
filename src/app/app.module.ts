@@ -39,7 +39,7 @@ import { DepreciationComponent } from './Depreciation/depreciation/depreciation.
     UpdateSecurityquestionComponent,
     CreateDeliverystatusComponent,
     ReadDeliverystatusComponent,
-    UpdateDeliverystatusComponent
+    UpdateDeliverystatusComponent,
     CreateWarehouseComponent,
     ReadWarehouseComponent,
     UpdateWarehouseComponent,

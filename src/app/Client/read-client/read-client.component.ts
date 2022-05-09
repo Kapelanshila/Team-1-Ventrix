@@ -17,18 +17,22 @@ import Swal from 'sweetalert2';
 })
 export class ReadClientComponent implements OnInit {
   clients:any[] = [];
+  // Copy
   p: number = 1;
   config: any; 
   noOfRows = 10;
+  // Copy
+
   //Search query 
   query:string = '';
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
   { 
+    // Copy
     this.config = {
       currentPage: 1,
       itemsPerPage: 2
     };
-
+     // Copy
 
   }
 
@@ -46,10 +50,12 @@ export class ReadClientComponent implements OnInit {
     this.router.navigate(['/create-client']);
   }
 
-  
+  // Copy
   pageChange(newPage: number) {
 		this.router.navigate(['/read-client'], { queryParams: { page: newPage } })
   }
+// Copy
+
 
   editClient(selectedclient: Client)
   {

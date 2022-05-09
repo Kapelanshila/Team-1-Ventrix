@@ -163,8 +163,6 @@ export class VentrixDBServiceService {
     }
 
 
-}
-
     setDepreciation(value : Depreciation)
     {
       this.depreciationValue = value;
