@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 export class CreateEmployeeComponent implements OnInit {
   titles:any[] = [];
   employeeform : FormGroup;
-  employees:any[] = [];
+  employee:any[] = [];
   submitted = false;
   find = false;
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
@@ -24,7 +24,7 @@ export class CreateEmployeeComponent implements OnInit {
       name: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]),
       surname: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]),
       idNumber: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator, this.checkID]),
-      phoneNumber: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator, Validators.pattern("[0-9{10}")]),
+      phoneNumber: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator, Validators.pattern("[0-9]{10}")]),
       homeAddress: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]),
       emailAddress: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator, Validators.email]),
       titleId: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]),   
@@ -47,7 +47,7 @@ export class CreateEmployeeComponent implements OnInit {
     this.submitted = true;
      //Creates new employee object
     const value = { ...this.employeeform.value, titleId: +this.employeeform.value.titleId };
-    this.titles.forEach(element => {
+    this.employee.forEach(element => {
       if(element.employeeId==0,
         element.name==this.employeeform.get('name')?.value&&
         element.surname==this.employeeform.get('surname')?.value&&

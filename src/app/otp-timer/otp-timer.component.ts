@@ -56,9 +56,9 @@ export class OtpTimerComponent implements OnInit {
         allowEscapeKey: false
       }).then((result) => {
         if(result.isConfirmed){
-          this.router.navigate(['/Otp-timer']).then(() => {
+          this.router.navigate(['/otp-timer']).then(() => {
             window.location.reload();
-          })
+          });
         }
       })
    }

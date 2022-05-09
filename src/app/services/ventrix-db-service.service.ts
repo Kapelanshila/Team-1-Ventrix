@@ -103,19 +103,19 @@ export class VentrixDBServiceService {
     }
 
     createOtpTimer(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44317/api/Otp-timer/createOtpTimer',obj)
+      return this.http.post<any>('https://localhost:44317/api/OTP/createOtpTimer',obj)
     }
 
     readOtpTimer(): Observable<OtpTimer[]>{
-      return this.http.get<OtpTimer[]>('https://localhost:44317/api/Otp-timer/getOtpTimer')
+      return this.http.get<OtpTimer[]>('https://localhost:44317/api/OTP/getOtpTimer')
     }
 
     updateOtpTimer(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44317/api/Otp-timer/updateOtpTimer',obj)
+      return this.http.post<any>('https://localhost:44317/api/OTP/updateOtpTimer',obj)
     }
 
     deleteOtpTimer(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44317/api/Otp-timer/deleteOtpTimer',obj)
+      return this.http.post<any>('https://localhost:44317/api/OTP/deleteOtpTimer',obj)
     }
 
     setOtpTimer(value: OtpTimer)
