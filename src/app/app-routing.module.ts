@@ -24,7 +24,6 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'create-client', component: CreateClientComponent },
 { path: 'read-client', component: ReadClientComponent },
 { path: 'update-client', component: ClientUpdateComponent },
-
 { path: 'dashboard', component: DashboardComponent },
 { path: 'create-securityquestion', component: CreateSecurityquestionComponent },
 { path: 'read-securityquestion', component: ReadSecurityquestionComponent },
