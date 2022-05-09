@@ -10,7 +10,7 @@
                 <label>Enter Security Question</label>
                    <!-- Error messages -->
                 <div *ngIf="submitted">
-                    <span *ngIf="f['description'].errors?.['required']" class="text-danger" >Please enter a security question</span>
+                    <span *ngIf="f['description'].errors?.['required'] || f['description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a security question</span>
                 </div>
                 <textarea type="text" class="form-control" formControlName="description" placeholder="Enter Security Question" required></textarea>
                  </div>

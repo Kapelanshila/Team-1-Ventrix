@@ -22,7 +22,7 @@ export class UpdateSecurityquestionComponent implements OnInit {
     this.Securityquestionform = fbuilder.group({
       //Security question ID is not displayed but is neccessary for the API to update
       securityQuestionId: new FormControl ('',[Validators.required]),
-      description: new FormControl ('',[Validators.required,]),
+      description: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
     });
   }
 
@@ -98,4 +98,23 @@ export class UpdateSecurityquestionComponent implements OnInit {
     {
       this.router.navigate(['/read-securityquestion']);
     }
+
+     //Check no white spaces
+  public noWhitespaceValidator(someFormControl: FormControl) 
+  {
+    var iCount = 0;
+    for(var i = 0; i < someFormControl.value.length; i++)
+    {
+      if (someFormControl.value[i] == " ")
+      {
+        iCount += 1
+      }
+    }
+    if (iCount != someFormControl.value.length)
+    {
+      return  null
+    }
+    return {'noWhitespaceValidator' : true}
+
+}
 }

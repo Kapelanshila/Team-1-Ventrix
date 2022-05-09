@@ -8,6 +8,9 @@
             <br>
             <div class="form-group">
                 <label>New Delivery Status</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['description'].errors?.['required'] || f['description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a delivery status</span>
+                </div>
                 <input type="text" class="form-control" formControlName="description" placeholder="Enter new delivery status" required>
             </div>
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">

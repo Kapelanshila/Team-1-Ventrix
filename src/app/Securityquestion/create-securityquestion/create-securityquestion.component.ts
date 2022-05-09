@@ -20,7 +20,7 @@ export class CreateSecurityquestionComponent implements OnInit {
   {
       //Additional Validation can be added here
       this. Securityquestionform = fbuilder.group({
-      description: new FormControl ('',[Validators.required,]),
+      description: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
     });
   }
 
@@ -91,4 +91,22 @@ export class CreateSecurityquestionComponent implements OnInit {
     this.router.navigate(['/read-securityquestion']);
   }
 
+  //Check no white spaces
+  public noWhitespaceValidator(someFormControl: FormControl) 
+  {
+    var iCount = 0;
+    for(var i = 0; i < someFormControl.value.length; i++)
+    {
+      if (someFormControl.value[i] == " ")
+      {
+        iCount += 1
+      }
+    }
+    if (iCount != someFormControl.value.length)
+    {
+      return  null
+    }
+    return {'noWhitespaceValidator' : true}
+
+}
 }
