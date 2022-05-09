@@ -14,24 +14,52 @@ import Swal from 'sweetalert2';
 export class CreateSecurityquestionComponent implements OnInit {
   Securityquestionform : FormGroup;
   submitted = false;
+  find =false;
+  securityquestions:any[] = [];
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
   {
       //Additional Validation can be added here
       this. Securityquestionform = fbuilder.group({
-      Description: new FormControl ('',[Validators.required,]),
+      description: new FormControl ('',[Validators.required,]),
     });
   }
 
 
 
   ngOnInit(): void {
-
+    this.ventrixdbservice.readSecurityquestion()
+    .subscribe(response => {
+      this.securityquestions = response;
+      console.log(this.securityquestions)
+    })
   }
   //Form submit calls add security question
   addSecurityquestion()
   {
     this.submitted = true;
-    if (this. Securityquestionform.valid) {
+    //Check if client does not already exsist
+    this.securityquestions.forEach(element => {
+      if (element.description == this.Securityquestionform.get('description')?.value) 
+      {
+        this.find = true;
+        Swal.fire({
+          icon: 'error',
+          title: 'Security Question Altready Exsists',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+              this.router.navigate(['/create-securityquestion']).then(() => {
+              window.location.reload();
+            });
+          }
+        })  
+      }
+    });
+
+    if (this.Securityquestionform.valid && this.find == false) {
       console.log(this.Securityquestionform.value);
       this.ventrixdbservice.createSecurityquestion(this.Securityquestionform.value).subscribe()
         //redirects back to data table and refreshes
@@ -51,6 +79,7 @@ export class CreateSecurityquestionComponent implements OnInit {
           }
         })  
     }
+
   }
 
   // Get value of formcontrol name to return it to api

@@ -10,9 +10,9 @@
                 <label>Enter Security Question</label>
                    <!-- Error messages -->
                 <div *ngIf="submitted">
-                    <span *ngIf="f['Description'].errors?.['required']" class="text-danger" >Please enter a security question</span>
+                    <span *ngIf="f['description'].errors?.['required']" class="text-danger" >Please enter a security question</span>
                 </div>
-                <textarea type="text" class="form-control" formControlName="Description" placeholder="Enter Security Question" required></textarea>
+                <textarea type="text" class="form-control" formControlName="description" placeholder="Enter Security Question" required></textarea>
                  </div>
         
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
