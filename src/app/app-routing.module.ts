@@ -5,7 +5,6 @@ import { CreatewarrantyperiodComponent } from './WarrantyPeriod/createwarrantype
 import { UpdateWarehouseComponent } from './Warehouse/update-warehouse/update-warehouse.component';
 import { ReadWarehouseComponent } from './Warehouse/read-warehouse/read-warehouse.component';
 import { CreateWarehouseComponent } from './Warehouse/create-warehouse/create-warehouse.component';
-import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReadClientComponent } from './Client/read-client/read-client.component';
 import { AppComponent } from './app.component';
