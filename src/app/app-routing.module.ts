@@ -1,3 +1,4 @@
+import { Component, NgModule } from '@angular/core';
 import { UpdatewarrantyperiodComponent } from './WarrantyPeriod/updatewarrantyperiod/updatewarrantyperiod.component';
 import { ReadwarrantyperiodComponent } from './WarrantyPeriod/readwarrantyperiod/readwarrantyperiod.component';
 import { CreatewarrantyperiodComponent } from './WarrantyPeriod/createwarrantyperiod/createwarrantyperiod.component';
@@ -11,6 +12,10 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
 import { CreateClientComponent } from './Client/create-client/create-client.component';
 import { ClientUpdateComponent } from './Client/update-client/client-update.component';
+import { CreateEmployeeComponent } from './Employee/create-employee/create-employee.component';
+import { UpdateEmployeeComponent } from './Employee/update-employee/update-employee.component';
+import { ReadEmployeeComponent } from './Employee/read-employee/read-employee.component';
+import { OtpTimerComponent } from './otp-timer/otp-timer.component';
 import { CreateSecurityquestionComponent } from './Securityquestion/create-securityquestion/create-securityquestion.component';
 import { UpdateSecurityquestionComponent } from './Securityquestion/update-securityquestion/update-securityquestion.component';
 import { ReadSecurityquestionComponent } from './Securityquestion/read-securityquestion/read-securityquestion.component';
@@ -24,6 +29,10 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'create-client', component: CreateClientComponent },
 { path: 'read-client', component: ReadClientComponent },
 { path: 'update-client', component: ClientUpdateComponent },
+{ path: 'create-employee', component: CreateEmployeeComponent},
+{ path: 'update-employee', component: UpdateEmployeeComponent},
+{ path: 'read-employee', component: ReadEmployeeComponent},
+{path: 'otp-timer', component: OtpTimerComponent},
 { path: 'dashboard', component: DashboardComponent },
 { path: 'create-securityquestion', component: CreateSecurityquestionComponent },
 { path: 'read-securityquestion', component: ReadSecurityquestionComponent },
@@ -40,6 +49,7 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'dashboard', component: DashboardComponent },
 { path: 'login', component: LoginComponent },
 { path: 'depreciation', component: DepreciationComponent }];
+
 
 // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }];
 
