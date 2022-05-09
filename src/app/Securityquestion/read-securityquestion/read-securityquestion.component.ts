@@ -13,8 +13,17 @@ import Swal from 'sweetalert2';
 })
 export class ReadSecurityquestionComponent implements OnInit {
   securityquestions:any[] = [];
+  p: number = 1;
+  config: any; 
+  noOfRows = 10;
 
-  constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) { }
+  constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
+  { 
+    this.config = {
+      currentPage: 1,
+      itemsPerPage: 2
+    };
+  }
 
   ngOnInit(): void {
     
@@ -27,6 +36,10 @@ export class ReadSecurityquestionComponent implements OnInit {
   addSecurityquestion()
   {
     this.router.navigate(['/create-securityquestion']);
+  }
+
+  pageChange(newPage: number) {
+		this.router.navigate(['/read-client'], { queryParams: { page: newPage } })
   }
 
   editSecurityquestion(selectedSecurityquestion: Securityquestion)

@@ -31,20 +31,21 @@
                 <li class="nav-item dropdown d-sm-block d-md-none">
                     <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Admin </a>
                     <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-                        <a class="dropdown-item" href="#">User</a>
+                        <a class="dropdown-item" routerLink="/read-user">User</a>
                         <a class="dropdown-item" href="#">Backup/Restore</a>
-                        <a class="dropdown-item" href="#">Supplier</a>
-                        <a class="dropdown-item" href="#">Client</a>
+                        <a class="dropdown-item" routerLink="/read-supplier">Supplier</a>
+                        <a class="dropdown-item" routerLink="/read-client">Client</a>
                         <a class="dropdown-item" href="#">Client Order Status</a>
                         <a class="dropdown-item" href="#">Employee</a>
-                        <a class="dropdown-item" href="#">Depreciation</a>
+                        <a class="dropdown-item" routerLink="/depreciation">Depreciation</a>
                         <a class="dropdown-item" href="#">OTP Timer</a>
                         <a class="dropdown-item" href="#">Write-Off Reason</a>
-                        <a class="dropdown-item" href="#">Warranty Period</a>
+                        <a class="dropdown-item" routerLink="/readwarrantyperiod">Warranty Period</a>
+                        <a class="dropdown-item" routerLink="/read-warehouse">Warehouse</a>
                         <a class="dropdown-item" href="#">Asset Condition</a>
-                        <a class="dropdown-item" href="#">Security Question</a>
+                        <a class="dropdown-item" routerLink="/read-securityquestion">Security Question</a>
                         <a class="dropdown-item" href="#">Time slot</a>
-                        <a class="dropdown-item" href="#">Delivery Status</a>
+                        <a class="dropdown-item" routerLink="/read-deliverystatus">Delivery Status</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown d-sm-block d-md-none">
@@ -94,25 +95,25 @@
                         </div>
                     </a>
                     <div id='submenu2' class="collapse sidebar-submenu">
-                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                        <a routerLink="/read-user" class="list-group-item list-group-item-action text-white bg-primary">
                             <span class="menu-collapsed">User</span>
                         </a>
                         <a href="#" class="list-group-item list-group-item-action text-white  bg-primary">
                             <span class="menu-collapsed">Backup/Restore</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
+                        <a routerLink="/read-supplier" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Supplier</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
+                        <a routerLink="/read-client" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Client</span>
                         </a>
                         <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Client Order Status</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
+                        <a routerLink="/read-employee" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Employee</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
+                        <a routerLink="/depreciation" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Depreciation</span>
                         </a>
                         <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
@@ -121,10 +122,10 @@
                         <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Write-Off Reason</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
+                        <a routerLink="/readwarrantyperiod" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Warranty Period</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
+                        <a routerLink="/read-warehouse" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Warehouse</span>
                         </a>
                         <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
@@ -133,13 +134,10 @@
                         <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Asset Condition</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
+                        <a routerLink="/read-securityquestion" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Security Question</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
-                            <span class="menu-collapsed">Client</span>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
+                        <a routerLink="/read-deliverystatus" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Delivery Status</span>
                         </a>
                     </div>
