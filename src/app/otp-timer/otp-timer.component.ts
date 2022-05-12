@@ -20,7 +20,7 @@ export class OtpTimerComponent implements OnInit {
  constructor(fbuilder: FormBuilder, private router: Router, private ventrixdbservice:VentrixDBServiceService)
  {
    this.otpTimerform = fbuilder.group({
-     timeid: new FormControl(''),
+      otpTimeId: new FormControl(''),
      time: new FormControl('',[Validators.required])
    });
  }
@@ -40,7 +40,7 @@ export class OtpTimerComponent implements OnInit {
    this.submitted = true;
    this.newOtpTimer = 
    {
-     timeid: 0,
+     otpTimeId: 0,
      time: this.otpTimerform.get('time')?.value,
    }
    if(this.otpTimerform.valid) {
@@ -83,7 +83,7 @@ export class OtpTimerComponent implements OnInit {
      {
        this.newOtpTimer = 
        {
-         timeid: selectedOtpTimer.timeid,
+        otpTimeId: selectedOtpTimer.otpTimeId,
          time: this.otpTimerform.get('time')?.value,
        }
        console.log(this.newOtpTimer);

@@ -10,6 +10,7 @@
 .table-responsive {
   margin: 12% 0;
   box-shadow: 0 30px 30px rgba(0, 0, 0, 0.292);
+  background: #fff;
 }
 .table-wrapper {
   min-width: 1000px;
@@ -77,40 +78,10 @@ table.table td a.delete {
 table.table td i {
   font-size: 19px;
 }    
-.pagination {
-  float: right;
-  margin: 0 0 5px;
-}
 .page-item active
 {
   color: white;
-}
-.pagination li a {
-  border: none;
-  font-size: 95%;
-  width: 30px;
-  height: 30px;
-  margin: 0 2px;
-  line-height: 30px;
-  border-radius: 30px !important;
-  text-align: center;
-  padding: 0;
-}
-.pagination li a:hover {
-  color: #666;
-}	
-.pagination li.disabled i {
-  color: #ccc;
-}
-.pagination li i {
-  font-size: 16px;
-  padding-top: 6px
-}
-.hint-text {
-  float: left;
-  margin-top: 6px;
-  font-size: 95%;
-}    
+}  
 .btn-primary{
   border: none;
   margin: 0 13px;
@@ -119,4 +90,12 @@ table.table td i {
 .icon-adjust 
 {
   text-align: center;
+}
+.pagination {
+  float: right;
+  margin: 0 0 5px;
+}
+.custom-pagination /deep/ .ngx-pagination .current 
+{
+    background:#077bff;
 }

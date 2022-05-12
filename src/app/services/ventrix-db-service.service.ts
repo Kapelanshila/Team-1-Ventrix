@@ -31,22 +31,22 @@ export class VentrixDBServiceService {
     //Client CRUD:
     //Creates client from API
     createClient(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/Client/createClient',obj)
+      return this.http.post<any>('https://localhost:44324/api/Client/createClient',obj)
     }
 
     //Returns clients from API
     readClient(): Observable<Client[]> {
-      return this.http.get<Client[]>('https://localhost:44317/api/Client/getClients')
+      return this.http.get<Client[]>('https://localhost:44324/api/Client/getClients')
     }
     
     //Updates clients from API
     updateClient(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/Client/updateClient',obj)
+      return this.http.put<any>('https://localhost:44324/api/Client/updateClient',obj)
     }
 
     //Deletes client from API
     deleteClient(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/Client/deleteClient',obj)
+      return this.http.post<any>('https://localhost:44324/api/Client/deleteClient',obj)
     }
 
     //Get Selected client so it can be either updated or deleted
@@ -71,22 +71,22 @@ export class VentrixDBServiceService {
     //User CRUD:
     //Creates user from API
     createUser(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/User/createUser',obj)
+      return this.http.post<any>('https://localhost:44324/api/User/createUser',obj)
     }
 
     //Returns users from API
     readUser(): Observable<User[]> {
-      return this.http.get<User[]>('https://localhost:44317/api/User/getUsers')
+      return this.http.get<User[]>('https://localhost:44324/api/User/getUsers')
     }
     
     //Updates users from API
     updateUser(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/User/updateUser',obj)
+      return this.http.post<any>('https://localhost:44324/api/User/updateUser',obj)
     }
 
      //Deletes user from API
      deleteUser(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44317/api/User/deleteUser',obj)
+       return this.http.post<any>('https://localhost:44324/api/User/deleteUser',obj)
      }
 
      //Get Selected user so it can be either updated or deleted
@@ -109,29 +109,29 @@ export class VentrixDBServiceService {
 
      //Searches User through use of the api
      searchUser(value:string){
-       return this.http.get<any>('https://localhost:44317/api/User/searchUsers?search='+value)
+       return this.http.get<any>('https://localhost:44324/api/User/searchUsers?search='+value)
      }
 
      selectedSupplier: Supplier | undefined;
      //User CRUD:
      //Creates Supplier from API
      createSupplier(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44317/api/Supplier/createSupplier',obj)
+       return this.http.post<any>('https://localhost:44324/api/Supplier/createSupplier',obj)
      }
 
      //Returns Suppliers from API
      readSupplier(): Observable<Supplier[]> {
-       return this.http.get<Supplier[]>('https://localhost:44317/api/Supplier/getSuppliers')
+       return this.http.get<Supplier[]>('https://localhost:44324/api/Supplier/getSupplier')
      }
     
      //Updates Supplier from API
      updateSupplier(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44317/api/Supplier/updateSupplier',obj)
+       return this.http.put<any>('https://localhost:44324/api/Supplier/updateSupplier',obj)
      }
 
      //Deletes Supplier from API
      deleteSupplier(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44317/api/Supplier/deleteSupplier',obj)
+       return this.http.post<any>('https://localhost:44324/api/Supplier/deleteSupplier',obj)
      }
 
      //Get Selected Supplier so it can be either updated or deleted
@@ -154,33 +154,33 @@ export class VentrixDBServiceService {
 
      //Searches Supplier through use of the api
      searchSupplier(value:string){
-      return this.http.get<any>('https://localhost:44317/api/Supplier/searchSuppliers?search='+value)
+      return this.http.get<any>('https://localhost:44324/api/Supplier/searchSuppliers?search='+value)
     }
        //Returns Suppliers from API
        readRole(): Observable<Supplier[]> {
-        return this.http.get<Supplier[]>('https://localhost:44317/api/User/getRoles')
+        return this.http.get<Supplier[]>('https://localhost:44324/api/User/getRoles')
       }
          
     selectedEmployee: Employee | undefined;
     //Employee CRUD
     //Creates Employee from API
     createEmployee(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44317/api/Employee/createEmployee',obj)
+      return this.http.post<any>('https://localhost:44324/api/Employee/createEmployee',obj)
     }
 
     //returns employees from API
     readEmployee(): Observable<Employee[]>{
-      return this.http.get<Employee[]>('https://localhost:44317/api/Employee/getEmployees')
+      return this.http.get<Employee[]>('https://localhost:44324/api/Employee/getEmployees')
     }
 
     //Updates employee from API
     updateEmployee(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44317/api/Employee/updateEmployee', obj)
+      return this.http.post<any>('https://localhost:44324/api/Employee/updateEmployee', obj)
     }
 
     //Deletes employee from api
     deleteEmployee(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44317/api/Employee/deleteEmployee',obj)
+      return this.http.post<any>('https://localhost:44324/api/Employee/deleteEmployee',obj)
     }
 
     //Get Selected employee so it can be either updated or deleted
@@ -202,27 +202,27 @@ export class VentrixDBServiceService {
     }
 
     searchEmployee(value:string){
-      return this.http.get<any>('https://localhost:44317/api/Employee/searchEmployees?search='+value)
+      return this.http.get<any>('https://localhost:44324/api/Employee/searchEmployees?search='+value)
     }
 
     readTitle(): Observable<Employee[]>{
-      return this.http.get<Employee[]>('https://localhost:44317/api/Employee/getTitles')
+      return this.http.get<Employee[]>('https://localhost:44324/api/Employee/getTitles')
     }
 
     createOtpTimer(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44317/api/OTP/createOtpTimer',obj)
+      return this.http.post<any>('https://localhost:44324/api/OtpExpiryTime/createOtpExpiryTime',obj)
     }
 
     readOtpTimer(): Observable<OtpTimer[]>{
-      return this.http.get<OtpTimer[]>('https://localhost:44317/api/OTP/getOtpTimer')
+      return this.http.get<OtpTimer[]>('https://localhost:44324/api/OtpExpiryTime/getOtpExpiryTime')
     }
 
     updateOtpTimer(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44317/api/OTP/updateOtpTimer',obj)
+      return this.http.put<any>('https://localhost:44324/api/OtpExpiryTime/updateOtpExpiryTime',obj)
     }
 
     deleteOtpTimer(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44317/api/OTP/deleteOtpTimer',obj)
+      return this.http.post<any>('https://localhost:44324/api/OtpExpiryTime/deleteOtpExpiryTime',obj)
     }
 
     setOtpTimer(value: OtpTimer)
@@ -237,48 +237,48 @@ export class VentrixDBServiceService {
   
   //Searches Client through use if the api
     searchClient(value:string){
-      return this.http.get<any>('https://localhost:44317/api/Client/searchClients?search='+value)
+      return this.http.get<any>('https://localhost:44324/api/Client/searchClients?search='+value)
     }
 
     createDepreciation(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/Depreciation/createDepreciation',obj)
+      return this.http.post<any>('https://localhost:44324/api/Depreciation/createDepreciation',obj)
     }
 
     //Returns Depreciation from API
     readDepreciation(): Observable<Depreciation[]> {
-      return this.http.get<Depreciation[]>('https://localhost:44317/api/Depreciation/getDepreciation')
+      return this.http.get<Depreciation[]>('https://localhost:44324/api/Depreciation/getDepreciation')
     }
 
     //Updates Depreciation from API
     updateDepreciation(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/Depreciation/updateDepreciation',obj)
+      return this.http.put<any>('https://localhost:44324/api/Depreciation/updateDepreciation',obj)
     }
 
     //Deletes Depreciation from API
     deleteDepreciation(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/Depreciation/deleteDepreciation',obj)
+      return this.http.post<any>('https://localhost:44324/api/Depreciation/deleteDepreciation',obj)
     }
 
     selectedSecurityquestion: Securityquestion | undefined;
     //Security question CRUD:
     //Creates security question from API
     createSecurityquestion(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/SecurityQuestion/createSecurityquestion',obj)
+      return this.http.post<any>('https://localhost:44324/api/SecurityQuestion/createSecurityquestion',obj)
     }
 
     //Returns security question from API
     readSecurityquestion(): Observable<Securityquestion[]> {
-      return this.http.get<Securityquestion[]>('https://localhost:44317/api/SecurityQuestion/getSecurityquestion')
+      return this.http.get<Securityquestion[]>('https://localhost:44324/api/SecurityQuestion/getSecurityquestion')
     }
     
     //Updates security question from API
     updateSecurityquestion(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/SecurityQuestion/updateSecurityquestion',obj)
+      return this.http.put<any>('https://localhost:44324/api/SecurityQuestion/updateSecurityquestion',obj)
     }
 
     //Deletes security question from API
     deleteSecurityquestion(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/SecurityQuestion/deleteSecurityquestion',obj)
+      return this.http.post<any>('https://localhost:44324/api/SecurityQuestion/deleteSecurityquestion',obj)
     }
 
     //Get Selected security question so it can be either updated or deleted
@@ -303,22 +303,22 @@ export class VentrixDBServiceService {
     //Delivery status CRUD:
     //Creates delivery status from API
     createDeliverystatus(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/DeliveryStatus/createDeliverystatus',obj)
+      return this.http.post<any>('https://localhost:44324/api/DeliveryStatus/createDeliverystatus',obj)
     }
 
     //Returns delivery status from API
     readDeliverystatus(): Observable<Deliverystatus[]> {
-      return this.http.get<Deliverystatus[]>('https://localhost:44317/api/DeliveryStatus/getDeliverystatus')
+      return this.http.get<Deliverystatus[]>('https://localhost:44324/api/DeliveryStatus/getDeliverystatus')
     }
     
     //Updates delivery status from API
     updateDeliverystatus(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/DeliveryStatus/updateDeliverystatus',obj)
+      return this.http.put<any>('https://localhost:44324/api/DeliveryStatus/updateDeliverystatus',obj)
     }
 
     //Deletes delivery status from API
     deleteDeliverystatus(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/DeliveryStatus/deleteDeliverystatus',obj)
+      return this.http.post<any>('https://localhost:44324/api/DeliveryStatus/deleteDeliverystatus',obj)
     }
 
     //Get Selected delivery status so it can be either updated or deleted
@@ -356,22 +356,22 @@ export class VentrixDBServiceService {
     
     //Creates Warehouse from API
     createWarehouse(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/Warehouse/createWarehouse',obj)
+      return this.http.post<any>('https://localhost:44324/api/Warehouse/createWarehouse',obj)
     }
 
     //Returns Warehouses from API
     readWarehouse(): Observable<Warehouse[]> {
-      return this.http.get<Warehouse[]>('https://localhost:44317/api/Warehouse/getWarehouse')
+      return this.http.get<Warehouse[]>('https://localhost:44324/api/Warehouse/getWarehouse')
     }
     
     //Updates Warehouse from API
     updateWarehouse(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/Warehouse/updateWarehouse',obj)
+      return this.http.put<any>('https://localhost:44324/api/Warehouse/updateWarehouse',obj)
     }
 
     //Deletes Warehouse from API
     deleteWarehouse(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44317/api/Warehouse/deleteWarehouse',obj)
+      return this.http.post<any>('https://localhost:44324/api/Warehouse/deleteWarehouse',obj)
     }
 
     //Get Selected Warehouse so it can be either updated or deleted
@@ -397,22 +397,22 @@ export class VentrixDBServiceService {
      //Client Warehouse:
      //Creates Warehouse from API
      createWarrantyPeriod(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44317/api/WarrantyPeriod/createWarrantyPeriod',obj)
+       return this.http.post<any>('https://localhost:44324/api/WarrantyPeriod/createWarrantyPeriod',obj)
      }
  
      //Returns WarrantyPeriods from API
      readWarrantyPeriod(): Observable<WarrantyPeriod[]> {
-       return this.http.get<WarrantyPeriod[]>('https://localhost:44317/api/WarrantyPeriod/getWarrantyPeriod')
+       return this.http.get<WarrantyPeriod[]>('https://localhost:44324/api/WarrantyPeriod/getWarrantyPeriod')
      }
      
      //Updates WarrantyPeriod from API
      updateWarrantyPeriod(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44317/api/WarrantyPeriod/updateWarrantyPeriod',obj)
+       return this.http.put<any>('https://localhost:44324/api/WarrantyPeriod/updateWarrantyPeriod',obj)
      }
  
      //Deletes WarrantyPeriod from API
      deleteWarrantyPeriod(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44317/api/WarrantyPeriod/deleteWarrantyPeriod',obj)
+       return this.http.post<any>('https://localhost:44324/api/WarrantyPeriod/deleteWarrantyPeriod',obj)
      }
  
      //Get Selected WarrantyPeriod so it can be either updated or deleted

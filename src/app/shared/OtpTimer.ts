@@ -1,4 +1,4 @@
 export interface OtpTimer {
-    timeid: Number
+    otpTimeId: Number
     time: Number
 }
