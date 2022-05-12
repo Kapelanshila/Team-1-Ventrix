@@ -45,8 +45,8 @@ export class VentrixDBServiceService {
     }
 
     //Deletes client from API
-    deleteClient(obj:any){
-      this.http.delete('https://localhost:44324/api/Client/deleteClient',obj)
+    deleteClient(obj:any): Observable<any[]> {
+      return this.http.post<any>('https://localhost:44324/api/Client/deleteClient',obj)
     }
 
     //Get Selected client so it can be either updated or deleted
@@ -121,12 +121,12 @@ export class VentrixDBServiceService {
 
      //Returns Suppliers from API
      readSupplier(): Observable<Supplier[]> {
-       return this.http.get<Supplier[]>('https://localhost:44324/api/Supplier/getSuppliers')
+       return this.http.get<Supplier[]>('https://localhost:44324/api/Supplier/getSupplier')
      }
     
      //Updates Supplier from API
      updateSupplier(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44324/api/Supplier/updateSupplier',obj)
+       return this.http.put<any>('https://localhost:44324/api/Supplier/updateSupplier',obj)
      }
 
      //Deletes Supplier from API
@@ -210,19 +210,19 @@ export class VentrixDBServiceService {
     }
 
     createOtpTimer(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44324/api/OTP/createOtpTimer',obj)
+      return this.http.post<any>('https://localhost:44324/api/OtpExpiryTime/createOtpExpiryTime',obj)
     }
 
     readOtpTimer(): Observable<OtpTimer[]>{
-      return this.http.get<OtpTimer[]>('https://localhost:44324/api/OTP/getOtpTimer')
+      return this.http.get<OtpTimer[]>('https://localhost:44324/api/OtpExpiryTime/getOtpExpiryTime')
     }
 
     updateOtpTimer(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44324/api/OTP/updateOtpTimer',obj)
+      return this.http.put<any>('https://localhost:44324/api/OtpExpiryTime/updateOtpExpiryTime',obj)
     }
 
     deleteOtpTimer(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44324/api/OTP/deleteOtpTimer',obj)
+      return this.http.post<any>('https://localhost:44324/api/OtpExpiryTime/deleteOtpExpiryTime',obj)
     }
 
     setOtpTimer(value: OtpTimer)
@@ -251,7 +251,7 @@ export class VentrixDBServiceService {
 
     //Updates Depreciation from API
     updateDepreciation(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/Depreciation/updateDepreciation',obj)
+      return this.http.put<any>('https://localhost:44324/api/Depreciation/updateDepreciation',obj)
     }
 
     //Deletes Depreciation from API
@@ -273,7 +273,7 @@ export class VentrixDBServiceService {
     
     //Updates security question from API
     updateSecurityquestion(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/SecurityQuestion/updateSecurityquestion',obj)
+      return this.http.put<any>('https://localhost:44324/api/SecurityQuestion/updateSecurityquestion',obj)
     }
 
     //Deletes security question from API
@@ -313,7 +313,7 @@ export class VentrixDBServiceService {
     
     //Updates delivery status from API
     updateDeliverystatus(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/DeliveryStatus/updateDeliverystatus',obj)
+      return this.http.put<any>('https://localhost:44324/api/DeliveryStatus/updateDeliverystatus',obj)
     }
 
     //Deletes delivery status from API
@@ -366,7 +366,7 @@ export class VentrixDBServiceService {
     
     //Updates Warehouse from API
     updateWarehouse(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/Warehouse/updateWarehouse',obj)
+      return this.http.put<any>('https://localhost:44324/api/Warehouse/updateWarehouse',obj)
     }
 
     //Deletes Warehouse from API
@@ -407,7 +407,7 @@ export class VentrixDBServiceService {
      
      //Updates WarrantyPeriod from API
      updateWarrantyPeriod(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44324/api/WarrantyPeriod/updateWarrantyPeriod',obj)
+       return this.http.put<any>('https://localhost:44324/api/WarrantyPeriod/updateWarrantyPeriod',obj)
      }
  
      //Deletes WarrantyPeriod from API

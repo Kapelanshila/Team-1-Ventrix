@@ -17,11 +17,10 @@ import Swal from 'sweetalert2';
 })
 export class ReadClientComponent implements OnInit {
   clients:any[] = [];
-  // Copy
   p: number = 1;
   config: any; 
   noOfRows = 10;
-  // Copy
+
 
   //Search query 
   query:string = '';
@@ -88,8 +87,8 @@ export class ReadClientComponent implements OnInit {
 
   //Searches through client first validates if there is spaace or no search was add then call api to search
   searchClient()
-  {
-      if (this.query == '' || this.query.replace(/\s/g, '').length == 0)
+  { 
+      if (this.query != '' && this.query.replace(/\s/g, '').length == 0)
       {
         Swal.fire({
           icon: 'error',
@@ -108,7 +107,7 @@ export class ReadClientComponent implements OnInit {
       }
       else
       {
-        this.ventrixdbservice.searchClient(this.query.toString()).subscribe(response => {
+          this.ventrixdbservice.searchClient(this.query.toString()).subscribe(response => {
           this.clients = response;
           if (this.clients.length == 0)
           {

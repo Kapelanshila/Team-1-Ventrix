@@ -11,7 +11,7 @@
             <div class="form-group">
                 <div *ngIf="otpTimers.length > 0">
                     <div *ngFor="let otpTimer of otpTimers">
-                        <h5>Current OTP Timers: {{otpTimer.time}}seconds</h5>
+                        <h5>Current Time: {{otpTimer.time}} seconds</h5>
                         <div *ngIf="submitted">
                             <span *ngIf="f['time'].errors?.['required']" class="text-danger">Please enter a time</span>
                         </div>
