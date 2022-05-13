@@ -1,0 +1,21 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class ="warranty-period-card">
+        <form class="form-warranty-period" [formGroup]="warrantyPeriodForm" (ngSubmit)="createWarrantyPeriod()"><span class="reauth-email"> </span>					
+            <h4 class="card-title">Create Warranty Period</h4>
+            <hr>
+            <br>
+            <div class="form-group">
+                <label>Warranty period </label>
+                <!-- Error messages -->
+                <div *ngIf="submitted">
+                    <span *ngIf="f['Description'].errors?.['required'] || f['Description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a warranty period</span>
+                </div>
+                <input type="text" class="form-control" formControlName="Description" placeholder="Enter a warranty period" required>
+            </div>
+
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Save">
+        </form>
+    </div>
+</div>
