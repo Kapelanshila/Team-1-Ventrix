@@ -40,7 +40,7 @@ export class DepreciationComponent implements OnInit {
 
   createDepreciation()
   {
-      
+    this.submitted =true
     this.newDepreciation = 
     {
       depreciationId: 0,
@@ -72,6 +72,7 @@ export class DepreciationComponent implements OnInit {
   
   updateDepreciation(selectedDepreciation: Depreciation)
   {
+    this.submitted =true
     if (this.depreciationform.valid) {
       if (selectedDepreciation.percentage == this.depreciationform.get('percentage')?.value)
       {
@@ -98,7 +99,7 @@ export class DepreciationComponent implements OnInit {
           //Sweet alerts are used as notifications
           Swal.fire({
             icon: 'success',
-            title: 'Depreciation Added Successfully',
+            title: 'Depreciation Updated Successfully',
             confirmButtonText: 'OK',
             confirmButtonColor: '#077bff',
             allowOutsideClick: false,

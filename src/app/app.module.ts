@@ -18,7 +18,7 @@ import { UpdateSupplierComponent } from './Supplier/update-supplier/update-suppl
 import { CreateEmployeeComponent } from './Employee/create-employee/create-employee.component';
 import { ReadEmployeeComponent } from './Employee/read-employee/read-employee.component';
 import { UpdateEmployeeComponent } from './Employee/update-employee/update-employee.component';
-import { OtpTimerComponent } from './otp-timer/otp-timer.component';
+import { OtpTimerComponent } from './OTP/otp-timer.component';
 import { CreateSecurityquestionComponent } from './Securityquestion/create-securityquestion/create-securityquestion.component';
 import { ReadSecurityquestionComponent } from './Securityquestion/read-securityquestion/read-securityquestion.component';
 import { UpdateSecurityquestionComponent } from './Securityquestion/update-securityquestion/update-securityquestion.component';
