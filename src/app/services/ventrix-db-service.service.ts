@@ -175,7 +175,7 @@ export class VentrixDBServiceService {
 
     //Updates employee from API
     updateEmployee(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44324/api/Employee/updateEmployee', obj)
+      return this.http.put<any>('https://localhost:44324/api/Employee/updateEmployee', obj)
     }
 
     //Deletes employee from api
@@ -206,7 +206,7 @@ export class VentrixDBServiceService {
     }
 
     readTitle(): Observable<Employee[]>{
-      return this.http.get<Employee[]>('https://localhost:44324/api/Employee/getTitles')
+      return this.http.get<Employee[]>('https://localhost:44324/api/Title/getTitle')
     }
 
     createOtpTimer(obj:any): Observable<any[]>{
