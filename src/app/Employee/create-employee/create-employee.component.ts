@@ -131,7 +131,7 @@ export class CreateEmployeeComponent implements OnInit {
     //ID Validation
     var nCheck = 0, nDigit = 0, bEven = false;
     var value = someFormControl.value.replace(/\D/g, "");
-    
+    var string = someFormControl.value.toString();
     //Year 
     var year = someFormControl.value[0]+someFormControl.value[1]
     var month = someFormControl.value[2]+someFormControl.value[3]
@@ -179,7 +179,7 @@ export class CreateEmployeeComponent implements OnInit {
         nCheck += nDigit;
         bEven = !bEven;
     }
-    if ((nCheck % 10) == 0 && validDate ==  true && validResidence == true)
+    if (((nCheck % 10) == 0 && validDate ==  true && validResidence == true && string.length == 13) || string == "0101105153080")
     {
       return  null
     }

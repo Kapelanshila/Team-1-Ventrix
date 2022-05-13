@@ -74,7 +74,7 @@ export class ReadEmployeeComponent implements OnInit {
 
   searchEmployee()
   {
-    if(this.query == '' || this.query.replace(/\s/g, '').length==0)
+    if (this.query != '' && this.query.replace(/\s/g, '').length == 0)
     {
       Swal.fire({
         icon: 'error',

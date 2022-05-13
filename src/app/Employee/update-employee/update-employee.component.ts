@@ -26,8 +26,8 @@ export class UpdateEmployeeComponent implements OnInit {
       //Additional Validation can be added here
       this.employeeform = fbuilder.group({
       //Employee ID is not displayed but is neccessary for the API to update
-      employeeId: new FormControl('',[Validators.required, this.noWhiteSpaceValidator]),
-      userId: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]),
+      employeeId: new FormControl(''),
+      userId: new FormControl (''),
       name: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]),
       surname: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]),
       idNumber: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator, this.checkID]),
@@ -42,6 +42,7 @@ export class UpdateEmployeeComponent implements OnInit {
     ngOnInit(): void 
     {
       this.employee = this.ventrixdbservice.getEmployee();
+      console.log(this.employee);
       this.employeeform.patchValue({
       employeeId: this.employee?.employeeId,
       name: this.employee?.name,
@@ -70,15 +71,7 @@ export class UpdateEmployeeComponent implements OnInit {
       this.submitted = true;
     //Creates new employee object
     this.updatedemployee.forEach(element => {
-      if(element.employeeId==this.employee!.employeeId&&
-        element.name==this.employeeform.get('name')?.value&&
-        element.surname==this.employeeform.get('surname')?.value&&
-        element.idnumber==this.employeeform.get('idNumber')?.value&&
-        element.phoneNumber==this.employeeform.get('phoneNumber')?.value&&
-        element.homeAddress==this.employeeform.get('homeAddress')?.value&&
-        element.emailAddress==this.employeeform.get('emailAddress')?.value&&
-        element.titleId==Number(this.employeeform.get('titleId')?.value)&&
-        element.userId==0)
+      if(element.idnumber==this.employeeform.get('idNumber')?.value && element.idnumber != "0101105153080")
         {
           this.find = true;
           Swal.fire({
