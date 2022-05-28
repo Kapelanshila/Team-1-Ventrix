@@ -1,0 +1,19 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="assettype-card">
+        <!--Form group linking input values to typescript -->
+        <form class="form-assettype"  [formGroup]="assettypeform" (ngSubmit)="addAssetType()"><span class="reauth-email"> </span>					
+            <h4 class="card-title">Add Asset Type</h4>
+            <hr>
+            <br>
+            <div class="form-group">
+                <label>Asset Type</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['description'].errors?.['required'] || f['description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an asset type description</span>
+                </div>
+                <input type="text" class="form-control" formControlName="description" placeholder="Enter Asset Type description" required>
+            </div>
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Save">
+        </form>
+</div>
