@@ -66,7 +66,7 @@ export class UpdatewarrantyperiodComponent implements OnInit {
           allowEscapeKey: false
         }).then((result) => {
           if (result.isConfirmed) {
-              this.router.navigate(['/create-warranty-period']).then(() => {
+              this.router.navigate(['/read-warranty-period']).then(() => {
               window.location.reload();
             });
           }

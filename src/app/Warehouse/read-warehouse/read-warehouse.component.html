@@ -26,12 +26,14 @@
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Address</th>
                         </tr>
                     </thead>
                     <tbody>
                     <tr *ngFor="let warehouse of warehouses | paginate:{itemsPerPage: noOfRows, currentPage:p}">
+                                <td>{{warehouse.warehouseId}}</td>
                                 <td>{{warehouse.name}}</td>
                                 <td>{{warehouse.address}}</td>
                         <td class = "icon-adjust">

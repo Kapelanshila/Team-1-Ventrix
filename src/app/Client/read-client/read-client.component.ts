@@ -20,15 +20,18 @@ export class ReadClientComponent implements OnInit {
   p: number = 1;
   config: any; 
   noOfRows = 10;
+
+
   //Search query 
   query:string = '';
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
   { 
+    // Copy
     this.config = {
       currentPage: 1,
       itemsPerPage: 2
     };
-
+     // Copy
 
   }
 
@@ -46,10 +49,12 @@ export class ReadClientComponent implements OnInit {
     this.router.navigate(['/create-client']);
   }
 
-  
+  // Copy
   pageChange(newPage: number) {
 		this.router.navigate(['/read-client'], { queryParams: { page: newPage } })
   }
+// Copy
+
 
   editClient(selectedclient: Client)
   {
@@ -82,8 +87,8 @@ export class ReadClientComponent implements OnInit {
 
   //Searches through client first validates if there is spaace or no search was add then call api to search
   searchClient()
-  {
-      if (this.query == '' || this.query.replace(/\s/g, '').length == 0)
+  { 
+      if (this.query != '' && this.query.replace(/\s/g, '').length == 0)
       {
         Swal.fire({
           icon: 'error',
@@ -102,7 +107,7 @@ export class ReadClientComponent implements OnInit {
       }
       else
       {
-        this.ventrixdbservice.searchClient(this.query.toString()).subscribe(response => {
+          this.ventrixdbservice.searchClient(this.query.toString()).subscribe(response => {
           this.clients = response;
           if (this.clients.length == 0)
           {

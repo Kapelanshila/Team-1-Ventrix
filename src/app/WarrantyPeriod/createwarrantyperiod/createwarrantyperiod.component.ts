@@ -38,10 +38,9 @@ export class CreatewarrantyperiodComponent implements OnInit {
   createWarrantyPeriod()
   {
     this.submitted = true;
-    //Check if warehouse does not already exsist
+    //Check if period does not already exsist
     this.warrantyPeriods.forEach(element => {
-      if (element.description == this.warrantyPeriodForm.get('description')?.value 
-      ) 
+      if (element.description == this.warrantyPeriodForm.get('Description')?.value)   
       {
         this.find = true;
         Swal.fire({
