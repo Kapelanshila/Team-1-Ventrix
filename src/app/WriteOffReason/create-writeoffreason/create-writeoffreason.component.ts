@@ -43,7 +43,7 @@ export class CreateWriteoffreasonComponent implements OnInit {
         this.find = true;
         Swal.fire({
           icon: 'error',
-          title: 'Write-Off Reason Already Exsists',
+          title: 'Write-Off Reason Already Exists',
           confirmButtonText: 'OK',
           confirmButtonColor: '#077bff',
           allowOutsideClick: false,
