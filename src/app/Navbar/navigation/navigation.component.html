@@ -35,39 +35,53 @@
                         <a class="dropdown-item" href="#">Backup/Restore</a>
                         <a class="dropdown-item" routerLink="/read-supplier">Supplier</a>
                         <a class="dropdown-item" routerLink="/read-client">Client</a>
+
                         <a class="dropdown-item" href="#">Client Order Status</a>
                         <a class="dropdown-item" href="/read-employee">Employee</a>
                         <a class="dropdown-item" routerLink="/depreciation">Depreciation</a>
                         <a class="dropdown-item" href="/otp-timer">OTP Timer</a>
                         <a class="dropdown-item" href="#">Write-Off Reason</a>
+
                         <a class="dropdown-item" routerLink="/read-warranty-period">Warranty Period</a>
                         <a class="dropdown-item" routerLink="/read-warehouse">Warehouse</a>
+                        <a class="dropdown-item" href="#">Asset Repair Reason</a>
                         <a class="dropdown-item" href="#">Asset Condition</a>
                         <a class="dropdown-item" routerLink="/read-securityquestion">Security Question</a>
                         <a class="dropdown-item" href="#">Time slot</a>
-                        <a class="dropdown-item" routerLink="/read-deliverystatus">Delivery Status</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown d-sm-block d-md-none">
                     <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Inventory </a>
                     <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-                        <a class="dropdown-item" href="#">Test</a>
+                        <a class="dropdown-item" routerLink="/read-inventory">Inventory Item</a>
+                        <a class="dropdown-item" routerLink="/read-inventorycategory">Inventory Category</a>
+                        <a class="dropdown-item" href="#">Client Order</a>
+                        <a class="dropdown-item" href="#">Supplier Order</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown d-sm-block d-md-none">
                     <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Assets </a>
                     <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-                        <a class="dropdown-item" href="#">Test</a>
+                        <a class="dropdown-item" routerLink="/read-asset">Asset Item</a>
+                        <a class="dropdown-item" routerLink="/read-assetcategory">Asset Category</a>
+                        <a class="dropdown-item" href="#">Asset Repair</a>
+                        <a class="dropdown-item" outerLink="/read-assettype">Asset Type</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown d-sm-block d-md-none">
                     <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Reporting </a>
                     <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-                        <a class="dropdown-item" href="#">Test</a>
+                        <a class="dropdown-item" href="#">Inventory</a>
+                        <a class="dropdown-item" href="#">Assets</a>
+                        <a class="dropdown-item" href="#">Written-Off Inventory</a>
+                        <a class="dropdown-item" href="#">Written-Off Assets</a>
+                        <a class="dropdown-item" href="#">Depreciation</a>
+                        <a class="dropdown-item" href="#">Employees</a>
+                        <a class="dropdown-item" href="#">Management</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown d-sm-block d-md-none">
-                    <a class="nav-link" href="#" id="smallerscreenmenu"> Profile </a>
+                    <a class="nav-link" routerLink="/view-user-details" id="smallerscreenmenu"> Profile </a>
                 </li>
                 <li class="nav-item dropdown d-sm-block d-md-none">
                     <a class="nav-link" href="#" id="smallerscreenmenu"> Logout </a>
@@ -119,7 +133,7 @@
                         <a href="/otp-timer" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">OTP Timer</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
+                        <a href="/read-writeoffreason" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Write-Off Reason</span>
                         </a>
                         <a routerLink="/read-warranty-period" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
@@ -128,7 +142,7 @@
                         <a routerLink="/read-warehouse" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Warehouse</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
+                        <a routerLink="/read-assetrepairreason" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Asset Repair Reason</span>
                         </a>
                         <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
@@ -148,6 +162,20 @@
                             <span class="submenu-icon ml-auto"></span>
                         </div>
                     </a>
+                    <div id='submenu3' class="collapse sidebar-submenu">
+                        <a routerLink="/read-inventory"class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Inventory Item</span>
+                        </a>
+                        <a routerLink="/read-inventorycategory" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Inventory Category</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Client Order</span>
+                        </a>
+                        <a routerLink="/read-inventorytype" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Supplier Order</span>
+                        </a>
+                    </div>
                     <a href="#submenu4" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-money fa-fw mr-3"></span>
@@ -155,20 +183,54 @@
                             <span class="submenu-icon ml-auto"></span>
                         </div>
                     </a>
-                    <a href="#submenu4" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
+                    <div id='submenu4' class="collapse sidebar-submenu">
+                        <a routerLink="/read-asset" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Asset Item</span>
+                        </a>
+                        <a routerLink="/read-assetcategory" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Asset Category</span>
+                        </a>
+                        <a routerLink="/read-asset-repair-reason" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Asset Repair</span>
+                        </a>
+                    </div>
+                    <a href="#submenu5" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-bar-chart fa-fw mr-3"></span>
                             <span class="menu-collapsed">Reporting</span>
                             <span class="submenu-icon ml-auto"></span>
                         </div>
                     </a>
-                    <a href="#submenu5" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
+                    <div id='submenu5' class="collapse sidebar-submenu">
+                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Inventory</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Assets</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Written-Off Inventory</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Written-Off Assets</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Depreciation</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Employees</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Management</span>
+                        </a>
+                    </div>
+                    <a routerLink="/view-user-details" href="#submenu6" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-user fa-fw mr-3"></span>
                             <span class="menu-collapsed">Profile</span>
                         </div>
                     </a>
-                    <a href="#submenu6" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
+                    <a routerLink="/login" (click)="logout()" href="#submenu6" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-sign-out fa-fw mr-3"></span>
                             <span class="menu-collapsed">Logout</span>
@@ -179,5 +241,3 @@
         </div>
     </div>
 </div>  
-<!-- JQUERY Code for Navbar -->
-<!-- <script src="script.js"></script> -->

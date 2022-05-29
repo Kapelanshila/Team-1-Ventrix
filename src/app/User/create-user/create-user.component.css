@@ -15,7 +15,7 @@ margin: 0 auto 25px;
 margin-top: 75px;
 border-radius: 2px;
 box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-text-align: center;
+text-align: left;
 }
 
 .client-card .reauth-email {
@@ -24,7 +24,7 @@ color: #404040;
 line-height: 2;
 margin-bottom: 10px;
 font-size: 14px;
-text-align: center;
+text-align: left;
 overflow: hidden;
 text-overflow: ellipsis;
 white-space: nowrap;
@@ -41,15 +41,6 @@ border-color: #3F70CA;
 outline: 0;
 -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #3F70CA;
 box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #3F70CA;
-}
-
-.client-card .btn.btn-client:hover, .client-card .btn.btn-client:active, .client-card .btn.btn-client:focus {
-background: #031F60;
-}
-
-.btn-primary{
-padding-left: 25px;
-padding-right: 25px;
 }
 
 br {
