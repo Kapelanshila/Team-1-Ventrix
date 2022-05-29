@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
@@ -13,26 +12,41 @@ import Swal from 'sweetalert2';
 })
 export class CreateUserComponent implements OnInit {
 
+  roles:any[] = [];
   userform : FormGroup;
   submitted = false;
+  createUser:User|undefined;
+
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
   {
       //Additional Validation can be added here
       this.userform = fbuilder.group({
-      userRoleId: new FormControl ('',[Validators.required]),
+      userRoleId: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+    this.ventrixdbservice.readRole()
+    .subscribe(response => {
+      this.roles = response;
+      console.log(this.roles)
+    })
   }
 
   //Form submit calls add user function
   addUser()
   {
     this.submitted = true;
+    this.createUser = 
+    {
+      userId: 0,
+      userRoleId: Number(this.userform.get('userRoleId')?.value),
+      hashedPassword: ''
+    }
     if (this.userform.valid) {
-      console.log(this.userform.value);
-      this.ventrixdbservice.createUser(this.userform.value).subscribe()
+      console.log(this.createUser);
+      this.ventrixdbservice.createUser(this.createUser).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications
         Swal.fire({
@@ -60,4 +74,23 @@ export class CreateUserComponent implements OnInit {
   {
     this.router.navigate(['/read-user']);
   }
+
+      //Check no white spaces
+      public noWhitespaceValidator(someFormControl: FormControl) 
+      {
+        var iCount = 0;
+        for(var i = 0; i < someFormControl.value.length; i++)
+        {
+          if (someFormControl.value[i] == " ")
+          {
+            iCount += 1
+          }
+        }
+        if (iCount != someFormControl.value.length)
+        {
+          return  null
+        }
+        return {'noWhitespaceValidator' : true}
+  
+    }
 }

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-
+import { UserVM } from 'src/app/shared/UserVM';
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
@@ -13,61 +13,92 @@ import Swal from 'sweetalert2';
 })
 export class UpdateUserComponent implements OnInit {
 
+  roles:any[] = [];
   userform : FormGroup;
-  user: User|undefined;
   submitted = false;
+  createUser:User|undefined;
+  user:UserVM|undefined;
+
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
   {
       //Additional Validation can be added here
       this.userform = fbuilder.group({
-      //User ID is not displayed but is neccessary for the API to update
-      userId: new FormControl ('',[Validators.required]),
-      userRoleId: new FormControl ('',[Validators.required]),
+      userRoleId: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
     });
   }
 
-  //Populate Input values
   ngOnInit(): void 
   {
-    this.user = this.ventrixdbservice.getUser();
-    this.userform.patchValue({
-    userId: this.user?.userId,
-    userRoleId: this.user?.userRoleId,
+    this.ventrixdbservice.readRole()
+    .subscribe(response => {
+      this.roles = response;
+      console.log(this.roles)
     })
 
-    this.ventrixdbservice.clearClient();
+    this.user = this.ventrixdbservice.getUser()
+    console.log(this.user);
+    this.userform.patchValue({
+      userRoleId: this.user?.userRoleId,
+      })
   }
 
-  get f() { return this.userform.controls!;}
-
+  //Form submit calls add user function
   updateUser()
   {
     this.submitted = true;
-    if (this.userform.valid)
+    this.createUser = 
     {
-      this.ventrixdbservice.updateUser(this.userform.value).subscribe();
-      //redirects back to data table and refreshes page
-      //Sweet alerts are used as notifications
-      Swal.fire({
-        icon: 'success',
-        title: 'User Updated Successfully',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#077bff',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigate(['/read-user']).then(() => {
-           window.location.reload();
-          });
-        }
-      })  
-    } 
+      userId: this.user?.userId!,
+      userRoleId: Number(this.userform.get('userRoleId')?.value),
+      hashedPassword: ''
+    }
+    if (this.userform.valid) {
+      console.log(this.createUser);
+      this.ventrixdbservice.updateUser(this.createUser).subscribe()
+        //redirects back to data table and refreshes
+        //Sweet alerts are used as notifications
+        Swal.fire({
+          icon: 'success',
+          title: 'User Updated Successfully',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/read-user']).then(() => {
+              window.location.reload();
+            });
+          }
+        })  
+    }
   }
 
-  //When Cancel button clicked returns to Read User screen
+  // Get value of formcontrol name to return it to api
+  get f() { return this.userform.controls!; }
+
+  //When Cancel button clicked returns to Read Client screen
   returnDataTable()
   {
     this.router.navigate(['/read-user']);
   }
+
+      //Check no white spaces
+      public noWhitespaceValidator(someFormControl: FormControl) 
+      {
+        var iCount = 0;
+        for(var i = 0; i < someFormControl.value.length; i++)
+        {
+          if (someFormControl.value[i] == " ")
+          {
+            iCount += 1
+          }
+        }
+        if (iCount != someFormControl.value.length)
+        {
+          return  null
+        }
+        return {'noWhitespaceValidator' : true}
+  
+    }
 }
