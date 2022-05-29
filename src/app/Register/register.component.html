@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+
+<div class = "body">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-12 col-xl-10" style="margin-top: 10px;">
+                <div class="card shadow-lg o-hidden border-0 my-5" >
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-flex">
+                                <div class="flex-grow-1 bg-login-image" style="background-image: url(&quot;assets/images/DJCS.jpg&quot;); background-size: cover; background-position-x: center; background-position-y: center;"></div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h4 class="text-dark mb-4">Create Account</h4>
+                                    </div>
+                                    <form class="user" [formGroup]="userform" (ngSubmit)="register()">
+                                        <div class="mb-3">
+                                            <label>Title</label>
+                                        <div *ngIf="submitted">
+                                            <span *ngIf="f['titleId'].errors?.['required'] || f['titleId'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please select a title</span>
+                                        </div>   
+                                        <select  class="form-control" formControlName="titleId">
+                                            <option selected=""> </option>
+                                            <option *ngFor="let title of titles" [value]=title.titleId>{{title.description}}</option>
+                                        </select>
+                                        </div>
+
+                                    
+                                            <label>UserID</label>
+                                        <div *ngIf="submitted">
+                                            <span *ngIf="f['userId'].errors?.['required'] || f['userId'].errors?.['noWhiteSpaceValidator']" class="text-danger">Invalid User ID</span>
+                                        </div> 
+                                        <div class="mb-3"><input class="form-control" formControlName = "userId"  type="text"  placeholder="Enter User ID" name="userId"></div>
+
+
+                                        <label>Name</label>
+                                        <div *ngIf="submitted">
+                                        <span *ngIf="f['name'].errors?.['required'] || f['name'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a name</span>
+                                        </div>
+                                        <div class="mb-3"><input class="form-control" formControlName = "name"  type="text"  placeholder="Enter Name" name="name"></div>
+
+                           
+                                        <label>Surname</label>
+
+                                        <div *ngIf="submitted">
+                                        <span *ngIf="f['surname'].errors?.['required'] || f['surname'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a surname</span>
+                                        </div>
+                                        <div class="mb-3"><input class="form-control" formControlName = "surname"  type="text"  placeholder="Enter Surname" name="surname"></div>
+
+                         
+                                        <label>ID Number</label>
+
+                                        <div *ngIf="submitted">
+                                            <span *ngIf="f['idNumber'].invalid && (f['idNumber'].touched || f['idNumber'].dirty || f['idNumber'].errors?.['noWhiteSpaceValidator'])" class="text-danger">Please enter a valid ID number</span>
+                                        </div>
+                                        <div class="mb-3"><input class="form-control" formControlName = "idNumber"  type="text"  placeholder="Enter ID Number" name="id"></div>
+                                        
+                   
+                                        <label>Phone number</label>
+                                        <div> 
+                                            <span *ngIf="f['phoneNumber'].invalid && (f['phoneNumber'].touched || f['phoneNumber'].dirty)" class="text-danger">Please enter a valid phone number</span>
+                                        </div>
+                                        <div class="mb-3"><input class="form-control" formControlName = "phoneNumber"  type="text"  placeholder="Enter Phone Number" name="number"></div>
+                                        
+
+                           
+                                        <label>Home address</label>
+                                        <div *ngIf="submitted">
+                                            <span *ngIf="f['homeAddress'].errors?.['required'] || f['homeAddress'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a home address</span>
+                                        </div>
+                                        <div class="mb-3"><textarea class="form-control" formControlName = "homeAddress" style="resize: none;" placeholder="Enter Home Address" required></textarea></div>
+                                        
+
+    
+                                        <label>Email address</label>
+                                        <div>
+                                            <span *ngIf="f['emailAddress'].invalid && (f['emailAddress'].touched || f['emailAddress'].dirty)" class="text-danger">Please enter a valid email address</span>
+                                        </div>
+                                        <div class="mb-3"><input type="email" class="form-control" formControlName = "emailAddress" placeholder="Enter Email Address" required></div>                                    
+                                        
+
+                                        <small style="font-size:11px; color: #106cfc;">(Should contain 6 characters minimum, including 1 upper case letter, 1 lower case letter, 1 number and 1 special character)</small>
+                                        <div *ngIf="submitted">
+                                            <span *ngIf="f['password'].errors?.['required'] || f['password'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a password</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input class="form-control" formControlName = "password"  type="password" placeholder="Password" name="password">
+                                            <app-password-strength [passwordToCheck]="userform.value.password" (passwordStrength)="passwordValid($event)"></app-password-strength>
+                                            <!-- <a style="cursor: pointer;" class="help" title="Help" data-toggle="tooltip"><i class="fa fa-question-circle" aria-hidden="true"></i></a> -->
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="custom-control custom-checkbox small"></div>
+                                        </div><button class="btn btn-primary d-block btn-user w-100" type="submit" [disabled]="!passwordIsValid">Next</button>
+                                        <hr>
+                                    </form>
+                                    <div class="text-center"><a class="small" href="/login">Already have an Account?</a></div>
+                                    <img src="assets/images/Akquize.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/theme.js"></script>
+<script src="assets/bootstrap.min.js"></script>

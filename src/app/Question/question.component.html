@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+<div class = "body">
+    <div class="container" style="width:65%;">
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-12 col-xl-10" style="margin-top: 10px;">
+                <div class="card shadow-lg o-hidden border-0 my-5" >
+                    <div class="card-body p-0">
+                    <div class="p-5">
+                        <h2 class="text-dark text-center">One More Thing...</h2>
+                        <br>
+                        <div class="text-center">
+                            <h5 style = " font-weight:normal;" class="text-dark mb-4">Please Select and Answer Security Questions</h5>
+                        </div>
+                        <hr>
+                        <form class="questions" [formGroup]="questionform" (ngSubmit)="addResponse()">
+                            <label>Security Question 1</label>
+                            <div *ngIf="submitted">
+                                <span *ngIf="f['question1'].errors?.['required'] || f['question1'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please select a question</span>
+                            </div>   
+                            <select  class="form-control" formControlName="question1">
+                                <option selected=""> </option>
+                                <option *ngFor="let question of questions" [value]=question.securityQuestionId>{{question.description}}</option>
+                            </select>
+                            <br>
+                            <div *ngIf="submitted">
+                                <span *ngIf="f['answer1'].errors?.['required'] || f['answer1'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a answer</span>
+                                </div>
+                                <div class="mb-3"><input class="form-control" formControlName = "answer1"  type="text"  placeholder="Enter an Answer" name="surname"></div>
+                            <br>
+
+                            <label>Security Question 2</label>
+                            <div *ngIf="submitted">
+                                <span *ngIf="f['question2'].errors?.['required'] || f['question2'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please select a question</span>
+                            </div>   
+                            <select  class="form-control" formControlName="question2">
+                                <option selected=""> </option>
+                                <option *ngFor="let question of questions" [value]=question.securityQuestionId>{{question.description}}</option>
+                            </select>
+                            <br>  
+
+                            <div *ngIf="submitted">
+                            <span *ngIf="f['answer2'].errors?.['required'] || f['answer2'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a answer</span>
+                            </div>
+                            <div class="mb-3"><input class="form-control" formControlName = "answer2"  type="text"  placeholder="Enter an Answer" name="surname"></div>
+                            <br>
+
+                            <label>Security Question 3</label>
+                            <div *ngIf="submitted">
+                                <span *ngIf="f['question3'].errors?.['required'] || f['question3'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please select a question</span>
+                            </div>   
+                            <select  class="form-control" formControlName="question3">
+                                <option selected=""> </option>
+                                <option *ngFor="let question of questions" [value]=question.securityQuestionId>{{question.description}}</option>
+                            </select>
+                            <br>
+                            <div *ngIf="submitted">
+                                <span *ngIf="f['answer3'].errors?.['required'] || f['answer3'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a answer</span>
+                                </div>
+                                <div class="mb-3"><input class="form-control" formControlName = "answer3"  type="text"  placeholder="Enter an Answer" name="surname"></div>
+                            <br>
+                            <hr>
+                            <div class="text-center"><button class="btn btn-primary" style = "padding-left: 30px; padding-right: 30px;" type="submit">Submit</button></div>
+                            <!-- <div class="text-center"><a class="small" routerLink="/register">Back</a></div> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/theme.js"></script>
+<script src="assets/bootstrap.min.js"></script>

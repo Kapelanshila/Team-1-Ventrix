@@ -1,0 +1,55 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="container-xl">
+        <div class="table-responsive" >
+            <div class="table-wrapper" >
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>Asset Repair Reason</h2>
+                        </div>
+                        <div class="col-sm-4">
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="addassetrepairreason()"><i class="fa fa-plus"></i> Add New</button>
+                    </div>
+                    <!-- Copy -->
+                    <div class="col-md-12 text-nowrap" style="padding: 1%;">
+                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;
+                            <select class="d-inline-block form-select form-select-sm" [(ngModel)]="noOfRows">
+                                    <option value="5" selected="">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                            </select>&nbsp;</label></div>
+                        </div>
+                    <div class="col-md-12">
+                    <!-- Copy -->
+                </div>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Asset Repair Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Copy -->
+                        <tr *ngFor="let assetrepairreason of assetrepairreasons| paginate:{itemsPerPage: noOfRows, currentPage:p}">
+                        <td>{{assetrepairreason.description}}</td>
+                        <td class = "icon-adjust">
+                            <!--Add cursor pointer so that the links seem clickable -->
+                            <a [routerLink]="" style="cursor: pointer;" class="edit" title="Edit" data-toggle="tooltip"><i  (click)="editassetrepairreason(assetrepairreason)" class="material-icons">&#xE254;</i></a>
+                            <a [routerLink]="" style="cursor: pointer;" class="delete" title="Delete" data-toggle="tooltip"><i (click)="deleteassetrepairreason(assetrepairreason)" class="material-icons">&#xE872;</i></a>
+                        </td>  
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="hint-text">Showing <b> {{specifictypes.length}}</b> entries</div>
+                <div class="pagination">
+                    <div id="pagination" class="custom-pagination">
+                        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                    </div>    
+                </div>		
+            </div>
+        </div>  
+    </div>   
+</div>
