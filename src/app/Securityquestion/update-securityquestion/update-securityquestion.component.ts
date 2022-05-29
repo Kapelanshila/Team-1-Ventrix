@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Securityquestion } from 'src/app/shared/Securityquestion';
+import { Securityquestion } from 'src/app/shared/SecurityQuestion';
 import { Router } from '@angular/router';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -58,13 +58,7 @@ export class UpdateSecurityquestionComponent implements OnInit {
           confirmButtonColor: '#077bff',
           allowOutsideClick: false,
           allowEscapeKey: false
-        }).then((result) => {
-          if (result.isConfirmed) {
-              this.router.navigate(['/read-securityquestion']).then(() => {
-              window.location.reload();
-            });
-          }
-        })  
+        }) 
       }
     });
 

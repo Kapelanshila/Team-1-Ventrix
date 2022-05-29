@@ -8,7 +8,7 @@ import { UserVM } from '../shared/UserVM';
 import { Employee } from '../shared/Employee';
 import { OtpTimer } from '../shared/OtpTimer';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
-import { Securityquestion } from '../shared/Securityquestion';
+import { Securityquestion } from '../shared/SecurityQuestion';
 import { Deliverystatus } from '../shared/Deliverystatus';
 import { Warehouse } from '../shared/Warehouse';
 import { param } from 'jquery';

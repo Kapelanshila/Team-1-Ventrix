@@ -6,7 +6,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8">
-                            <h2>Manage Clients</h2>
+                            <h2>Clients</h2>
                         </div>
                         <div class="col-sm-4">
                             <div class="search-box">
@@ -32,7 +32,6 @@
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Name</th>
                             <th>Surname</th>
                             <th>Contact Number</th>
@@ -41,9 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                                                             <!-- Copy -->
                         <tr *ngFor="let client of clients| paginate:{itemsPerPage: noOfRows, currentPage:p}">
-                        <td>{{client.clientId}}</td>
                         <td>{{client.contactPersonName}}</td>
                         <td>{{client.contactPersonSurname}}</td>
                         <td>{{client.contactPersonNumber}}</td>

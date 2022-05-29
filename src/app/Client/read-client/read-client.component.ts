@@ -47,15 +47,15 @@ export class ReadClientComponent implements OnInit {
   addClient()
   {
     this.router.navigate(['/create-client']);
+  
   }
 
   // Copy
   pageChange(newPage: number) {
 		this.router.navigate(['/read-client'], { queryParams: { page: newPage } })
   }
-// Copy
-
-
+  
+  // Copy
   editClient(selectedclient: Client)
   {
       this.ventrixdbservice.setClient(selectedclient);

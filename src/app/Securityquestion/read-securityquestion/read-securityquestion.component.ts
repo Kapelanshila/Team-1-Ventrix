@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Securityquestion } from 'src/app/shared/Securityquestion';
+import { Securityquestion } from 'src/app/shared/SecurityQuestion';
 import { Router } from '@angular/router';
 //Make sure swal is imported
 import Swal from 'sweetalert2';
@@ -26,7 +26,6 @@ export class ReadSecurityquestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
     this.ventrixdbservice.readSecurityquestion()
     .subscribe(response => {
       this.securityquestions = response;
@@ -51,6 +50,8 @@ export class ReadSecurityquestionComponent implements OnInit {
   //Delete Security question Function 
   deleteSecurityquestion(selectedSecurityquestion: Securityquestion)
   { 
+    if (this.securityquestions.length > 3)
+    {
       //Sweet alerts are used as notifications
       Swal.fire({
         icon: 'warning',
@@ -69,6 +70,25 @@ export class ReadSecurityquestionComponent implements OnInit {
           });
         }
       })  
+    }
+    else
+    {
+      Swal.fire({
+        icon: 'warning',
+        title: 'There must be atleast 3 security questions that exist on the system',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#077bff',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+            this.router.navigate(['/read-securityquestion']).then(() => {
+            window.location.reload();
+          });
+        }
+      })  
+    }
+     
   }
 }
 
