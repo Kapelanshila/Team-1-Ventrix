@@ -8,7 +8,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import Swal from 'sweetalert2';
 import { throwError } from 'rxjs';
 import { TokenStorageService } from 'src/app/_helpers/TokenStorageService';
-import * as bcrypt from 'bcryptjs';
+
 
 
 @Component({
