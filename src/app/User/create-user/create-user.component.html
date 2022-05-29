@@ -6,17 +6,16 @@
             <hr>
             <br>
             <p class="form-group text-center">Select User Role:&nbsp;&nbsp;</p>
-            <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">User Roles</button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Administration</a>
-                    <a class="dropdown-item" href="#">Management</a>
-                    <a class="dropdown-item" href="#">Driver</a>
-                    <a class="dropdown-item" href="#">Warehouse</a>
-                </div>
+            <div *ngIf="submitted">
+                <span *ngIf="f['userRoleId'].errors?.['required'] || f['userRoleId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select user role</span>
             </div>
+            <select  class="form-control" formControlName="userRoleId">
+                <option selected=""> </option>
+                <option *ngFor="let role of roles" [value]=role.userRoleId>{{role.description}}</option>
+            </select>
             <br>
             <div class="btn">
-                <input type="button" class="btn btn-secondary" value="Add User">
+                <input type="submit" class="btn btn-primary" value="Add User">
             </div>
         </form>
         <div class="text-center"></div>

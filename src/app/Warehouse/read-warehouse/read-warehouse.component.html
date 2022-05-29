@@ -7,8 +7,9 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8">
-                            <h2>Warehouses</h2>
+                            <h2>Warehouse</h2>
                         </div>
+                        <div class="col-sm-4">
                         </div>
                         <button type="button" class="btn btn-primary" (click)="createWarehouse()"><i class="fa fa-plus"></i> Add New</button>
                     </div>
@@ -26,14 +27,12 @@
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Name</th>
                             <th>Address</th>
                         </tr>
                     </thead>
                     <tbody>
                     <tr *ngFor="let warehouse of warehouses | paginate:{itemsPerPage: noOfRows, currentPage:p}">
-                                <td>{{warehouse.warehouseId}}</td>
                                 <td>{{warehouse.name}}</td>
                                 <td>{{warehouse.address}}</td>
                         <td class = "icon-adjust">

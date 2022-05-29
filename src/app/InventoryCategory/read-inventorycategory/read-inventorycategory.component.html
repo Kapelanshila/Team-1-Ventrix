@@ -1,0 +1,60 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="container-xl">
+        <div class="table-responsive" >
+            <div class="table-wrapper" >
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>Inventory Categories</h2>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="search-box">
+                                <i class="material-icons">&#xE8B6;</i>
+                                <input type="text" class="form-control" placeholder="Search&hellip;" (keyup.enter)="searchInventoryCategory()" [(ngModel)]="query">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="addInventoryCategory()"><i class="fa fa-plus"></i> Add New</button>
+                    </div>
+                    <!-- Copy -->
+                    <div class="col-md-12 text-nowrap" style="padding: 1%;">
+                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;
+                            <select class="d-inline-block form-select form-select-sm" [(ngModel)]="noOfRows">
+                                    <option value="5" selected="">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>&nbsp;</label></div>
+                        </div>
+                    <div class="col-md-12">
+                    <!-- Copy -->
+                </div>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Copy -->
+                        <tr *ngFor="let inventorycategory of inventorycategories| paginate:{itemsPerPage: noOfRows, currentPage:p}">
+                        <td>{{inventorycategory.description}}</td>
+                        <td class = "icon-adjust">
+                            <!--Add cursor pointer so that the links seem clickable -->
+                            <a [routerLink]="" style="cursor: pointer;" class="view" title="View" data-toggle="tooltip"><i class="fa fa-eye"  (click)="viewInventoryCategory(inventorycategory)" aria-hidden="true"></i></a>
+                            <a [routerLink]="" style="cursor: pointer;" class="edit" title="Edit" data-toggle="tooltip"><i  (click)="editInventoryCategory(inventorycategory)" class="material-icons">&#xE254;</i></a>
+                            <a [routerLink]="" style="cursor: pointer;" class="delete" title="Delete" data-toggle="tooltip"><i (click)="deleteInventoryCategory(inventorycategory)" class="material-icons">&#xE872;</i></a>
+                        </td>  
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="hint-text">Showing <b> {{inventorycategories.length}}</b> entries</div>
+                <div class="pagination">
+                    <div id="pagination" class="custom-pagination">
+                        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                    </div>    
+                </div>		
+            </div>
+        </div>  
+    </div>   
+</div>

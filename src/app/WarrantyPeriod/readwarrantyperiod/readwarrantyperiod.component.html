@@ -26,13 +26,11 @@
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Warranty Period</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let warrantyPeriod of warrantyPeriods | paginate:{itemsPerPage: noOfRows, currentPage:p}">
-                            <td>{{warrantyPeriod.warrantyPeriodId}}</td>
                             <td>{{warrantyPeriod.description}}</td>
                             <td class = "icon-adjust">
                                 <!--Add cursor pointer so that the links seem clickable -->

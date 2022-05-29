@@ -33,7 +33,6 @@
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Name</th>
                             <th>Contact Person Name</th>
                             <th>Contact Number</th>
@@ -43,7 +42,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let supplier of suppliers | paginate:{itemsPerPage: noOfRows, currentPage:p}">
-                        <td>{{supplier.supplierId}}</td>
                         <td>{{supplier.supplierName}}</td>
                         <td>{{supplier.contactPersonName}}</td>
                         <td>{{supplier.contactPersonNumber}}</td>
