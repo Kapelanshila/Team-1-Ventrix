@@ -30,7 +30,7 @@ export class CreateAssettypeComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    this.ventrixdbservice.readInventoryType()
+    this.ventrixdbservice.readAssetType()
     .subscribe(response => {
       this.assettypes = response;
       console.log(this.assettypes)
@@ -42,25 +42,19 @@ addAssetType()
 {
   this.submitted = true;
   //Check if asset category does not already exsist
-    this.assettypes.forEach(element => {
-    if (element.description == this.assettypeform.get('description')?.value) 
-    {
-      this.find = true;
-      Swal.fire({
-        icon: 'error',
-        title: 'Asset Type Already Exsists',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#077bff',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-            this.router.navigate(['/create-assettype']).then(() => {
-            window.location.reload();
-          });
-        }
-      })  
-    }
+  this.assettypes.forEach(element => {
+  if (element.description == this.assettypeform.get('description')?.value)
+  {
+    this.find = true;
+    Swal.fire({
+      icon: 'error',
+      title: 'Asset Type Already Exsists',
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#077bff',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }) 
+  }
   });
 
   if (this.assettypeform.valid && this.find == false) {
