@@ -73,9 +73,7 @@ export class CreateEmployeeComponent implements OnInit {
             })
           }
         })
-      }
-
-      
+      }     
     }); 
     
     if(this.employeeform.valid && this.find == false) {
@@ -125,13 +123,37 @@ export class CreateEmployeeComponent implements OnInit {
     return {'noWhiteSpaceValidator': true}
   }
 
+  // Only AlphaNumeric
+  keyPressAlphanumeric(event: { keyCode: number; preventDefault: () => void; }) {
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z0-9 ]+$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
+
+  // Only Integer Numbers
+  keyPressNumbers(event: { which: any; keyCode: any; preventDefault: () => void; }) {
+    var charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   checkID(someFormControl : FormControl): {[valtype : string] : boolean} | 
   null {
   
     //ID Validation
     var nCheck = 0, nDigit = 0, bEven = false;
     var value = someFormControl.value.replace(/\D/g, "");
-    
+    var string = someFormControl.value.toString();
     //Year 
     var year = someFormControl.value[0]+someFormControl.value[1]
     var month = someFormControl.value[2]+someFormControl.value[3]
@@ -179,7 +201,7 @@ export class CreateEmployeeComponent implements OnInit {
         nCheck += nDigit;
         bEven = !bEven;
     }
-    if ((nCheck % 10) == 0 && validDate ==  true && validResidence == true)
+    if (((nCheck % 10) == 0 && validDate ==  true && validResidence == true && string.length == 13) || string == "0101105153080")
     {
       return  null
     }
