@@ -59,7 +59,6 @@ export class UpdateWriteoffreasonComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Write-Off Reason Already Exists',
-
         confirmButtonText: 'OK',
         confirmButtonColor: '#077bff',
         allowOutsideClick: false,
