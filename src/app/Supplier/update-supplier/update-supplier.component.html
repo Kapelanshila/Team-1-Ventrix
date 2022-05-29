@@ -15,11 +15,11 @@
             </div>
             <div class="form-group">
                 <label>Contact Person Number</label>
-                <input type="text" class="form-control" formControlName="contactPersonNumber" placeholder="Enter Contact Person Number" required>
+                <input type="text" class="form-control" formControlName="contactPersonNumber" placeholder="Enter Contact Person Number" required (keypress)="keyPressNumbers($event)">
             </div>	
             <div class="form-group">
                 <label>Work Address</label>
-                <textarea class="form-control" formControlName = "workAddress" placeholder="Enter Supplier Address" required></textarea>
+                <textarea class="form-control" formControlName = "workAddress" placeholder="Enter Supplier Address" required (keypress)="keyPressAlphanumeric($event)"></textarea>
             </div>	
             <div class="form-group">
                 <label>Email</label>

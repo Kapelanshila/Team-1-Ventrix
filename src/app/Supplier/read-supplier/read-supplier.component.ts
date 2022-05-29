@@ -13,6 +13,11 @@ import Swal from 'sweetalert2';
 export class ReadSupplierComponent implements OnInit {
   suppliers:any[] = [];
   query:string = '';
+    // Copy
+    p: number = 1;
+    config: any; 
+    noOfRows = 10;
+    // Copy
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) { }
 
   ngOnInit(): void 
@@ -60,7 +65,7 @@ export class ReadSupplierComponent implements OnInit {
 
   searchSupplier()
   {
-    if (this.query == '' || this.query.replace(/\s/g,'').length == 0)
+    if (this.query != '' && this.query.replace(/\s/g, '').length == 0)
     {
       Swal.fire({
         icon: 'error',
