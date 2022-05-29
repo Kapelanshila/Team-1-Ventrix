@@ -1,0 +1,58 @@
+<div class="body">
+    <app-navigation></app-navigation>
+    <div class="inventory-card">
+        <form class="form-user"  [formGroup]="inventoryform" (ngSubmit)="editInventory()"><span class="reauth-email"> </span>
+            <h4 class="card-title">Update Inventory Item </h4>
+            <hr>
+            <label>Name</label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['name'].errors?.['required'] || f['name'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter an inventory name</span>
+            </div>
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter Inventory Name" required>
+            <br>
+
+            <label>Inventory Category</label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['inventoryCategoryId'].errors?.['inventoryCategoryId'] || f['inventoryCategoryId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a category</span>
+            </div>
+            <select  class="form-control" formControlName="inventoryCategoryId" (change)="getTypes()">
+                <option selected=""> </option>
+                <option *ngFor="let category of categories" [value]=category.inventoryCategoryId>{{category.description}}</option>
+            </select>
+            <br>
+
+            <label>Inventory Type</label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['inventoryTypeId'].errors?.['inventoryTypeId'] || f['inventoryTypeId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a type</span>
+            </div>
+            <select  class="form-control" formControlName="inventoryTypeId" >
+            
+                <option *ngFor="let type of types" [value]=type.inventoryTypeId>{{type.description}}</option>
+            </select>
+            <br>
+
+            <label>Supplier</label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['supplierId'].errors?.['supplierId'] || f['supplierId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a supplier</span>
+            </div>
+            <select  class="form-control" formControlName="supplierId">
+                <option selected=""> </option>
+                <option *ngFor="let supplier of suppliers" [value]=supplier.supplierId>{{supplier.supplierName}}</option>
+            </select>
+            <br>
+
+            <label>Warehouse</label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['warehouseId'].errors?.['warehouseId'] || f['warehouseId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a warehouse</span>
+            </div>
+            <select  class="form-control" formControlName="warehouseId">
+                <option selected=""> </option>
+                <option *ngFor="let warehouse of warehouses" [value]=warehouse.warehouseId>{{warehouse.name}}</option>
+            </select>
+            <br>
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Save">
+        </form>
+        <div class="text-center"></div>
+    </div>
+</div>
