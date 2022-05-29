@@ -47,12 +47,8 @@
 }
 
 .btn-primary{
-  background: #4371C4;
   padding-left: 25px;
   padding-right: 25px;
-}
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background: #031F60!important;
 }
 
 br {
