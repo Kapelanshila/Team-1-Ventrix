@@ -26,6 +26,7 @@ import { AssetType } from '../shared/AssetType';
 import { AssetVM } from '../shared/AssetVM';
 import { Register } from '../shared/Register';
 import { Mail } from '../shared/Mail';
+import { UserSecurityVM } from '../shared/UserSecurityVM';
 
 @Injectable({
   providedIn: 'root'
@@ -835,5 +836,11 @@ export class VentrixDBServiceService {
     localStorage.removeItem('Account');
   } 
    //
+
+  //User Security Question
+  readUserSecurityQuestion(): Observable<UserSecurityVM[]> {
+    return this.http.get<UserSecurityVM[]>('https://localhost:44324/api/UserSecurityQuestion/getUserSecurityQuestion')
+  }
+  //
   }
 
