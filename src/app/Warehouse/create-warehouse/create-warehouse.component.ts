@@ -110,7 +110,17 @@ createWarehouse()
       return  null
     }
     return {'noWhitespaceValidator' : true}
+  }
 
-}
+  // Only AlphaNumeric
+  keyPressAlphanumeric(event: { keyCode: number; preventDefault: () => void; }) {
+    var inp = String.fromCharCode(event.keyCode);
 
+    if (/^[a-zA-Z0-9 ]+$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
 }

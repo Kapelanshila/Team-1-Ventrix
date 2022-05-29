@@ -29,14 +29,14 @@
                 <div>
                     <span *ngIf="f['contactPersonNumber'].invalid && (f['contactPersonNumber'].touched || f['contactPersonNumber'].dirty)" class="text-danger" >Please enter valid contact number</span>
                 </div>
-                <input type="text" class="form-control" formControlName="contactPersonNumber" placeholder="Enter Client Contact Number" required>
+                <input type="text" class="form-control" formControlName="contactPersonNumber" placeholder="Enter Client Contact Number" required (keypress)="keyPressNumbers($event)">
             </div>	
             <div class="form-group">
                 <label>Work Address</label>
                 <div *ngIf="submitted">
                     <span *ngIf="f['workAddress'].errors?.['required'] || f['workAddress'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a work address</span>
                 </div>
-                <textarea class="form-control" formControlName = "workAddress" placeholder="Enter Supplier Work Address" required></textarea>
+                <textarea class="form-control" formControlName = "workAddress" placeholder="Enter Supplier Work Address" required (keypress)="keyPressAlphanumeric($event)"></textarea>
             </div>	
             <div class="form-group">
                 <label>Supplier Email Address</label>

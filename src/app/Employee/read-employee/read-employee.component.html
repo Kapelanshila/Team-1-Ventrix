@@ -6,7 +6,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8">
-                            <h2>Manage Employees</h2>
+                            <h2>Employees</h2>
                         </div>
                         <br>
                         <br>
@@ -32,7 +32,6 @@
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Name</th>
                             <th>Surname</th>
                             <th>ID Number</th>
@@ -43,7 +42,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let employee of employees | paginate:{itemsPerPage: noOfRows, currentPage:p}">
-                        <td>{{employee.employeeId}}</td>
                         <td>{{employee.name}}</td>
                         <td>{{employee.surname}}</td>
                         <td>{{employee.idnumber}}</td>

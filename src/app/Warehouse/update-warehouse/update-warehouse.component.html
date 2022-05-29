@@ -20,7 +20,7 @@
         <div *ngIf="submitted">
             <span *ngIf="f['address'].errors?.['required'] || f['address'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an address</span>
         </div>
-        <input type="text" class="form-control" formControlName="address" placeholder="Enter the warehouse address" required>
+        <input type="text" class="form-control" formControlName="address" placeholder="Enter the warehouse address" required (keypress)="keyPressAlphanumeric($event)">
     </div>
     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
     <input type="submit" class="btn btn-primary" value="Save">
