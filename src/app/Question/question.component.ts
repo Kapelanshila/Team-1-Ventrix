@@ -51,9 +51,13 @@ export class QuestionComponent implements OnInit {
 
   addResponse()
   {
-    //Checks if the user entered selected the same question
     this.submitted = true;
-    if (this.questionform.get('question1')?.value == 
+  console.log(this.questionform.get('question1')?.value)
+  console.log(this.questionform.get('question2')?.value)
+  console.log(this.questionform.get('question3')?.value)
+  //Checks if the user entered selected the same question
+
+    if ((this.questionform.get('question1')?.value == 
     this.questionform.get('question2')?.value ||
     this.questionform.get('question1')?.value == 
     this.questionform.get('question3')?.value ||
@@ -64,18 +68,23 @@ export class QuestionComponent implements OnInit {
     this.questionform.get('question3')?.value == 
     this.questionform.get('question2')?.value ||
     this.questionform.get('question3')?.value == 
-    this.questionform.get('question1')?.value )
-    {
-      Swal.fire({
-        icon: 'warning',
-        title: 'You cannot select the same question!',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#077bff',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-      }) 
-    }
-    else
+    this.questionform.get('question1')?.value ) &&
+    (this.questionform.get('question1')?.value != '' 
+    ||this.questionform.get('question2')?.value != '' 
+    ||this.questionform.get('question3')?.value  != ''))
+  {
+    Swal.fire({
+      icon: 'warning',
+      title: 'You cannot select the same question!',
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#077bff',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }) 
+  }
+  else
+  {
+    if (this.questionform.valid)
     {
       this.response1 = 
       {
@@ -111,7 +120,7 @@ export class QuestionComponent implements OnInit {
         }
       })  
     }
-
+    }
   }
 
   public noWhiteSpaceValidator(someFormControl: FormControl)
