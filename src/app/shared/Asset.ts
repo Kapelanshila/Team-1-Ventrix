@@ -3,6 +3,8 @@ export interface Asset {
     conditionId :number
     assetTypeId:number
     warrantyId:number 
+    warehouseId:number
     name:string 
-    manufacturer:number
+    manufacturer:string
+    assetStatus: string|null;
 }

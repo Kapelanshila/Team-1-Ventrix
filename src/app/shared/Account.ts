@@ -1,4 +1,4 @@
-export interface Register {
+export interface Account {
     employeeId: Number
     name :String 
     surname: String

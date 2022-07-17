@@ -1,4 +1,5 @@
 export interface Warranty {
     warrantyId: Number
-    Date: Date 
+    warrantyPeriodId: Number
+    date: Date 
 }
