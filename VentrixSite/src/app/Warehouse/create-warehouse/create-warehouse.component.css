@@ -1,0 +1,67 @@
+.body{
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient( rgba(0, 0, 0,0.55), rgba(0, 0, 0, 0.55) ), url("Ventrix.jpg");
+    background-size: cover;
+    height: 1500px;
+    width:100%;
+    position: absolute;
+}
+
+.warehouse-card {
+  max-width: 35%;
+  padding: 20px 30px;
+  background-color: #F7F7F7;
+  margin: 0 auto 25px;
+  margin-top: 75px;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.warehouse-card .reauth-email {
+  display: block;
+  color: #404040;
+  line-height: 2;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+
+.warehouse-card label {
+  color: #000000;
+}
+
+.warehouse-card .form-client .form-control:focus {
+  border-color: #3F70CA;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #3F70CA;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #3F70CA;
+}
+
+.warehouse-card .btn.btn-client:hover, .warehouse-card .btn.btn-client:active, .warehouse-card .btn.btn-client:focus {
+  background: #031F60;
+}
+
+.btn-primary{
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+br {
+  display: block;
+  content: ""; 
+  margin-top: 15px; 
+}
+
+section{
+  height:100vh;
+  width: 100%;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+ background-attachment: fixed;
+}

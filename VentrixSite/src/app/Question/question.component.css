@@ -1,0 +1,8 @@
+.body{
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(#4e73de,#106cfc);
+    background-size: contain;
+    height: 155%;
+    width:100%;
+    position: absolute;
+}

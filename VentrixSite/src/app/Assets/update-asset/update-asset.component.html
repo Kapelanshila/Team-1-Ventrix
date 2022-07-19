@@ -1,0 +1,55 @@
+<!-- <div class="body">
+    <app-navigation></app-navigation>
+    <div class="asset-card">
+        <form class="form-user"  [formGroup]="assetform" (ngSubmit)="editAsset()"><span class="reauth-email"> </span>
+            <h4 class="card-title">Update Asset Item </h4>
+            <hr>
+            <label>Name</label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['name'].errors?.['required'] || f['name'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter an asset name</span>
+            </div>
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter Asset Name" required>
+            <br>
+
+            <label>Asset Category</label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['assetCategoryId'].errors?.['assetCategoryId'] || f['assetCategoryId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a category</span>
+            </div>
+            <select  class="form-control" formControlName="assetCategoryId" (change)="getTypes()">
+                <option selected=""> </option>
+                <option *ngFor="let category of categories" [value]=category.assetCategoryId>{{category.description}}</option>
+            </select>
+            <br>
+
+            <label>Asset Type</label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['assetTypeId'].errors?.['assetTypeId'] || f['assetTypeId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a type</span>
+            </div>
+            <select  class="form-control" formControlName="assetTypeId" >
+            
+                <option *ngFor="let type of types" [value]=type.assetTypeId>{{type.description}}</option>
+            </select>
+            <br>
+
+            <label>Warranty Period</label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['warrantyId'].errors?.['warrantyId'] || f['warrantyId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a Warranty Period</span>
+            </div>
+            <select  class="form-control" formControlName="warrantyId">
+                <option selected=""> </option>
+                <option *ngFor="let warranty of warrantyPeriods" [value]=warranty.warrantyId>{{warranty.WarrantyPeriod}}</option>
+            </select>
+            <br>
+
+            <label>Manufacturer</label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['manufacturer'].errors?.['manufacturer'] || f['manufacturer'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a manufacturer</span>
+            </div>
+            <input type="text" class="form-control" formControlName="manufacturer" placeholder="Enter Manufacturer Name" required>
+            <br>
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Save">
+        </form>
+        <div class="text-center"></div>
+    </div>
+</div> -->

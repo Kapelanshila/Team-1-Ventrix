@@ -1,0 +1,23 @@
+<div class="body">
+    <app-navigation></app-navigation>
+    <div class="client-card">
+        <form class="form-user"  [formGroup]="userform" (ngSubmit)="addUser()"><span class="reauth-email"> </span>
+            <h4 class="card-title">Add User</h4>
+            <hr>
+            <br>
+            <p class="form-group text-center">Select User Role:&nbsp;&nbsp;</p>
+            <div *ngIf="submitted">
+                <span *ngIf="f['userRoleId'].errors?.['required'] || f['userRoleId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select user role</span>
+            </div>
+            <select  class="form-control" formControlName="userRoleId">
+                <option selected=""> </option>
+                <option *ngFor="let role of roles" [value]=role.userRoleId>{{role.description}}</option>
+            </select>
+            <br>
+            <div class="btn">
+                <input type="submit" class="btn btn-primary" value="Add User">
+            </div>
+        </form>
+        <div class="text-center"></div>
+    </div>
+</div>

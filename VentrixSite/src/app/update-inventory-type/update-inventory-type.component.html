@@ -1,0 +1,19 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="inventorytype-card">
+        <!--Form group linking input values to typescript -->
+        <form class="form-inventorytype"  [formGroup]="inventorytypeform" (ngSubmit)="updateInventoryType()"><span class="reauth-email"> </span>					
+            <h4 class="card-title">Add Inventory Type</h4>
+            <hr>
+            <br>
+            <div class="form-group">
+                <label>Inventory Type</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['description'].errors?.['required'] || f['description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an inventory type description</span>
+                </div>
+                <input type="text" class="form-control" formControlName="description" placeholder="Enter Inventory Type description" required>
+            </div>
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Save">
+        </form>
+</div>
