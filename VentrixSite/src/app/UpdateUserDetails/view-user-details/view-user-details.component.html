@@ -1,0 +1,40 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="container-xl">
+        <div class="table-responsive" >
+            <div class="table-wrapper" >
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>Profile</h2>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="updateUserDetails()"><i class="fa fa-plus"></i>Update User Details</button>
+                        <br>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Employee #</th>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>ID Number</th>
+                            <th>Phone Number</th>
+                            <th>Home Address</th>
+                            <th>Email Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let employee of employees | paginate:{itemsPerPage: noOfRows, currentPage:p}">
+                        <td>{{employee.id}}</td>
+                        <td>{{employee.name}}</td>
+                        <td>{{employee.surname}}</td>
+                        <td>{{employee.idnumber}}</td>
+                        <td>{{employee.phoneNumber}}</td>
+                        <td>{{employee.homeAddress}}</td>
+                        <td>{{employee.emailAddress}}</td> 
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>  
+    </div>   
+</div>

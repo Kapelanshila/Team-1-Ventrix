@@ -1,0 +1,19 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="writeoffreason-card">
+        <!--Form group linking input values to typescript -->
+        <form class="form-writeoffreason"  [formGroup]="writeoffreasonform" (ngSubmit)="addWriteOffReason()"><span class="reauth-email"> </span>					
+            <h4 class="card-title">Add Write-Off Reason</h4>
+            <hr>
+            <br>
+            <div class="form-group">
+                <label>Write-Off Reason</label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['description'].errors?.['required'] || f['description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a write-off reason</span>
+                </div>
+                <input type="text" class="form-control" formControlName="description" placeholder="Enter write-off reason" required>
+            </div>
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Save">
+        </form>
+</div>
