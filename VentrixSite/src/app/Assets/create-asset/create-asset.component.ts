@@ -173,7 +173,7 @@ export class CreateAssetComponent implements OnInit {
             this.find = true;
             Swal.fire({
               icon: 'error',
-              title: 'Asset Item Already Exsists',
+              title: 'Asset Item Already Exists',
               confirmButtonText: 'OK',
               confirmButtonColor: '#077bff',
               allowOutsideClick: false,
