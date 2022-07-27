@@ -294,7 +294,7 @@ deleteAsset(selecteditem: AssetVM)
         {
           Swal.fire({
             icon: 'error',
-            title: 'Asset Assoiciated to Asset Repairs',
+            title: 'Asset Associated to Asset Repairs',
             text:'Please remove associated asset repairs',
             showDenyButton: false,
             confirmButtonText: 'Ok',
