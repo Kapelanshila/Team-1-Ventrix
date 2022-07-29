@@ -1,0 +1,34 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content>
+
+  <div class="background-pic">
+     <div class="background-filter">
+
+       <ion-card>
+         <ion-card-header>
+           <ion-card-title>
+            Welcome!
+           </ion-card-title>
+         </ion-card-header>
+         <ion-card-content>
+          <form [formGroup]="loginform" (ngSubmit)="login()">
+            <ion-item>
+             <ion-input  formControlName = "emailAddress"   placeholder="Email Address"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="password" formControlName = "hashedPassword" placeholder="Password"></ion-input>
+            </ion-item>
+
+            <div class="bottom-section">
+              <ion-button  type="submit">Log In</ion-button>
+            </div>
+            </form>
+         </ion-card-content>
+       </ion-card>
+     </div>
+  </div>
+
+</ion-content>
