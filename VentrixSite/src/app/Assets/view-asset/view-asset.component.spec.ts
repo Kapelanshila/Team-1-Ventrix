@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpdateAssetComponent } from './update-asset.component';
+import { ViewAssetComponent } from './view-asset.component';
 
-describe('UpdateAssetComponent', () => {
-  let component: UpdateAssetComponent;
-  let fixture: ComponentFixture<UpdateAssetComponent>;
+describe('ViewAssetComponent', () => {
+  let component: ViewAssetComponent;
+  let fixture: ComponentFixture<ViewAssetComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UpdateAssetComponent ]
+      declarations: [ ViewAssetComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UpdateAssetComponent);
+    fixture = TestBed.createComponent(ViewAssetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

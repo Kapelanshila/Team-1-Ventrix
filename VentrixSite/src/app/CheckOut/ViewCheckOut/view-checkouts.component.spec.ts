@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpdateAssetComponent } from './update-asset.component';
+import { ViewCheckoutsComponent } from './view-checkouts.component';
 
-describe('UpdateAssetComponent', () => {
-  let component: UpdateAssetComponent;
-  let fixture: ComponentFixture<UpdateAssetComponent>;
+describe('ViewCheckoutsComponent', () => {
+  let component: ViewCheckoutsComponent;
+  let fixture: ComponentFixture<ViewCheckoutsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UpdateAssetComponent ]
+      declarations: [ ViewCheckoutsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UpdateAssetComponent);
+    fixture = TestBed.createComponent(ViewCheckoutsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

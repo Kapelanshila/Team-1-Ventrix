@@ -69,11 +69,8 @@ table.table td a {
     display: inline-block;
     margin: 0 5px;
 }
-table.table td a.edit {
-    color: #3F70CA;
-}
-table.table td a.delete {
-    color: #E34724;
+table.table td a.checkout {
+    color: #8300ee;
 }
 table.table td i {
     font-size: 19px;
@@ -96,11 +93,28 @@ table.table td i {
     float: right;
     margin: 0 0 5px;
 }
-table.table td a.view {
-    color: #000000;
-}
 .custom-pagination /deep/ .ngx-pagination .current 
 {
     background:#077bff;
 }
 
+.container-fluid
+{
+    width: 90%;
+}
+.underline-on-hover a:hover {
+    text-decoration: underline;
+}
+
+.modal
+{
+  background: linear-gradient( rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55) )  
+}
+
+.modal-content {
+    -ms-transform: translate(0,50%);
+    -moz-transform: translate(0,50%);
+    -webkit-transform: translate(0,50%);
+    transform: translate(0,50%);
+    width:100%;
+  }

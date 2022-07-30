@@ -1,55 +1,134 @@
-<!-- <div class="body">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<div class="body">
     <app-navigation></app-navigation>
     <div class="asset-card">
         <form class="form-user"  [formGroup]="assetform" (ngSubmit)="addAsset()"><span class="reauth-email"> </span>
             <h4 class="card-title">Add Asset Item </h4>
             <hr>
-            <label>Name</label>
+            <label>Name
+                <span>
+                    <i class="fa fa-info-circle" title="Enter the exact name of the asset."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
                 <span *ngIf="f['name'].errors?.['required'] || f['name'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter an asset name</span>
             </div>
-            <input type="text" class="form-control" formControlName="name" placeholder="Enter Asset Name" required>
+            <input maxlength="32" type="text" class="form-control" formControlName="name" placeholder="Enter Asset Name" required>
             <br>
 
-            <label>Asset Category</label>
+            <label>Manufacturer
+                <span>
+                    <i class="fa fa-info-circle" title="Enter the name of the asset's manufacturer."></i>
+                </span>
+            </label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['manufacturer'].errors?.['manufacturer'] || f['manufacturer'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a manufacturer name</span>
+            </div>
+            <div>
+            <input maxlength="32" type="text" class="form-control" formControlName="manufacturer" placeholder="Enter Manufacturer Name" required (keypress)="keyPressAlphabet($event)">
+            </div>
+
+            <label>Asset Category
+                <span>
+                    <i class="fa fa-info-circle" title="Select the category under which the asset falls."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
                 <span *ngIf="f['assetCategoryId'].errors?.['assetCategoryId'] || f['assetCategoryId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a category</span>
             </div>
-            <select  class="form-control" formControlName="assetCategoryId" (change)="getTypes()">
+            <select class="form-control" formControlName="assetCategoryId" (change)="getTypes()">
                 <option selected=""> </option>
                 <option *ngFor="let category of categories" [value]=category.assetCategoryId>{{category.description}}</option>
             </select>
             <br>
 
-            <label>Asset Type</label>
+            <label>Asset Type
+                <span>
+                    <i class="fa fa-info-circle" title="Select the type the asset can be described as."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
                 <span *ngIf="f['assetTypeId'].errors?.['assetTypeId'] || f['assetTypeId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a type</span>
             </div>
-            <select  class="form-control" formControlName="assetTypeId" >
+            <select  style="padding-bottom: 3%;" class="form-control" formControlName="assetTypeId" >
             
                 <option *ngFor="let type of types" [value]=type.assetTypeId>{{type.description}}</option>
             </select>
             <br>
 
-            <label>Warranty</label>
+            <label>Asset condition
+                <span>
+                    <i class="fa fa-info-circle" title="Select the condition of the asset."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
-                <span *ngIf="f['warrantyId'].errors?.['warrantyId'] || f['warrantyId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a warranty period</span>
+                <span *ngIf="f['conditionId'].errors?.['conditionId'] || f['conditionId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a condition</span>
             </div>
-            <select  class="form-control" formControlName="warrantyId">
+            <select class="form-control" formControlName="conditionId">
                 <option selected=""> </option>
-                <option *ngFor="let warrantyPeriod of warrantyPeriods" [value]=warrantyPeriod.warrantyPeriodId>{{warrantyPeriod.description}}</option>
+                <option *ngFor="let condition of conditions" [value]=condition.conditionId>{{condition.description}}</option>
             </select>
             <br>
 
-            <label>Manufacturer</label>
+            <label>Warranty Period
+                <span>
+                    <i class="fa fa-info-circle" title="Select the warranty period the asset has."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
-                <span *ngIf="f['manufacturer'].errors?.['manufacturer'] || f['manufacturer'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a manufacturer</span>
+                <span *ngIf="f['warrantyPeriodId'].errors?.['warrantyPeriodId'] || f['warrantyPeriodId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a warranty period</span>
             </div>
-            <input type="text" class="form-control" formControlName="manufacturer" placeholder="Enter Manufacturer Name" required>
+            <select class="form-control" formControlName="warrantyPeriodId">
+                <option selected=""> </option>                              
+                <option *ngFor="let warrantyPeriod of warrantyPeriods" [value]=warrantyPeriod.warrantyPeriodId>{{warrantyPeriod.value}} year(s)</option>
+            </select>
+            <br>
+
+            <label>Warehouse
+                <span>
+                    <i class="fa fa-info-circle" title="Select the warehouse where the asset is stored."></i>
+                </span>
+            </label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['warehouseId'].errors?.['warehouseId'] || f['warehouseId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a condition</span>
+            </div>
+            <select class="form-control" formControlName="warehouseId">
+                <option selected=""> </option>
+                <option *ngFor="let warehouse of warehouses" [value]=warehouse.warehouseId>{{warehouse.name}}</option>
+            </select>
+            <br>
+
+            <label>Warranty Date
+                <span>
+                    <i class="fa fa-info-circle" title="Select the start date of the warranty."></i>
+                </span>
+            </label>   
+            <div *ngIf="submitted">
+                <span *ngIf="f['warrantyDate'].errors?.['warrantyDate'] || f['warrantyDate'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a warranty date</span>
+            </div>
+            <div class="md-form md-outline input-with-post-icon datepicker">
+                <input placeholder="Select date" type="date" id="example" class="form-control" formControlName="warrantyDate">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label>Asset Image
+                    <span>
+                        <i class="fa fa-info-circle" title="Upload an image of the asset."></i>
+                    </span>
+                </label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['assetImage'].errors?.['assetImage'] || f['assetImage'].errors?.['noWhitespaceValidator']" class="text-danger" >Please add an image of the asset</span>
+                </div>
+                   <!-- Error messages -->
+                <input maxlength="64" class="form-control" #file id="img" type="file" accept="image/jpeg" (change)="uploadFile(file.files!)">
+            </div>  
+
             <br>
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
-            <input type="submit" class="btn btn-primary" value="Save">
+            <input type="submit" class="btn btn-primary" [disabled]="disabled" value="Save">
         </form>
         <div class="text-center"></div>
     </div>
-</div> -->
+</div>

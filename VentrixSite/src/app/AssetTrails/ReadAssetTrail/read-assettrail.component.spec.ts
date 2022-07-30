@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpdateAssetComponent } from './update-asset.component';
+import { ReadAssettrailComponent } from './read-assettrail.component';
 
-describe('UpdateAssetComponent', () => {
-  let component: UpdateAssetComponent;
-  let fixture: ComponentFixture<UpdateAssetComponent>;
+describe('ReadAssettrailComponent', () => {
+  let component: ReadAssettrailComponent;
+  let fixture: ComponentFixture<ReadAssettrailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UpdateAssetComponent ]
+      declarations: [ ReadAssettrailComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UpdateAssetComponent);
+    fixture = TestBed.createComponent(ReadAssettrailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

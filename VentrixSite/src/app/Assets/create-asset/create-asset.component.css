@@ -5,7 +5,12 @@
     height: 1500px;
     width:100%;
     position: absolute;
+    overflow-x: hidden;
+  }
 
+  div
+  {
+    padding-bottom: 3%;
   }
   
   .asset-card {
@@ -53,3 +58,7 @@
   {
   color: red;
   }
+  
+select{
+  -webkit-appearance: listbox !important
+}
