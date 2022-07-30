@@ -111,7 +111,7 @@ export class ReadTimeslotComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             this.ventrixdbservice.deleteTimeslot(selectedTimeslot).subscribe();
-            this.router.navigate(['/read-writeoffreason']).then(() => {
+            this.router.navigate(['/read-timeslot']).then(() => {
             window.location.reload();
             });
           }

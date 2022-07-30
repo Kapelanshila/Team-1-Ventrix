@@ -1,0 +1,85 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="container-xl">
+        <div class="table-responsive" >
+            <div class="table-wrapper" >
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>{{selectedorder.description}} Inventories </h2>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="search-box">
+                                <i class="material-icons">&#xE8B6;</i>
+                                <input type="text" class="form-control" placeholder="Search&hellip;" (keyup.enter)="searchInventory()" [(ngModel)]="query">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="addInventory()"><i class="fa fa-shopping-cart fa-xs"></i> Edit Inventory</button>
+                    </div>
+                    <!-- Copy -->
+                    <div class="col-md-12 text-nowrap" style="padding: 1%;">
+                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;
+                            <select class="d-inline-block form-select form-select-sm" [(ngModel)]="noOfRows">
+                                    <option value="5" selected="">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>&nbsp;</label></div>
+                        </div>
+                    <div class="col-md-12">
+                    <!-- Copy -->
+                </div>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Supplier</th>
+                            <th>Warehouse</th>
+                            <th>Quantity on Hand</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let inventoryItem of inventoryItems | paginate:{itemsPerPage: noOfRows, currentPage:p}">
+                        <ng-container>
+                            <td>{{inventoryItem.name}}</td>
+                        </ng-container>
+                  
+                        <td>{{inventoryItem!.category!.description}}</td>
+                        <td>{{inventoryItem!.type!.description}}</td>
+                        <td>{{inventoryItem!.warehouse!.name}}</td>
+                        <td>{{inventoryItem!.supplier!.supplierName}}</td>
+                        <td>{{inventoryItem.quantityOnHand}}</td>
+                        <ng-container *ngIf="inventoryItem.selected == true && inventoryItem.added == true &&(inventoryItem.quantity <= 0 || inventoryItem!.quantity! > inventoryItem!.quantityOnHand!)">
+                            <td  style="width: 15%"><input type="number"  (change)="addQuantity($event, inventoryItem)" style="height: 8%; width: 97%;  border-color: red;" value="{{inventoryItem.quantity}}" min="0"></td>
+                        </ng-container>
+
+                        <ng-container *ngIf="inventoryItem.selected == true && inventoryItem.added == false">
+                            <td  style="width: 15%"><input type="number"  (change)="addQuantity($event, inventoryItem)" style="height: 8%; width: 97%;" value="{{inventoryItem.quantity}}" min="0"></td>
+                        </ng-container>
+
+                        <ng-container  *ngIf="inventoryItem.selected == false">
+                            <td style="width: 15% !important"><input type="number" style="height: 8%; width: 97%;" value="{{inventoryItem.quantity}}" min="0"></td>
+                        </ng-container>
+
+                        <td style="width: 3%"><input type="checkbox" [disabled]="inventoryItem.stored" (click)="selected($event, inventoryItem)" [checked]="inventoryItem.selected" style="transform: scale(1.3);" ></td>
+                        
+                        <ng-container  *ngIf="inventoryItem.stored == true">
+                            <td class = "icon-adjust" style="width: 1%">
+                                <a [routerLink]="" style="cursor: pointer;" class="delete" title="Delete" data-toggle="tooltip" (click)="deleteClientOrderLine(inventoryItem)"><i style="font-size: 17px;" class="material-icons">&#xE872;</i></a>
+                            </td>  
+                         </ng-container>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="hint-text">Showing <b> {{inventoryItems.length}}</b> entries</div>
+                <div class="pagination">
+                    <div id="pagination" class="custom-pagination">
+                        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                    </div>    
+                </div>		
+            </div>
+        </div>  
+    </div>   
+</div>
