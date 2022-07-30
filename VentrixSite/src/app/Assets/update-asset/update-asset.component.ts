@@ -120,6 +120,7 @@ export class UpdateAssetComponent implements OnInit {
           //Send file to api to be stored
           this.http.post('https://localhost:44324/api/File/uploadAssetImage', formData).subscribe();
           
+          this.ventrixdbservice.updateAsset(this.assetform.value).subscribe();
           Swal.fire({
             icon: 'success',
             title: 'Image Successfully Updated',
@@ -135,7 +136,7 @@ export class UpdateAssetComponent implements OnInit {
                   userId: this.ventrixdbservice.getAccount().userId
                 })
                 console.log(this.assetform.value)
-                this.ventrixdbservice.updateAsset(this.assetform.value).subscribe();
+        
                 this.router.navigate(['/read-asset']).then(() => {
                   window.location.reload();
                 })
@@ -233,7 +234,7 @@ export class UpdateAssetComponent implements OnInit {
             this.find = true;
             Swal.fire({
               icon: 'error',
-              title: 'Asset Item Altready Exsists',
+              title: 'Asset Item Altready Exists',
               confirmButtonText: 'OK',
               confirmButtonColor: '#077bff',
               allowOutsideClick: false,
@@ -242,7 +243,7 @@ export class UpdateAssetComponent implements OnInit {
           }
     });
 
-    if (this.assetform.valid && this.find == false && this.assetform.dirty) 
+    if (this.assetform.valid && this.find == false) 
       { 
         console.log(this.assetform.value)
         this.currentDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
