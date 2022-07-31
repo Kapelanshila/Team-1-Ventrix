@@ -1,0 +1,38 @@
+<div class="body">
+    <app-navigation></app-navigation>
+    <div class="inventory-card">
+        <form class="form-user"  [formGroup]="writeofform" (ngSubmit)="writeOffInventory()"><span class="reauth-email"> </span>
+            <h4 class="card-title">Write Off {{assetItem!.name}}</h4>
+            <hr>
+            <br>
+            <label>Write-Off Reason
+                <span>
+                    <i class="fa fa-info-circle" title="Select the main reason the asset is being written off."></i>
+                </span>
+            </label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['writeOffReasonId'].errors?.['writeOffReasonId'] || f['writeOffReasonId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a Write-Off Reason</span>
+            </div>
+            <select  class="form-control" formControlName="writeOffReasonId">
+                <option selected=""> </option>
+                <option *ngFor="let reason of reasons" [value]=reason.writeOffReasonId>{{reason.description}}</option>
+            </select>
+
+            <br>
+            <label>Write-Off Description
+                <span>
+                    <i class="fa fa-info-circle" title="Describe in more depth the specific reason the asset is being written off."></i>
+                </span>
+            </label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['description'].errors?.['required'] || f['description'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a Write-Off Description</span>
+            </div>
+            <div class="mb-3"><textarea maxlength = "128" class="form-control" formControlName = "description" placeholder="Enter a Write Off Description" required (keypress)="keyPressAlphabet($event)"></textarea></div>
+            <br>
+
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Save">
+        </form>
+        <div class="text-center"></div>
+    </div>
+</div>
