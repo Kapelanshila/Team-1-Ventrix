@@ -5,6 +5,7 @@
     height: 1500px;
     width:100%;
     position: absolute;
+    overflow-x: hidden;
 }
 
 .table-responsive {

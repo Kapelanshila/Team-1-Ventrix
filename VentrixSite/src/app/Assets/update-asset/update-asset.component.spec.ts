@@ -1,25 +1,25 @@
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { UpdateAssetComponent } from './update-asset.component';
+import { UpdateAssetComponent } from './update-asset.component';
 
-// describe('UpdateAssetComponent', () => {
-//   let component: UpdateAssetComponent;
-//   let fixture: ComponentFixture<UpdateAssetComponent>;
+describe('UpdateAssetComponent', () => {
+  let component: UpdateAssetComponent;
+  let fixture: ComponentFixture<UpdateAssetComponent>;
 
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       declarations: [ UpdateAssetComponent ]
-//     })
-//     .compileComponents();
-//   });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ UpdateAssetComponent ]
+    })
+    .compileComponents();
+  });
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(UpdateAssetComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(UpdateAssetComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
