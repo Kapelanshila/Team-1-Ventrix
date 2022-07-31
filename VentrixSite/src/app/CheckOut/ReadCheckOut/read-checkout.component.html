@@ -1,0 +1,115 @@
+
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="container-fluid">
+        <div class="table-responsive" >
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>Checkout Assets</h2>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="search-box">
+                                <i class="material-icons">&#xE8B6;</i>
+                                <input type="text" class="form-control" placeholder="Search&hellip;" [(ngModel)]="query"  (keyup.enter)="searchAssignedAssets()">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="viewCheckOuts()"><i class="fa fa-eye" ></i> Checked Out</button>
+                    </div>
+                    <!-- Copy -->
+                    <div class="col-md-12 text-nowrap" style="padding: 1%;">
+                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;
+                            <select class="d-inline-block form-select form-select-sm" [(ngModel)]="noOfRows">
+                                    <option value="5" selected="">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>&nbsp;</label></div>
+                        </div>
+                    <div class="col-md-12">
+                    <!-- Copy -->
+                    </div>
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Asset</th>
+                                <th>Employee Name</th>
+                                <th>Employee Surname</th>
+                                <th>Employee Email</th>
+                                <th>Assignment Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of assignedAssets| paginate:{itemsPerPage: noOfRows, currentPage:p}">           
+                            <td>{{item.assetname}}</td>
+                            <td>{{item.employeename}}</td>
+                            <td>{{item.employeesurname}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.date | extension}}</td>
+                            <td class = "icon-adjust">
+                                <a [routerLink]="" style="cursor: pointer;" class="checkout" title="Checkout Asset" (click)="openPopup(item)" data-toggle="tooltip"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                            </td>  
+                        </tr>
+                        </tbody>
+                        </table>
+                    <div class="hint-text">Showing <b>  {{assignedAssets.length}} </b> entries</div>
+                    <div class="pagination">
+                        <div id="pagination" class="custom-pagination">
+                            <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                        </div>    
+                    </div>		
+                </div>
+            </div>  
+        </div>   
+    </div> 
+</div> 
+<!-- Upload Document to Check Out Asset -->
+<div
+class="modal bootstrap-iso"
+tabindex="-1"
+role="dialog"
+[ngStyle]="{'display':displayStyle}">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <ng-container *ngIf="selecteditem != undefined">
+            <h4 class="modal-title">Check Out {{selecteditem!.assetname}}</h4>
+        </ng-container>
+    </div>
+    <div class="modal-body">
+        <br>
+        <h6>Upload Checkout Document:</h6>
+
+        <ng-container *ngIf="filename == '' ">
+            <div class="custom-file">
+                <input  class="custom-file-input form-control"  #file id="img" type="file" accept="application/pdf" (change)="uploadFile(file.files!)">
+                <label class="custom-file-label" for="customFile">Choose File</label>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="filename != ''">
+            <div class="custom-file">
+                <input  class="custom-file-input form-control"  #file id="img" type="file" accept="application/pdf" (change)="uploadFile(file.files!)">
+                <label class="custom-file-label" for="customFile">{{filename}}</label>
+            </div>
+        </ng-container>
+        
+    <br>
+    <br>
+    </div>
+    <div class="modal-footer">
+        <button type="button" style="margin: 0%; margin-right: 10px;" class="btn btn-danger" 
+        (click)="closePopup()">
+            Close
+        </button>
+        <button type="button" style="margin: 0%;" class="btn btn-primary" 
+            (click)="checkOut()">
+            Checkout
+        </button>
+    </div>
+</div>
+</div> 
+</div> 
+
+

@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Search Orders</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menuId="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background-pic">
+
+  <div class="background-pic" >
+    <div class="background-filter">
+      <div class="table-container">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <ion-input class="text-gray-700 bg-white bg-clip-padding" formControlName = "query" placeholder="Search Orders..."></ion-input>
+          <button type="submit" class="
+            w-full
+            px-6
+            py-2.5
+            bg-blue-600
+            text-white
+            font-medium
+            text-xs
+            leading-tight
+            uppercase
+            rounded
+            shadow-md
+            hover:bg-blue-700 hover:shadow-lg
+            focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+            active:bg-blue-800 active:shadow-lg
+            transition
+            duration-150
+            ease-in-out" type="submit" [disabled]="!myForm.valid">Search</button>
+        </form>
+        <br>
+
+
+        <ion-list style="background-color: rgb(138, 191, 237);">
+
+          <ion-item-sliding *ngFor="let delivery of deliveries"  class="bg-white rounded-lg shadow-xl lg:flex lg:max-w-lg">
+
+            <ng-container *ngIf="delivery.status == 'Delivered' || delivery.status == 'Scheduled' || delivery.status == 'Rescheduled' || delivery.status == 'En Route'">
+              <ion-item-options side="start">
+                <ion-item-option color="secondary" [routerLink]="['/vieworder',delivery.clientOrderId]" >View Order</ion-item-option>
+              </ion-item-options>
+            </ng-container>
+ 
+            <ion-item  >
+              <img  src="../../assets/truck-48.png">
+
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    {{delivery.description}}
+                  </ion-col>
+                </ion-row>
+                <ng-container *ngIf="delivery.status == 'Collected'">
+                  <ion-row>
+                    <ion-col>
+                      <ion-badge color="primary" >Not Scheduled</ion-badge>
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+
+                <ng-container *ngIf="delivery.status == 'Rescheduled'">
+                  <ion-row>
+                    <ion-col>
+                      <ion-badge color="tertiary" >Rescheduled</ion-badge>
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+
+                <ng-container *ngIf="delivery.status == 'Scheduled'">
+                  <ion-row>
+                    <ion-col>
+                      <ion-badge color="danger" >Not Delivered</ion-badge>
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+
+                <ng-container *ngIf="delivery.status == 'En Route'">
+                  <ion-row>
+                    <ion-col>
+                      <ion-badge color="warning" >En Route</ion-badge>
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+
+                <ng-container *ngIf="delivery.status == 'Delivered'">
+                  <ion-row>
+                    <ion-col>
+                      <ion-badge color="success">Delivered</ion-badge>
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+
+                </ion-grid>
+            </ion-item>
+
+          </ion-item-sliding>
+          <div class="bg-red-400 p-6 rounded-lg shadow-lg" *ngIf="deliveries.length === 0">
+            <img
+              src="../../assets/bell-2-48.png" style="padding-bottom: 5%;"/>
+            <p class="text-white-800">No orders found!</p>
+          </div>
+          </ion-list>
+
+      </div>
+    </div>
+  </div>
+
