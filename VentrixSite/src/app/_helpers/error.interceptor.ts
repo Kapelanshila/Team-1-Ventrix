@@ -101,6 +101,19 @@ export class ErrorInterceptor implements HttpInterceptor {
                   })
                   }
 
+                  
+              if (err.status === 469) {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'No Changes Made',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#077bff',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                  })
+                  }
+
+
             return throwError(() => new Error('Invalid Request'));
         }))
     }

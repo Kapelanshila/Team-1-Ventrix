@@ -63,7 +63,8 @@ export class UpdateSupplierComponent implements OnInit {
       && element.contactPersonName == this.supplierform.get('contactPersonName')?.value
       && element.contactPersonNumber == this.supplierform.get('contactPersonNumber')?.value
       && element.workAddress == this.supplierform.get('workAddress')?.value
-      && element.emailAddress == this.supplierform.get('emailAddress')?.value)
+      && element.emailAddress == this.supplierform.get('emailAddress')?.value
+      && element.supplierId != this.supplier?.supplierId)
       {
         this.find = true;
         Swal.fire({

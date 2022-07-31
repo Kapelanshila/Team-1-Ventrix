@@ -31,6 +31,9 @@ export class ReadInventoryComponent implements OnInit {
   item!:InventoryVM;
   type:any;
   inventoryItems:any[] = [];
+  inventorywriteoffs!:any;
+  clientorders!:any;
+  supplierorders!:any;
 
   //Search query 
   query:string = '';
@@ -187,41 +190,21 @@ export class ReadInventoryComponent implements OnInit {
   //Delete Inventory Function 
   deleteInventory(selecteditem: InventoryVM)
   { 
-    this.ventrixdbservice.readClientOrderLine()
+    this.ventrixdbservice.readInventoryWriteOffLine()
     .subscribe(response => {
-      this.clientorderline = response;
+      this.inventorywriteoffs = response;
 
-      this.ventrixdbservice.readSupplierOrderLine()
+      this.ventrixdbservice.readClientOrderLine()
       .subscribe(response => {
-        this.supplierorderline = response;
-      
-        //Only Deltes Inventory if not found in supplier and client order line tables
-        if (this.clientorderline.find(x => x.inventoryId == selecteditem.inventoryId) != undefined)
-        {
-          Swal.fire({
-            icon: 'error',
-            title: 'Cannot Delete',
-            text: 'Delete associated inventory order lines',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#077bff',
-            allowOutsideClick: false,
-            allowEscapeKey: false
-          })
-        }
-        else if (this.supplierorderline.find(x => x.inventoryId == selecteditem.inventoryId) != undefined)
-        {
-          Swal.fire({
-            icon: 'error',
-            title: 'Cannot Delete',
-            text: 'Delete associated inventory in inventory order lines',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#077bff',
-            allowOutsideClick: false,
-            allowEscapeKey: false
-          })
-        }
-        else
-        {
+        this.clientorders = response;
+
+        this.ventrixdbservice.readSupplierOrderLine()
+        .subscribe(response => {
+          this.supplierorders = response;
+  
+
+      if (this.inventorywriteoffs.find((x: { inventoryId: Number; }) => x.inventoryId == selecteditem.inventoryId) && undefined || this.clientorders.find((x: { inventoryId: Number; }) => x.inventoryId == selecteditem.inventoryId) == undefined || this.supplierorders.find((x: { inventoryId: Number; }) => x.inventoryId == selecteditem.inventoryId) == undefined)
+      {
         //Sweet alerts are used as notifications
         Swal.fire({
           icon: 'warning',
@@ -232,16 +215,29 @@ export class ReadInventoryComponent implements OnInit {
           confirmButtonColor: '#077bff',
           allowOutsideClick: false,
           allowEscapeKey: false
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.ventrixdbservice.deleteInventory(selecteditem).subscribe();
-              this.router.navigate(['/read-inventory']).then(() => {
-              window.location.reload();
-              });
-            }
-          })  
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.ventrixdbservice.deleteInventory(selecteditem).subscribe();
+            this.router.navigate(['/read-inventory']).then(() => {
+            window.location.reload();
+            });
+          }
+        })  
+        }
+        else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'Inventory Assoiciated to other entries',
+            showDenyButton: false,
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#077bff',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          })
         }
       })
+    })
     })
   }
 }

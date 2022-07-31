@@ -6,9 +6,11 @@ import { VentrixDBServiceService } from 'src/app/services/ventrix-db-service.ser
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/User';
 import { UserVM } from '../shared/UserVM';
-import { Register } from '../shared/Register';
+import { Account } from '../shared/Account';
 
 import Swal from 'sweetalert2';
+// import { ThemeService } from 'ng2-charts';
+import { PathService } from '../services/path-service.service';
 
 @Component({
   selector: 'app-register',
@@ -25,23 +27,26 @@ export class RegisterComponent implements OnInit {
   found = false;
   unique = true;
   password:string = '';
-  account!: Register;
+  account!: Account;
   hashed:string = '';
   passwordIsValid = false;
-  potentialaccount: Register | undefined;
+  potentialaccount: Account | undefined;
+  emailaddress!:string;
+  employee:Employee | undefined;
 
-  constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService) 
+  constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService, private pathService: PathService) 
   { 
     this.userform = fbuilder.group({
+      employeeId: new FormControl (''), 
       name: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]),
       surname: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]),
       idNumber: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator, this.checkID]),
       phoneNumber: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator, Validators.pattern("[0-9]{10}")]),
       homeAddress: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]),
-      emailAddress: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator, Validators.email,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      emailAddress: new FormControl (''),
       titleId: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]), 
       userId: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]),   
-      password: new FormControl ('',[Validators.required, this.noWhiteSpaceValidator]),   
+      password: new FormControl (''),   
     });
   }
 
@@ -51,6 +56,24 @@ export class RegisterComponent implements OnInit {
       this.titles = response;
       console.log(this.titles)
     })
+
+    this.ventrixdbservice.clearAccount();
+
+    //Pre populate predifned values by the admin
+    this.emailaddress = this.ventrixdbservice.getEmail();
+    this.ventrixdbservice.readEmployee()
+    .subscribe(response => {
+      this.employees = response;
+      this.employee = this.employees.find(x => x.emailAddress == this.emailaddress);
+      this.userform.patchValue({
+        employeeId: this.employee?.employeeId,
+        userId: this.employee?.userId,
+        name: this.employee?.name,
+        surname: this.employee?.surname,
+        emailAddress: this.employee?.emailAddress,
+        })
+    })
+    
 
     //In the event the user went back a screen then populate values
     this.potentialaccount = this.ventrixdbservice.getAccount();
@@ -76,8 +99,7 @@ export class RegisterComponent implements OnInit {
 
   register()
   {
-    this.found = false;
-    this.valid = true;
+    this.unique = true;
     this.submitted = true;
     if (this.userform.valid)
     {
@@ -95,42 +117,21 @@ export class RegisterComponent implements OnInit {
           if (this.employees.length != 0)
           {
             this.users.forEach(user => {   
-
-              if (user.userId == Number(this.userform.get('userId')?.value))
-              {
-                this.found = true;
-                this.employees.forEach(employee => {
-                  if (employee.userId == Number(this.userform.get('userId')?.value))
-                  {
-                    this.valid = false;              
-                  }
+                 this.employees.forEach(employee => {
                   //We want to determine if the user is unique so we check the email address and id number
-                  if (employee.emailAddress == this.userform.get('emailAddress')?.value || employee.idnumber == this.userform.get('idNumber')?.value )
+                  if ((employee.emailAddress == this.userform.get('emailAddress')?.value && this.employee?.userId != employee.userId) || employee.idnumber == this.userform.get('idNumber')?.value )
                   {
                     this.unique = false;
                   }
                 });
-              }
             });
           }
-          else 
-          {
-            this.users.forEach(user => {   
 
-              if (user.userId == Number(this.userform.get('userId')?.value))
-              {
-                this.found = true;
-              }
-            });
-          }
-      
-        if ((this.found == true && this.valid == true) || (this.found == true && this.employees.length == 0))
-        {
-            //Notification if user is not unique 
+           //Notification if user is not unique 
           if (this.unique == false)
           {
             Swal.fire({
-              icon: 'error',
+              icon: 'warning',
               title: 'Duplicate identity information was found',
               confirmButtonText: 'OK',
               confirmButtonColor: '#077bff',
@@ -140,31 +141,30 @@ export class RegisterComponent implements OnInit {
           }
           else 
           {
-          //Notification to re-enter password 
-            const { value: password } = await Swal.fire({
-            title: 'Re-enter your password',
-            input: 'password',
-            inputLabel: 'Password',
-            inputPlaceholder: 'Enter your password',
-          })
-            if (password) {
-              //Check if entered passwords match
-              if (password != this.userform.get('password')?.value)
-              {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Passwords do not match',
-                  confirmButtonText: 'OK',
-                  confirmButtonColor: '#077bff',
-                  allowOutsideClick: false,
-                  allowEscapeKey: false
-                })
-              }
-              else 
-              {
+          // //Notification to re-enter password 
+          //   const { value: password } = await Swal.fire({
+          //   title: 'Re-enter your password',
+          //   input: 'password',
+          //   inputLabel: 'Password',
+          //   inputPlaceholder: 'Enter your password',
+          // })
+      
+          // //Check if entered passwords match
+          // if (password != this.userform.get('password')?.value)
+          // {
+          //   Swal.fire({
+          //     icon: 'error',
+          //     title: 'Passwords do not match',
+          //     confirmButtonText: 'OK',
+          //     confirmButtonColor: '#077bff',
+          //     allowOutsideClick: false,
+          //     allowEscapeKey: false
+          //   })
+          // }
+
                 this.account =  
                 {
-                  employeeId: 0,
+                  employeeId: Number(this.userform.get('employeeId')?.value),
                   userId: Number(this.userform.get('userId')?.value),
                   titleId: Number(this.userform.get('titleId')?.value),
                   name: this.userform.get('name')?.value,
@@ -173,26 +173,14 @@ export class RegisterComponent implements OnInit {
                   phoneNumber: this.userform.get('phoneNumber')?.value,
                   homeAddress: this.userform.get('homeAddress')?.value,
                   emailAddress: this.userform.get('emailAddress')?.value,
-                  hashedPassword: this.userform.get('password')?.value,
+                  hashedPassword: '',
+                  role:''
                 }
                 this.ventrixdbservice.setAccount(this.account);
-                console.log(this.ventrixdbservice.getAccount());
+                this.pathService.setPath('/register')
                 this.router.navigate(['/2FA']);
-              }
-            }            
-          }
-        }
-          else 
-          {
-            Swal.fire({
-              icon: 'error',
-              title: 'Invalid User ID',
-              confirmButtonText: 'OK',
-              confirmButtonColor: '#077bff',
-              allowOutsideClick: false,
-              allowEscapeKey: false
-          }) 
-        }
+              }      
+    
         });
       })
     }
@@ -277,7 +265,39 @@ export class RegisterComponent implements OnInit {
     return {'noWhiteSpaceValidator': true}
   }
 
-  passwordValid(event: boolean) {
-    this.passwordIsValid = event;
+// Only Alphabet & space
+keyPressAlphabet(event: { keyCode: number; preventDefault: () => void; }) {
+  var inp = String.fromCharCode(event.keyCode);
+
+  if (/^[a-zA-Z ]+$/.test(inp)) {
+    return true;
+  } else {
+    event.preventDefault();
+    return false;
   }
+}
+
+// Only Integer Numbers
+keyPressNumbers(event: { which: any; keyCode: any; preventDefault: () => void; }) {
+  var charCode = (event.which) ? event.which : event.keyCode;
+  // Only Numbers 0-9
+  if ((charCode < 48 || charCode > 57)) {
+    event.preventDefault();
+    return false;
+  } else {
+    return true;
+  }
+}
+
+// Only AlphaNumeric
+keyPressAlphanumeric(event: { keyCode: number; preventDefault: () => void; }) {
+  var inp = String.fromCharCode(event.keyCode);
+
+  if (/^[a-zA-Z0-9 ]+$/.test(inp)) {
+    return true;
+  } else {
+    event.preventDefault();
+    return false;
+  }
+}
 }

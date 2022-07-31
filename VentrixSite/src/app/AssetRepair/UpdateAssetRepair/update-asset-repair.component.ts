@@ -88,7 +88,7 @@ export class UpdateAssetRepairComponent implements OnInit {
       this.assetform.patchValue({
       userId: this.ventrixdbservice.getAccount().userId,
     })
-    if (this.assetform.valid && this.assetform.dirty) 
+    if (this.assetform.valid) 
       { 
         console.log(this.assetform.value)
         this.ventrixdbservice.updateAssetRepair(this.assetform.value).subscribe();

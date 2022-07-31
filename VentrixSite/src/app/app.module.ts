@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -60,13 +60,57 @@ import { PasswordStrengthComponent } from './PasswordStrength/password-strength.
 import { TwoFactorAuthComponent } from './TwoFactorAuthentication/two-factor-auth.component';
 import { QuestionComponent } from './Question/question.component';
 import { NgOtpInputModule } from  'ng-otp-input';
-
-
-// import { CreateAssetComponent } from './Assets/create-asset/create-asset.component';
-// import { ReadAssetComponent } from './Assets/read-asset/read-asset.component';
-// import { UpdateAssetComponent } from './Assets/update-asset/update-asset.component';
-import { UpdateUserDetailsComponent } from './UpdateUserDetails/update-user-details/update-user-details.component';
-import { ViewUserDetailsComponent } from './UpdateUserDetails/view-user-details/view-user-details.component';
+import { CreateAssetComponent } from './Assets/create-asset/create-asset.component';
+import { ReadAssetComponent } from './Assets/read-asset/read-asset.component';
+import { UpdateAssetComponent } from './Assets/update-asset/update-asset.component';
+import { UpdateProfileComponent } from './UpdateProfile/update-profile.component';
+import { CreateSupplierOrderComponent } from './SupplierOrder/create-supplier-order/create-supplier-order.component';
+import { ReadSupplierOrderComponent } from './SupplierOrder/read-supplier-order/read-supplier-order.component';
+import { UpdateSupplierOrderComponent } from './SupplierOrder/update-supplier-order/update-supplier-order.component';
+import { CreateClientOrderComponent } from './ClientOrder/create-client-order/create-client-order.component';
+import { ReadClientOrderComponent } from './ClientOrder/read-client-order/read-client-order.component';
+import { UpdateClientOrderComponent } from './ClientOrder/update-client-order/update-client-order.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ExtensionPipe } from './pipes/extension.pipe';
+import { TimePipe } from './pipes/time.pipe';
+import { ReadClientOrderlineComponent } from './ClientOrderLine/ReadClientOrderLine/read-client-orderline.component';
+import { UpdateClientOrderlineComponent } from './ClientOrderLine/UpdateClientOrderLine/update-client-orderline.component';
+import { ReadSupplierOrderlineComponent } from './SupplierOrderLine/ReadSupplierOrderLine/read-supplier-orderline.component';
+import { UpdateSupplierOrderlineComponent } from './SupplierOrderLine/UpdateSupplierOrderLine/update-supplier-orderline.component';
+import { WriteOffInventoryComponent } from './WriteOffInventory/write-off-inventory.component';
+import { WriteOffComponent } from './WriteOffInventory/WriteOff/write-off.component';
+import { ViewWriteOffsComponent } from './WriteOffInventory/ViewWriteOffs/view-write-offs.component';
+import { ReadInventoryStocktakeComponent } from './StockTake/Inventory/ReadInventoryStockTake/read-inventory-stocktake.component';
+import { CreateInventoryStocktakeComponent } from './StockTake/Inventory/CreateInventoryStockTake/create-inventory-stocktake.component';
+import { DatePipe } from './pipes/date.pipe';
+import { ViewAssetComponent } from './Assets/view-asset/view-asset.component';
+import { GaugeChartModule } from 'angular-gauge-chart'
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import {TimelineModule} from 'primeng/timeline';
+import { AssetRepairComponent } from './AssetRepair/asset-repair.component';
+import { CreateAssetRepairComponent } from './AssetRepair/CreateAssetRepair/create-asset-repair.component';
+import { ReadAssetRepairComponent } from './AssetRepair/ReadAssetRepair/read-asset-repair.component';
+import { UpdateAssetRepairComponent } from './AssetRepair/UpdateAssetRepair/update-asset-repair.component';
+import { RevertRepairComponent } from './RevertRepair/revert-repair.component';
+import { ReadAssignedAssetComponent } from './AssignedAsset/ReadAssignedAsset/read-assigned-asset.component';
+import { UndoAssignedAssetComponent } from './AssignedAsset/UndoAssignedAsset/undo-assigned-asset.component';
+import { ReadCheckoutComponent } from './CheckOut/ReadCheckOut/read-checkout.component';
+import { ViewCheckoutsComponent } from './CheckOut/ViewCheckOut/view-checkouts.component';
+import { ReadCheckinComponent } from './CheckIn/ReadCheckIn/read-checkin.component';
+import { ViewCheckinComponent } from './CheckIn/ViewCheckIn/view-checkin.component';
+import { ReadAssetWriteoffComponent } from './AssetWriteOff/ReadAssetWriteOff/read-asset-writeoff.component';
+import { ViewAssetWriteoffComponent } from './AssetWriteOff/ViewAssetWriteOff/view-asset-writeoff.component';
+import { CreateAssetWriteoffComponent } from './AssetWriteOff/CreateAssetWriteOff/create-asset-writeoff.component';
+import { ReadAssettrailComponent } from './AssetTrails/ReadAssetTrail/read-assettrail.component';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { TimeslotComponent } from './Timeslot/timeslot.component';
+import { CreateTimeslotComponent } from './Timeslot/CreateTimeslot/create-timeslot.component';
+import { ReadTimeslotComponent } from './Timeslot/ReadTimeslot/read-timeslot.component';
+import { UpdateTimeslotComponent } from './Timeslot/UpdateTimeslot/update-timeslot.component';
+import { CompletedOrdersComponent } from './ClientOrder/completed-orders/completed-orders.component';
 
 @NgModule({
   declarations: [
@@ -122,21 +166,69 @@ import { ViewUserDetailsComponent } from './UpdateUserDetails/view-user-details/
     PasswordStrengthComponent,
     TwoFactorAuthComponent,
     QuestionComponent,
-    // CreateAssetComponent,
-    // ReadAssetComponent,
-    // UpdateAssetComponent
-    UpdateUserDetailsComponent,
-    ViewUserDetailsComponent
+    CreateAssetComponent,
+    ReadAssetComponent,
+    UpdateAssetComponent,
+    UpdateProfileComponent,
+    CreateSupplierOrderComponent,
+    ReadSupplierOrderComponent,
+    UpdateSupplierOrderComponent,
+    CreateClientOrderComponent,
+    ReadClientOrderComponent,
+    UpdateClientOrderComponent,
+    ExtensionPipe,
+    TimePipe,
+    ReadClientOrderlineComponent,
+    UpdateClientOrderlineComponent,
+    ReadSupplierOrderlineComponent,
+    UpdateSupplierOrderlineComponent,
+    WriteOffInventoryComponent,
+    WriteOffComponent,
+    ViewWriteOffsComponent,
+    ReadInventoryStocktakeComponent,
+    CreateInventoryStocktakeComponent,
+    DatePipe,
+    ViewAssetComponent,
+    AssetRepairComponent,
+    CreateAssetRepairComponent,
+    ReadAssetRepairComponent,
+    UpdateAssetRepairComponent,
+    RevertRepairComponent,
+    ReadAssignedAssetComponent,
+    UndoAssignedAssetComponent,
+    ReadCheckoutComponent,
+    ViewCheckoutsComponent,
+    ReadCheckinComponent,
+    ViewCheckinComponent,
+    ReadAssetWriteoffComponent,
+    ViewAssetWriteoffComponent,
+    CreateAssetWriteoffComponent,
+    ReadAssettrailComponent,
+    TimeslotComponent,
+    CreateTimeslotComponent,
+    ReadTimeslotComponent,
+    UpdateTimeslotComponent,
+    CompletedOrdersComponent
   ],
   imports: [
-    BrowserModule,
+    GaugeChartModule,
+     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
     NgxPaginationModule,
-    NgOtpInputModule
+    NgOtpInputModule, 
+    NgSelectModule,
+    NgCircleProgressModule.forRoot({}),
+    TimelineModule,
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

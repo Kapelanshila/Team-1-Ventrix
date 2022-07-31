@@ -67,7 +67,6 @@ export class CreateSupplierComponent implements OnInit {
 
     if (this.supplierform.valid && this.find == false) {
       console.log(this.supplierform.value);
-      this.ventrixdbservice.createSupplier(this.supplierform.value).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications
         Swal.fire({
@@ -79,6 +78,7 @@ export class CreateSupplierComponent implements OnInit {
           allowEscapeKey: false
         }).then((result) => {
           if (result.isConfirmed) {
+            this.ventrixdbservice.createSupplier(this.supplierform.value).subscribe()
             this.router.navigate(['/read-supplier']).then(() => {
               window.location.reload();
             });

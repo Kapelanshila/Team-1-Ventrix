@@ -9,4 +9,5 @@ export interface Account {
     titleId: Number
     userId: Number
     hashedPassword:string
+    role:string
 }

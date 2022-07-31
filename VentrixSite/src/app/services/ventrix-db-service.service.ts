@@ -51,6 +51,7 @@ import { TimeSlotDate } from '../shared/TimeSlotDate';
 import { DeliveryTimeslot } from '../shared/DeliveryTimeslot';
 import { TimeslotVM } from '../shared/TimeslotVM';
 import { OrderDelivery } from '../shared/OrderDelivery';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -66,22 +67,22 @@ export class VentrixDBServiceService {
     //Client CRUD:
     //Creates client from API
     createClient(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/Client/createClient',obj)
+      return this.http.post<any>(environment.apiUrl+'Client/createClient',obj)
     }
 
     //Returns clients from API
     readClient(): Observable<Client[]> {
-      return this.http.get<Client[]>('https://localhost:44324/api/Client/getClients')
+      return this.http.get<Client[]>(environment.apiUrl+'Client/getClients')
     }
     
     //Updates clients from API
     updateClient(obj:any): Observable<any[]> {
-      return this.http.put<any>('https://localhost:44324/api/Client/updateClient',obj)
+      return this.http.put<any>(environment.apiUrl+'Client/updateClient',obj)
     }
 
     //Deletes client from API
     deleteClient(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/Client/deleteClient',obj)
+      return this.http.post<any>(environment.apiUrl+'Client/deleteClient',obj)
     }
 
     //Get Selected client so it can be either updated or deleted
@@ -106,22 +107,22 @@ export class VentrixDBServiceService {
     //User CRUD:
     //Creates user from API
     createUser(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/VentrixUser/createVentrixUser',obj)
+      return this.http.post<any>(environment.apiUrl+'VentrixUser/createVentrixUser',obj)
     }
 
     //Returns users from API
     readUser(): Observable<User[]> {
-      return this.http.get<User[]>('https://localhost:44324/api/VentrixUser/getVentrixUser')
+      return this.http.get<User[]>(environment.apiUrl+'VentrixUser/getVentrixUser')
     }
     
     //Updates users from API
     updateUser(obj:any): Observable<any[]> {
-      return this.http.put<any>('https://localhost:44324/api/VentrixUser/updateVentrixUser',obj)
+      return this.http.put<any>(environment.apiUrl+'VentrixUser/updateVentrixUser',obj)
     }
 
      //Deletes user from API
      deleteUser(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44324/api/VentrixUser/deleteVentrixUser',obj)
+       return this.http.post<any>(environment.apiUrl+'VentrixUser/deleteVentrixUser',obj)
      }
 
      //Get Selected user so it can be either updated or deleted
@@ -145,29 +146,29 @@ export class VentrixDBServiceService {
 
      //Searches User through use of the api
      searchUser(value:string){
-       return this.http.get<any>('https://localhost:44324/api/VentrixUser/searchVentrixUsers?search='+value)
+       return this.http.get<any>(environment.apiUrl+'VentrixUser/searchVentrixUsers?search='+value)
      }
 
      selectedSupplier: Supplier | undefined;
      //User CRUD:
      //Creates Supplier from API
      createSupplier(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44324/api/Supplier/createSupplier',obj)
+       return this.http.post<any>(environment.apiUrl+'Supplier/createSupplier',obj)
      }
 
      //Returns Suppliers from API
      readSupplier(): Observable<Supplier[]> {
-       return this.http.get<Supplier[]>('https://localhost:44324/api/Supplier/getSupplier')
+       return this.http.get<Supplier[]>(environment.apiUrl+'Supplier/getSupplier')
      }
     
      //Updates Supplier from API
      updateSupplier(obj:any): Observable<any[]> {
-       return this.http.put<any>('https://localhost:44324/api/Supplier/updateSupplier',obj)
+       return this.http.put<any>(environment.apiUrl+'Supplier/updateSupplier',obj)
      }
 
      //Deletes Supplier from API
      deleteSupplier(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44324/api/Supplier/deleteSupplier',obj)
+       return this.http.post<any>(environment.apiUrl+'Supplier/deleteSupplier',obj)
      }
 
      //Get Selected Supplier so it can be either updated or deleted
@@ -190,34 +191,34 @@ export class VentrixDBServiceService {
 
      //Searches Supplier through use of the api
      searchSupplier(value:string){
-      return this.http.get<any>('https://localhost:44324/api/Supplier/searchSuppliers?search='+value)
+      return this.http.get<any>(environment.apiUrl+'Supplier/searchSuppliers?search='+value)
     }
 
       //Returns Suppliers from API
       readRole(): Observable<any[]> {
-      return this.http.get<any[]>('https://localhost:44324/api/UserRole/getUserRole')
+      return this.http.get<any[]>(environment.apiUrl+'UserRole/getUserRole')
     }
         
     selectedEmployee: Employee | undefined;
     //Employee CRUD
     //Creates Employee from API
     createEmployee(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44324/api/Employee/createEmployee',obj)
+      return this.http.post<any>(environment.apiUrl+'Employee/createEmployee',obj)
     }
 
     //returns employees from API
     readEmployee(): Observable<Employee[]>{
-      return this.http.get<Employee[]>('https://localhost:44324/api/Employee/getEmployees')
+      return this.http.get<Employee[]>(environment.apiUrl+'Employee/getEmployees')
     }
 
     //Updates employee from API
     updateEmployee(obj:any): Observable<any[]>{
-      return this.http.put<any>('https://localhost:44324/api/Employee/updateEmployee', obj)
+      return this.http.put<any>(environment.apiUrl+'Employee/updateEmployee', obj)
     }
 
     //Deletes employee from api
     deleteEmployee(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44324/api/Employee/deleteEmployee',obj)
+      return this.http.post<any>(environment.apiUrl+'Employee/deleteEmployee',obj)
     }
 
     //Get Selected employee so it can be either updated or deleted
@@ -239,27 +240,27 @@ export class VentrixDBServiceService {
     }
 
     searchEmployee(value:string){
-      return this.http.get<any>('https://localhost:44324/api/Employee/searchEmployees?search='+value)
+      return this.http.get<any>(environment.apiUrl+'Employee/searchEmployees?search='+value)
     }
 
     readTitle(): Observable<Employee[]>{
-      return this.http.get<Employee[]>('https://localhost:44324/api/Title/getTitle')
+      return this.http.get<Employee[]>(environment.apiUrl+'Title/getTitle')
     }
 
     createOtpTimer(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44324/api/OtpExpiryTime/createOtpExpiryTime',obj)
+      return this.http.post<any>(environment.apiUrl+'OtpExpiryTime/createOtpExpiryTime',obj)
     }
 
     readOtpTimer(): Observable<OtpTimer[]>{
-      return this.http.get<OtpTimer[]>('https://localhost:44324/api/OtpExpiryTime/getOtpExpiryTime')
+      return this.http.get<OtpTimer[]>(environment.apiUrl+'OtpExpiryTime/getOtpExpiryTime')
     }
 
     updateOtpTimer(obj:any): Observable<any[]>{
-      return this.http.put<any>('https://localhost:44324/api/OtpExpiryTime/updateOtpExpiryTime',obj)
+      return this.http.put<any>(environment.apiUrl+'OtpExpiryTime/updateOtpExpiryTime',obj)
     }
 
     deleteOtpTimer(obj:any): Observable<any[]>{
-      return this.http.post<any>('https://localhost:44324/api/OtpExpiryTime/deleteOtpExpiryTime',obj)
+      return this.http.post<any>(environment.apiUrl+'OtpExpiryTime/deleteOtpExpiryTime',obj)
     }
 
     setOtpTimer(value: OtpTimer)
@@ -274,48 +275,48 @@ export class VentrixDBServiceService {
   
   //Searches Client through use if the api
     searchClient(value:string){
-      return this.http.get<any>('https://localhost:44324/api/Client/searchClients?search='+value)
+      return this.http.get<any>(environment.apiUrl+'Client/searchClients?search='+value)
     }
 
     createDepreciation(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/Depreciation/createDepreciation',obj)
+      return this.http.post<any>(environment.apiUrl+'Depreciation/createDepreciation',obj)
     }
 
     //Returns Depreciation from API
     readDepreciation(): Observable<Depreciation[]> {
-      return this.http.get<Depreciation[]>('https://localhost:44324/api/Depreciation/getDepreciation')
+      return this.http.get<Depreciation[]>(environment.apiUrl+'Depreciation/getDepreciation')
     }
 
     //Updates Depreciation from API
     updateDepreciation(obj:any): Observable<any[]> {
-      return this.http.put<any>('https://localhost:44324/api/Depreciation/updateDepreciation',obj)
+      return this.http.put<any>(environment.apiUrl+'Depreciation/updateDepreciation',obj)
     }
 
     //Deletes Depreciation from API
     deleteDepreciation(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/Depreciation/deleteDepreciation',obj)
+      return this.http.post<any>(environment.apiUrl+'Depreciation/deleteDepreciation',obj)
     }
 
     selectedSecurityquestion: Securityquestion | undefined;
     //Security question CRUD:
     //Creates security question from API
     createSecurityquestion(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/SecurityQuestion/createSecurityquestion',obj)
+      return this.http.post<any>(environment.apiUrl+'SecurityQuestion/createSecurityquestion',obj)
     }
 
     //Returns security question from API
     readSecurityquestion(): Observable<Securityquestion[]> {
-      return this.http.get<Securityquestion[]>('https://localhost:44324/api/SecurityQuestion/getSecurityquestion')
+      return this.http.get<Securityquestion[]>(environment.apiUrl+'SecurityQuestion/getSecurityquestion')
     }
     
     //Updates security question from API
     updateSecurityquestion(obj:any): Observable<any[]> {
-      return this.http.put<any>('https://localhost:44324/api/SecurityQuestion/updateSecurityquestion',obj)
+      return this.http.put<any>(environment.apiUrl+'SecurityQuestion/updateSecurityquestion',obj)
     }
 
     //Deletes security question from API
     deleteSecurityquestion(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/SecurityQuestion/deleteSecurityquestion',obj)
+      return this.http.post<any>(environment.apiUrl+'SecurityQuestion/deleteSecurityquestion',obj)
     }
 
     //Get Selected security question so it can be either updated or deleted
@@ -340,22 +341,22 @@ export class VentrixDBServiceService {
     //Delivery status CRUD:
     //Creates delivery status from API
     createDeliverystatus(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/DeliveryStatus/createDeliverystatus',obj)
+      return this.http.post<any>(environment.apiUrl+'DeliveryStatus/createDeliverystatus',obj)
     }
 
     //Returns delivery status from API
     readDeliverystatus(): Observable<Deliverystatus[]> {
-      return this.http.get<Deliverystatus[]>('https://localhost:44324/api/DeliveryStatus/getDeliverystatus')
+      return this.http.get<Deliverystatus[]>(environment.apiUrl+'DeliveryStatus/getDeliverystatus')
     }
     
     //Updates delivery status from API
     updateDeliverystatus(obj:any): Observable<any[]> {
-      return this.http.put<any>('https://localhost:44324/api/DeliveryStatus/updateDeliverystatus',obj)
+      return this.http.put<any>(environment.apiUrl+'DeliveryStatus/updateDeliverystatus',obj)
     }
 
     //Deletes delivery status from API
     deleteDeliverystatus(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/DeliveryStatus/deleteDeliverystatus',obj)
+      return this.http.post<any>(environment.apiUrl+'DeliveryStatus/deleteDeliverystatus',obj)
     }
 
     //Get Selected delivery status so it can be either updated or deleted
@@ -392,22 +393,22 @@ export class VentrixDBServiceService {
     
     //Creates Warehouse from API
     createWarehouse(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/Warehouse/createWarehouse',obj)
+      return this.http.post<any>(environment.apiUrl+'Warehouse/createWarehouse',obj)
     }
 
     //Returns Warehouses from API
     readWarehouse(): Observable<Warehouse[]> {
-      return this.http.get<Warehouse[]>('https://localhost:44324/api/Warehouse/getWarehouse')
+      return this.http.get<Warehouse[]>(environment.apiUrl+'Warehouse/getWarehouse')
     }
     
     //Updates Warehouse from API
     updateWarehouse(obj:any): Observable<any[]> {
-      return this.http.put<any>('https://localhost:44324/api/Warehouse/updateWarehouse',obj)
+      return this.http.put<any>(environment.apiUrl+'Warehouse/updateWarehouse',obj)
     }
 
     //Deletes Warehouse from API
     deleteWarehouse(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/Warehouse/deleteWarehouse',obj)
+      return this.http.post<any>(environment.apiUrl+'Warehouse/deleteWarehouse',obj)
     }
 
     //Get Selected Warehouse so it can be either updated or deleted
@@ -433,22 +434,22 @@ export class VentrixDBServiceService {
      //Client Warehouse:
      //Creates Warehouse from API
      createWarrantyPeriod(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44324/api/WarrantyPeriod/createWarrantyPeriod',obj)
+       return this.http.post<any>(environment.apiUrl+'WarrantyPeriod/createWarrantyPeriod',obj)
      }
  
      //Returns WarrantyPeriods from API
      readWarrantyPeriod(): Observable<WarrantyPeriod[]> {
-       return this.http.get<WarrantyPeriod[]>('https://localhost:44324/api/WarrantyPeriod/getWarrantyPeriod')
+       return this.http.get<WarrantyPeriod[]>(environment.apiUrl+'WarrantyPeriod/getWarrantyPeriod')
      }
      
      //Updates WarrantyPeriod from API
      updateWarrantyPeriod(obj:any): Observable<any[]> {
-       return this.http.put<any>('https://localhost:44324/api/WarrantyPeriod/updateWarrantyPeriod',obj)
+       return this.http.put<any>(environment.apiUrl+'WarrantyPeriod/updateWarrantyPeriod',obj)
      }
  
      //Deletes WarrantyPeriod from API
      deleteWarrantyPeriod(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44324/api/WarrantyPeriod/deleteWarrantyPeriod',obj)
+       return this.http.post<any>(environment.apiUrl+'WarrantyPeriod/deleteWarrantyPeriod',obj)
      }
 
      //Get Selected WarrantyPeriod so it can be either updated or deleted
@@ -472,32 +473,32 @@ export class VentrixDBServiceService {
      //Inventory Category 
      selectedInventoryCategory: InventoryCategory | undefined;
      createInventoryCategory(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/InventoryCategory/createInventoryCategory',obj)
+      return this.http.post<any>(environment.apiUrl+'InventoryCategory/createInventoryCategory',obj)
     }
 
     //Returns Inventory Category from API
     readInventoryCategory(): Observable<InventoryCategory[]> {
-      return this.http.get<InventoryCategory[]>('https://localhost:44324/api/InventoryCategory/getInventoryCategories')
+      return this.http.get<InventoryCategory[]>(environment.apiUrl+'InventoryCategory/getInventoryCategories')
     }
     
     //Updates Inventory Category  from API
     updateInventoryCategory(obj:any): Observable<any[]> {
-      return this.http.put<any>('https://localhost:44324/api/InventoryCategory/updateInventoryCategory',obj)
+      return this.http.put<any>(environment.apiUrl+'InventoryCategory/updateInventoryCategory',obj)
     }
 
     //Deletes Inventory Category  from API
     deleteInventoryCategory(obj:any): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/InventoryCategory/deleteInventoryCategory',obj)
+      return this.http.post<any>(environment.apiUrl+'InventoryCategory/deleteInventoryCategory',obj)
     }
 
     //Search Inventory Category
     searchInventoryCategory(value:string){
-      return this.http.get<any>('https://localhost:44324/api/InventoryCategory/searchInventoryCategories?search='+value)
+      return this.http.get<any>(environment.apiUrl+'InventoryCategory/searchInventoryCategories?search='+value)
     }     
 
     //Register 
      Register(obj:any): Observable<any[]> {
-      return this.http.put<any>('https://localhost:44324/api/Register',obj)
+      return this.http.put<any>(environment.apiUrl+'Register',obj)
       }
 
       //Get Selected Inventory Category so it can be either updated or deleted
@@ -522,22 +523,22 @@ export class VentrixDBServiceService {
       //WriteOff Reason
       selectedWriteOffReason: WriteOffReason | undefined;
       createWriteOffReason(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44324/api/WriteOffReason/createWriteOffReason',obj)
+       return this.http.post<any>(environment.apiUrl+'WriteOffReason/createWriteOffReason',obj)
      }
  
      //Returns Write Off Reason from API
      readWriteOffReason(): Observable<InventoryCategory[]> {
-       return this.http.get<InventoryCategory[]>('https://localhost:44324/api/WriteOffReason/getWriteOffReason')
+       return this.http.get<InventoryCategory[]>(environment.apiUrl+'WriteOffReason/getWriteOffReason')
      }
      
      //Updates Write Off Reason  from API
      updateWriteReason(obj:any): Observable<any[]> {
-       return this.http.put<any>('https://localhost:44324/api/WriteOffReason/updateWriteOffReason',obj)
+       return this.http.put<any>(environment.apiUrl+'WriteOffReason/updateWriteOffReason',obj)
      }
  
      //Deletes Write Off Reason from API
      deleteWriteReason(obj:any): Observable<any[]> {
-       return this.http.post<any>('https://localhost:44324/api/WriteOffReason/deleteWriteOffReason',obj)
+       return this.http.post<any>(environment.apiUrl+'WriteOffReason/deleteWriteOffReason',obj)
      }
 
        //Get SelectedWrite Off Reason so it can be either updated or deleted
@@ -561,22 +562,22 @@ export class VentrixDBServiceService {
          //Inventory Type
          selectedInventoryType: InventoryType | undefined;
          createInventoryType(obj:any): Observable<any[]> {
-         return this.http.post<any>('https://localhost:44324/api/InventoryType/createInventoryType',obj)
+         return this.http.post<any>(environment.apiUrl+'InventoryType/createInventoryType',obj)
        }
    
        //Returns Inventory Typefrom API
        readInventoryType(): Observable<InventoryType[]> {
-         return this.http.get<InventoryType[]>('https://localhost:44324/api/InventoryType/getInventoryType')
+         return this.http.get<InventoryType[]>(environment.apiUrl+'InventoryType/getInventoryType')
        }
        
        //Updates Inventory Type from API
        updateInventoryType(obj:any): Observable<any[]> {
-         return this.http.put<any>('https://localhost:44324/api/InventoryType/updateInventoryType',obj)
+         return this.http.put<any>(environment.apiUrl+'InventoryType/updateInventoryType',obj)
        }
    
        //Deletes Inventory Type Reason from API
        deleteInventoryType(obj:any): Observable<any[]> {
-         return this.http.post<any>('https://localhost:44324/api/InventoryType/deleteInventoryType',obj)
+         return this.http.post<any>(environment.apiUrl+'InventoryType/deleteInventoryType',obj)
        }
 
          //Get Selected Inventory Type so it can be either updated or deleted
@@ -600,22 +601,22 @@ export class VentrixDBServiceService {
       //Asset Repair Reason
         selectedAssetRepairReason: AssetRepairReason | undefined;
         createAssetRepairReason(obj:any): Observable<any[]> {
-        return this.http.post<any>('https://localhost:44324/api/AssetRepairReason/createAssetRepairReason',obj)
+        return this.http.post<any>(environment.apiUrl+'AssetRepairReason/createAssetRepairReason',obj)
       }
   
       //Returns Asset Repair Reason from API
       readAssetRepairReason(): Observable<AssetRepairReason[]> {
-        return this.http.get<AssetRepairReason[]>('https://localhost:44324/api/AssetRepairReason/getAssetRepairReason')
+        return this.http.get<AssetRepairReason[]>(environment.apiUrl+'AssetRepairReason/getAssetRepairReason')
       }
       
       //Updates Asset Repair Reason from APIv
       updateAssetRepairReason(obj:any): Observable<any[]> {
-        return this.http.put<any>('https://localhost:44324/api/AssetRepairReason/updateAssetRepairReason',obj)
+        return this.http.put<any>(environment.apiUrl+'AssetRepairReason/updateAssetRepairReason',obj)
       }
   
       //Deletes Asset Repair Reason Reason from API
       deleteAssetRepairReason(obj:any): Observable<any[]> {
-        return this.http.post<any>('https://localhost:44324/api/AssetRepairReason/deleteAssetRepairReason',obj)
+        return this.http.post<any>(environment.apiUrl+'AssetRepairReason/deleteAssetRepairReason',obj)
       }
 
         //Get Selected Asset Repair Reason so it can be either updated or deleted
@@ -639,22 +640,22 @@ export class VentrixDBServiceService {
         //Inventory 
         selectedInventory: InventoryVM | undefined;
         createInventory(obj:any): Observable<any[]> {
-        return this.http.post<any>('https://localhost:44324/api/Inventory/createInventory',obj)
+        return this.http.post<any>(environment.apiUrl+'Inventory/createInventory',obj)
       }
   
       //Returns Asset Repair Reason from API
       readInventory(): Observable<Inventory[]> {
-        return this.http.get<Inventory[]>('https://localhost:44324/api/Inventory/getInventories')
+        return this.http.get<Inventory[]>(environment.apiUrl+'Inventory/getInventories')
       }
       
       //Updates Asset Repair Reason from APIv
       updateInventory(obj:any): Observable<any[]> {
-        return this.http.put<any>('https://localhost:44324/api/Inventory/updateInventory',obj)
+        return this.http.put<any>(environment.apiUrl+'Inventory/updateInventory',obj)
       }
   
       //Deletes Asset Repair Reason Reason from API
       deleteInventory(obj:any): Observable<any[]> {
-        return this.http.post<any>('https://localhost:44324/api/Inventory/deleteInventory',obj)
+        return this.http.post<any>(environment.apiUrl+'Inventory/deleteInventory',obj)
       }
 
         //Get Selected Asset Repair Reason so it can be either updated or deleted
@@ -677,29 +678,29 @@ export class VentrixDBServiceService {
 
         //Search Inventory
         searchInventory(value:string){
-          return this.http.get<any>('https://localhost:44324/api/Inventory/searchInventories?search='+value)
+          return this.http.get<any>(environment.apiUrl+'Inventory/searchInventories?search='+value)
         }     
         //
 
         //Asset Type
         selectedAssetType: AssetType | undefined;
         createAssetType(obj:any): Observable<any[]> {
-        return this.http.post<any>('https://localhost:44324/api/AssetType/createAssetType',obj)
+        return this.http.post<any>(environment.apiUrl+'AssetType/createAssetType',obj)
       }
   
       //Returns Asset Typefrom API
       readAssetType(): Observable<AssetType[]> {
-        return this.http.get<AssetType[]>('https://localhost:44324/api/AssetType/getAssetType')
+        return this.http.get<AssetType[]>(environment.apiUrl+'AssetType/getAssetType')
       }
       
       //Updates Asset Type from API
       updateAssetType(obj:any): Observable<any[]> {
-        return this.http.put<any>('https://localhost:44324/api/AssetType/updateAssetType',obj)
+        return this.http.put<any>(environment.apiUrl+'AssetType/updateAssetType',obj)
       }
   
       //Deletes Asset Type Reason from API
       deleteAssetType(obj:any): Observable<any[]> {
-        return this.http.post<any>('https://localhost:44324/api/AssetType/deleteAssetType',obj)
+        return this.http.post<any>(environment.apiUrl+'AssetType/deleteAssetType',obj)
       }
 
         //Get Selected Asset Type so it can be either updated or deleted
@@ -723,27 +724,27 @@ export class VentrixDBServiceService {
     //Asset Category 
     selectedAssetCategory: AssetCategory | undefined;
     createAssetCategory(obj:any): Observable<any[]> {
-     return this.http.post<any>('https://localhost:44324/api/AssetCategory/createAssetCategory',obj)
+     return this.http.post<any>(environment.apiUrl+'AssetCategory/createAssetCategory',obj)
    }
 
    //Returns Asset Category from API
    readAssetCategory(): Observable<AssetCategory[]> {
-     return this.http.get<AssetCategory[]>('https://localhost:44324/api/AssetCategory/getAssetCategories')
+     return this.http.get<AssetCategory[]>(environment.apiUrl+'AssetCategory/getAssetCategories')
    }
    
    //Updates Asset Category  from API
    updateAssetCategory(obj:any): Observable<any[]> {
-     return this.http.put<any>('https://localhost:44324/api/AssetCategory/updateAssetCategory',obj)
+     return this.http.put<any>(environment.apiUrl+'AssetCategory/updateAssetCategory',obj)
    }
 
    //Deletes Asset Category  from API
    deleteAssetCategory(obj:any): Observable<any[]> {
-     return this.http.post<any>('https://localhost:44324/api/AssetCategory/deleteAssetCategory',obj)
+     return this.http.post<any>(environment.apiUrl+'AssetCategory/deleteAssetCategory',obj)
    }
 
    //Search Asset Category
    searchAssetCategory(value:string){
-     return this.http.get<any>('https://localhost:44324/api/AssetCategory/searchAssetCategories?search='+value)
+     return this.http.get<any>(environment.apiUrl+'AssetCategory/searchAssetCategories?search='+value)
    }
 
    //Get Selected Asset Category so it can be either updated or deleted
@@ -767,27 +768,27 @@ export class VentrixDBServiceService {
    //Asset 
    selectedAsset: AssetVM | undefined;
    createAsset(obj:any): Observable<any[]> {
-   return this.http.post<any>('https://localhost:44324/api/Asset/createAsset',obj)
+   return this.http.post<any>(environment.apiUrl+'Asset/createAsset',obj)
  }
 
  //Returns Asset from API
  readAsset(): Observable<Asset[]> {
-   return this.http.get<Asset[]>('https://localhost:44324/api/Asset/getAssets')
+   return this.http.get<Asset[]>(environment.apiUrl+'Asset/getAssets')
  }
  
  //Updates Asset from APIv
  updateAsset(obj:any): Observable<any[]> {
-   return this.http.post<any>('https://localhost:44324/api/Asset/updateAsset',obj)
+   return this.http.put<any>(environment.apiUrl+'Asset/updateAsset',obj)
  }
 
  //Deletes Asset from API
  deleteAsset(obj:any): Observable<any[]> {
-   return this.http.post<any>('https://localhost:44324/api/Asset/deleteAsset',obj)
+   return this.http.post<any>(environment.apiUrl+'Asset/deleteAsset',obj)
  }
 
   //Gets Asset Image
   getAssetImage(path: string){
-    return this.http.get('https://localhost:44324/api/File/getAssetImage?path='+path, {responseType : 'text'})
+    return this.http.get(environment.apiUrl+'File/getAssetImage?path='+path, {responseType : 'text'})
   }
 
    //Get Selected Asset so it can be either updated or deleted
@@ -810,19 +811,19 @@ export class VentrixDBServiceService {
 
    //Search Asset
    searchAsset(value:string){
-     return this.http.get<any>('https://localhost:44324/api/Asset/searchAssets?search='+value)
+     return this.http.get<any>(environment.apiUrl+'Asset/searchAssets?search='+value)
    }     
    //
 
    //Condition 
    readCondition(): Observable<Condition[]> {
-    return this.http.get<Condition[]>('https://localhost:44324/api/Asset/getCondition')
+    return this.http.get<Condition[]>(environment.apiUrl+'Asset/getCondition')
   }
    //
 
    //WarrantyPeriod
    readWarranty(): Observable<Warranty[]> {
-    return this.http.get<Warranty[]>('https://localhost:44324/api/Asset/getWarranty')
+    return this.http.get<Warranty[]>(environment.apiUrl+'Asset/getWarranty')
   }
    //
 
@@ -834,7 +835,7 @@ export class VentrixDBServiceService {
 
    //Deletes Asset from API
     createUserSecurityQuestion(obj:any,email:string): Observable<any[]> {
-      return this.http.post<any>('https://localhost:44324/api/UserSecurityQuestion/createUserSecurityQuestion?email='+email,obj)
+      return this.http.post<any>(environment.apiUrl+'UserSecurityQuestion/createUserSecurityQuestion?email='+email,obj)
     }
 
 
@@ -889,17 +890,17 @@ export class VentrixDBServiceService {
 
    //Validate User for Register
    validUser(password:string, email : string){
-    return this.http.get<any>('https://localhost:44324/api/Register/validUser?password='+password+'&emailaddress='+email)
+    return this.http.get<any>(environment.apiUrl+'Register/validUser?password='+password+'&emailaddress='+email)
   }
 
   //Updates Asset from APIv
   resetPassword(obj:any): Observable<any[]> {
-    return this.http.put<any>('https://localhost:44324/api/Employee/resetPassword',obj)
+    return this.http.put<any>(environment.apiUrl+'Employee/resetPassword',obj)
   }
 
     //Get Forgotten Account
     forgotUser(answer1: string, answer2:string, answer3:string, question1: Number, question2:Number, question3:Number){
-    return this.http.get<any>('https://localhost:44324/api/VentrixUser/getForgottenUser?answer1='+answer1+'&answer2='+answer2+'&answer3='+answer3+'&question1='+question1+'&question2='+question2+'&question3='+question3)
+    return this.http.get<any>(environment.apiUrl+'VentrixUser/getForgottenUser?answer1='+answer1+'&answer2='+answer2+'&answer3='+answer3+'&question1='+question1+'&question2='+question2+'&question3='+question3)
   }
 
     //Get Selected Account
@@ -923,33 +924,33 @@ export class VentrixDBServiceService {
 
     //Deletes Asset from API
     dowloadFile(path:string){
-      return this.http.get('https://localhost:44324/api/File/getClientOrderFile?path='+path, {responseType : 'blob'})
+      return this.http.get(environment.apiUrl+'File/getClientOrderFile?path='+path, {responseType : 'blob'})
     }
     
     //Deletes Asset from API
     dowloadSupplierFile(path:string){
-      return this.http.get('https://localhost:44324/api/File/getSupplierOrderFile?path='+path, {responseType : 'blob'})
+      return this.http.get(environment.apiUrl+'File/getSupplierOrderFile?path='+path, {responseType : 'blob'})
     }
 
   //Client Order 
    selectedClientOrder: ClientOrderVM | undefined;
    createClientOrder(obj:any): Observable<any[]> {
-   return this.http.post<any>('https://localhost:44324/api/ClientOrder/createClientOrder',obj)
+   return this.http.post<any>(environment.apiUrl+'ClientOrder/createClientOrder',obj)
   }
 
  //Returns ClientOrder from API
  readClientOrder(): Observable<ClientOrder[]> {
-   return this.http.get<ClientOrder[]>('https://localhost:44324/api/ClientOrder/getClientOrders')
+   return this.http.get<ClientOrder[]>(environment.apiUrl+'ClientOrder/getClientOrders')
  }
  
  //Updates ClientOrder from APIv
  updateClientOrder(obj:any): Observable<any[]> {
-   return this.http.put<any>('https://localhost:44324/api/ClientOrder/updateClientOrder',obj)
+   return this.http.put<any>(environment.apiUrl+'ClientOrder/updateClientOrder',obj)
  }
 
  //Deletes ClientOrder from API
  deleteClientOrder(obj:any): Observable<any[]> {
-   return this.http.post<any>('https://localhost:44324/api/ClientOrder/deleteClientOrder',obj)
+   return this.http.post<any>(environment.apiUrl+'ClientOrder/deleteClientOrder',obj)
  }
 
    //Get Selected ClientOrder so it can be either updated or deleted
@@ -972,65 +973,65 @@ export class VentrixDBServiceService {
 
    //Search ClientOrder
    searchClientOrder(value:string){
-     return this.http.get<any>('https://localhost:44324/api/ClientOrder/searchClientOrders?search='+value)
+     return this.http.get<any>(environment.apiUrl+'ClientOrder/searchClientOrders?search='+value)
    }     
    //
 
    //Delete Client Order Invoice
    deleteClientOrderInvoice(path: string){
-    return this.http.get<any>('https://localhost:44324/api/File/deleteClientOrderInvoice?path='+path)
+    return this.http.get<any>(environment.apiUrl+'File/deleteClientOrderInvoice?path='+path)
   }
   
  //Returns ClientOrder from API
  readClientOrderStatuses(): Observable<ClientOrderStatus[]> {
-  return this.http.get<ClientOrderStatus[]>('https://localhost:44324/api/ClientOrderStatus/getClientOrderStatuses')
+  return this.http.get<ClientOrderStatus[]>(environment.apiUrl+'ClientOrderStatus/getClientOrderStatuses')
 }
 
 //Client Order Line 
   selectedClientOrderLine: ClientOrderLineVM | undefined;
    //Create ClientOrderLine
   createClientOrderLine(response: ClientResponse) {
-  return this.http.post<any>('https://localhost:44324/api/ClientOrderLine/createClientOrderLine',response)
+  return this.http.post<any>(environment.apiUrl+'ClientOrderLine/createClientOrderLine',response)
  }
    //Read ClientOrderLine
   readClientOrderLine(): Observable<any[]> {
-    return this.http.get<any[]>('https://localhost:44324/api/ClientOrderLine/getClientOrderLines')
+    return this.http.get<any[]>(environment.apiUrl+'ClientOrderLine/getClientOrderLines')
   }
 
   //Update ClientOrderLine
   updateClientOrderLine(obj:any): Observable<any[]> {
-    return this.http.put<any>('https://localhost:44324/api/ClientOrderLine/updateClientOrderLine',obj)
+    return this.http.put<any>(environment.apiUrl+'ClientOrderLine/updateClientOrderLine',obj)
   }
 
   //Delete ClientOrderLine
   deleteClientOrderLine(obj:any){
-    return this.http.post<any>('https://localhost:44324/api/ClientOrderLine/deleteClientOrderLine',obj)
+    return this.http.post<any>(environment.apiUrl+'ClientOrderLine/deleteClientOrderLine',obj)
   }
   
   //Delete ClientOrderLine
   revertStatus(obj:any){
-    return this.http.post<any>('https://localhost:44324/api/ClientOrderLine/revertStatus',obj)
+    return this.http.post<any>(environment.apiUrl+'ClientOrderLine/revertStatus',obj)
   }
 
  //Supplier Order 
  selectedSupplierOrder: SupplierOrderVM | undefined;
  createSupplierOrder(obj:any): Observable<any[]> {
- return this.http.post<any>('https://localhost:44324/api/SupplierOrder/createSupplierOrder',obj)
+ return this.http.post<any>(environment.apiUrl+'SupplierOrder/createSupplierOrder',obj)
 }
 
 //Returns SupplierOrder from API
 readSupplierOrder(): Observable<SupplierOrder[]> {
- return this.http.get<SupplierOrder[]>('https://localhost:44324/api/SupplierOrder/getSupplierOrders')
+ return this.http.get<SupplierOrder[]>(environment.apiUrl+'SupplierOrder/getSupplierOrders')
 }
 
 //Updates SupplierOrder from APIv
 updateSupplierOrder(obj:any): Observable<any[]> {
- return this.http.put<any>('https://localhost:44324/api/SupplierOrder/updateSupplierOrder',obj)
+ return this.http.put<any>(environment.apiUrl+'SupplierOrder/updateSupplierOrder',obj)
 }
 
 //Deletes SupplierOrder from API
 deleteSupplierOrder(obj:any): Observable<any[]> {
- return this.http.post<any>('https://localhost:44324/api/SupplierOrder/deleteSupplierOrder',obj)
+ return this.http.post<any>(environment.apiUrl+'SupplierOrder/deleteSupplierOrder',obj)
 }
 
  //Get Selected SupplierOrder so it can be either updated or deleted
@@ -1053,66 +1054,66 @@ deleteSupplierOrder(obj:any): Observable<any[]> {
 
  //Search SupplierOrder
  searchSupplierOrder(value:string){
-   return this.http.get<any>('https://localhost:44324/api/SupplierOrder/searchSupplierOrders'+value)
+   return this.http.get<any>(environment.apiUrl+'SupplierOrder/searchSupplierOrders'+value)
  }     
  //
 
  //Delete Supplier Order Invoice
  deleteSupplierOrderInvoice(path: string){
-  return this.http.get<any>('https://localhost:44324/api/File/deleteSupplierOrderInvoice?path='+path)
+  return this.http.get<any>(environment.apiUrl+'File/deleteSupplierOrderInvoice?path='+path)
 }
 
 //Supplier Order Line 
 selectedSupplierOrderLine: SupplierOrderLineVM | undefined;
 //Create SupplierOrderLine
 createSupplierOrderLine(response: SupplierResponse) {
-return this.http.post<any>('https://localhost:44324/api/SupplierOrderLine/createSupplierOrderLine',response)
+return this.http.post<any>(environment.apiUrl+'SupplierOrderLine/createSupplierOrderLine',response)
 }
 //Read SupplierOrderLine
 readSupplierOrderLine(): Observable<any[]> {
- return this.http.get<any[]>('https://localhost:44324/api/SupplierOrderLine/getSupplierOrderLines')
+ return this.http.get<any[]>(environment.apiUrl+'SupplierOrderLine/getSupplierOrderLines')
 }
 
 //Update SupplierOrderLine
 updateSupplierOrderLine(obj:any): Observable<any[]> {
- return this.http.put<any>('https://localhost:44324/api/SupplierOrderLine/updateSupplierOrderLine',obj)
+ return this.http.put<any>(environment.apiUrl+'SupplierOrderLine/updateSupplierOrderLine',obj)
 }
 
 //Delete SupplierOrderLine
 deleteSupplierOrderLine(obj:any){
- return this.http.post<any>('https://localhost:44324/api/SupplierOrderLine/deleteSupplierOrderLine',obj)
+ return this.http.post<any>(environment.apiUrl+'SupplierOrderLine/deleteSupplierOrderLine',obj)
 }
 
 //Creates PDF for Specific Client Order
 createOrderPDF(obj:any){
-  return this.http.post<any>('https://localhost:44324/api/pdfcreator',obj, {responseType: 'blob' as 'json'})
+  return this.http.post<any>(environment.apiUrl+'pdfcreator',obj, {responseType: 'blob' as 'json'})
  }
 
 
 //Essentially add "Packed" status
 packOrder(obj:any){
-  return this.http.post<any>('https://localhost:44324/api/PackOrder/packOrder',obj)
+  return this.http.post<any>(environment.apiUrl+'PackOrder/packOrder',obj)
  }
 
  //Reverts changes by deleting status
 revertPackOrder(obj:any){
-  return this.http.post<any>('https://localhost:44324/api/PackOrder/revertPackOrder',obj)
+  return this.http.post<any>(environment.apiUrl+'PackOrder/revertPackOrder',obj)
 }
 
  //Create Write Off
  createWriteOff(obj:any){
-  return this.http.post<any>('https://localhost:44324/api/InventoryWriteOff/createWriteOff',obj)
+  return this.http.post<any>(environment.apiUrl+'InventoryWriteOff/createWriteOff',obj)
 }
 
 //readInventoryWriteOff
 readInventoryWriteOff(){
-  return this.http.get<any>('https://localhost:44324/api/InventoryWriteOff/getInventoryWriteOff')
+  return this.http.get<any>(environment.apiUrl+'InventoryWriteOff/getInventoryWriteOff')
 }
 //
 
 //readInventoryWriteOffLine 
 readInventoryWriteOffLine(){
-  return this.http.get<any>('https://localhost:44324/api/InventoryWriteOff/getInventoryWriteOffLines')
+  return this.http.get<any>(environment.apiUrl+'InventoryWriteOff/getInventoryWriteOffLines')
 }
 
  //Get Selected InventoryWriteOff so it can be either updated or deleted
@@ -1134,33 +1135,33 @@ readInventoryWriteOffLine(){
 } 
 
 updateInventoryStock(obj:any){
-  return this.http.post<any>('https://localhost:44324/api/StockTake/updateInventoryStock',obj)
+  return this.http.post<any>(environment.apiUrl+'StockTake/updateInventoryStock',obj)
 }
 
    //Delete Asset Image
    deleteAssetImage(path: string){
-    return this.http.get<any>('https://localhost:44324/api/File/deleteAssetImage?path='+path)
+    return this.http.get<any>(environment.apiUrl+'File/deleteAssetImage?path='+path)
   }
 
 //Asset Repairs 
 selectedAssetRepair: AssetRepair | undefined;
  createAssetRepair(obj:any): Observable<any[]> {
- return this.http.post<any>('https://localhost:44324/api/AssetRepair/createAssetRepair',obj)
+ return this.http.post<any>(environment.apiUrl+'AssetRepair/createAssetRepair',obj)
 }
 
 //Returns AssetRepair from API
 readAssetRepair(): Observable<AssetRepair[]> {
- return this.http.get<AssetRepair[]>('https://localhost:44324/api/AssetRepair/getAssetRepairs')
+ return this.http.get<AssetRepair[]>(environment.apiUrl+'AssetRepair/getAssetRepairs')
 }
 
   //Updates AssetRepair from APIv
   updateAssetRepair(obj:any): Observable<any[]> {
-  return this.http.put<any>('https://localhost:44324/api/AssetRepair/updateAssetRepair',obj)
+  return this.http.put<any>(environment.apiUrl+'AssetRepair/updateAssetRepair',obj)
   }
 
   //Deletes AssetRepair from API
   deleteAssetRepair(obj:any): Observable<any[]> {
-  return this.http.post<any>('https://localhost:44324/api/AssetRepair/deleteAssetRepair',obj)
+  return this.http.post<any>(environment.apiUrl+'AssetRepair/deleteAssetRepair',obj)
   }
 
  //Get Selected AssetRepair so it can be either updated or deleted
@@ -1182,107 +1183,107 @@ readAssetRepair(): Observable<AssetRepair[]> {
 } 
 
 repairAsset(obj:any): Observable<any[]> {
-  return this.http.post<any>('https://localhost:44324/api/AssetRepair/repairAsset',obj)
+  return this.http.post<any>(environment.apiUrl+'AssetRepair/repairAsset',obj)
  }
  
 undoRepair(obj:any): Observable<any[]> {
-  return this.http.post<any>('https://localhost:44324/api/AssetRepair/undoRepair',obj)
+  return this.http.post<any>(environment.apiUrl+'AssetRepair/undoRepair',obj)
  }
 
 //Assigned Asset 
 readAssignedAssets(): Observable<AssignedAsset[]> {
-  return this.http.get<AssignedAsset[]>('https://localhost:44324/api/AssignAsset/getAssignedAssets')
+  return this.http.get<AssignedAsset[]>(environment.apiUrl+'AssignAsset/getAssignedAssets')
  }
 
 createAssigned(obj:any): Observable<any[]> {
-  return this.http.post<any>('https://localhost:44324/api/AssignAsset/createAssignedAsset',obj)
+  return this.http.post<any>(environment.apiUrl+'AssignAsset/createAssignedAsset',obj)
  }
  
 undoAssignment(obj:any): Observable<any[]> {
-  return this.http.post<any>('https://localhost:44324/api/AssignAsset/undoAssignment',obj)
+  return this.http.post<any>(environment.apiUrl+'AssignAsset/undoAssignment',obj)
  }
 
  searchAssignment(value:string){
-  return this.http.get<any>('https://localhost:44324/api/AssignAsset/searchAssignedAssets?search='+value)
+  return this.http.get<any>(environment.apiUrl+'AssignAsset/searchAssignedAssets?search='+value)
 } 
 
 deleteAssignedAsset(obj:any): Observable<any[]> {
-  return this.http.post<any>('https://localhost:44324/api/AssignAsset/deleteAssigned',obj)
+  return this.http.post<any>(environment.apiUrl+'AssignAsset/deleteAssigned',obj)
   }
 
 //Check Out Asset 
 createCheckOutAsset(obj:any): Observable<any[]> {
-  return this.http.post<any>('https://localhost:44324/api/CheckOut/createCheckOut',obj)
+  return this.http.post<any>(environment.apiUrl+'CheckOut/createCheckOut',obj)
  }
  
  //Returns AssetRepair from API
  readCheckOutAsset(): Observable<CheckOutAsset[]> {
-  return this.http.get<CheckOutAsset[]>('https://localhost:44324/api/CheckOut/getCheckOuts')
+  return this.http.get<CheckOutAsset[]>(environment.apiUrl+'CheckOut/getCheckOuts')
  }
 
  searchCheckOut(value:string){
-  return this.http.get<any>('https://localhost:44324/api/CheckOut/searchCheckOut?search='+value)
+  return this.http.get<any>(environment.apiUrl+'CheckOut/searchCheckOut?search='+value)
 }  
 
 deleteCheckOutDocument(path: string){
-  return this.http.get<any>('https://localhost:44324/api/File/deleteCheckOutDocument?path='+path)
+  return this.http.get<any>(environment.apiUrl+'File/deleteCheckOutDocument?path='+path)
 }
 
 getCheckOutDocument(path: string){
-  return this.http.get('https://localhost:44324/api/File/getCheckOutDocument?path='+path, {responseType : 'blob'}) 
+  return this.http.get(environment.apiUrl+'File/getCheckOutDocument?path='+path, {responseType : 'blob'}) 
 }
 
 //Check In Asset 
 createCheckInAsset(obj:any): Observable<any[]> {
-  return this.http.post<any>('https://localhost:44324/api/CheckIn/createCheckIn',obj)
+  return this.http.post<any>(environment.apiUrl+'CheckIn/createCheckIn',obj)
  }
  
  //Returns AssetRepair from API
  readCheckInAsset(): Observable<CheckInAsset[]> {
-  return this.http.get<CheckInAsset[]>('https://localhost:44324/api/CheckIn/getCheckIns')
+  return this.http.get<CheckInAsset[]>(environment.apiUrl+'CheckIn/getCheckIns')
  }
 
  searchCheckIn(value:string){
-  return this.http.get<any>('https://localhost:44324/api/CheckIn/searchCheckIn?search='+value)
+  return this.http.get<any>(environment.apiUrl+'CheckIn/searchCheckIn?search='+value)
 }  
 
 deleteCheckInDocument(path: string){
-  return this.http.get<any>('https://localhost:44324/api/File/deleteCheckInDocument?path='+path)
+  return this.http.get<any>(environment.apiUrl+'File/deleteCheckInDocument?path='+path)
 }
 
 getCheckInDocument(path: string){
-  return this.http.get('https://localhost:44324/api/File/getCheckInDocument?path='+path, {responseType : 'blob'}) 
+  return this.http.get(environment.apiUrl+'File/getCheckInDocument?path='+path, {responseType : 'blob'}) 
 }
 
 //Asset History Location 
 readAssetLocations(obj:any){
-  return this.http.post<any>('https://localhost:44324/api/Asset/getLocations', obj)
+  return this.http.post<any>(environment.apiUrl+'Asset/getLocations', obj)
 }
 
 //Asset Write Off 
 createAssetWriteOff(obj:any){
-  return this.http.post<any>('https://localhost:44324/api/AssetWriteOff/createWriteOff', obj)
+  return this.http.post<any>(environment.apiUrl+'AssetWriteOff/createWriteOff', obj)
 }
 
 deleteAssetWriteOff(obj:any){
-  return this.http.post<any>('https://localhost:44324/api/AssetWriteOff/deleteWrittenOffAsset', obj)
+  return this.http.post<any>(environment.apiUrl+'AssetWriteOff/deleteWrittenOffAsset', obj)
 }
 
 readAssetWriteOff(): Observable<AssetWriteOff[]> {
-  return this.http.get<AssetWriteOff[]>('https://localhost:44324/api/AssetWriteOff/getAssetWriteOff')
+  return this.http.get<AssetWriteOff[]>(environment.apiUrl+'AssetWriteOff/getAssetWriteOff')
  }
 
 searchAssetWriteOff(value:string){
-  return this.http.get<any>('https://localhost:44324/api/AssetWriteOff/searchAssetWriteOff?search='+value)
+  return this.http.get<any>(environment.apiUrl+'AssetWriteOff/searchAssetWriteOff?search='+value)
 }
 
 //Asset Trails 
 readAssetTrails(): Observable<AssetTrail[]> {
-  return this.http.get<AssetTrail[]>('https://localhost:44324/api/Asset/getAssetTrails')
+  return this.http.get<AssetTrail[]>(environment.apiUrl+'Asset/getAssetTrails')
  }
 
  searchAssetTrails(value:string){
-  return this.http.get<any>('https://localhost:44324/api/Asset/searchAssetTrails?search='+value)
+  return this.http.get<any>(environment.apiUrl+'Asset/searchAssetTrails?search='+value)
 }
 
 //
@@ -1291,19 +1292,19 @@ readAssetTrails(): Observable<AssetTrail[]> {
 selectedTimeslot: TimeslotVM | undefined;
 
 readTimeslots(): Observable<Timeslot[]> {
-  return this.http.get<Timeslot[]>('https://localhost:44324/api/Timeslot/getTimeslot')
+  return this.http.get<Timeslot[]>(environment.apiUrl+'Timeslot/getTimeslot')
  }
 
  createTimeslot(obj:any){
-  return this.http.post<any>('https://localhost:44324/api/Timeslot/createTimeSlot', obj)
+  return this.http.post<any>(environment.apiUrl+'Timeslot/createTimeSlot', obj)
 }
 
 updateTimeslot(obj:any){
-  return this.http.post<any>('https://localhost:44324/api/Timeslot/updateTimeSlot', obj)
+  return this.http.put<any>(environment.apiUrl+'Timeslot/updateTimeSlot', obj)
 }
 
 deleteTimeslot(obj:any): Observable<any[]> {
-  return this.http.post<any>('https://localhost:44324/api/Timeslot/deleteTimeSlot',obj)
+  return this.http.post<any>(environment.apiUrl+'Timeslot/deleteTimeSlot',obj)
   }
 
    //Get Selected AssetRepair so it can be either updated or deleted
@@ -1327,26 +1328,26 @@ deleteTimeslot(obj:any): Observable<any[]> {
 
 //TimeSlotDates
 readTimeslotDates(): Observable<TimeSlotDate[]> {
-  return this.http.get<TimeSlotDate[]>('https://localhost:44324/api/Timeslot/getTimeSlotDate')
+  return this.http.get<TimeSlotDate[]>(environment.apiUrl+'Timeslot/getTimeSlotDate')
  }
 //
 
 //DeliveryTimeslots
 readDeliveryTimeslots(): Observable<DeliveryTimeslot[]> {
-  return this.http.get<DeliveryTimeslot[]>('https://localhost:44324/api/Timeslot/getDeliveryTimeslot')
+  return this.http.get<DeliveryTimeslot[]>(environment.apiUrl+'Timeslot/getDeliveryTimeslot')
  }
 //
   
 //Returns Order Deliveries from API
 readOrderDeliveries(): Observable<OrderDelivery[]> {
-return this.http.get<OrderDelivery[]>('https://localhost:44324/api/Delivery/getOrderDeliveries')
+return this.http.get<OrderDelivery[]>(environment.apiUrl+'Delivery/getOrderDeliveries')
 }
 //
 
 
 //Creates PDF for Specific Client Order
 createDeliveredOrderPDF(obj:any){
-  return this.http.post<any>('https://localhost:44324/api/pdfcreator/createDeliveredPDF',obj, {responseType: 'blob' as 'json'})
+  return this.http.post<any>(environment.apiUrl+'pdfcreator/createDeliveredPDF',obj, {responseType: 'blob' as 'json'})
  }
 
 }

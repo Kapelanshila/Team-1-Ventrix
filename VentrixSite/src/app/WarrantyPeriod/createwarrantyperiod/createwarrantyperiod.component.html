@@ -6,12 +6,17 @@
             <hr>
             <br>
             <div class="form-group">
-                <label>Warranty period </label>
-                <!-- Error messages -->
+                <label>Value
+                    <span>
+                        <i class="fa fa-info-circle" title="Enter a warranty period value to be used when adding assets."></i>
+                    </span>
+                </label>
                 <div *ngIf="submitted">
-                    <span *ngIf="f['Description'].errors?.['required'] || f['Description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a warranty period</span>
+                    <span *ngIf="f['value'].errors?.['required'] || f['value'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a value</span>
                 </div>
-                <input type="text" class="form-control" formControlName="Description" placeholder="Enter a warranty period" required>
+                <div style="padding-bottom: 6%;">
+                    <input type = "number" formControlName="value" min="1">
+                </div>
             </div>
 
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">

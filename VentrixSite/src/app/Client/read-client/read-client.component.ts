@@ -47,7 +47,6 @@ export class ReadClientComponent implements OnInit {
   addClient()
   {
     this.router.navigate(['/create-client']);
-  
   }
 
   // Copy

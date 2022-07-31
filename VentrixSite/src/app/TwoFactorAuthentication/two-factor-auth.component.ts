@@ -5,9 +5,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { NgOtpInputComponent, NgOtpInputConfig } from 'ng-otp-input';
 import Swal from 'sweetalert2';
-import { Register } from '../shared/Register';
+import { Account } from '../shared/Account';
 import { OtpTimer } from '../shared/OtpTimer';
 import { Mail } from '../shared/Mail';
+import { PathService } from '../services/path-service.service';
+import { HttpBackend } from '@angular/common/http';
 
 @Component({
   selector: 'app-two-factor-auth',
@@ -19,13 +21,14 @@ timerinvalid = false;
 submitted = false;
 otp: string | undefined;
 number!: number;
-account!:Register;
+account!:Account;
 otptimer!: OtpTimer[];
 timer!: Number;
 timeLeft!: number;
 interval: any| undefined;
 expired = false;
 mail!: Mail;
+check: string | undefined;
 
 
 config :NgOtpInputConfig = {
@@ -33,7 +36,7 @@ config :NgOtpInputConfig = {
   length: 5,
 };
 
-constructor( private router: Router,private ventrixdbservice:VentrixDBServiceService)  
+constructor( private router: Router,private ventrixdbservice:VentrixDBServiceService , private pathService: PathService) 
 { 
 
 }
@@ -50,7 +53,6 @@ ngOnInit(): void
     OTP: this.number.toString(),
     email: this.account.emailAddress.toString()
   }
-  console.log(this.mail)
   this.ventrixdbservice.sendOTP(this.mail).subscribe();
 
   this.ventrixdbservice.readOtpTimer()
@@ -70,6 +72,8 @@ ngOnInit(): void
         },1000)
         
       })
+
+      this.check = this.pathService.getRequest();
 }
 
 onOtpChange(otp: string | undefined) {
@@ -86,34 +90,14 @@ resend()
     allowOutsideClick: false,
     allowEscapeKey: false
   })
-  this.account = this.ventrixdbservice.getAccount()!;
-
-  
-  this.ventrixdbservice.readOtpTimer()
-      .subscribe(response => {
-        this.otptimer = response
-        this.timer = this.otptimer[0].time
-        this.timeLeft = Number(this.otptimer[0].time)
-       
-        this.interval = setInterval(() => {
-          if(this.timeLeft > 0) {
-            this.timeLeft--;
-          }
-          if(this.timeLeft == 0)
-          {
-            this.timerinvalid = true
-          }
-        },1000)
-        
-      })
-
-  this.mail = 
-  {
-    OTP: this.number.toString(),
-    email: this.account.emailAddress.toString()
-  }
-  console.log(this.mail)
-  this.ventrixdbservice.sendOTP(this.mail).subscribe();
+  .then((result) => {
+    if (result.isConfirmed) {
+      this.account = this.ventrixdbservice.getAccount()!;
+      this.router.navigate(['/2FA']).then(() => {
+        window.location.reload();
+      });
+    }
+  })  
 }
 
 register()
@@ -158,6 +142,9 @@ register()
       }
       else
       {
+        //If the user requests to register 
+       if (this.pathService.getPath() == '/register')
+       {
         this.ventrixdbservice.Register(this.account).subscribe();
         Swal.fire({
           icon: 'success',
@@ -173,10 +160,81 @@ register()
             });
           }
         })  
+       }
+      
+      //If the user requests to update profile
+       if (this.pathService.getPath() == '/profile' && this.check == undefined)
+       {
+        this.ventrixdbservice.updateEmployee(this.account).subscribe();
+        Swal.fire({
+          icon: 'success',
+          title: 'Account Successfully Updated',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/profile']).then(() => {
+              window.location.reload();
+            });
+          }
+        })  
+       }
+
+      //If the user requests to update password
+       if (this.check == "checkpassword")
+       {
+        this.ventrixdbservice.resetPassword(this.account).subscribe();
+        this.pathService.clearRequest();
+        Swal.fire({
+          icon: 'success',
+          title: 'Password Successfully Updated',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/login']).then(() => {
+              window.location.reload();
+            });
+          }
+        })  
+       }
+   
+      //If the user requests to update password
+      if (this.check == "resetEmail")
+      {
+       this.ventrixdbservice.resetPassword(this.account).subscribe();
+       this.ventrixdbservice.updateEmployee(this.account).subscribe();
+       this.pathService.clearRequest();
+       Swal.fire({
+         icon: 'success',
+         title: 'Password and Email Successfully Updated',
+         confirmButtonText: 'OK',
+         confirmButtonColor: '#077bff',
+         allowOutsideClick: false,
+         allowEscapeKey: false
+       }).then((result) => {
+         if (result.isConfirmed) {
+           this.router.navigate(['/login']).then(() => {
+             window.location.reload();
+           });
+         }
+       })  
+      }
+
       }
     }
   }
+  }
 
+  back()
+  {
+    this.router.navigate(['/'+this.pathService.getPath()]).then(() => {
+      window.location.reload();
+    });
   }
 
 }

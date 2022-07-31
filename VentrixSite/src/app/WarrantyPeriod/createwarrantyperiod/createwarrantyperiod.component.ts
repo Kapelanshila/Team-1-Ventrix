@@ -21,7 +21,7 @@ export class CreatewarrantyperiodComponent implements OnInit {
   {
       //Additional Validation can be added here
       this.warrantyPeriodForm = fbuilder.group({
-      Description: new FormControl ('',[Validators.required, this.noWhitespaceValidator]),
+      value: new FormControl ('',[Validators.required, this.noWhitespaceValidator]),
     });
   }
 
@@ -40,7 +40,7 @@ export class CreatewarrantyperiodComponent implements OnInit {
     this.submitted = true;
     //Check if period does not already exsist
     this.warrantyPeriods.forEach(element => {
-      if (element.description == this.warrantyPeriodForm.get('Description')?.value)   
+      if (element.value == this.warrantyPeriodForm.get('value')?.value)   
       {
         this.find = true;
         Swal.fire({
@@ -59,6 +59,25 @@ export class CreatewarrantyperiodComponent implements OnInit {
         })  
       }
     });
+
+    if (this.warrantyPeriodForm.get('value')?.value == 0)   
+      {
+        this.find = true;
+        Swal.fire({
+          icon: 'error',
+          title: 'The warranty period cannot be 0.',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+              this.router.navigate(['/create-warranty-period']).then(() => {
+              window.location.reload();
+            });
+          }
+        })  
+      }
 
     if (this.warrantyPeriodForm.valid && this.find == false) {
       console.log(this.warrantyPeriodForm.value);

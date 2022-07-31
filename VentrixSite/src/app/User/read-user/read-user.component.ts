@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 //Make sure swal is imported
 import Swal from 'sweetalert2';
 import { UserVM } from 'src/app/shared/UserVM';
+import { Employee } from 'src/app/shared/Employee';
 
 @Component({
   selector: 'app-read-user',
@@ -25,6 +26,9 @@ export class ReadUserComponent implements OnInit {
   query:string = '';
   added:boolean = false;
   deleteuser:User|undefined;
+  employee!:Employee;
+  user:any;
+  role:any;
 
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
   { 
@@ -46,72 +50,55 @@ export class ReadUserComponent implements OnInit {
         this.roles = response;
 
         this.ventrixdbservice.readEmployee()
-          .subscribe(response => {
-            this.employees = response;
-              //Possibility no employees exist on the system yet 
-              //So an if statement is used to check for this if this was ommited if-else statement would be undefined 
-              if (this.employees.length != 0)
-              {
-                this.users.forEach(user => {   
-                  this.added = false;
-                  this.roles.forEach(role => {
-                    this.employees.forEach(employee => {
+        .subscribe(response => {
+          
+          this.users.forEach(user => {   
+            this.added = false;
+            this.user = this.users.find(x => x.userId == user.userId);
+            this.role = this.roles.find(x => x.userRoleId == this.user.userRoleId);
 
-                      if (user.userRoleId == role.userRoleId && this.employees.find((x: { userId: Number; }) => x.userId == user.userId) != undefined && this.added == false)
-                      {
-                        this.uservm = 
-                        {
-                          userId: user.userId,
-                          userRoleId: user.userRoleId,
-                          description: role.description,
-                          registered: true,
-                          hashedPassword:''
-                        }
-                        this.added = true;
-                        console.log(this.uservm)
-                      }
-                      else if (user.userRoleId == role.userRoleId && this.employees.find((x: { userId: Number; }) => x.userId == user.userId) == undefined && this.added == false)
-                      {
-                        this.uservm = 
-                        {
-                          userId: user.userId,
-                          userRoleId: user.userRoleId,
-                          description: role.description,
-                          registered: false,
-                          hashedPassword:''
-                        }
-                        this.added = true;
-                        console.log(this.uservm)
-                      }
-                    });
-                  });
-                    //Populates it in view model for it to be read in the table 
+            console.log(this.role)
+              this.employees = response;
+              this.employee = this.employees.find(x => x.userId == user.userId);
+
+              this.roles.forEach(role => {
+                  if (user.userRoleId == role.userRoleId && this.employee.idnumber != undefined && this.added == false && this.role.description != 'Master')
+                  {
+                    this.uservm = 
+                    {
+                      userId: user.userId,
+                      userRoleId: user.userRoleId,
+                      description: role.description,
+                      name: this.employee.name,
+                      surname: this.employee.surname,
+                      emailAddress: this.employee.emailAddress,
+                      registered: true,
+                      hashedPassword:''
+                    }
+                    this.added = true;
                     this.userroles.push(this.uservm);
-                });
-              }
-              else 
-              {
-                this.users.forEach(user => {   
-                  this.added = false;
-                  this.roles.forEach(role => {
-                      if (user.userRoleId == role.userRoleId && user.userId)
-                      {
-                        this.uservm = 
-                        {
-                          userId: user.userId,
-                          userRoleId: user.userRoleId,
-                          description: role.description,
-                          registered: false,
-                          hashedPassword:''
-                        }
-                        this.added = true;
-                      }
-                  });
-                    //Populates it in view model for it to be read in the table 
+                  }
+                  else if (user.userRoleId == role.userRoleId && this.employee.idnumber == undefined && this.added == false && this.role.description != 'Master')
+                  {
+                    this.uservm = 
+                    {
+                      userId: user.userId,
+                      userRoleId: user.userRoleId,
+                      description: role.description,
+                      name: this.employee.name,
+                      surname: this.employee.surname,
+                      emailAddress: this.employee.emailAddress,
+                      registered: false,
+                      hashedPassword:''
+                    }
+                    this.added = true;
                     this.userroles.push(this.uservm);
-                });
-              }
+                  }
+              });
+                //Populates it in view model for it to be read in the table 
+         
             });
+          })
         })
     })
   }
@@ -141,23 +128,13 @@ export class ReadUserComponent implements OnInit {
       //Sweet alerts are used as notifications
       Swal.fire({
         icon: 'warning',
-        title: 'Are you sure you want to delete this user?',
-        text: 'The user currently has a registered account!',
-        showDenyButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: `No`,
+        title: 'The user currently has a registered account!',
+        text: 'To delete this user delete them from employee',
+        confirmButtonText: 'OK',
         confirmButtonColor: '#077bff',
         allowOutsideClick: false,
         allowEscapeKey: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          console.log(selecteduser);
-          this.ventrixdbservice.deleteUser(this.deleteuser).subscribe();
-          this.router.navigate(['/read-user']).then(() => {
-          window.location.reload();
-          });
-        }
-      })  
+      }) 
     }
     else
     {
@@ -167,7 +144,6 @@ export class ReadUserComponent implements OnInit {
         title: 'Are you sure you want to delete this user?',
         showDenyButton: true,
         confirmButtonText: 'Yes',
-        denyButtonText: `No`,
         confirmButtonColor: '#077bff',
         allowOutsideClick: false,
         allowEscapeKey: false
@@ -241,8 +217,11 @@ export class ReadUserComponent implements OnInit {
                 {
                   this.users.forEach(user => {   
                     this.added = false;
+                    this.employees.forEach(element => {
+                      this.employee = this.employees.find(x => x.userId == element.userId);
+                    });
+
                     this.roles.forEach(role => {
-                      this.employees.forEach(employee => {
 
                         if (user.userRoleId == role.userRoleId && user.hashedPassword != '' && this.added == false)
                         {
@@ -251,6 +230,9 @@ export class ReadUserComponent implements OnInit {
                             userId: user.userId,
                             userRoleId: user.userRoleId,
                             description: role.description,
+                            name: this.employee.name,
+                            surname: this.employee.surname,
+                            emailAddress: this.employee.emailAddress,
                             registered: true,
                             hashedPassword:''
                           }
@@ -264,13 +246,15 @@ export class ReadUserComponent implements OnInit {
                             userId: user.userId,
                             userRoleId: user.userRoleId,
                             description: role.description,
+                            name: this.employee.name,
+                            surname: this.employee.surname,
+                            emailAddress: this.employee.emailAddress,
                             registered: false,
                             hashedPassword:''
                           }
                           this.added = true;
                           console.log(this.uservm)
                         }
-                      });
                     });
                       //Populates it in view model for it to be read in the table 
                       this.userroles.push(this.uservm);
@@ -288,6 +272,9 @@ export class ReadUserComponent implements OnInit {
                             userId: user.userId,
                             userRoleId: user.userRoleId,
                             description: role.description,
+                            name: this.employee.name,
+                            surname: this.employee.surname,
+                            emailAddress: this.employee.emailAddress,
                             registered: false,
                             hashedPassword:''
                           }

@@ -13,6 +13,12 @@ import Swal from 'sweetalert2';
 export class ReadEmployeeComponent implements OnInit {
 
   employees:any[] = [];
+  users:any[] = [];
+  roles:any[] = [];
+  role:any;
+  user:any;
+  data:Employee[] = [];
+
   p: number = 1;
   config: any;
   noOfRows = 10;
@@ -27,10 +33,33 @@ export class ReadEmployeeComponent implements OnInit {
 
   ngOnInit(): void 
   {
+    // Only employees registered are show ie. only employees with an ID number
     this.ventrixdbservice.readEmployee()
     .subscribe(response => {
-      this.employees = response;
-      console.log(this.employees)
+      this.data = response;
+
+      //For master account
+      this.ventrixdbservice.readUser()
+      .subscribe(response => {
+        this.users = response;
+
+        this.ventrixdbservice.readRole()
+        .subscribe(response => {
+          this.roles = response;
+
+
+          this.data.forEach(element => {
+            this.user = this.users.find(x => x.userId == element.userId);
+            this.role = this.roles.find(x => x.userRoleId == this.user.userRoleId);
+
+            if (element.idnumber != undefined && this.role.description != 'Master')
+            {
+              this.employees.push(element);
+            }
+          });
+        })
+  
+      })
     })
   }
 
@@ -55,6 +84,7 @@ export class ReadEmployeeComponent implements OnInit {
     Swal.fire({
       icon: 'warning',
       title: 'Are you sure you want to delete this employee?',
+      text: 'Deleting this employee will remove user information',
       showDenyButton: true,
       confirmButtonText: 'Yes',
       denyButtonText: 'No',

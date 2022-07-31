@@ -2,7 +2,11 @@
     <app-navigation></app-navigation>
     <form class="admin-form" [formGroup]="otpTimerform"><span class="reauth-email"></span>
         <div class="admin-card">
-            <h4>OTP Timer</h4>
+            <h4>OTP Timer
+                <span>
+                    <i class="fa fa-info-circle" title="Enter the amount of time which you want to give the user to enter their OTP when registering."></i>
+                </span>
+            </h4>
             <hr>
             <div *ngIf="otpTimers.length == 0">
                 <button type="button" class="btn btn-primary" (click)="createOtpTimer()"><i class="fa fa-plus"></i>Add New</button>

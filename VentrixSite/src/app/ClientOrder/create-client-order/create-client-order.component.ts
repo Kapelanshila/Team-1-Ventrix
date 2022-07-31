@@ -150,8 +150,6 @@ export class CreateClientOrderComponent implements OnInit {
         clientInvoice: this.filename
       }
    
-      this.ventrixdbservice.createClientOrder(this.order).subscribe();
-
       Swal.fire({
         icon: 'success',
         title: 'Client Order Successfully Added',
@@ -167,10 +165,6 @@ export class CreateClientOrderComponent implements OnInit {
           });
         }
       })  
-      })
-      this.router.navigate(['/read-clientorder']).then(() => {
-        window.location.reload();
-      });
     }
     })
   }
