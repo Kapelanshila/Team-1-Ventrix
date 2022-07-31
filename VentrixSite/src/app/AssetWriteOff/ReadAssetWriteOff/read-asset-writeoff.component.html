@@ -1,0 +1,71 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="container-xl">
+        <div class="table-responsive" >
+            <div class="table-wrapper" >
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>Write-Off Assets</h2>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="search-box">
+                                <i class="material-icons">&#xE8B6;</i>
+                                <input type="text" class="form-control" placeholder="Search&hellip;" (keyup.enter)="searchAsset()" [(ngModel)]="query">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="viewwriteoffs()"><i class="fa fa-eye"></i> Asset Write-Offs</button>
+                    </div>
+                    <div class="col-md-12 text-nowrap" style="padding: 1%;">
+                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;
+                            <select class="d-inline-block form-select form-select-sm" [(ngModel)]="noOfRows">
+                                    <option value="5" selected="">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>&nbsp;</label></div>
+                        </div>
+                    <div class="col-md-12">
+              </div>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Warranty Period</th>
+                            <th>Warehouse</th>
+                            <th>Manufacturer</th>
+                            <th>Condition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let assetItem of assetItems | paginate:{itemsPerPage: noOfRows, currentPage:p}">
+                        <td>{{assetItem.name}}</td>
+                        <td>{{assetItem.category}}</td>
+                        <td>{{assetItem.type}}</td>
+                        <ng-container *ngIf="assetItem.warrantyperiod == 1">
+                            <td>{{assetItem.warrantyperiod}} year</td>
+                        </ng-container>
+                        <ng-container *ngIf="assetItem.warrantyperiod != 1">
+                            <td>{{assetItem.warrantyperiod}} years</td>
+                        </ng-container>
+                        <td>{{assetItem.warehouse}}</td>
+                        <td>{{assetItem.manufacturer}}</td>
+                        <td>{{assetItem.condition}}</td>
+                        <td class = "icon-adjust">
+                            <a [routerLink]="" style="cursor: pointer;" class="write-off" title="Write-Off" data-toggle="tooltip" (click)="writeoffAsset(item)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        </td>  
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="hint-text">Showing <b> {{assetItems.length}}</b> entries</div>
+                <div class="pagination">
+                    <div id="pagination" class="custom-pagination">
+                        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                    </div>    
+                </div>		
+            </div>
+        </div>  
+    </div>   
+</div>

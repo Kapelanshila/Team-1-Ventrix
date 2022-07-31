@@ -1,0 +1,128 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="container-xl">
+        <div class="table" >
+            <div class="table-wrapper" >
+                <br>
+                <div class="table-title">
+                    <h1 style="text-align: center;">{{assetitem!.name}} Details</h1>
+              </div>	
+            </div>
+            <img [src]="image" alt="asset image" style=" width: 100%; height: 20vw; object-fit: cover;">
+            <br>
+            <br>
+            <br>
+            <div style="margin-left: 20%; margin-right: 20%;">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-12" style="padding: 0px 0px;">
+                            <div style="text-align: center;">
+                                <rg-gauge-chart
+                                [canvasWidth]="canvasWidth"
+                                [needleValue]="needleValue"
+                                [centralLabel]="centralLabel"
+                                [options]="options"
+                                [name]="name"
+                                [nameFont]="nameFont"
+                                [bottomLabel]="bottomLabel">
+                                </rg-gauge-chart>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col-lg-4  col-sm-12" style="padding: 0px 0px;">
+                        <div style="text-align: center;">
+                            <h4 style="font-weight: normal; margin-left: 12.5%;">Asset Information</h4>
+                            <br>
+                            <ul style="list-style-type:none;">
+                                <li>Manufacturer: {{assetitem!.manufacturer}}</li>
+                                <li>Type: {{assetitem!.type}}</li>
+                                <li>Category: {{assetitem!.category}}</li>
+                                <ng-container *ngIf="assetitem!.assetStatus! == 'Repairing'">
+                                    <br>
+                                    <li style="color: red; font-weight: bold; font-size: 25px;">Repairing</li>
+                                </ng-container>
+                             </ul>
+                        </div>                   
+                    </div>
+                </div>
+            </div> 
+
+            <h2 style="text-align: center; font-weight: normal;">Warranty</h2>
+            <hr>
+            <p style="text-align: center;">Summary of warranty information and duration</p>
+
+            <!-- Out of warranty -->
+            <ng-container *ngIf="daysleft <= 0">
+                <div style="text-align: center;">
+                    <circle-progress
+                    [percent]="100"
+                    [radius]="100"
+                    [outerStrokeWidth]="12"
+                    [innerStrokeWidth]="6"
+                    [outerStrokeGradient]="true"
+                    [outerStrokeGradientStopColor]="'#f50000'"
+                    [outerStrokeColor]="'#feb10b'"
+                    [innerStrokeColor]="'#330000'"
+                    [animation]="true"
+                    [animationDuration]="300"
+                    [showSubtitle]="true"
+                    [showTitle]="false"
+                    [showUnits]="false"
+                    [subtitle]="'Out of Warranty'"
+                  ></circle-progress>
+                  <br>
+                  <p>Warranty Date: {{assetitem!.warrantyDate | date}}</p>
+                  <ng-container *ngIf="assetitem!.warrantyperiod == 1">
+                    <p style="color: blue;">Duration: {{assetitem!.warrantyperiod}} year</p>
+                  </ng-container>
+                  <ng-container *ngIf="assetitem!.warrantyperiod! > 1">
+                    <p style="color: blue;">Duration: {{assetitem!.warrantyperiod}} years</p>
+                  </ng-container>
+                </div>    
+            </ng-container>
+
+             <!-- Still in warranty -->
+            <ng-container *ngIf="daysleft > 0">
+                <div style="text-align: center;">
+                    <circle-progress
+                    [percent]="percent"
+                    [radius]="100"
+                    [outerStrokeWidth]="12"
+                    [innerStrokeWidth]="6"
+                    [outerStrokeGradient]="true"
+                    [outerStrokeGradientStopColor]="'#ff00bb'"
+                    [outerStrokeColor]="'#206afe'"
+                    [innerStrokeColor]="'#4f445f'"
+                    [animation]="true"
+                    [animationDuration]="300"
+                    [showSubtitle]="true"
+                    [subtitle]="'Warranty Progress'"
+                  ></circle-progress>
+                  <br>
+                  <p>Warranty Date: {{assetitem!.warrantyDate | date}}</p>
+                  <ng-container *ngIf="assetitem!.warrantyperiod == 1">
+                    <p style="color: blue;">Duration: {{assetitem!.warrantyperiod}} year</p>
+                  </ng-container>
+                  <ng-container *ngIf="assetitem!.warrantyperiod! > 1">
+                    <p style="color: blue;">Duration: {{assetitem!.warrantyperiod}} years</p>
+                  </ng-container>
+                </div>
+            </ng-container>
+            <br>
+            <br>
+            <h2 style="text-align: center; font-weight: normal;">Asset History Location</h2>
+            <hr>
+            <div style="text-align: center;">                    
+                <p-timeline [value]="events">
+                    <ng-template pTemplate="content" let-event>
+                        <small class="p-text-secondary">&#123;&#123;event.date&#125;&#125;</small>
+                    </ng-template>
+                    <ng-template pTemplate="opposite" let-event>
+                        &#123;&#123;event.status&#125;&#125;
+                        <br>
+                        <small class="p-text-secondary">&#123;&#123;event.address&#125;&#125;</small>
+                    </ng-template>
+                </p-timeline>
+            </div>
+            <br>
+    </div>   
+</div>
