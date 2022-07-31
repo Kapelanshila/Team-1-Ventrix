@@ -1,0 +1,26 @@
+<div class="body">
+    <app-navigation></app-navigation>
+    <div class="inventory-card">
+        <form class="form-user"  [formGroup]="inventoryform" (ngSubmit)="doStockTake()"><span class="reauth-email"> </span>
+            <h4 class="card-title">Edit Quantity on Hand for {{inventoryitem!.name}}</h4>
+            <h6 style="color: blue;">Current Quantity on Hand: {{inventoryitem!.quantityOnHand}}</h6> 
+            <hr>
+            <br>
+            <label>Quantity
+                <span>
+                    <i class="fa fa-info-circle" title="Enter the actual quantity after stock take has been completed."></i>
+                </span>
+            </label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['quantity'].errors?.['required'] || f['quantity'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a Quantity</span>
+            </div>
+            <div style="padding-bottom: 6%;">
+                <input type = "number" formControlName="quantity" min="0">
+            </div>
+          
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
+            <input type="submit" class="btn btn-primary" value="Save">
+        </form>
+        <div class="text-center"></div>
+    </div>
+</div>
