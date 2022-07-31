@@ -48,8 +48,8 @@
                   
                         <td>{{inventoryItem.category.description}}</td>
                         <td>{{inventoryItem.type.description}}</td>
-                        <td>{{inventoryItem.warehouse.name}}</td>
                         <td>{{inventoryItem.supplier.supplierName}}</td>
+                        <td>{{inventoryItem.warehouse.name}}</td>
                         <td>{{inventoryItem.quantityOnHand}}</td>
                         <ng-container *ngIf="inventoryItem.selected == true && inventoryItem.added == true &&(inventoryItem.quantity <= 0 || inventoryItem.quantity > inventoryItem.quantityOnHand)">
                             <td  style="width: 15%"><input type="number"  (change)="addQuantity($event, inventoryItem)" style="height: 8%; width: 97%;  border-color: red;" value="{{inventoryItem.quantity}}" min="0"></td>
