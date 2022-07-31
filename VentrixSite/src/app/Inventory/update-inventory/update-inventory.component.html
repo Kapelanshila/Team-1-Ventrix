@@ -8,7 +8,7 @@
             <div *ngIf="submitted">
                 <span *ngIf="f['name'].errors?.['required'] || f['name'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter an inventory name</span>
             </div>
-            <input type="text" class="form-control" formControlName="name" placeholder="Enter Inventory Name" required>
+            <input maxlength="32" type="text" class="form-control" formControlName="name" placeholder="Enter Inventory Name" required (keypress)="keyPressAlphanumeric($event)">
             <br>
 
             <label>Inventory Category</label>

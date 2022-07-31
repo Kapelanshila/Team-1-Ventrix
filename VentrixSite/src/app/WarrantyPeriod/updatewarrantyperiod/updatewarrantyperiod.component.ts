@@ -24,7 +24,7 @@ export class UpdatewarrantyperiodComponent implements OnInit {
       this.warrantyPeriodForm = fbuilder.group({
       //WarrantyPeriod ID is not displayed but is neccessary for the API to update
       warrantyPeriodId: new FormControl (''),
-      description: new FormControl ('',[Validators.required, this.noWhitespaceValidator]),
+      value: new FormControl ('',[Validators.required, this.noWhitespaceValidator]),
     });
   }
  //Populate Input values
@@ -33,7 +33,7 @@ export class UpdatewarrantyperiodComponent implements OnInit {
       this.warrantyPeriod = this.ventrixdbservice.getWarrantyPeriod();
       this.warrantyPeriodForm.patchValue({
       warrantyPeriodId: this.warrantyPeriod?.warrantyPeriodId,
-      description: this.warrantyPeriod?.description
+      value: this.warrantyPeriod?.value
       })
 
       this.ventrixdbservice.clearWarrantyPeriod();
@@ -53,8 +53,8 @@ export class UpdatewarrantyperiodComponent implements OnInit {
       this.submitted = true;
     //Check if warranty-period does not already exsist
     this.warrantyPeriods.forEach(element => {
-      if (element.description == this.warrantyPeriodForm.get('description')?.value 
-  ) 
+      if (element.value == this.warrantyPeriodForm.get('value')?.value
+      && element.warrantyPeriodId != this.warrantyPeriod?.warrantyPeriodId) 
       {
         this.find = true;
         Swal.fire({
@@ -64,13 +64,7 @@ export class UpdatewarrantyperiodComponent implements OnInit {
           confirmButtonColor: '#077bff',
           allowOutsideClick: false,
           allowEscapeKey: false
-        }).then((result) => {
-          if (result.isConfirmed) {
-              this.router.navigate(['/read-warranty-period']).then(() => {
-              window.location.reload();
-            });
-          }
-        })  
+        })
       }
     });
 

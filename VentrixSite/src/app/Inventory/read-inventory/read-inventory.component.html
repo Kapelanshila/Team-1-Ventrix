@@ -50,7 +50,6 @@
                         <td>{{inventoryItem.quantityOnHand}}</td>
                         <td class = "icon-adjust">
                             <!--Add cursor pointer so that the links seem clickable -->
-                            <a [routerLink]="" style="cursor: pointer;" class="view" title="View" data-toggle="tooltip"><i class="fa fa-eye" aria-hidden="true"></i></a>
                             <a [routerLink]="" style="cursor: pointer;" class="edit" title="Edit" data-toggle="tooltip" (click)="editInventory(inventoryItem)"><i class="material-icons">&#xE254;</i></a>
                             <a [routerLink]="" style="cursor: pointer;" class="delete" title="Delete" data-toggle="tooltip" (click)="deleteInventory(inventoryItem)"><i class="material-icons">&#xE872;</i></a>
                         </td>  

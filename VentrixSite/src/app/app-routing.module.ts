@@ -21,8 +21,8 @@ import { CreateEmployeeComponent } from './Employee/create-employee/create-emplo
 import { UpdateEmployeeComponent } from './Employee/update-employee/update-employee.component';
 import { ReadEmployeeComponent } from './Employee/read-employee/read-employee.component';
 import { CreateSecurityquestionComponent } from './SecurityQuestion/create-securityquestion/create-securityquestion.component';
-import { UpdateSecurityquestionComponent } from './SecurityQuestion/update-securityquestion/update-securityquestion.component';
 import { ReadSecurityquestionComponent } from './SecurityQuestion/read-securityquestion/read-securityquestion.component';
+import { UpdateSecurityquestionComponent } from './SecurityQuestion/update-securityquestion/update-securityquestion.component';
 import { OtpTimerComponent } from './OTPTimer/otp-timer.component';
 import { LoginComponent } from './Login/login/login.component';
 import { DepreciationComponent } from './Depreciation/depreciation.component';
@@ -50,64 +50,142 @@ import { ReadAssettypeComponent } from './AssetType/read-assettype/read-assettyp
 import { UpdateAssettypeComponent } from './AssetType/update-assettype/update-assettype.component';
 import { TwoFactorAuthComponent } from './TwoFactorAuthentication/two-factor-auth.component';
 import { QuestionComponent } from './Question/question.component';
-// import { CreateAssetComponent } from './Assets/create-asset/create-asset.component';
-// import { ReadAssetComponent } from './Assets/read-asset/read-asset.component';
-// import { UpdateAssetComponent } from './Assets/update-asset/update-asset.component';
+import { UpdateProfileComponent } from './UpdateProfile/update-profile.component';
+import { CreateSupplierOrderComponent } from './SupplierOrder/create-supplier-order/create-supplier-order.component';
+import { ReadSupplierOrderComponent } from './SupplierOrder/read-supplier-order/read-supplier-order.component';
+import { UpdateSupplierOrderComponent } from './SupplierOrder/update-supplier-order/update-supplier-order.component';
+import { CreateClientOrderComponent } from './ClientOrder/create-client-order/create-client-order.component';
+import { ReadClientOrderComponent } from './ClientOrder/read-client-order/read-client-order.component';
+import { UpdateClientOrderComponent } from './ClientOrder/update-client-order/update-client-order.component';
+import { ReadClientOrderlineComponent } from './ClientOrderLine/ReadClientOrderLine/read-client-orderline.component';
+import { UpdateClientOrderlineComponent } from './ClientOrderLine/UpdateClientOrderLine/update-client-orderline.component';
+import { ReadSupplierOrderlineComponent } from './SupplierOrderLine/ReadSupplierOrderLine/read-supplier-orderline.component';
+import { UpdateSupplierOrderlineComponent } from './SupplierOrderLine/UpdateSupplierOrderLine/update-supplier-orderline.component';
+import { WriteOffInventoryComponent } from './WriteOffInventory/write-off-inventory.component';
+import { WriteOffComponent } from './WriteOffInventory/WriteOff/write-off.component';
+import { ViewWriteOffsComponent } from './WriteOffInventory/ViewWriteOffs/view-write-offs.component';
+import { ReadInventoryStocktakeComponent } from './StockTake/Inventory/ReadInventoryStockTake/read-inventory-stocktake.component';
+import { CreateInventoryStocktakeComponent } from './StockTake/Inventory/CreateInventoryStockTake/create-inventory-stocktake.component';
+import { CreateAssetComponent } from './Assets/create-asset/create-asset.component';
+import { ReadAssetComponent } from './Assets/read-asset/read-asset.component';
+import { UpdateAssetComponent } from './Assets/update-asset/update-asset.component';
+import { ViewAssetComponent } from './Assets/view-asset/view-asset.component';
+import { AssetRepairComponent } from './AssetRepair/asset-repair.component';
+import { CreateAssetRepairComponent } from './AssetRepair/CreateAssetRepair/create-asset-repair.component';
+import { ReadAssetRepairComponent } from './AssetRepair/ReadAssetRepair/read-asset-repair.component';
+import { UpdateAssetRepairComponent } from './AssetRepair/UpdateAssetRepair/update-asset-repair.component';
+import { RevertRepairComponent } from './RevertRepair/revert-repair.component';
+import { ReadAssignedAssetComponent } from './AssignedAsset/ReadAssignedAsset/read-assigned-asset.component';
+import { UndoAssignedAssetComponent } from './AssignedAsset/UndoAssignedAsset/undo-assigned-asset.component';
+import { ReadCheckoutComponent } from './CheckOut/ReadCheckOut/read-checkout.component';
+import { ViewCheckoutsComponent } from './CheckOut/ViewCheckOut/view-checkouts.component';
+import { ReadCheckinComponent } from './CheckIn/ReadCheckIn/read-checkin.component';
+import { ViewCheckinComponent } from './CheckIn/ViewCheckIn/view-checkin.component';
+import { ReadAssetWriteoffComponent } from './AssetWriteOff/ReadAssetWriteOff/read-asset-writeoff.component';
+import { ViewAssetWriteoffComponent } from './AssetWriteOff/ViewAssetWriteOff/view-asset-writeoff.component';
+import { CreateAssetWriteoffComponent } from './AssetWriteOff/CreateAssetWriteOff/create-asset-writeoff.component';
+import { ReadAssettrailComponent } from './AssetTrails/ReadAssetTrail/read-assettrail.component';
+import { TimeslotComponent } from './Timeslot/timeslot.component';
+import { CreateTimeslotComponent } from './Timeslot/CreateTimeslot/create-timeslot.component';
+import { ReadTimeslotComponent } from './Timeslot/ReadTimeslot/read-timeslot.component';
+import { UpdateTimeslotComponent } from './Timeslot/UpdateTimeslot/update-timeslot.component';
+import { CompletedOrdersComponent } from './ClientOrder/completed-orders/completed-orders.component';
+import { AdminAuthGuard } from './_helpers/admin.auth.guard';
+import { InventoryAuthGuard } from './_helpers/inventory.auth.guard';
+import { AssetAuthGuard } from './_helpers/asset.auth.guard';
+import { DriverAuthGuard } from './_helpers/driver.auth.guard';
+import { GeneralAuthGuard } from './_helpers/general.auth.guard';
 
 const routes: Routes = [{ path: 'app', component: AppComponent },
-{ path: 'create-client', component: CreateClientComponent },
-{ path: 'read-client', component: ReadClientComponent },
-{ path: 'update-client', component: ClientUpdateComponent },
-{ path: 'create-assetcategory', component: CreateAssetcategoryComponent },
-{ path: 'read-assetcategory', component: ReadAssetcategoryComponent },
-{ path: 'update-assetcategory', component: UpdateAssetcategoryComponent },
-{ path: 'create-inventorycategory', component: CreateInventorycategoryComponent },
-{ path: 'read-inventorycategory', component: ReadInventorycategoryComponent },
-{ path: 'update-inventorycategory', component: UpdateInventorycategoryComponent },
-{ path: 'create-employee', component: CreateEmployeeComponent},
-{ path: 'update-employee', component: UpdateEmployeeComponent},
-{ path: 'read-employee', component: ReadEmployeeComponent},
-{ path: 'otp-timer', component: OtpTimerComponent},
-{ path: 'dashboard', component: DashboardComponent },
-{ path: 'create-supplier', component: CreateSupplierComponent },
-{ path: 'update-supplier', component: UpdateSupplierComponent },
-{ path: 'create-user', component: CreateUserComponent },
-{ path: 'update-user', component: UpdateUserComponent },
-{ path: 'read-user', component: ReadUserComponent },
-{ path: 'read-supplier', component: ReadSupplierComponent },
-{ path: 'create-securityquestion', component: CreateSecurityquestionComponent },
-{ path: 'read-securityquestion', component: ReadSecurityquestionComponent },
-{ path: 'update-securityquestion', component: UpdateSecurityquestionComponent },
-{ path: 'create-warehouse', component: CreateWarehouseComponent },
-{ path: 'read-warehouse', component: ReadWarehouseComponent },
-{ path: 'update-warehouse', component: UpdateWarehouseComponent },
-{ path: 'create-warranty-period', component: CreatewarrantyperiodComponent },
-{ path: 'read-warranty-period', component: ReadwarrantyperiodComponent},
-{ path: 'update-warranty-period', component: UpdatewarrantyperiodComponent },
+{ path: 'create-client', component: CreateClientComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'read-client', component: ReadClientComponent},
+{ path: 'update-client', component: ClientUpdateComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'create-assetcategory', component: CreateAssetcategoryComponent , canActivate: [AssetAuthGuard]  },
+{ path: 'read-assetcategory', component: ReadAssetcategoryComponent, canActivate: [AssetAuthGuard]  },
+{ path: 'update-assetcategory', component: UpdateAssetcategoryComponent , canActivate: [AssetAuthGuard]  },
+{ path: 'create-inventorycategory', component: CreateInventorycategoryComponent , canActivate: [InventoryAuthGuard]  },
+{ path: 'read-inventorycategory', component: ReadInventorycategoryComponent , canActivate: [InventoryAuthGuard]  },
+{ path: 'update-inventorycategory', component: UpdateInventorycategoryComponent , canActivate: [InventoryAuthGuard]  },
+{ path: 'create-employee', component: CreateEmployeeComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'update-employee', component: UpdateEmployeeComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'read-employee', component: ReadEmployeeComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'otp-timer', component: OtpTimerComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'create-supplier', component: CreateSupplierComponent , canActivate: [AdminAuthGuard]  },
+{ path: 'update-supplier', component: UpdateSupplierComponent , canActivate: [AdminAuthGuard]  },
+{ path: 'create-user', component: CreateUserComponent , canActivate: [AdminAuthGuard]  },
+{ path: 'update-user', component: UpdateUserComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'read-user', component: ReadUserComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'read-supplier', component: ReadSupplierComponent , canActivate: [AdminAuthGuard]  },
+{ path: 'create-securityquestion', component: CreateSecurityquestionComponent , canActivate: [AdminAuthGuard]  },
+{ path: 'read-securityquestion', component: ReadSecurityquestionComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'update-securityquestion', component: UpdateSecurityquestionComponent , canActivate: [AdminAuthGuard]  },
+{ path: 'create-warehouse', component: CreateWarehouseComponent , canActivate: [AdminAuthGuard]  },
+{ path: 'read-warehouse', component: ReadWarehouseComponent , canActivate: [AdminAuthGuard]  },
+{ path: 'update-warehouse', component: UpdateWarehouseComponent , canActivate: [AdminAuthGuard]  },
+{ path: 'create-warranty-period', component: CreatewarrantyperiodComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'read-warranty-period', component: ReadwarrantyperiodComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'update-warranty-period', component: UpdatewarrantyperiodComponent , canActivate: [AdminAuthGuard]  },
 { path: 'dashboard', component: DashboardComponent },
 { path: 'login', component: LoginComponent },
-{ path: 'depreciation', component: DepreciationComponent },
-{ path: 'create-writeoffreason', component: CreateWriteoffreasonComponent},
-{ path: 'read-writeoffreason', component: ReadWriteoffreasonComponent},
-{ path: 'update-writeoffreason', component: UpdateWriteoffreasonComponent},
+{ path: 'depreciation', component: DepreciationComponent , canActivate: [AdminAuthGuard]  },
+{ path: 'create-writeoffreason', component: CreateWriteoffreasonComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'read-writeoffreason', component: ReadWriteoffreasonComponent, canActivate: [AdminAuthGuard]  },
+{ path: 'update-writeoffreason', component: UpdateWriteoffreasonComponent, canActivate: [AdminAuthGuard]  },
 {path: 'register', component:RegisterComponent},
-{path: 'read-inventorytype', component: ReadInventoryTypeComponent},
-{path: 'create-inventorytype', component:CreateInventoryTypeComponent},
-{path: 'update-inventorytype', component:UpdateInventoryTypeComponent},
-{path: 'read-assettype', component: ReadAssettypeComponent},
-{path: 'create-assettype', component:CreateAssettypeComponent},
-{path: 'update-assettype', component:UpdateAssettypeComponent},
-{ path: 'read-assetrepairreason', component: ReadAssetRepairReasonComponent},
-{path: 'create-assetrepairreason', component:CreateAssetRepairReasonComponent},
-{path: 'update-assetrepairreason', component:UpdateAssetRepairReasonComponent},
-{path: 'create-inventory', component:CreateInventoryComponent},
-{path: 'read-inventory', component:ReadInventoryComponent},
-{path: 'update-inventory', component:UpdateInventoryComponent},
+{path: 'read-inventorytype', component: ReadInventoryTypeComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'create-inventorytype', component:CreateInventoryTypeComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'update-inventorytype', component:UpdateInventoryTypeComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'read-assettype', component: ReadAssettypeComponent, canActivate: [AssetAuthGuard]  },
+{path: 'create-assettype', component:CreateAssettypeComponent, canActivate: [AssetAuthGuard]  },
+{path: 'update-assettype', component:UpdateAssettypeComponent, canActivate: [AssetAuthGuard]  },
+{ path: 'read-assetrepairreason', component: ReadAssetRepairReasonComponent, canActivate: [AdminAuthGuard]  },
+{path: 'create-assetrepairreason', component:CreateAssetRepairReasonComponent, canActivate: [AdminAuthGuard]  },
+{path: 'update-assetrepairreason', component:UpdateAssetRepairReasonComponent, canActivate: [AdminAuthGuard]  },
+{path: 'create-inventory', component:CreateInventoryComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'read-inventory', component:ReadInventoryComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'update-inventory', component:UpdateInventoryComponent, canActivate: [InventoryAuthGuard]  },
 {path: '2FA', component:TwoFactorAuthComponent},
 {path: 'question', component:QuestionComponent},
-// {path: 'create-asset', component:CreateAssetComponent},
-// {path: 'read-asset', component:ReadAssetComponent},
-// {path: 'update-asset', component:UpdateAssetComponent},
+{path: 'profile', component:UpdateProfileComponent, canActivate: [GeneralAuthGuard]  },
+{path: 'create-supplierorder', component:CreateSupplierOrderComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'read-supplierorder', component:ReadSupplierOrderComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'update-supplierorder', component:UpdateSupplierOrderComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'create-clientorder', component:CreateClientOrderComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'read-clientorder', component:ReadClientOrderComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'update-clientorder', component:UpdateClientOrderComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'read-clientorderline', component:ReadClientOrderlineComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'update-clientorderline', component:UpdateClientOrderlineComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'read-supplierorderline', component:ReadSupplierOrderlineComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'update-supplierorderline', component:UpdateSupplierOrderlineComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'write-off-inventory', component:WriteOffInventoryComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'write-off-item', component:WriteOffComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'view-write-offs', component:ViewWriteOffsComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'create-inventory-stocktake', component:CreateInventoryStocktakeComponent},
+{path: 'read-inventory-stocktake', component:ReadInventoryStocktakeComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'create-asset', component:CreateAssetComponent, canActivate: [AssetAuthGuard]  },
+{path: 'read-asset', component:ReadAssetComponent, canActivate: [AssetAuthGuard]  },
+{path: 'update-asset', component:UpdateAssetComponent, canActivate: [AssetAuthGuard]  },
+{path: 'view-asset', component:ViewAssetComponent, canActivate: [AssetAuthGuard]  },
+{path: 'asset-repair', component:AssetRepairComponent, canActivate: [AssetAuthGuard]  },
+{path: 'create-asset-repair', component:CreateAssetRepairComponent, canActivate: [AssetAuthGuard]  },
+{path: 'read-asset-repair', component:ReadAssetRepairComponent, canActivate: [AssetAuthGuard]  },
+{path: 'update-asset-repair', component:UpdateAssetRepairComponent, canActivate: [AssetAuthGuard]  },
+{path: 'revert-repair', component:RevertRepairComponent, canActivate: [AssetAuthGuard]  },
+{path: 'read-assigned-asset', component:ReadAssignedAssetComponent, canActivate: [AssetAuthGuard]  },
+{path: 'undo-assigned-asset', component:UndoAssignedAssetComponent, canActivate: [AssetAuthGuard]  },
+{path: 'read-checkout', component:ReadCheckoutComponent, canActivate: [AssetAuthGuard]  },
+{path: 'view-checkout', component:ViewCheckoutsComponent, canActivate: [AssetAuthGuard]  },
+{path: 'read-checkin', component:ReadCheckinComponent, canActivate: [AssetAuthGuard]  },
+{path: 'view-checkin', component:ViewCheckinComponent, canActivate: [AssetAuthGuard]  },
+{path: 'read-asset-writeoff', component:ReadAssetWriteoffComponent, canActivate: [AssetAuthGuard]  },
+{path: 'create-asset-writeoff', component:CreateAssetWriteoffComponent, canActivate: [AssetAuthGuard]  },
+{path: 'view-asset-writeoff', component:ViewAssetWriteoffComponent, canActivate: [AssetAuthGuard]  },
+{path: 'read-asset-trail', component:ReadAssettrailComponent, canActivate: [AssetAuthGuard]  },
+{path: 'create-timeslot', component:CreateTimeslotComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'read-timeslot', component:ReadTimeslotComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'update-timeslot', component:UpdateTimeslotComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'timeslot', component:TimeslotComponent, canActivate: [InventoryAuthGuard]  },
+{path: 'completed-orders', component:CompletedOrdersComponent, canActivate: [DriverAuthGuard]  },
 {path: '', redirectTo: 'login', pathMatch: 'full' }];
 
 @NgModule({

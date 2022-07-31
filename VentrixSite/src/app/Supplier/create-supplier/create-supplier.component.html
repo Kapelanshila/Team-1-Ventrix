@@ -8,45 +8,65 @@
             <hr>
             <br>
             <div class="form-group">
-                <label>Supplier Name</label>
+                <label>Supplier Name
+                    <span>
+                        <i class="fa fa-info-circle" title="Enter the name of the supplier."></i>
+                    </span>
+                </label>
                 <div *ngIf="submitted">
                     <span *ngIf="f['supplierName'].errors?.['required'] || f['supplierName'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a supplier name</span>
                 </div>
-                <input type="text" class="form-control" formControlName="supplierName" placeholder="Enter Supplier Name" required>
+                <input maxlength="32" type="text" class="form-control" formControlName="supplierName" placeholder="Enter Supplier Name" required (keypress)="keyPressAlphabet($event)">
             </div>
             <div class="form-group">
-                <label>Contact Person Surname</label>
+                <label>Contact Person Surname
+                    <span>
+                        <i class="fa fa-info-circle" title="Enter the surname of the contact person for the supplier."></i>
+                    </span>
+                </label>
                 <div *ngIf="submitted">
                     <span *ngIf="f['contactPersonName'].errors?.['required'] || f['contactPersonName'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a contact person surname</span>
                 </div>
-                <input type="text" class="form-control" formControlName="contactPersonName" placeholder="Enter Contact Person Surname" required>
+                <input maxlength="32" type="text" class="form-control" formControlName="contactPersonName" placeholder="Enter Contact Person Surname" required (keypress)="keyPressAlphabet($event)">
             </div>
             <div class="form-group">     
-                <label>Contact Number</label>
+                <label>Contact Number
+                    <span>
+                        <i class="fa fa-info-circle" title="Enter the cellphone number for the contact person for the supplier."></i>
+                    </span>
+                </label>
                 <div *ngIf="submitted">
                     <span *ngIf="f['contactPersonNumber'].errors?.['required'] || f['workAddress'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a contact number</span>
                 </div>
                 <div>
                     <span *ngIf="f['contactPersonNumber'].invalid && (f['contactPersonNumber'].touched || f['contactPersonNumber'].dirty)" class="text-danger" >Please enter valid contact number</span>
                 </div>
-                <input type="text" class="form-control" formControlName="contactPersonNumber" placeholder="Enter Client Contact Number" required (keypress)="keyPressNumbers($event)">
+                <input maxlength="15" type="text" class="form-control" formControlName="contactPersonNumber" placeholder="Enter Client Contact Number" required (keypress)="keyPressNumbers($event)">
             </div>	
             <div class="form-group">
-                <label>Work Address</label>
+                <label>Work Address
+                    <span>
+                        <i class="fa fa-info-circle" title="Enter the physical address for the supplier."></i>
+                    </span>
+                </label>
                 <div *ngIf="submitted">
                     <span *ngIf="f['workAddress'].errors?.['required'] || f['workAddress'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a work address</span>
                 </div>
-                <textarea class="form-control" formControlName = "workAddress" placeholder="Enter Supplier Work Address" required (keypress)="keyPressAlphanumeric($event)"></textarea>
+                <textarea maxlength="64" class="form-control" formControlName = "workAddress" placeholder="Enter Supplier Work Address" required (keypress)="keyPressAlphanumeric($event)"></textarea>
             </div>	
             <div class="form-group">
-                <label>Supplier Email Address</label>
+                <label>Supplier Email Address
+                    <span>
+                        <i class="fa fa-info-circle" title="Enter the email address for the supplier."></i>
+                    </span>
+                </label>
                       <div *ngIf="submitted">
                         <span *ngIf="f['emailAddress'].errors?.['required'] || f['emailAddress'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an email</span>
                     </div>
                     <div>
                         <span *ngIf="f['emailAddress'].errors?.['email'] && (f['emailAddress'].touched || f['emailAddress'].dirty)" class="text-danger" >Please enter a valid email address</span>
                     </div>
-                <input type="email" class="form-control" formControlName = "emailAddress" placeholder="Enter Client Email" required>
+                <input maxlength="32" type="email" class="form-control" formControlName = "emailAddress" placeholder="Enter Client Email" required>
             </div>
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
             <input type="submit" class="btn btn-primary" value="Create">

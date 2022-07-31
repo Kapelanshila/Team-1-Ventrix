@@ -26,6 +26,7 @@ export class CreateInventoryComponent implements OnInit {
   warehouses:any[] = [];
   inventories:any[] = [];
   find = false;
+  temp:any[] = [];
 
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService)
   {
@@ -48,7 +49,18 @@ export class CreateInventoryComponent implements OnInit {
 
     this.ventrixdbservice.readInventoryCategory()
     .subscribe(response => {
-      this.categories = response;
+      this.temp = response;
+
+      this.temp.forEach(value => {
+
+        this.ventrixdbservice.readInventoryType()
+        .subscribe(response => {
+            if (response.find(x => x.inventoryCategoryId == value.inventoryCategoryId) != undefined )
+            {
+              this.categories.push(this.temp.find(x => x.inventoryCategoryId == value.inventoryCategoryId));
+            }
+        })
+      });
     })
 
     this.ventrixdbservice.readInventoryType()
@@ -84,13 +96,11 @@ export class CreateInventoryComponent implements OnInit {
   addInventory()
     {
       this.submitted = true;
+      this.find = false;
     //Check if inventory item does not already exsist
     this.inventories.forEach(element => {
       if (
-      element.name == this.inventoryform.get('name')?.value && 
-      element.inventoryTypeId == this.inventoryform.get('inventoryTypeId')?.value &&
-      element.warehouseId == this.inventoryform.get('warehouseId')?.value &&
-      element.supplierId == this.inventoryform.get('supplierId')?.value)
+      element.name == this.inventoryform.get('name')?.value)
       {
         this.find = true;
         Swal.fire({
@@ -165,5 +175,29 @@ export class CreateInventoryComponent implements OnInit {
         return  null
       }
       return {'noWhitespaceValidator' : true}
+  }
+
+  // Only Alphabet & space
+  keyPressAlphabet(event: { keyCode: number; preventDefault: () => void; }) {
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z ]+$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
+
+  // Only AlphaNumeric
+  keyPressAlphanumeric(event: { keyCode: number; preventDefault: () => void; }) {
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z0-9 ]+$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
   }
 }

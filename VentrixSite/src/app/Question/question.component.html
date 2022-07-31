@@ -6,14 +6,18 @@
                 <div class="card shadow-lg o-hidden border-0 my-5" >
                     <div class="card-body p-0">
                     <div class="p-5">
-                        <h2 class="text-dark text-center">One More Thing...</h2>
+                        <h2 class="text-dark text-center">{{title}}</h2>
                         <br>
                         <div class="text-center">
                             <h5 style = " font-weight:normal;" class="text-dark mb-4">Please Select and Answer Security Questions</h5>
                         </div>
                         <hr>
                         <form class="questions" [formGroup]="questionform" (ngSubmit)="addResponse()">
-                            <label>Security Question 1</label>
+                            <label>Security Question 1
+                                <span>
+                                    <i class="fa fa-info-circle" title="Select your first security question to answer."></i>
+                                </span>
+                            </label>
                             <div *ngIf="submitted">
                                 <span *ngIf="f['question1'].errors?.['required'] || f['question1'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please select a question</span>
                             </div>   
@@ -28,7 +32,11 @@
                                 <div class="mb-3"><input class="form-control" formControlName = "answer1"  type="text"  placeholder="Enter an Answer" name="surname"></div>
                             <br>
 
-                            <label>Security Question 2</label>
+                            <label>Security Question 2
+                                <span>
+                                    <i class="fa fa-info-circle" title="Select your second security question to answer."></i>
+                                </span>
+                            </label>
                             <div *ngIf="submitted">
                                 <span *ngIf="f['question2'].errors?.['required'] || f['question2'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please select a question</span>
                             </div>   
@@ -44,7 +52,11 @@
                             <div class="mb-3"><input class="form-control" formControlName = "answer2"  type="text"  placeholder="Enter an Answer" name="surname"></div>
                             <br>
 
-                            <label>Security Question 3</label>
+                            <label>Security Question 3
+                                <span>
+                                    <i class="fa fa-info-circle" title="Select your third security question to answer."></i>
+                                </span>
+                            </label>
                             <div *ngIf="submitted">
                                 <span *ngIf="f['question3'].errors?.['required'] || f['question3'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please select a question</span>
                             </div>   
@@ -67,6 +79,6 @@
             </div>
         </div>
     </div>
-</div>
+
 <script src="assets/theme.js"></script>
 <script src="assets/bootstrap.min.js"></script>

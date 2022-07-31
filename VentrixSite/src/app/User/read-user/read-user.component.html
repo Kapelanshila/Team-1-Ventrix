@@ -30,14 +30,18 @@
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th>User ID</th>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Surname</th>
                             <th>Role</th>
                             <th>Registered</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let userrole of userroles | paginate:{itemsPerPage: noOfRows, currentPage:p}">
-                        <td>{{userrole.userId}}</td>
+                        <td>{{userrole.emailAddress}}</td>
+                        <td>{{userrole.name}}</td>
+                        <td>{{userrole.surname}}</td>
                         <td>{{userrole.description}}</td>
                         <td *ngIf = "userrole.registered == true" class="icon-adjust">
                             <i class="fa fa-check" aria-hidden="true"></i>

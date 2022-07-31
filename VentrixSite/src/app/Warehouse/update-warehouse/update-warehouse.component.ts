@@ -59,7 +59,9 @@ export class UpdateWarehouseComponent implements OnInit {
     //Check if warehouse does not already exsist
     this.warehouses.forEach(element => {
       if (element.name == this.warehouseForm.get('name')?.value 
-      && element.address == this.warehouseForm.get('address')?.value) 
+      && element.address == this.warehouseForm.get('address')?.value
+      && element.warehouseId != this.warehouse?.warehouseId) 
+
       {
         this.find = true;
         Swal.fire({
@@ -133,6 +135,18 @@ export class UpdateWarehouseComponent implements OnInit {
     var inp = String.fromCharCode(event.keyCode);
 
     if (/^[a-zA-Z0-9 ]+$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
+
+  // Only Alphabet & space
+  keyPressAlphabet(event: { keyCode: number; preventDefault: () => void; }) {
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z ]+$/.test(inp)) {
       return true;
     } else {
       event.preventDefault();

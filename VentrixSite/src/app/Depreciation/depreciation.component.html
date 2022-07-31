@@ -2,7 +2,11 @@
     <app-navigation></app-navigation>
     <form class="admin-form"  [formGroup]="depreciationform"><span class="reauth-email"></span>		
         <div class="admin-card">	
-            <h4>Depreciation</h4>
+            <h4>Depreciation
+                <span>
+                    <i class="fa fa-info-circle" title="Enter the amount by which you will depreciate all assets."></i>
+                </span>
+            </h4>
             <hr>
             <div *ngIf="depreciations.length == 0">
                 <button type="button" class="btn btn-primary" (click)="createDepreciation()"><i class="fa fa-plus"></i> Add New</button>

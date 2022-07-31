@@ -44,26 +44,18 @@ export class CreateClientComponent implements OnInit {
     //Check if client does not already exsist
     this.clients.forEach(element => {
       if (element.contactPersonName == this.clientform.get('contactPersonName')?.value 
-      && element.contactPersonSurname == this.clientform.get('contactPersonSurname')?.value && 
-      element.contactPersonNumber == this.clientform.get('contactPersonNumber')?.value && 
-      element.workAddress == this.clientform.get('workAddress')?.value && 
+      && element.contactPersonSurname == this.clientform.get('contactPersonSurname')?.value || 
       element.emailAddress == this.clientform.get('emailAddress')?.value) 
       {
         this.find = true;
         Swal.fire({
           icon: 'error',
-          title: 'Client Altready Exsists',
+          title: 'Client Already Exsists',
           confirmButtonText: 'OK',
           confirmButtonColor: '#077bff',
           allowOutsideClick: false,
           allowEscapeKey: false
-        }).then((result) => {
-          if (result.isConfirmed) {
-              this.router.navigate(['/create-client']).then(() => {
-              window.location.reload();
-            });
-          }
-        })  
+        })
       }
     });
 
@@ -141,18 +133,15 @@ export class CreateClientComponent implements OnInit {
     }
   }
 
-  allLetter(inputtxt: { value: string; })
-      { 
-      var letters = /^[A-Za-z]+$/;
-      if(inputtxt.value.match(letters))
-      {
-      alert('Input accepted');
+  // Only Alphabet & space
+  keyPressAlphabet(event: { keyCode: number; preventDefault: () => void; }) {
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z ]+$/.test(inp)) {
       return true;
-      }
-      else
-      {
-      alert('Please input alphabet characters only');
+    } else {
+      event.preventDefault();
       return false;
-      }
-      }
+    }
+  }
 }

@@ -11,7 +11,7 @@
                 <div *ngIf="submitted">
                     <span *ngIf="f['description'].errors?.['required'] || f['description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an inventory type description</span>
                 </div>
-                <input type="text" class="form-control" formControlName="description" placeholder="Enter Inventory Type description" required>
+                <input maxlength="32" type="text" class="form-control" formControlName="description" placeholder="Enter Inventory Type description" required (keypress)="keyPressAlphabet($event)">
             </div>
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
             <input type="submit" class="btn btn-primary" value="Save">

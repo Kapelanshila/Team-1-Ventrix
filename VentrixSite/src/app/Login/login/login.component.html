@@ -20,7 +20,7 @@
                                         <div *ngIf="submitted">
                                             <span *ngIf="f['emailAddress'].errors?.['required'] || f['emailAddress'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an email address</span>
                                         </div>
-                                        <div class="mb-3"><input class="form-control" formControlName = "emailAddress"  type="emailAdress" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email"></div>
+                                        <div class="mb-3"><input class="form-control" formControlName = "emailAddress"  type="emailAdress" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address" name="email"></div>
                                         <div *ngIf="submitted">
                                             <span *ngIf="f['hashedPassword'].errors?.['required'] || f['hashedPassword'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a password</span>
                                         </div>
@@ -30,8 +30,8 @@
                                         </div><button class="btn btn-primary d-block btn-user w-100" type="submit">Login</button>
                                         <hr>
                                     </form>
-                                    <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
-                                    <div class="text-center"><a class="small" href="/register">Create an Account!</a></div><img src="assets/images/Akquize.png">
+                                    <div class="text-center"><a class="small" href="javascript:void(0);" (click)="openPopup()">Forgot Password?</a></div>
+                                    <div class="text-center"><a class="small"  href="javascript:void(0);" (click)="register() ">Register your Account!</a></div><img src="assets/images/Akquize.png">
                                 </div>
                             </div>
                         </div>
@@ -40,6 +40,113 @@
             </div>
         </div>
     </div>
+
+    <!-- Select Option Modal -->
+        <div
+        class="modal"
+        tabindex="-2"
+        role="dialog"
+        [ngStyle]="{'display':displayStyle}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="margin: auto;">Reset Password</h4>
+            </div>
+            <div class="modal-body">
+                <div id="container">
+                <br>
+                <button type="button" class="btn btn-primary" (click)= "updateDetails()" >
+                Forgot Email + Password
+                </button>
+                <br>
+                <br>
+                <button type="button" class="btn btn-dark" (click)="openPasswordPopup()">
+                  Forgot Password
+                </button>
+                <br>
+                <br>
+                <button type="button" class="btn btn-danger" (click)="updatePassword()"                        
+                (click)="closePopup()">
+                    Cancel
+                </button>
+                <br>
+                <br>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div
+    class="modal"
+    tabindex="-1"
+    role="dialog"
+    [ngStyle]="{'display':pdisplayStyle}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content password">
+            <div class="modal-header">
+                <h4 class="modal-title">Reset Password</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="resetform">
+                <label>Email</label>
+                <input class="form-control" formControlName = "email"  type="text">
+                <br>
+                <label>Password</label>
+                <input class="form-control" formControlName = "hashedPassword"  type="password">
+                <app-password-strength [passwordToCheck]="resetform.value.hashedPassword" (passwordStrength)="passwordValid($event)"></app-password-strength>
+                <label>Re-enter Password</label>
+                <input class="form-control" formControlName = "password"  type="password" placeholder="Re-enter Password" name="password">
+            </form>  
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" 
+                        (click)="closePasswordPopup()">
+                Close
+                </button>
+                <button type="button" class="btn btn-primary" [disabled]="!passwordIsValid" (click)="updatePassword()">
+                    Next
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+     <!-- Reset Password Modal -->
+    <div
+    class="modal"
+    tabindex="-1"
+    role="dialog"
+    [ngStyle]="{'display':pdisplayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content password">
+        <div class="modal-header">
+            <h4 class="modal-title">Reset Password</h4>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="resetform">
+            <label>Email</label>
+            <input class="form-control" formControlName = "email"  type="text">
+            <br>
+            <label>Password</label>
+            <input class="form-control" formControlName = "hashedPassword"  type="password">
+            <app-password-strength [passwordToCheck]="resetform.value.hashedPassword" (passwordStrength)="passwordValid($event)"></app-password-strength>
+            <label>Re-enter Password</label>
+            <input class="form-control" formControlName = "password"  type="password" placeholder="Re-enter Password" name="password">
+        </form>  
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" 
+                    (click)="closePasswordPopup()">
+            Close
+            </button>
+            <button type="button" class="btn btn-primary" [disabled]="!passwordIsValid" (click)="updatePassword()">
+                Next
+            </button>
+        </div>
+    </div>
+  </div>
+  </div>
 </div>
 <script src="assets/theme.js"></script>
 <script src="assets/bootstrap.min.js"></script>

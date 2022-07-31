@@ -22,7 +22,7 @@ export class ReadAssetRepairReasonComponent implements OnInit {
   config: any; 
   noOfRows = 10;
   specifictypes:any[] = [];
-
+  assetrepairs!: any;
   //Search query 
   query:string = '';
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
@@ -64,24 +64,44 @@ export class ReadAssetRepairReasonComponent implements OnInit {
 
   //Delete inventory category Function 
   deleteassetrepairreason(selectedassetrepairreason: AssetRepairReason)
-  { 
-      //Sweet alerts are used as notifications
-      Swal.fire({
-        icon: 'warning',
-        title: 'Are you sure you want to delete this inventory type?',
-        showDenyButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: `No`,
-        confirmButtonColor: '#077bff',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.ventrixdbservice.deleteAssetRepairReason(selectedassetrepairreason).subscribe();
-          this.router.navigate(['/read-assetrepairreason']).then(() => {
-          window.location.reload();
-          });
+  {       
+    this.ventrixdbservice.readAssetRepair()
+    .subscribe(response => {
+      this.assetrepairs = response;
+
+      if (this.assetrepairs.find((x: { assetRepairReasonId: Number; }) => x.assetRepairReasonId == selectedassetrepairreason.assetRepairReasonId) == undefined)
+      {
+        //Sweet alerts are used as notifications
+        Swal.fire({
+          icon: 'warning',
+          title: 'Are you sure you want to delete this asset repair reason?',
+          showDenyButton: true,
+          confirmButtonText: 'Yes',
+          denyButtonText: `No`,
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.ventrixdbservice.deleteAssetRepairReason(selectedassetrepairreason).subscribe();
+            this.router.navigate(['/read-writeoffreason']).then(() => {
+            window.location.reload();
+            });
+          }
+        })  
         }
-      })  
+        else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'Asset Repair Reason Assoiciated to other entries',
+            showDenyButton: false,
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#077bff',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          })
+        }
+      })
   } 
 }

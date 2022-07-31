@@ -6,20 +6,28 @@
             <hr>
             <br>
             <div class="form-group">
-                <label>Name</label>
+                <label>Name
+                    <span>
+                        <i class="fa fa-info-circle" title="Enter the name of the warehouse."></i>
+                    </span>
+                </label>
                 <!-- Error messages -->
                 <div *ngIf="submitted">
                     <span *ngIf="f['name'].errors?.['required'] || f['name'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a name</span>
                 </div>
-                <input type="text" class="form-control" formControlName="name" placeholder="Enter the warehouse name" required>
+                <input maxlength="32" type="text" class="form-control" formControlName="name" placeholder="Enter the warehouse name" required (keypress)="keyPressAlphabet($event)">
             </div>
             <div class="form-group">
-                <label>Address</label>
+                <label>Address
+                    <span>
+                        <i class="fa fa-info-circle" title="Enter the physical address of the warehouse."></i>
+                    </span>
+                </label>
                    <!-- Error messages -->
                 <div *ngIf="submitted">
                     <span *ngIf="f['address'].errors?.['required'] || f['address'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an address</span>
                 </div>
-                <input type="text" class="form-control" formControlName="address" placeholder="Enter the warehouse address" required (keypress)="keyPressAlphanumeric($event)">
+                <input maxlength="50" type="text" class="form-control" formControlName="address" placeholder="Enter the warehouse address" required (keypress)="keyPressAlphanumeric($event)">
             </div>
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
             <input type="submit" class="btn btn-primary" value="Save">

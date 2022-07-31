@@ -7,11 +7,15 @@
             <hr>
             <br>
             <div class="form-group">
-                <label>Asset Repair Reason</label>
+                <label>Asset Repair Reason
+                    <span>
+                        <i class="fa fa-info-circle" title="Describe the general reason for an asset to be repaired (e.g. Water damage, Broken part)"></i>
+                    </span>
+                </label>
                 <div *ngIf="submitted">
                     <span *ngIf="f['description'].errors?.['required'] || f['description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an asset repair reason</span>
                 </div>
-                <input type="text" class="form-control" formControlName="description" placeholder="Enter Inventory Category description" required>
+                <input maxlength="64" type="text" class="form-control" formControlName="description" placeholder="Enter Asset Repair Reason description" required (keypress)="keyPressAlphabet($event)">
             </div>
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
             <input type="submit" class="btn btn-primary" value="Save">

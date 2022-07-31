@@ -5,9 +5,49 @@
             <h4 class="card-title">Add User</h4>
             <hr>
             <br>
-            <p class="form-group text-center">Select User Role:&nbsp;&nbsp;</p>
+            <div class="form-group">
+                <label>Name
+                    <span>
+                        <i class="fa fa-info-circle" title="Enter the first name of the user."></i>
+                    </span>
+                </label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['name'].errors?.['required'] || f['name'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a name of user</span>
+                </div>
+                <input maxlength="32" type="text" class="form-control" formControlName="name" placeholder="Enter Name of User" required (keypress)="keyPressAlphabet($event)">
+            </div>
+            <div class="form-group">
+                <label>Surname
+                    <span>
+                        <i class="fa fa-info-circle" title="Enter the surname of the user."></i>
+                    </span>
+                </label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['surname'].errors?.['required'] || f['surname'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please surname of user</span>
+                </div>
+                <input maxlength="32" type="text" class="form-control" formControlName="surname" placeholder="Enter Surname of User" required (keypress)="keyPressAlphabet($event)">
+            </div>
+            <div class="form-group">
+                <label>Email Address
+                    <span>
+                        <i class="fa fa-info-circle" title="Enter the email address of the user."></i>
+                    </span>
+                </label>
+                <div *ngIf="submitted">
+                    <span *ngIf="f['emailAddress'].errors?.['required'] || f['emailAddress'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter an email address of user</span>
+                </div>
+                <div>
+                    <span *ngIf="f['emailAddress'].invalid && (f['emailAddress'].touched || f['emailAddress'].dirty)" class="text-danger">Please enter a valid email address</span>
+                </div>
+                <input maxlength="32" type="email" class="form-control" formControlName = "emailAddress" placeholder="Enter Email Address of User" required>
+            </div>
+            <p class="form-group">User Role
+                <span>
+                    <i class="fa fa-info-circle" title="Select the user's role in the Ventrix system."></i>
+                </span>
+            &nbsp;&nbsp;</p>
             <div *ngIf="submitted">
-                <span *ngIf="f['userRoleId'].errors?.['required'] || f['userRoleId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select user role</span>
+                <span *ngIf="f['userRoleId'].errors?.['required'] || f['userRoleId'].errors?.['noWhitespaceValidator']" class="text-danger">Please Select a User role</span>
             </div>
             <select  class="form-control" formControlName="userRoleId">
                 <option selected=""> </option>
@@ -16,6 +56,7 @@
             <br>
             <div class="btn">
                 <input type="submit" class="btn btn-primary" value="Add User">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
             </div>
         </form>
         <div class="text-center"></div>

@@ -63,7 +63,8 @@ export class UpdateSupplierComponent implements OnInit {
       && element.contactPersonName == this.supplierform.get('contactPersonName')?.value
       && element.contactPersonNumber == this.supplierform.get('contactPersonNumber')?.value
       && element.workAddress == this.supplierform.get('workAddress')?.value
-      && element.emailAddress == this.supplierform.get('emailAddress')?.value)
+      && element.emailAddress == this.supplierform.get('emailAddress')?.value
+      && element.supplierId != this.supplier?.supplierId)
       {
         this.find = true;
         Swal.fire({
@@ -148,6 +149,18 @@ export class UpdateSupplierComponent implements OnInit {
       return false;
     } else {
       return true;
+    }
+  }
+
+  // Only Alphabet & space
+  keyPressAlphabet(event: { keyCode: number; preventDefault: () => void; }) {
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z ]+$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
     }
   }
 }

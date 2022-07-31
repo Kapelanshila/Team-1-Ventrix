@@ -51,7 +51,7 @@ export class UpdateInventorycategoryComponent implements OnInit {
     this.submitted = true;
     //Check if inventory category does not already exsist
     this.inventorycategories.forEach(element => {
-    if (element.description == this.inventorycategoryform.get('description')?.value)
+    if (element.description == this.inventorycategoryform.get('description')?.value && element.inventoryCategoryId != this.inventorycategory?.inventoryCategoryId)
     {
       this.find = true;
       Swal.fire({
@@ -109,5 +109,17 @@ export class UpdateInventorycategoryComponent implements OnInit {
         return  null
       }
       return {'noWhitespaceValidator' : true}
+  }
+
+  // Only Alphabet & space
+  keyPressAlphabet(event: { keyCode: number; preventDefault: () => void; }) {
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z ]+$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
   }
 }

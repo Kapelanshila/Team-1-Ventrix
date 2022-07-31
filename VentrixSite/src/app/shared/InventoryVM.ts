@@ -11,4 +11,5 @@ export interface InventoryVM {
     supplier:Supplier | undefined
     name:string | undefined
     quantityOnHand:number | undefined
+
 }

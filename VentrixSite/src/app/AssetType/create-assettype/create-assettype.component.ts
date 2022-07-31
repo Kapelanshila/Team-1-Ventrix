@@ -30,7 +30,7 @@ export class CreateAssettypeComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    this.ventrixdbservice.readAssetType()
+    this.ventrixdbservice.readInventoryType()
     .subscribe(response => {
       this.assettypes = response;
       console.log(this.assettypes)
@@ -42,19 +42,25 @@ addAssetType()
 {
   this.submitted = true;
   //Check if asset category does not already exsist
-  this.assettypes.forEach(element => {
-  if (element.description == this.assettypeform.get('description')?.value)
-  {
-    this.find = true;
-    Swal.fire({
-      icon: 'error',
-      title: 'Asset Type Already Exsists',
-      confirmButtonText: 'OK',
-      confirmButtonColor: '#077bff',
-      allowOutsideClick: false,
-      allowEscapeKey: false
-    }) 
-  }
+    this.assettypes.forEach(element => {
+    if (element.description == this.assettypeform.get('description')?.value) 
+    {
+      this.find = true;
+      Swal.fire({
+        icon: 'error',
+        title: 'Asset Type Already Exsists',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#077bff',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+            this.router.navigate(['/create-assettype']).then(() => {
+            window.location.reload();
+          });
+        }
+      })  
+    }
   });
 
   if (this.assettypeform.valid && this.find == false) {
@@ -112,5 +118,17 @@ public noWhitespaceValidator(someFormControl: FormControl)
     return  null
   }
   return {'noWhitespaceValidator' : true}
+}
+
+// Only Alphabet & space
+keyPressAlphabet(event: { keyCode: number; preventDefault: () => void; }) {
+  var inp = String.fromCharCode(event.keyCode);
+
+  if (/^[a-zA-Z ]+$/.test(inp)) {
+    return true;
+  } else {
+    event.preventDefault();
+    return false;
+  }
 }
 }
