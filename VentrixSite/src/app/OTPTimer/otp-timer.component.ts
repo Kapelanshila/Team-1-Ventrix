@@ -98,8 +98,8 @@ export class OtpTimerComponent implements OnInit {
      if(selectedOtpTimer.time == this.otpTimerform.get('time')?.value)
      {
        Swal.fire({
-         icon: 'error',
-         title: 'OTP Timer already exists',
+         icon: 'info',
+         title: 'No changes made',
          confirmButtonText: 'OK',
          confirmButtonColor: '#077bff',
          allowOutsideClick: false,

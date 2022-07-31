@@ -52,7 +52,7 @@ export class UpdateAssetRepairReasonComponent implements OnInit {
     this.submitted = true;
     //Check if Read Asset Repair Reason does not already exsist
     this.assetrepairreasons.forEach(element => {
-    if (element.description == this.assetrepairreasonsform.get('description')?.value)
+    if (element.description == this.assetrepairreasonsform.get('description')?.value && element.assetRepairReasonId != this.assetrepairreason.assetRepairReasonId)
     {
       this.find = true;
       Swal.fire({
@@ -116,5 +116,17 @@ export class UpdateAssetRepairReasonComponent implements OnInit {
         return  null
       }
       return {'noWhitespaceValidator' : true}
+  }
+
+  // Only Alphabet & space
+  keyPressAlphabet(event: { keyCode: number; preventDefault: () => void; }) {
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z ]+$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
   }
 }

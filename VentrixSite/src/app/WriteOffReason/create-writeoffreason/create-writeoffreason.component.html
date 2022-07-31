@@ -7,11 +7,15 @@
             <hr>
             <br>
             <div class="form-group">
-                <label>Write-Off Reason</label>
+                <label>Write-Off Reason
+                    <span>
+                        <i class="fa fa-info-circle" title="Enter a broad reason why an item would need to be written off."></i>
+                    </span>
+                </label>
                 <div *ngIf="submitted">
                     <span *ngIf="f['description'].errors?.['required'] || f['description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a write-off reason</span>
                 </div>
-                <input type="text" class="form-control" formControlName="description" placeholder="Enter write-off reason" required>
+                <input maxlength="32" type="text" class="form-control" formControlName="description" placeholder="Enter write-off reason" required (keypress)="keyPressAlphabet($event)">
             </div>
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
             <input type="submit" class="btn btn-primary" value="Save">

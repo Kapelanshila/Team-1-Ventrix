@@ -78,7 +78,7 @@ export class ReadAssetcategoryComponent implements OnInit {
       {
         //Sweet alerts are used as notifications
         Swal.fire({
-          icon: 'warning',
+          icon: 'error',
           title: 'Are you sure you want to delete this asset category?',
           showDenyButton: true,
           confirmButtonText: 'Yes',

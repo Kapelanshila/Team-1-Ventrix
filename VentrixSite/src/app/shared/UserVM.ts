@@ -4,4 +4,7 @@ export interface UserVM {
     userRoleId : Number 
     registered: boolean
     hashedPassword:string
+    name: String,
+    surname: String,
+    emailAddress:String,
 }

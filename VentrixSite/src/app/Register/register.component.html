@@ -13,7 +13,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h4 class="text-dark mb-4">Create Account</h4>
+                                        <h4 class="text-dark mb-4">Add Account Details</h4>
                                     </div>
                                     <form class="user" [formGroup]="userform" (ngSubmit)="register()">
                                         <div class="mb-3">
@@ -27,60 +27,70 @@
                                         </select>
                                         </div>
 
-                                    
-                                            <label>UserID</label>
+                                        <label>Name
+                                            <span>
+                                                <i class="fa fa-info-circle" title="This is your first or preferred name. Update if necessary."></i>
+                                            </span>
+                                        </label>
                                         <div *ngIf="submitted">
-                                            <span *ngIf="f['userId'].errors?.['required'] || f['userId'].errors?.['noWhiteSpaceValidator']" class="text-danger">Invalid User ID</span>
-                                        </div> 
-                                        <div class="mb-3"><input class="form-control" formControlName = "userId"  type="text"  placeholder="Enter User ID" name="userId"></div>
-
-
-                                        <label>Name</label>
-                                        <div *ngIf="submitted">
-                                        <span *ngIf="f['name'].errors?.['required'] || f['name'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a name</span>
+                                            <span *ngIf="f['name'].errors?.['required'] || f['name'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a name</span>
                                         </div>
-                                        <div class="mb-3"><input class="form-control" formControlName = "name"  type="text"  placeholder="Enter Name" name="name"></div>
+                                        <div class="mb-3"><input class="form-control" formControlName = "name"  type="text"  placeholder="Enter Name" name="name"  (keypress)="keyPressAlphabet($event)"></div>
 
-                           
-                                        <label>Surname</label>
+                                        <label>Surname
+                                            <span>
+                                                <i class="fa fa-info-circle" title="This is your surname. Update if necessary."></i>
+                                            </span>
+                                        </label>
 
                                         <div *ngIf="submitted">
-                                        <span *ngIf="f['surname'].errors?.['required'] || f['surname'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a surname</span>
+                                            <span *ngIf="f['surname'].errors?.['required'] || f['surname'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a surname</span>
                                         </div>
-                                        <div class="mb-3"><input class="form-control" formControlName = "surname"  type="text"  placeholder="Enter Surname" name="surname"></div>
-
+                                        <div class="mb-3"><input class="form-control" formControlName = "surname"  type="text"  placeholder="Enter Surname" name="surname"  (keypress)="keyPressAlphabet($event)"></div>
                          
-                                        <label>ID Number</label>
+                                        <label>ID Number
+                                            <span>
+                                                <i class="fa fa-info-circle" title="This is your South African ID number."></i>
+                                            </span>
+                                        </label>
 
                                         <div *ngIf="submitted">
                                             <span *ngIf="f['idNumber'].invalid && (f['idNumber'].touched || f['idNumber'].dirty || f['idNumber'].errors?.['noWhiteSpaceValidator'])" class="text-danger">Please enter a valid ID number</span>
                                         </div>
-                                        <div class="mb-3"><input class="form-control" formControlName = "idNumber"  type="text"  placeholder="Enter ID Number" name="id"></div>
-                                        
-                   
-                                        <label>Phone number</label>
-                                        <div> 
-                                            <span *ngIf="f['phoneNumber'].invalid && (f['phoneNumber'].touched || f['phoneNumber'].dirty)" class="text-danger">Please enter a valid phone number</span>
-                                        </div>
-                                        <div class="mb-3"><input class="form-control" formControlName = "phoneNumber"  type="text"  placeholder="Enter Phone Number" name="number"></div>
-                                        
-
-                           
-                                        <label>Home address</label>
-                                        <div *ngIf="submitted">
-                                            <span *ngIf="f['homeAddress'].errors?.['required'] || f['homeAddress'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a home address</span>
-                                        </div>
-                                        <div class="mb-3"><textarea class="form-control" formControlName = "homeAddress" style="resize: none;" placeholder="Enter Home Address" required></textarea></div>
-                                        
-
+                                        <div class="mb-3"><input class="form-control" formControlName = "idNumber"  type="text"  placeholder="Enter ID Number" name="id"  (keypress)="keyPressNumbers($event)"></div> 
     
-                                        <label>Email address</label>
+                                        <label>Email address
+                                            <span>
+                                                <i class="fa fa-info-circle" title="This is your email address. Update if necessary."></i>
+                                            </span>
+                                        </label>
                                         <div>
                                             <span *ngIf="f['emailAddress'].invalid && (f['emailAddress'].touched || f['emailAddress'].dirty)" class="text-danger">Please enter a valid email address</span>
                                         </div>
                                         <div class="mb-3"><input type="email" class="form-control" formControlName = "emailAddress" placeholder="Enter Email Address" required></div>                                    
                                         
+                                        <label>Phone number
+                                            <span>
+                                                <i class="fa fa-info-circle" title="This is your cellphone number."></i>
+                                            </span>
+                                        </label>
+                                        <div> 
+                                            <span *ngIf="f['phoneNumber'].invalid && (f['phoneNumber'].touched || f['phoneNumber'].dirty)" class="text-danger">Please enter a valid phone number</span>
+                                        </div>
+                                        <div class="mb-3"><input class="form-control" formControlName = "phoneNumber"  type="text"  placeholder="Enter Phone Number" name="number" (keypress)="keyPressNumbers($event)"></div>
+                           
+                                        <label>Home address
+                                            <span>
+                                                <i class="fa fa-info-circle" title="This is your physical home address."></i>
+                                            </span>
+                                        </label>
+                                        <div *ngIf="submitted">
+                                            <span *ngIf="f['homeAddress'].errors?.['required'] || f['homeAddress'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a home address</span>
+                                        </div>
+                                        <div class="mb-3"><textarea class="form-control" formControlName = "homeAddress" style="resize: none;" placeholder="Enter Home Address" required (keypress)="keyPressAlphanumeric($event)"></textarea></div>
+                                        
 
+                                        <!-- 
                                         <small style="font-size:11px; color: #106cfc;">(Should contain 6 characters minimum, including 1 upper case letter, 1 lower case letter, 1 number and 1 special character)</small>
                                         <div *ngIf="submitted">
                                             <span *ngIf="f['password'].errors?.['required'] || f['password'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter a password</span>
@@ -88,11 +98,10 @@
                                         <div class="mb-3">
                                             <input class="form-control" formControlName = "password"  type="password" placeholder="Password" name="password">
                                             <app-password-strength [passwordToCheck]="userform.value.password" (passwordStrength)="passwordValid($event)"></app-password-strength>
-                                            <!-- <a style="cursor: pointer;" class="help" title="Help" data-toggle="tooltip"><i class="fa fa-question-circle" aria-hidden="true"></i></a> -->
-                                        </div>
+                                        </div> -->
                                         <div class="mb-3">
                                             <div class="custom-control custom-checkbox small"></div>
-                                        </div><button class="btn btn-primary d-block btn-user w-100" type="submit" [disabled]="!passwordIsValid">Next</button>
+                                        </div><button class="btn btn-primary d-block btn-user w-100" type="submit">Next</button>
                                         <hr>
                                     </form>
                                     <div class="text-center"><a class="small" href="/login">Already have an Account?</a></div>

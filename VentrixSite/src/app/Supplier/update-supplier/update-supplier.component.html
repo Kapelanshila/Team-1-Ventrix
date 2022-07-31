@@ -7,23 +7,23 @@
             <br>
             <div class="form-group">
                 <label>Supplier Name</label>
-                <input type="text" class="form-control" formControlName="supplierName" placeholder="Enter Supplier Name" required>
+                <input maxlength="32" type="text" class="form-control" formControlName="supplierName" placeholder="Enter Supplier Name" required (keypress)="keyPressAlphabet($event)">
             </div>
             <div class="form-group">
                 <label>Contact Person Name</label>
-                <input type="text" class="form-control" formControlName="contactPersonName" placeholder="Enter Contact Person Name" required>
+                <input maxlength="32" type="text" class="form-control" formControlName="contactPersonName" placeholder="Enter Contact Person Name" required (keypress)="keyPressAlphabet($event)">
             </div>
             <div class="form-group">
                 <label>Contact Person Number</label>
-                <input type="text" class="form-control" formControlName="contactPersonNumber" placeholder="Enter Contact Person Number" required (keypress)="keyPressNumbers($event)">
+                <input maxlength="32" type="text" class="form-control" formControlName="contactPersonNumber" placeholder="Enter Contact Person Number" required (keypress)="keyPressNumbers($event)">
             </div>	
             <div class="form-group">
                 <label>Work Address</label>
-                <textarea class="form-control" formControlName = "workAddress" placeholder="Enter Supplier Address" required (keypress)="keyPressAlphanumeric($event)"></textarea>
+                <textarea maxlength="50" class="form-control" formControlName = "workAddress" placeholder="Enter Supplier Address" required (keypress)="keyPressAlphanumeric($event)"></textarea>
             </div>	
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" class="form-control" formControlName = "emailAddress" placeholder="Enter Supplier Email" required>
+                <input maxlength="32" type="email" class="form-control" formControlName = "emailAddress" placeholder="Enter Supplier Email" required>
             </div>	
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
             <input type="submit" class="btn btn-primary" value="Save">

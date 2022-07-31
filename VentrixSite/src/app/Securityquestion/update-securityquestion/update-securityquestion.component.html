@@ -12,7 +12,7 @@
                     <span *ngIf="f['description'].errors?.['required'] || f['description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a security question</span>
                 </div>
                 <label>New Security Question</label>
-                <textarea type="text" class="form-control" formControlName="description" placeholder="Enter Security Question" required></textarea>
+                <textarea maxlength="64" type="text" class="form-control" formControlName="description" placeholder="Enter Security Question" required (keypress)="keyPressAlphabet($event)"></textarea>
             </div>
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
             <input type="submit" class="btn btn-primary" value="Update">

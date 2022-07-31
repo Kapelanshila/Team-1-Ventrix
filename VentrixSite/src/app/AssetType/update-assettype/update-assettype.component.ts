@@ -53,7 +53,7 @@ export class UpdateAssettypeComponent implements OnInit {
     this.submitted = true;
     //Check if asset category does not already exsist
     this.assettypes.forEach(element => {
-    if (element.description == this.assettypeform.get('description')?.value)
+    if (element.description == this.assettypeform.get('description')?.value && element.assetTypeId != this.type?.assetTypeId)
     {
       this.find = true;
       Swal.fire({
@@ -114,5 +114,17 @@ export class UpdateAssettypeComponent implements OnInit {
       return  null
     }
     return {'noWhitespaceValidator' : true}
+  }
+
+  // Only Alphabet & space
+  keyPressAlphabet(event: { keyCode: number; preventDefault: () => void; }) {
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z ]+$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
   }
 }

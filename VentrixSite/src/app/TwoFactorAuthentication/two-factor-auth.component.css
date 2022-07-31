@@ -5,4 +5,5 @@
     height: 155%;
     width:100%;
     position: absolute;
+    overflow-x: hidden;
 }

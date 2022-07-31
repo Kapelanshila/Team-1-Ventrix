@@ -5,4 +5,36 @@
     height: 100%;
     width:100%;
     position: absolute;
+    overflow-x: hidden;
 }
+.modal-content {
+    -ms-transform: translate(0,50%);
+    -moz-transform: translate(0,50%);
+    -webkit-transform: translate(0,50%);
+    transform: translate(0,50%);
+    width:100%;
+  }
+
+  .password {
+    -ms-transform: translate(0,30%);
+    -moz-transform: translate(0,30%);
+    -webkit-transform: translate(0,30%);
+    transform: translate(0,30%);
+    width:100%;
+  }
+
+
+  .modal
+  {
+    background: linear-gradient( rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55) )  
+  }
+
+  #container{
+    text-align: center;
+}
+
+#container button{
+    width: 50%;
+    height: 20%;
+}
+

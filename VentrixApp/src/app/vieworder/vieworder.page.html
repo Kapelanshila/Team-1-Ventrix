@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>View Order</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menuId="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="background-pic">
+    <div class="background-filter">
+
+
+      <div class="block p-6 rounded-lg shadow-lg bg-white max-w-full" style="width: 90%">
+        <ion-button color="primary" size="small" routerLink="{{path}}">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+          Back
+        </ion-button>
+        <hr><br>
+        <form [formGroup]="myForm">
+          <div class="form-group mb-6 ">
+
+            <div class="form-group mb-6">
+              <div class="flex justify-center">
+                <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center">
+                  <div class="py-3 px-6 border-b border-gray-300 text-cyan-800">
+                    Client information
+                  </div>
+                  <div class="p-6">
+                    <h5 class="text-gray-900 text-xl font-medium mb-2">{{clientInfo?.contactPersonName}} {{clientInfo?.contactPersonSurname}}</h5>
+                    <p class="text-gray-700 text-base mb-4">
+                     Phone: 
+                     <br>
+                     {{clientInfo?.contactPersonNumber}}
+                     <br>
+                     <br>
+                     Email:  
+                     {{clientInfo?.emailAddress}}
+                     <br>
+                     <br>
+                     Work Address:  
+                     <br>
+                     {{clientInfo?.workAddress}}
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+     
+            <label class="form-label inline-block mb-2" style="color: blue;">Timeslot</label>
+            <label class="form-label inline-block mb-4" style="color: black; font-size: 14px;">{{orderdate | date:"yyyy-MM-dd"}} | {{startTime | date:"hh:mm"}} - {{endTime | date:"hh:mm"}}</label>
+            <label for="exampleInputEmail1" class="form-label inline-block mb-2" style="color: purple;">Order Items</label>
+            <br>
+            <div class="row" style="color: black;" *ngFor="let item of vieworder">
+              <div class="col-4">
+                  <ul style="list-style-type:none">
+                      <li style="font-weight: bold;">{{item.name}}</li>
+                   </ul>
+              </div>
+              <div class="col-1">
+                  <ul style="list-style-type:none">
+                      <li>Quantity: {{item.quantity}}</li>
+                   </ul>
+              </div>
+            </div>
+           
+            
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</ion-content>

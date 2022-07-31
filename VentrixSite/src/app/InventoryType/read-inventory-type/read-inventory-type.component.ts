@@ -22,6 +22,7 @@ export class ReadInventoryTypeComponent implements OnInit {
   noOfRows = 10;
   inventorycategory!: InventoryCategory;
   specifictypes:any[] = [];
+  inventories:any[] = [];
 
   //Search query 
   query:string = '';
@@ -75,6 +76,23 @@ export class ReadInventoryTypeComponent implements OnInit {
   //Delete inventory category Function 
   deleteinventorytype(selectedinventorytype: InventoryType)
   { 
+    this.ventrixdbservice.readInventory()
+    .subscribe(response => {
+      this.inventories = response;
+      if (this.inventories.find(x => x.inventoryTypeId == selectedinventorytype.inventoryTypeId))
+      {
+        Swal.fire({
+          icon: 'error',
+          title: 'Cannot Delete Type',
+          text: 'Delete associated inventory item first',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+      }
+      else
+      {
       //Sweet alerts are used as notifications
       Swal.fire({
         icon: 'warning',
@@ -93,5 +111,7 @@ export class ReadInventoryTypeComponent implements OnInit {
           });
         }
       })  
+      }
+    })
   } 
 }

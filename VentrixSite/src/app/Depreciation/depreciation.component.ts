@@ -102,8 +102,8 @@ export class DepreciationComponent implements OnInit {
       if (selectedDepreciation.percentage == this.depreciationform.get('percentage')?.value)
       {
         Swal.fire({
-          icon: 'error',
-          title: 'Depreciation already exists',
+          icon: 'info',
+          title: 'No changes made',
           confirmButtonText: 'OK',
           confirmButtonColor: '#077bff',
           allowOutsideClick: false,

@@ -53,7 +53,8 @@ export class UpdateWriteoffreasonComponent implements OnInit {
     this.submitted = true;
     //Check if write-off reason does not already exsist
   this.writeoffreasons.forEach(element => {
-    if (element.description == this.writeoffreasonform.get('description')?.value) 
+    if (element.description == this.writeoffreasonform.get('description')?.value
+    && element.writeOffReasonId != this.writeoffreason?.writeOffReasonId) 
     {
       this.find = true;
       Swal.fire({
@@ -111,5 +112,17 @@ export class UpdateWriteoffreasonComponent implements OnInit {
         return  null
       }
       return {'noWhitespaceValidator' : true}
+  }
+
+  // Only Alphabet & space
+  keyPressAlphabet(event: { keyCode: number; preventDefault: () => void; }) {
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z ]+$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
   }
 }

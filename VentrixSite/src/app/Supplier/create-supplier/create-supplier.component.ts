@@ -67,7 +67,6 @@ export class CreateSupplierComponent implements OnInit {
 
     if (this.supplierform.valid && this.find == false) {
       console.log(this.supplierform.value);
-      this.ventrixdbservice.createSupplier(this.supplierform.value).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications
         Swal.fire({
@@ -79,6 +78,7 @@ export class CreateSupplierComponent implements OnInit {
           allowEscapeKey: false
         }).then((result) => {
           if (result.isConfirmed) {
+            this.ventrixdbservice.createSupplier(this.supplierform.value).subscribe()
             this.router.navigate(['/read-supplier']).then(() => {
               window.location.reload();
             });
@@ -133,6 +133,18 @@ export class CreateSupplierComponent implements OnInit {
       return false;
     } else {
       return true;
+    }
+  }
+
+  // Only Alphabet & space
+  keyPressAlphabet(event: { keyCode: number; preventDefault: () => void; }) {
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z ]+$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
     }
   }
 }

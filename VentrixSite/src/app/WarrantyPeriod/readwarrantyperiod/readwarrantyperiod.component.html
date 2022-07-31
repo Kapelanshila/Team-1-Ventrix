@@ -31,7 +31,12 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let warrantyPeriod of warrantyPeriods | paginate:{itemsPerPage: noOfRows, currentPage:p}">
-                            <td>{{warrantyPeriod.description}}</td>
+                            <ng-container *ngIf="warrantyPeriod.value == 1">
+                                <td>{{warrantyPeriod.value}} year</td>
+                            </ng-container>
+                            <ng-container *ngIf="warrantyPeriod.value != 1">
+                                <td>{{warrantyPeriod.value}} years</td>
+                            </ng-container>
                             <td class = "icon-adjust">
                                 <!--Add cursor pointer so that the links seem clickable -->
                                 <a [routerLink]="" style="cursor: pointer;" class="edit" title="Edit" data-toggle="tooltip"><i  (click)="editWarrantyPeriod(warrantyPeriod)" class="material-icons">&#xE254;</i></a>

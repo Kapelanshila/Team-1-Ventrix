@@ -19,7 +19,8 @@ export class ReadWriteoffreasonComponent implements OnInit {
   p: number = 1;
   config: any; 
   noOfRows = 10;
-
+  writeoff!:any;
+  assetwriteoff!:any;
   //Search query 
   query:string = '';
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
@@ -61,23 +62,49 @@ export class ReadWriteoffreasonComponent implements OnInit {
   //Delete write-off reason Function 
   deleteWriteOffReason(selectedwriteoffreason: WriteOffReason)
   { 
-      //Sweet alerts are used as notifications
-      Swal.fire({
-        icon: 'warning',
-        title: 'Are you sure you want to delete this write-off reason?',
-        showDenyButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: `No`,
-        confirmButtonColor: '#077bff',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.ventrixdbservice.deleteWriteReason(selectedwriteoffreason).subscribe();
-          this.router.navigate(['/read-writeoffreason']).then(() => {
-          window.location.reload();
-          });
+    
+    this.ventrixdbservice.readInventoryWriteOffLine()
+    .subscribe(response => {
+      this.writeoff = response;
+
+      this.ventrixdbservice.readAssetWriteOff()
+      .subscribe(response => {
+        this.assetwriteoff = response;
+
+      if (this.writeoff.find((x: { writeOffReasonId: Number; }) => x.writeOffReasonId == selectedwriteoffreason.writeOffReasonId) && undefined || this.assetwriteoff.find((x: { writeOffReasonId: Number; }) => x.writeOffReasonId == selectedwriteoffreason.writeOffReasonId) == undefined)
+      {
+        //Sweet alerts are used as notifications
+        Swal.fire({
+          icon: 'warning',
+          title: 'Are you sure you want to delete this write-off reason?',
+          showDenyButton: true,
+          confirmButtonText: 'Yes',
+          denyButtonText: `No`,
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.ventrixdbservice.deleteWriteReason(selectedwriteoffreason).subscribe();
+            this.router.navigate(['/read-writeoffreason']).then(() => {
+            window.location.reload();
+            });
+          }
+        })  
         }
-      })  
+        else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'Write Off Reason Assoiciated to other entries',
+            showDenyButton: false,
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#077bff',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          })
+        }
+      })
+    })
   }
 }

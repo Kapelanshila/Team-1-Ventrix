@@ -17,11 +17,11 @@
                         <hr>
                         <form (ngSubmit)="register()">
                             <ng-otp-input (onInputChange)="onOtpChange($event)"  [config]="config"></ng-otp-input>
-                            <hr><button class="btn btn-primary" [disabled]="timerinvalid" type="submit">Register</button>
+                            <hr><button class="btn btn-primary" [disabled]="timerinvalid" type="submit">Submit</button>
                         </form>
                         <br>
                         <div class="text-center"><a class="small" (click)="resend()">Resend OTP</a></div>
-                        <div routerLink="/register" class="text-center"><a class="small">Back</a></div>
+                        <div (click)="back()" class="text-center"><a class="small">Back</a></div>
                     </div>
                 </div>
             </div>
