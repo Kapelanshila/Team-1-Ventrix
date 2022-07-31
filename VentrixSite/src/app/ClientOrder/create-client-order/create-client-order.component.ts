@@ -151,6 +151,7 @@ export class CreateClientOrderComponent implements OnInit {
       }
    
       this.ventrixdbservice.createClientOrder(this.order).subscribe();
+
       Swal.fire({
         icon: 'success',
         title: 'Client Order Successfully Added',
@@ -158,6 +159,14 @@ export class CreateClientOrderComponent implements OnInit {
         confirmButtonColor: '#077bff',
         allowOutsideClick: false,
         allowEscapeKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.ventrixdbservice.createClientOrder(this.order).subscribe();
+          this.router.navigate(['/read-clientorder']).then(() => {
+            window.location.reload();
+          });
+        }
+      })  
       })
       this.router.navigate(['/read-clientorder']).then(() => {
         window.location.reload();

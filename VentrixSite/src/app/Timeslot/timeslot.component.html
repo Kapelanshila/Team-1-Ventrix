@@ -1,0 +1,61 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="container-fluid">
+        <div class="table-responsive" >
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-12" style="text-align: center;">
+
+                            <h2>Delivery Timeslots
+                                <span>
+                                    <i class="fa fa-info-circle" title="Drag and resize timeslots to edit them. Red timeslots are being used, blue timeslots are current available and purple timeslots are older slots not being used."></i>
+                                </span>
+                            </h2>
+                        </div>
+                            <br>   
+                            <br>                          
+                        <div class="col-12" style="text-align: center;">
+                        <div class="btn-group">
+                            <div
+                            class="btn btn-primary"
+                            mwlCalendarPreviousView
+                            [view]="view"
+                            [(viewDate)]="viewDate"
+                            >
+                            Previous
+                            </div>
+                            <div
+                            class="btn btn-outline-secondary"
+                            mwlCalendarToday
+                            [(viewDate)]="viewDate"
+                            >
+                            Today
+                            </div>
+                            <div
+                            class="btn btn-primary"
+                            mwlCalendarNextView
+                            [view]="view"
+                            [(viewDate)]="viewDate"
+                            >
+                            Next
+                            </div>
+                        </div>
+                        </div>
+                        <br>
+                        <br>
+                        
+                        <mwl-calendar-week-view
+                            [viewDate]="viewDate"
+                            [events]="events"
+                            [hourDuration]="60"
+                            [hourSegments]="2"
+                            [refresh]="refresh"
+                            (eventTimesChanged)="eventTimesChanged($event)"
+                         style="width: 100%;">
+                        </mwl-calendar-week-view>
+                </div>
+            </div>  
+        </div>   
+    </div> 
+</div> 
