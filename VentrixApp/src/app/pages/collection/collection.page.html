@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Collections</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menuId="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background-pic">
+  <div class="background-pic">
+    <div class="background-filter">
+      <div class="table-container">
+        <BR>
+        <ion-list style="background-color: rgb(0, 3, 59);">
+          <!-- Sliding item with text options on both sides -->
+          <ion-item-sliding *ngFor="let order of collections" class="bg-white rounded-lg shadow-xl lg:flex lg:max-w-lg">
+            <ion-item>
+              <img style="height:52%; width: 17%; padding-right: 2%; padding-bottom: 2%;" src="../../assets/package-2-64.png" />
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    {{order.description}}
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+            <ion-item-options side="end" color="light">
+              <ion-item-option color="success" (click)="collectOrder(order.clientOrderId)">Collected</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+
+          <div class="bg-red-400 p-6 rounded-lg shadow-lg" *ngIf="collections.length === 0">
+            <img
+              src="../../assets/bell-2-48.png" style="padding-bottom: 5%;"/>
+            <p class="text-white-800">No collections available!</p>
+          </div>
+        </ion-list>
+
+        <ion-button color="medium" (click)="refresh()" size="small">
+          <ion-icon name="refresh-outline"></ion-icon>
+          Refresh
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+
+</ion-content>
