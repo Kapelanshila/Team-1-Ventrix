@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Delivery Details</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menuId="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="background-pic">
+    <div class="background-filter">
+
+
+      <div class="block p-6 rounded-lg shadow-lg bg-white max-w-full" style="width: 90%">
+        <ion-button color="primary" size="small" routerLink="/deliveries">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+          Back
+        </ion-button>
+        <hr><br>
+          <div class="form-group mb-6 ">
+
+            <div class="form-group mb-6">
+              <div class="flex justify-center">
+                <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center">
+                  <div class="flex space-x-2 justify-center">
+                    <span *ngIf="isRescheduled" class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-red-600 text-white rounded-full">Rescheduled</span>
+                  </div>
+                  <div class="py-3 px-6 border-b border-gray-300 text-cyan-800">
+                    {{clientInfo?.contactPersonName}} {{clientInfo?.contactPersonSurname}}
+                  </div>
+                  <div class="p-6">
+                    <div class="text-gray-700 text-base mb-4">
+                     Phone: {{clientInfo?.contactPersonNumber}}
+                     <hr>
+                     <br>
+
+                     <ng-container *ngIf="!isRescheduled; else res ">
+                      <b>Delivery  information</b>
+                      <p class="text-gray-700 text-base mb-4">
+                       Date: {{previousDeliveryInfo?.date | date}}
+                       <br>
+                       Time:  {{previousDeliveryInfo?.time}}
+                      </p>
+
+                     </ng-container>
+
+                     <ng-template #res class="bg-red-400 text-white">
+                      <b>Rescheduled  information</b>
+                      <p class="text-gray-700 text-base mb-4">
+                       Date: {{rescheduledInfo?.date | date}}
+                       <br>
+                       Time:  {{rescheduledInfo?.timeslot}}
+                      </p>
+                    </ng-template>
+                     <div *ngIf="isRescheduled">
+
+
+                     </div>
+
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+</div>
+</div>
+</div>
+</div>
+
+</ion-content>
+
