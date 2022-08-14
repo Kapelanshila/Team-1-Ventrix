@@ -77,8 +77,6 @@ import { ReadClientOrderlineComponent } from './ClientOrderLine/ReadClientOrderL
 import { UpdateClientOrderlineComponent } from './ClientOrderLine/UpdateClientOrderLine/update-client-orderline.component';
 import { ReadSupplierOrderlineComponent } from './SupplierOrderLine/ReadSupplierOrderLine/read-supplier-orderline.component';
 import { UpdateSupplierOrderlineComponent } from './SupplierOrderLine/UpdateSupplierOrderLine/update-supplier-orderline.component';
-import { PackOrderComponent } from './PackOrder/pack-order.component';
-import { RevertPackOrderComponent } from './RevertPackOrder/revert-pack-order.component';
 import { WriteOffInventoryComponent } from './WriteOffInventory/write-off-inventory.component';
 import { WriteOffComponent } from './WriteOffInventory/WriteOff/write-off.component';
 import { ViewWriteOffsComponent } from './WriteOffInventory/ViewWriteOffs/view-write-offs.component';
@@ -112,15 +110,6 @@ import { TimeslotComponent } from './Timeslot/timeslot.component';
 import { CreateTimeslotComponent } from './Timeslot/CreateTimeslot/create-timeslot.component';
 import { ReadTimeslotComponent } from './Timeslot/ReadTimeslot/read-timeslot.component';
 import { UpdateTimeslotComponent } from './Timeslot/UpdateTimeslot/update-timeslot.component';
-import { CompletedOrdersComponent } from './ClientOrder/completed-orders/completed-orders.component';
-import { InventoryReportComponent } from './Reporting/inventory-report/inventory-report.component';
-import { AssetReportComponent } from './Reporting/asset-report/asset-report.component';
-import { InventoryWriteoffReportComponent } from './Reporting/inventory-writeoff-report/inventory-writeoff-report.component';
-import { AssetWriteoffReportComponent } from './Reporting/asset-writeoff-report/asset-writeoff-report.component';
-import { DepreciationReportComponent } from './Reporting/depreciation-report/depreciation-report.component';
-import { EmployeesReportComponent } from './Reporting/employees-report/employees-report.component';
-import { ManagementReportComponent } from './Reporting/management-report/management-report.component';
-import { BackupRestoreComponent } from './Backup-Restore/backup-restore.component';
 
 @NgModule({
   declarations: [
@@ -192,8 +181,6 @@ import { BackupRestoreComponent } from './Backup-Restore/backup-restore.componen
     UpdateClientOrderlineComponent,
     ReadSupplierOrderlineComponent,
     UpdateSupplierOrderlineComponent,
-    PackOrderComponent,
-    RevertPackOrderComponent,
     WriteOffInventoryComponent,
     WriteOffComponent,
     ViewWriteOffsComponent,
@@ -220,15 +207,6 @@ import { BackupRestoreComponent } from './Backup-Restore/backup-restore.componen
     CreateTimeslotComponent,
     ReadTimeslotComponent,
     UpdateTimeslotComponent,
-    CompletedOrdersComponent,
-    InventoryReportComponent,
-    AssetReportComponent,
-    InventoryWriteoffReportComponent,
-    AssetWriteoffReportComponent,
-    DepreciationReportComponent,
-    EmployeesReportComponent,
-    ManagementReportComponent
-    BackupRestoreComponent
   ],
   imports: [
     GaugeChartModule,

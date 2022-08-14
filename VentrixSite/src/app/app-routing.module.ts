@@ -61,8 +61,6 @@ import { ReadClientOrderlineComponent } from './ClientOrderLine/ReadClientOrderL
 import { UpdateClientOrderlineComponent } from './ClientOrderLine/UpdateClientOrderLine/update-client-orderline.component';
 import { ReadSupplierOrderlineComponent } from './SupplierOrderLine/ReadSupplierOrderLine/read-supplier-orderline.component';
 import { UpdateSupplierOrderlineComponent } from './SupplierOrderLine/UpdateSupplierOrderLine/update-supplier-orderline.component';
-import { PackOrderComponent } from './PackOrder/pack-order.component';
-import { RevertPackOrderComponent } from './RevertPackOrder/revert-pack-order.component';
 import { WriteOffInventoryComponent } from './WriteOffInventory/write-off-inventory.component';
 import { WriteOffComponent } from './WriteOffInventory/WriteOff/write-off.component';
 import { ViewWriteOffsComponent } from './WriteOffInventory/ViewWriteOffs/view-write-offs.component';
@@ -91,20 +89,11 @@ import { TimeslotComponent } from './Timeslot/timeslot.component';
 import { CreateTimeslotComponent } from './Timeslot/CreateTimeslot/create-timeslot.component';
 import { ReadTimeslotComponent } from './Timeslot/ReadTimeslot/read-timeslot.component';
 import { UpdateTimeslotComponent } from './Timeslot/UpdateTimeslot/update-timeslot.component';
-import { AssetReportComponent } from './Reporting/asset-report/asset-report.component';
-import { InventoryReportComponent } from './Reporting/inventory-report/inventory-report.component';
-import { AssetWriteoffReportComponent } from './Reporting/asset-writeoff-report/asset-writeoff-report.component';
-import { InventoryWriteoffReportComponent } from './Reporting/inventory-writeoff-report/inventory-writeoff-report.component';
-import { DepreciationReportComponent } from './Reporting/depreciation-report/depreciation-report.component';
-import { EmployeesReportComponent } from './Reporting/employees-report/employees-report.component';
-import { ManagementReportComponent } from './Reporting/management-report/management-report.component';
-import { CompletedOrdersComponent } from './ClientOrder/completed-orders/completed-orders.component';
 import { AdminAuthGuard } from './_helpers/admin.auth.guard';
 import { InventoryAuthGuard } from './_helpers/inventory.auth.guard';
 import { AssetAuthGuard } from './_helpers/asset.auth.guard';
 import { DriverAuthGuard } from './_helpers/driver.auth.guard';
 import { GeneralAuthGuard } from './_helpers/general.auth.guard';
-import { BackupRestoreComponent } from './Backup-Restore/backup-restore.component';
 
 const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'create-client', component: CreateClientComponent, canActivate: [AdminAuthGuard]  },
@@ -167,44 +156,10 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 {path: 'update-clientorderline', component:UpdateClientOrderlineComponent, canActivate: [InventoryAuthGuard]  },
 {path: 'read-supplierorderline', component:ReadSupplierOrderlineComponent, canActivate: [InventoryAuthGuard]  },
 {path: 'update-supplierorderline', component:UpdateSupplierOrderlineComponent, canActivate: [InventoryAuthGuard]  },
-{path: 'pack-order', component:PackOrderComponent, canActivate: [InventoryAuthGuard]  },
-{path: 'revert-pack-order', component:RevertPackOrderComponent, canActivate: [InventoryAuthGuard]  },
 {path: 'write-off-inventory', component:WriteOffInventoryComponent, canActivate: [InventoryAuthGuard]  },
 {path: 'write-off-item', component:WriteOffComponent, canActivate: [InventoryAuthGuard]  },
 {path: 'view-write-offs', component:ViewWriteOffsComponent, canActivate: [InventoryAuthGuard]  },
 {path: 'create-inventory-stocktake', component:CreateInventoryStocktakeComponent},
-{path: 'read-inventory-stocktake', component:ReadInventoryStocktakeComponent},
-{path: 'create-asset', component:CreateAssetComponent},
-{path: 'read-asset', component:ReadAssetComponent},
-{path: 'update-asset', component:UpdateAssetComponent},
-{path: 'view-asset', component:ViewAssetComponent},
-{path: 'asset-repair', component:AssetRepairComponent},
-{path: 'create-asset-repair', component:CreateAssetRepairComponent},
-{path: 'read-asset-repair', component:ReadAssetRepairComponent},
-{path: 'update-asset-repair', component:UpdateAssetRepairComponent},
-{path: 'revert-repair', component:RevertRepairComponent},
-{path: 'read-assigned-asset', component:ReadAssignedAssetComponent},
-{path: 'undo-assigned-asset', component:UndoAssignedAssetComponent},
-{path: 'read-checkout', component:ReadCheckoutComponent},
-{path: 'view-checkout', component:ViewCheckoutsComponent},
-{path: 'read-checkin', component:ReadCheckinComponent},
-{path: 'view-checkin', component:ViewCheckinComponent},
-{path: 'read-asset-writeoff', component:ReadAssetWriteoffComponent},
-{path: 'create-asset-writeoff', component:CreateAssetWriteoffComponent},
-{path: 'view-asset-writeoff', component:ViewAssetWriteoffComponent},
-{path: 'read-asset-trail', component:ReadAssettrailComponent},
-{path: 'create-timeslot', component:CreateTimeslotComponent},
-{path: 'read-timeslot', component:ReadTimeslotComponent},
-{path: 'update-timeslot', component:UpdateTimeslotComponent},
-{path: 'timeslot', component:TimeslotComponent},
-{path: 'asset-report',component:AssetReportComponent},
-{path: 'inventory-report',component:InventoryReportComponent},
-{path: 'asset-writeoff-report',component:AssetWriteoffReportComponent},
-{path: 'inventory-writeoff-report',component:InventoryWriteoffReportComponent},
-{path: 'depreciation-report',component:DepreciationReportComponent},
-{path: 'employees-report',component:EmployeesReportComponent},
-{path: 'management-report',component:ManagementReportComponent},
-{path: 'completed-orders', component:CompletedOrdersComponent},
 {path: 'read-inventory-stocktake', component:ReadInventoryStocktakeComponent, canActivate: [InventoryAuthGuard]  },
 {path: 'create-asset', component:CreateAssetComponent, canActivate: [AssetAuthGuard]  },
 {path: 'read-asset', component:ReadAssetComponent, canActivate: [AssetAuthGuard]  },
@@ -229,8 +184,6 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 {path: 'read-timeslot', component:ReadTimeslotComponent, canActivate: [InventoryAuthGuard]  },
 {path: 'update-timeslot', component:UpdateTimeslotComponent, canActivate: [InventoryAuthGuard]  },
 {path: 'timeslot', component:TimeslotComponent, canActivate: [InventoryAuthGuard]  },
-{path: 'completed-orders', component:CompletedOrdersComponent, canActivate: [DriverAuthGuard]  },
-{path: 'backup-restore', component:BackupRestoreComponent, canActivate: [AdminAuthGuard]  },
 {path: '', redirectTo: 'login', pathMatch: 'full' }];
 
 @NgModule({
