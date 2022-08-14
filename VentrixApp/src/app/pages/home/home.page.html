@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ventrix</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menuId="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="background-pic">
+    <div class="background-filter">
+      <h2 class="h2">Welcome {{account.name}}</h2>
+      <ion-list>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-card button="true" color="#031F60" routerLink="/deliveries">
+                <img src="../../assets/deliveries.png" />
+                <ion-card-content>
+                  <h1>Deliveries</h1>
+                </ion-card-content>
+              </ion-card>
+              <ion-card button="true" color="#031F60" routerLink="/collection">
+                <img src="../../assets/collections.png" />
+                <ion-card-content>
+                  <h1>Collections</h1>
+                </ion-card-content>
+              </ion-card>
+              <ion-card button="true" color="#031F60" routerLink="/searchorder">
+                <img src="../../assets/search.png" />
+                <ion-card-content>
+                  <h1>Search Orders</h1>
+                </ion-card-content>
+              </ion-card>
+              <ion-card button="true" color="#031F60" routerLink="/main">
+                <img src="../../assets/logout.png" />
+                <ion-card-content>
+                  <h1>Logout</h1>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

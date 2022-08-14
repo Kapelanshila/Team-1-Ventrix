@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Plan Route</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menuId="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background-pic">
+  <ion-button color="medium" style="padding-left: 10px;" (click)="refresh()" size="small">
+    <ion-icon name="refresh-outline"></ion-icon>
+    Refresh
+  </ion-button>
+
+  <ion-card color="secondary">
+    <ion-item>
+      <ion-button fill="outline" slot="start" routerLink="/deliveries">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        Back
+      </ion-button>
+    </ion-item>
+
+    <ion-card-content>
+      <h2>List of Destinations</h2>
+      <p style="color: black;">Total Distance: {{totaldistance}}</p>
+      <p style="color: black;">Total Duration: {{totalduration}}</p>
+    </ion-card-content>
+  </ion-card>
+  <div class="background-pic" >
+    <div class="background-filter">
+
+
+  <ion-card class="flex justify-center">
+    <ion-label color="danger"> arrange by draging </ion-label>
+    <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+      <div class="flex justify-center">
+        <ion-reorder-group
+          (ionItemReorder)="doReorder($any($event))"
+          disabled="false"
+          class="bg-white rounded-lg border border-gray-200 w-96 text-gray-900"
+        >
+          <ion-item
+            *ngFor="let item of VM"
+            class="px-6 py-2 border-b border-gray-200 w-full rounded-t-lg"
+          >
+            <ion-reorder slot="start"></ion-reorder>
+            <ion-label >
+              {{item.clientName}}
+
+              <ng-container *ngIf="item.distance <= 15">
+                <ion-chip color="success" (click)="details(item.clientId)">
+                  <ion-label>{{item.distance}} km</ion-label>
+                </ion-chip>
+              </ng-container>
+
+              <ng-container *ngIf="item.distance > 15 && item.distance <= 50">
+                <ion-chip color="warning" (click)="details(item.clientId)">
+                  <ion-label>{{item.distance}} km</ion-label>
+                </ion-chip>
+              </ng-container>
+
+              <ng-container *ngIf="item.distance > 50">
+                <ion-chip color="danger" (click)="details(item.clientId)">
+                  <ion-label>{{item.distance}} km</ion-label>
+                </ion-chip>
+              </ng-container>
+
+
+            </ion-label>
+          </ion-item>
+        </ion-reorder-group>
+      </div>
+    </div>
+  </ion-card>
+</div>
+</div>
+</ion-content>

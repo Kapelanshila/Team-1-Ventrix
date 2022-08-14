@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Deliveries</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menuId="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background-pic">
+
+  <div class="background-pic" >
+    <div class="background-filter">
+      <div class="table-container">
+
+        <button (click)="help()">
+          <img style="width: 70%; height: 70%; padding-top: 3%;" src="../../assets/help.png"/>
+        </button>
+        <ion-label color="danger" style="align-items: center; font-size: small;" *ngIf="isHelp" class="flex items-center bg-white border border-gray-200 rounded-lg shadow shadow-lg p-3 w-full md:w-1/2">
+          Swipe Right to Complete delivery or Change Status <ion-icon name="arrow-forward-outline"></ion-icon>
+ 
+           Swipe Left to Edit/Schedule<ion-icon name="arrow-back-outline"></ion-icon>
+        </ion-label>
+        <br>
+
+
+        <ion-list style="background-color: rgb(138, 191, 237);">
+          <!-- Sliding item with text options on both sides -->
+          <!-- (click)="navigateToDetails( delivery.clientId)" -->
+          <ion-item-sliding *ngFor="let delivery of deliveries"  class="bg-white rounded-lg shadow-xl lg:flex lg:max-w-lg">
+
+            <ng-container *ngIf="delivery.status == 'Scheduled' || delivery.status == 'Rescheduled'">
+              <ion-item-options side="start">
+                <ion-item-option color="secondary" [routerLink]="['/vieworder',delivery.clientOrderId]" >View Order</ion-item-option>
+                <ion-item-option color="tertiary" (click)="changeStatus(delivery)">En Route</ion-item-option>
+              </ion-item-options>
+            </ng-container>
+
+            <ng-container *ngIf="delivery.status == 'En Route'">
+              <ion-item-options style= "width: 200px;" side="start">
+
+                <ion-item-option color="secondary" [routerLink]="['/vieworder',delivery.clientOrderId]">View Order</ion-item-option>
+                <ion-item-option color="tertiary" [routerLink]="['/complete',delivery.clientOrderId, delivery.clientId]" >Complete Delivery</ion-item-option>
+              </ion-item-options>
+            </ng-container>
+ 
+            <ion-item  >
+              <img  src="../../assets/truck-48.png">
+
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    {{delivery.description}}
+                  </ion-col>
+                </ion-row>
+                <ng-container *ngIf="delivery.status == 'Collected'">
+                  <ion-row>
+                    <ion-col>
+                      <ion-badge color="primary" >Not Scheduled</ion-badge>
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+
+                <ng-container *ngIf="delivery.status == 'Rescheduled'">
+                  <ion-row>
+                    <ion-col>
+                      <ion-badge color="tertiary" >Rescheduled</ion-badge>
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+
+                <ng-container *ngIf="delivery.status == 'Scheduled'">
+                  <ion-row>
+                    <ion-col>
+                      <ion-badge color="danger" >Not Delivered</ion-badge>
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+
+                <ng-container *ngIf="delivery.status == 'En Route'">
+                  <ion-row>
+                    <ion-col>
+                      <ion-badge color="warning" >En Route</ion-badge>
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+
+
+                </ion-grid>
+            </ion-item>
+
+            <ng-container *ngIf="delivery.status == 'Collected'">
+              <ion-item-options side="end" color="danger">
+                <ion-item-option  [routerLink]="['/schedule',delivery.clientOrderId, delivery.clientId]">Schedule</ion-item-option>
+              </ion-item-options>
+            </ng-container>
+
+            <ng-container *ngIf="delivery.status == 'Scheduled' || delivery.status == 'En Route' && delivery.rescheduled == null">
+              <ion-item-options side="end" color="danger">
+                <ion-item-option color="danger"  [routerLink]="['/reschedule',delivery.clientOrderId, delivery.clientId]">Edit
+                </ion-item-option>
+              </ion-item-options>
+            </ng-container>
+
+
+          </ion-item-sliding>
+          <div class="bg-red-400 p-6 rounded-lg shadow-lg" *ngIf="deliveries.length === 0">
+            <img
+              src="../../assets/bell-2-48.png" style="padding-bottom: 5%;"/>
+            <p class="text-white-800">No deliveries available!</p>
+          </div>
+          </ion-list>
+
+          <ion-button  routerLink="/route" color="primary" class="min-w-full">
+            <ion-icon name="map-outline"></ion-icon>
+             &nbsp; Plan Route
+          </ion-button>
+
+          <ion-button color="medium" (click)="refresh()" size="small">
+            <ion-icon name="refresh-outline"></ion-icon>
+            Refresh
+          </ion-button>
+      </div>
+    </div>
+  </div>
+
