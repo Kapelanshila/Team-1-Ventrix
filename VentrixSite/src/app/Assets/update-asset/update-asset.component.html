@@ -71,6 +71,19 @@
             </select>
             <br>
 
+            <label>Value
+                <span>
+                    <i class="fa fa-info-circle" title="Enter the value of the asset."></i>
+                </span>
+            </label>
+            <div *ngIf="submitted">
+                <span *ngIf="f['value'].errors?.['value'] || f['value'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a asset value</span>
+            </div>
+            <div>
+                <input class="form-control" type="number" formControlName="value">
+            </div>
+            <br>
+
             <label>Warranty Date</label>   
             <div *ngIf="submitted">
                 <span *ngIf="f['warrantyDate'].errors?.['warrantyDate'] || f['warrantyDate'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a warranty date</span>

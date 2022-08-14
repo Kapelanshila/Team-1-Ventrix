@@ -77,6 +77,8 @@ import { ReadClientOrderlineComponent } from './ClientOrderLine/ReadClientOrderL
 import { UpdateClientOrderlineComponent } from './ClientOrderLine/UpdateClientOrderLine/update-client-orderline.component';
 import { ReadSupplierOrderlineComponent } from './SupplierOrderLine/ReadSupplierOrderLine/read-supplier-orderline.component';
 import { UpdateSupplierOrderlineComponent } from './SupplierOrderLine/UpdateSupplierOrderLine/update-supplier-orderline.component';
+import { PackOrderComponent } from './PackOrder/pack-order.component';
+import { RevertPackOrderComponent } from './RevertPackOrder/revert-pack-order.component';
 import { WriteOffInventoryComponent } from './WriteOffInventory/write-off-inventory.component';
 import { WriteOffComponent } from './WriteOffInventory/WriteOff/write-off.component';
 import { ViewWriteOffsComponent } from './WriteOffInventory/ViewWriteOffs/view-write-offs.component';
@@ -110,6 +112,18 @@ import { TimeslotComponent } from './Timeslot/timeslot.component';
 import { CreateTimeslotComponent } from './Timeslot/CreateTimeslot/create-timeslot.component';
 import { ReadTimeslotComponent } from './Timeslot/ReadTimeslot/read-timeslot.component';
 import { UpdateTimeslotComponent } from './Timeslot/UpdateTimeslot/update-timeslot.component';
+import { CompletedOrdersComponent } from './ClientOrder/completed-orders/completed-orders.component';
+import { InventoryReportComponent } from './Reporting/inventory-report/inventory-report.component';
+import { AssetReportComponent } from './Reporting/asset-report/asset-report.component';
+import { DepreciationReportComponent } from './Reporting/depreciation-report/depreciation-report.component';
+import { EmployeesReportComponent } from './Reporting/employees-report/employees-report.component';
+import { ManagementReportComponent } from './Reporting/management-report/management-report.component';
+import { BackupRestoreComponent } from './Backup-Restore/backup-restore.component';
+import { ChartsModule } from 'ng2-charts';
+import {MatTreeModule} from '@angular/material/tree';
+import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import { SupplyDemandReportComponent } from './Reporting/supply-demand-report/supply-demand-report.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +132,7 @@ import { UpdateTimeslotComponent } from './Timeslot/UpdateTimeslot/update-timesl
     NavigationComponent,
     DashboardComponent,
     CreateClientComponent,
+    SupplyDemandReportComponent,
     ClientUpdateComponent,
     CreateUserComponent,
     ReadUserComponent,
@@ -181,6 +196,8 @@ import { UpdateTimeslotComponent } from './Timeslot/UpdateTimeslot/update-timesl
     UpdateClientOrderlineComponent,
     ReadSupplierOrderlineComponent,
     UpdateSupplierOrderlineComponent,
+    PackOrderComponent,
+    RevertPackOrderComponent,
     WriteOffInventoryComponent,
     WriteOffComponent,
     ViewWriteOffsComponent,
@@ -207,11 +224,21 @@ import { UpdateTimeslotComponent } from './Timeslot/UpdateTimeslot/update-timesl
     CreateTimeslotComponent,
     ReadTimeslotComponent,
     UpdateTimeslotComponent,
+    CompletedOrdersComponent,
+    InventoryReportComponent,
+    AssetReportComponent,
+    DepreciationReportComponent,
+    EmployeesReportComponent,
+    ManagementReportComponent,
+    BackupRestoreComponent
   ],
   imports: [
+    ChartsModule,
+    MatButtonModule,
     GaugeChartModule,
      BrowserModule,
     AppRoutingModule,
+    MatTreeModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
@@ -219,6 +246,7 @@ import { UpdateTimeslotComponent } from './Timeslot/UpdateTimeslot/update-timesl
     NgxPaginationModule,
     NgOtpInputModule, 
     NgSelectModule,
+    MatIconModule,
     NgCircleProgressModule.forRoot({}),
     TimelineModule,
     NgbModalModule,

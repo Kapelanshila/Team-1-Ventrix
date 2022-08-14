@@ -17,13 +17,12 @@ export class PathService{
     getPath()
     {
       return JSON.parse(localStorage.getItem('path')!);
-  
     }
   
     //Clears Account
     clearPath()
     {
-      localStorage.removeItem('request');
+      localStorage.removeItem('path');
     } 
      //
 

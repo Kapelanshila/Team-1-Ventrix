@@ -18,7 +18,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService, private router: Router, private ventrixdbservice:VentrixDBServiceService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(catchError(err => {
+        return next.handle(request).pipe(catchError(err =>{
             if (err.status === 400) {
                 Swal.fire({
                     icon: 'error',
@@ -114,7 +114,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                   }
 
 
-            return throwError(() => new Error('Invalid Request'));
+            return throwError(() => new Error('Invalid Request\n' + err.status));
         }))
     }
 }

@@ -14,7 +14,7 @@
         </div>
 
         <a class="navbar-brand mx-auto" href="#">
-            <h3 style="font-weight: normal">Ventrix</h3>
+            <h3 style="font-weight: normal; margin-right: 3vw;">Ventrix</h3>
         </a>
     
         <div class="navbar navbar-expand-sm justify-content-between">
@@ -33,7 +33,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Admin </a>
                     <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
                         <a class="dropdown-item" routerLink="/read-user">User</a>
-                        <a class="dropdown-item" href="#">Backup/Restore</a>
+                        <a class="dropdown-item" href="/backup-restore">Backup/Restore</a>
                         <a class="dropdown-item" routerLink="/read-supplier">Supplier</a>
                         <a class="dropdown-item" routerLink="/read-client">Client</a>
                         <a class="dropdown-item" href="/read-employee">Employee</a>
@@ -99,13 +99,12 @@
                 <li class="nav-item dropdown d-sm-block d-md-none">
                     <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Reporting </a>
                     <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-                        <a class="dropdown-item" href="#">Inventory</a>
-                        <a class="dropdown-item" href="#">Assets</a>
-                        <a class="dropdown-item" href="#">Written-Off Inventory</a>
-                        <a class="dropdown-item" href="#">Written-Off Assets</a>
-                        <a class="dropdown-item" href="#">Depreciation</a>
-                        <a class="dropdown-item" href="#">Employees</a>
-                        <a class="dropdown-item" href="#">Management</a>
+                        <a class="dropdown-item" routerlink="/inventory-report">Inventory</a>
+                        <a class="dropdown-item" routerlink="/asset-report">Assets</a>
+                        <a class="dropdown-item" routerlink="/supply-demand">Supply and Demand</a>
+                        <a class="dropdown-item" routerlink="/depreciation-report">Depreciation</a>
+                        <a class="dropdown-item" routerlink="/employees-report">Employees</a>
+                        <a class="dropdown-item" routerlink="/management-report">Management</a>
                     </div>
                 </li>
                 </ng-container>
@@ -143,7 +142,7 @@
                             <span class="menu-collapsed">User</span>
                         </a>
 
-                        <a href="#" class="list-group-item list-group-item-action text-white  bg-primary">
+                        <a href="/backup-restore" class="list-group-item list-group-item-action text-white  bg-primary">
                             <span class="menu-collapsed">Backup/Restore</span>
                         </a>
                         <a routerLink="/read-supplier" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
@@ -283,25 +282,22 @@
                         </div>
                     </a>
                     <div id='submenu5' class="collapse sidebar-submenu">
-                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                        <a href="/inventory-report" class="list-group-item list-group-item-action text-white bg-primary">
                             <span class="menu-collapsed">Inventory</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                        <a href="/asset-report" class="list-group-item list-group-item-action text-white bg-primary">
                             <span class="menu-collapsed">Assets</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
-                            <span class="menu-collapsed">Written-Off Inventory</span>
+                        <a href="/supply-demand-report" class="list-group-item list-group-item-action text-white bg-primary">
+                            <span class="menu-collapsed">Supply and Demand</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
-                            <span class="menu-collapsed">Written-Off Assets</span>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                        <a href="/depreciation-report" class="list-group-item list-group-item-action text-white bg-primary">
                             <span class="menu-collapsed">Depreciation</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                        <a href="/employees-report" class="list-group-item list-group-item-action text-white bg-primary">
                             <span class="menu-collapsed">Employees</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action text-white bg-primary">
+                        <a href="/management-report" class="list-group-item list-group-item-action text-white bg-primary">
                             <span class="menu-collapsed">Management</span>
                         </a>
                     </div>

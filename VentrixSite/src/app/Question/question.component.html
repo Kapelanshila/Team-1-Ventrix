@@ -80,5 +80,44 @@
         </div>
     </div>
 
+
+    
+    <!-- Reset Password Modal -->
+    <!-- Reset Password Modal -->
+    <div
+    class="modal"
+    tabindex="-1"
+    role="dialog"
+    [ngStyle]="{'display':displayStyle}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content password">
+            <div class="modal-header">
+                <h4 class="modal-title">Reset Password</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="resetform">
+                <label>Email</label>
+                <input class="form-control" formControlName = "email"  type="text">
+                <br>
+                <label>Password</label>
+                <input class="form-control" formControlName = "hashedPassword"  type="password">
+                <app-password-strength [passwordToCheck]="resetform.value.hashedPassword" (passwordStrength)="passwordValid($event)"></app-password-strength>
+                <label>Re-enter Password</label>
+                <input class="form-control" formControlName = "password"  type="password" placeholder="Re-enter Password" name="password">
+            </form>  
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" 
+                        (click)="closePopup()">
+                Close
+                </button>
+                <button type="button" class="btn btn-primary" [disabled]="!passwordIsValid" (click)="updatePassword()">
+                    Next
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+    
 <script src="assets/theme.js"></script>
 <script src="assets/bootstrap.min.js"></script>

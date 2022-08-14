@@ -51,6 +51,7 @@ export class CreateAssetComponent implements OnInit {
       assetImage: new FormControl (''),
       userId: new FormControl (''),
       assetStatus: new FormControl (null),
+      value: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
     });
   }
 
@@ -183,7 +184,7 @@ export class CreateAssetComponent implements OnInit {
     });
   }
 
-    if (this.assetform.valid && this.find == false) 
+    if (this.assetform.valid && this.find == false && this.assetform.get('value')?.value > 0) 
       { 
         console.log(this.assetform.value)
         this.currentDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
@@ -206,6 +207,7 @@ export class CreateAssetComponent implements OnInit {
           userId: this.ventrixdbservice.getAccount().userId,
           assetImage: this.filename
         })
+        
         this.ventrixdbservice.createAsset(this.assetform.value).subscribe();
         console.log(this.assetform.get('userId')?.value);
         Swal.fire({
@@ -224,8 +226,21 @@ export class CreateAssetComponent implements OnInit {
         })  
         }
       }
-    }
+      else 
+      {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Invalid Asset Value',
+          text:'Asset Value cannot be less than zero',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+      }
+    }   
   }
+
     getTypes()
     {
       this.assetform.patchValue({

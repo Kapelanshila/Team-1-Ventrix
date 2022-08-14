@@ -21,4 +21,5 @@ export interface AssetVM {
     assetStatus: string|null;
     warehouseId:number
     warehouse:string
+    value: number
 }

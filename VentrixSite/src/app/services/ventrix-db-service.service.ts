@@ -1349,6 +1349,70 @@ return this.http.get<OrderDelivery[]>(environment.apiUrl+'Delivery/getOrderDeliv
 createDeliveredOrderPDF(obj:any){
   return this.http.post<any>(environment.apiUrl+'pdfcreator/createDeliveredPDF',obj, {responseType: 'blob' as 'json'})
  }
+ //
 
+ //Backup Database
+ backupDatabase(){
+  return this.http.get(environment.apiUrl+'BackupRestore/Backup', { responseType : 'text'})
+}
+ //
+
+ //Restore Database 
+ restoreDatabase(){
+  return this.http.get(environment.apiUrl+'BackupRestore/Restore', { responseType : 'text'})
+}
+ //
+
+ //Backup System Files 
+ backupDrive(){
+  return this.http.get(environment.apiUrl+'BackupRestore/BackupDrive', { responseType : 'text'})
+}
+ //
+
+  //Export Inventory Report
+  generateExcelInventoryReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/createInventoryReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
+
+  //Export Asset Report
+  generateExcelAssetReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateAssetReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
+     //Export Employee Report
+  generateExcelEmployeeReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateEmployeeReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
+  //Export Depreciation Report
+  generateExcelDepreciationReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateDepreciationReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
+   
+  //Export Demand Report
+  generateExcelDemandReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateDemandReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
+
+    //Export Demand Report
+  generateExcelSupplyReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateSupplyReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+   
+
+       //Export Demand Report
+  generateExcelManagementReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateManagementReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
 }
 

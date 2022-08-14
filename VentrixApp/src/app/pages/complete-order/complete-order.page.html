@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Complete Order</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background-pic">
+  <ion-button color="primary" size="small" routerLink="/deliveries">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+    Back
+  </ion-button>
+
+
+  <div class="background-pic" >
+    <div class="background-filter">
+
+  <div class="flex justify-center">
+  <ion-card color="medium tint">
+    <ion-card-header class="text-gray-900 text-xl leading-tight font-medium mb-2 text-white">SIGNATURE</ion-card-header>
+
+    <canvas #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+    <ion-card-subtitle>
+
+      <ion-badge color="success" *ngIf="signatureImg != undefined">
+        <ion-label>
+          Signature saved!
+        </ion-label>
+      </ion-badge>
+    </ion-card-subtitle>
+
+
+  </ion-card>
+</div>
+
+<div style="text-align: center;">
+  <button type="button"  (click)="savePad()" class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Save Signature</button>
+<button type="button"  (click)="clearPad()"
+class=" inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Clear</button>
+
+</div>
+
+  <ion-card>
+    <ion-button style="height: 50px;width:100%; border-radius: 50%;" (click)="completeOrder()">Complete Order</ion-button>
+  </ion-card>
+</div>
+</div>
+
+</ion-content>

@@ -17,9 +17,8 @@
                         <button type="button" class="btn btn-primary" (click)="addClientOrder()"><i class="fa fa-plus"></i> Add New</button>
 
                         <button type="button" class="btn btn-dark" (click)="refresh()"><i class="fa fa-refresh"></i> Refresh</button>
-                        
-                        <button type="button" class="btn btn-success"><i class="fa fa-check"></i>Completed</button>	
 
+                        <button type="button" class="btn btn-success" (click)="completedOrders()"><i class="fa fa-check"></i>Completed</button>	
                     </div>
                     <!-- Copy -->
                     <div class="col-md-12 text-nowrap" style="padding: 1%;">
@@ -53,7 +52,7 @@
                             </ng-container>
                             <td>{{order.contactPersonName}}</td>
                             <td>{{order.emailAddress}}</td>
-                            <td class="underline-on-hover">{{order.status}}</td>
+                            <td class="underline-on-hover"><a [routerLink]="" (click)="openPopup(order)" style="cursor: pointer; color: blue;">{{order.status}}</a></td>
                             <td class = "icon-adjust">
                                 <a [routerLink]="" style="cursor: pointer;" class="download" title="Download" data-toggle="tooltip"><i class="fa fa-arrow-down" style="font-size: 16px;" (click)="download(order)" aria-hidden="true"></i></a>
                                 <a [routerLink]="" style="cursor: pointer;" class="add" title="Add inventory to order" data-toggle="tooltip"><i class="fa fa-shopping-cart fa-xs" (click)="addInventory(order)"  style="font-size: 17px;" aria-hidden="true"></i></a>
