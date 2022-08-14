@@ -1349,6 +1349,25 @@ return this.http.get<OrderDelivery[]>(environment.apiUrl+'Delivery/getOrderDeliv
 createDeliveredOrderPDF(obj:any){
   return this.http.post<any>(environment.apiUrl+'pdfcreator/createDeliveredPDF',obj, {responseType: 'blob' as 'json'})
  }
+ //
+
+ //Backup Database
+ backupDatabase(){
+  return this.http.get(environment.apiUrl+'BackupRestore/Backup', { responseType : 'text'})
+}
+ //
+
+ //Restore Database 
+ restoreDatabase(){
+  return this.http.get(environment.apiUrl+'BackupRestore/Restore', { responseType : 'text'})
+}
+ //
+
+ //Backup System Files 
+ backupDrive(){
+  return this.http.get(environment.apiUrl+'BackupRestore/BackupDrive', { responseType : 'text'})
+}
+ //
 
 }
 
