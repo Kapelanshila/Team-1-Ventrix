@@ -115,12 +115,15 @@ import { UpdateTimeslotComponent } from './Timeslot/UpdateTimeslot/update-timesl
 import { CompletedOrdersComponent } from './ClientOrder/completed-orders/completed-orders.component';
 import { InventoryReportComponent } from './Reporting/inventory-report/inventory-report.component';
 import { AssetReportComponent } from './Reporting/asset-report/asset-report.component';
-import { InventoryWriteoffReportComponent } from './Reporting/inventory-writeoff-report/inventory-writeoff-report.component';
-import { AssetWriteoffReportComponent } from './Reporting/asset-writeoff-report/asset-writeoff-report.component';
 import { DepreciationReportComponent } from './Reporting/depreciation-report/depreciation-report.component';
 import { EmployeesReportComponent } from './Reporting/employees-report/employees-report.component';
 import { ManagementReportComponent } from './Reporting/management-report/management-report.component';
 import { BackupRestoreComponent } from './Backup-Restore/backup-restore.component';
+import { ChartsModule } from 'ng2-charts';
+import {MatTreeModule} from '@angular/material/tree';
+import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import { SupplyDemandReportComponent } from './Reporting/supply-demand-report/supply-demand-report.component';
 
 @NgModule({
   declarations: [
@@ -129,6 +132,7 @@ import { BackupRestoreComponent } from './Backup-Restore/backup-restore.componen
     NavigationComponent,
     DashboardComponent,
     CreateClientComponent,
+    SupplyDemandReportComponent,
     ClientUpdateComponent,
     CreateUserComponent,
     ReadUserComponent,
@@ -223,17 +227,18 @@ import { BackupRestoreComponent } from './Backup-Restore/backup-restore.componen
     CompletedOrdersComponent,
     InventoryReportComponent,
     AssetReportComponent,
-    InventoryWriteoffReportComponent,
-    AssetWriteoffReportComponent,
     DepreciationReportComponent,
     EmployeesReportComponent,
     ManagementReportComponent,
     BackupRestoreComponent
   ],
   imports: [
+    ChartsModule,
+    MatButtonModule,
     GaugeChartModule,
      BrowserModule,
     AppRoutingModule,
+    MatTreeModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
@@ -241,6 +246,7 @@ import { BackupRestoreComponent } from './Backup-Restore/backup-restore.componen
     NgxPaginationModule,
     NgOtpInputModule, 
     NgSelectModule,
+    MatIconModule,
     NgCircleProgressModule.forRoot({}),
     TimelineModule,
     NgbModalModule,

@@ -1,9 +1,10 @@
-import { WarrantyPeriod } from "./WarrantyPeriod"
-import { AssetCategory } from "./AssetCategory"
-import { AssetType } from "./AssetType"
-import { Warranty } from "./Warranty"
+import { Supplier } from "./Supplier"
+import { Warehouse } from "./Warehouse"
+import {InventoryCategory } from "./InventoryCategory"
+import { InventoryType } from "./InventoryType"
+import { Account } from "./Account"
 
-export interface AssetVM {
+export interface AssetReport {
     assetId :number | undefined
     conditionId :number | undefined
     assetTypeId:number | undefined
@@ -22,4 +23,5 @@ export interface AssetVM {
     warehouseId:number
     warehouse:string
     value: number
+    account:string
 }

@@ -24,7 +24,7 @@ export class QuestionComponent implements OnInit {
   response1!: UserSecurityQuestion;
   response2!: UserSecurityQuestion;
   response3!: UserSecurityQuestion;
-  check: string | undefined;
+  check!: any;
   resetform : FormGroup;
   passwordIsValid = false;
   title!: string;
@@ -59,6 +59,7 @@ export class QuestionComponent implements OnInit {
   {
 
     this.check = this.pathService.getPath();
+    console.log(this.pathService.getPath())
     this.qIDs= [];
     this.ventrixdbservice.readSecurityquestion()
     .subscribe(response => {
@@ -97,6 +98,7 @@ export class QuestionComponent implements OnInit {
 
   addResponse()
   {
+    console.log(this.check)
         //Checks if the user entered selected the same question
         this.submitted = true;
         if (this.questionform.get('question1')?.value == 
@@ -163,6 +165,7 @@ export class QuestionComponent implements OnInit {
         console.log(this.questions)
         if (this.check == '/login')
         {
+      
           this.ventrixdbservice.forgotUser( this.questionform.get('answer1')?.value, this.questionform.get('answer2')?.value, this.questionform.get('answer3')?.value, this.questionform.get('question1')?.value,this.questionform.get('question2')?.value,this.questionform.get('question3')?.value)
           .subscribe(response => {
             this.account = response;
@@ -200,6 +203,91 @@ export class QuestionComponent implements OnInit {
       return null
     }
     return {'noWhiteSpaceValidator': true}
+  }
+
+  updatePassword()
+  {
+    this.ventrixdbservice.readEmployee()
+    .subscribe(response => {
+      this.employees = response;
+      this.employees.forEach(element => {
+         this.employee = this.employees.find(x => x.emailAddress == this.resetform.get('email')?.value)!;
+      });
+
+      if (this.employee == undefined && this.closed == false)
+      {
+      
+        Swal.fire({
+          icon: 'warning',
+          title: "Invalid Email",
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+      }
+      else
+      {
+  //Check Password has no white spaces
+  var iCount = 0;
+  for(var i = 0; i < this.resetform.get('hashedPassword')!.value.length; i++)
+  {
+    if (this.resetform.get('hashedPassword')!.value[i] == " ")
+    {
+      iCount += 1
+    }
+  }
+
+  if (iCount > 0)
+  {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Invalid Password',
+      text: 'Password contains white spaces!',
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#077bff',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    })
+  }
+  else
+  {
+    if(this.resetform.get('hashedPassword')!.value != this.resetform.get('password')!.value)
+    {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Password do not match',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#077bff',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      })
+    }
+    else
+    {
+      this.account =
+      {
+        employeeId: this.employee.employeeId,
+        name : this.employee.name,
+        surname: this.employee.surname,
+        idNumber: this.employee.idnumber,
+        phoneNumber: this.employee.phoneNumber,
+        homeAddress: this.employee.homeAddress,
+        emailAddress: this.employee.emailAddress,
+        titleId: this.employee.titleId,
+        userId: this.employee.userId,
+        role:this.role,
+        hashedPassword: this.resetform.get('hashedPassword')?.value
+      }
+      this.ventrixdbservice.setAccount(this.account);
+      this.pathService.setRequest('checkpassword');
+      this.router.navigate(['/2FA']).then(() => {
+      })
+    }
+
+  }
+      }
+    });
   }
 
 }

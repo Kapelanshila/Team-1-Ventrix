@@ -54,6 +54,7 @@ export class UpdateAssetComponent implements OnInit {
       userId: new FormControl (''),
       warrantyId: new FormControl (''),
       assetStatus: new FormControl (''),
+      value: new FormControl ('',[Validators.required,this.noWhitespaceValidator]),
     });
   }
 
@@ -201,6 +202,7 @@ export class UpdateAssetComponent implements OnInit {
       warrantyId: this.assetitem?.warrantyId,
       assetStatus: this.assetitem?.assetStatus,
       warehouseId: this.assetitem?.warehouseId,
+      value: this.assetitem?.value
     })
   }
     
@@ -243,7 +245,7 @@ export class UpdateAssetComponent implements OnInit {
           }
     });
 
-    if (this.assetform.valid && this.find == false) 
+    if (this.assetform.valid && this.find == false && this.assetform.get('value')?.value > 0) 
       { 
         console.log(this.assetform.value)
         this.currentDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
@@ -282,6 +284,18 @@ export class UpdateAssetComponent implements OnInit {
           }
         })  
         }
+      }
+      else
+      {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Invalid Asset Value',
+          text:'Asset Value cannot be less than zero',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
       }
   }
 

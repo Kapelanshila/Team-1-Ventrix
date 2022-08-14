@@ -96,7 +96,8 @@ export class ReadAssetWriteoffComponent implements OnInit {
                           assetImage: asset.assetImage,
                           warrantyPeriodId: this.warranty.warrantyPeriodId,
                           assetCategoryId: this.type.assetCategoryId,
-                          assetStatus: asset.assetStatus
+                          assetStatus: asset.assetStatus,
+                          value: asset.value
                         }
                         this.assetItems.push(this.item)
                       }
@@ -216,7 +217,8 @@ export class ReadAssetWriteoffComponent implements OnInit {
                         assetImage: asset.assetImage,
                         warrantyPeriodId: this.warranty.warrantyPeriodId,
                         assetCategoryId: this.type.assetCategoryId,
-                        assetStatus: asset.assetStatus
+                        assetStatus: asset.assetStatus,
+                        value: asset.value
                        }
                        this.assetItems.push(this.item)
                       }

@@ -23,24 +23,83 @@ export class BackupRestoreComponent implements OnInit {
 
   backupDrive()
   {
-    this.loading = true;
-    this.ventrixdbservice.backupDrive().subscribe(response => {
-      this.loading = false;
-    })
-
+    Swal.fire({
+      icon: 'question',
+      title: 'Are you sure you want backup system files?',
+      text:'Eg. Client Invoices, Supplier Invoices, Asset Images etc.',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      confirmButtonColor: '#077bff',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.loading = true;
+        this.ventrixdbservice.backupDrive().subscribe(response => {
+          this.loading = false;
+          Swal.fire({
+            icon: 'success',
+            title: 'System Files Backed Up',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#077bff',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          })
+        })
+      }
+    })  
   }
 
   backupDatabase()
   {
-    this.ventrixdbservice.backupDatabase().subscribe(response => {
-    })
+    Swal.fire({
+      icon: 'question',
+      title: 'Are you sure you want to backup the database?',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      confirmButtonColor: '#077bff',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ventrixdbservice.backupDatabase().subscribe(response => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Database Backed Up',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#077bff',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          })
+        })
+      }
+    })  
   }
 
   restoreDatabase()
   {
-    this.ventrixdbservice.restoreDatabase().subscribe(response => {
-    })
-
+    Swal.fire({
+      icon: 'question',
+      title: 'Are you sure you want to restore the database?',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      confirmButtonColor: '#077bff',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ventrixdbservice.restoreDatabase().subscribe(response => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Database Restored',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#077bff',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          })
+        })
+      }
+    })  
   }
 
 }

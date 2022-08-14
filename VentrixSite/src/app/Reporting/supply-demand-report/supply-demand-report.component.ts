@@ -281,7 +281,7 @@ monthChange()
     let leftPosition = 0;
 
     PDF.addImage(contentDataUrl, 'PNG', leftPosition, topPosition, fileWidth, fileHeight);
-    PDF.save('Supply-Demand Report.pdf');
+    PDF.save('Demand Report.pdf');
   }
 
   )
@@ -306,7 +306,7 @@ monthChange()
     let leftPosition = 0;
 
     PDF.addImage(contentDataUrl, 'PNG', leftPosition, topPosition, fileWidth, fileHeight);
-    PDF.save('Graph.pdf');
+    PDF.save('Supply Report.pdf');
   }
 
   )

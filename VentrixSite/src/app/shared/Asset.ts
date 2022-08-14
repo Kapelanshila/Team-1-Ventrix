@@ -7,4 +7,5 @@ export interface Asset {
     name:string 
     manufacturer:string
     assetStatus: string|null;
+    value:number;
 }

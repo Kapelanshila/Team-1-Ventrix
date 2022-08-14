@@ -1369,5 +1369,50 @@ createDeliveredOrderPDF(obj:any){
 }
  //
 
+  //Export Inventory Report
+  generateExcelInventoryReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/createInventoryReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
+
+  //Export Asset Report
+  generateExcelAssetReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateAssetReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
+     //Export Employee Report
+  generateExcelEmployeeReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateEmployeeReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
+  //Export Depreciation Report
+  generateExcelDepreciationReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateDepreciationReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
+   
+  //Export Demand Report
+  generateExcelDemandReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateDemandReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
+
+    //Export Demand Report
+  generateExcelSupplyReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateSupplyReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+   
+
+       //Export Demand Report
+  generateExcelManagementReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateManagementReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
 }
 
