@@ -1,0 +1,41 @@
+<div class = "body">
+    <app-navigation></app-navigation>
+    <div class="container-xl">
+        <div class="table" >
+            <div class="table-wrapper" >
+                <br>
+                <div class="table-title">
+                    <h1 style="text-align: center;">BackUp/Restore</h1>
+              </div>	
+              <br>
+              <br>
+              <br>
+              <div class="row" style="text-align: center;">
+                <div class="col-lg-6 col-sm-12" style="padding: 0px 0px;">
+                    <img style="width: 180px; height:175px" src="assets/images/Database.png">
+                    <br>
+                    <p style="padding-top: 10px; font-size: 20px;">Database</p>
+                    <br>
+                    <button style="width: 90%; padding: 2%;" (click)="backupDatabase()" type="button" class="btn btn-primary"><i class="fa fa-undo"></i> Backup</button>
+                    <br>
+                    <br>
+                    <button style="width: 90%; padding: 2%;" (click)="restoreDatabase()" type="button" class="btn btn-dark"><i class="fa fa-refresh"></i> Restore</button>
+                </div>
+                <div class="col-lg-6 col-sm-12" style="padding: 0px 0px;">
+                    <img style="width: 190px; height:175px" src="assets/images/Drive.png">
+                    <br>
+                    <p style="padding-top: 10px; font-size: 20px;">System Files</p>
+                    <br>
+                    <button (click)="backupDrive()" style="width: 90%; padding: 2%;" type="button" class="btn btn-primary"><i class="fa fa-undo"></i> Backup</button>
+                </div>
+            </div>
+
+            </div>
+
+        </div>
+    </div>   
+</div>
+
+<div *ngIf="loading == true" class="loading">
+    <img class="loadingimage" src="assets/images/Loading.gif">
+</div>
