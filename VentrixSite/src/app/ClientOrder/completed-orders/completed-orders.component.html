@@ -6,7 +6,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8">
-                            <h2>Manage Client Orders</h2>
+                            <h2>Completed Client Orders</h2>
                         </div>
                         <div class="col-sm-4">
                             <div class="search-box">
@@ -14,11 +14,6 @@
                                 <input type="text" class="form-control" placeholder="Search&hellip;" [(ngModel)]="query"  (keyup.enter)="searchClientOrder()">
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary" (click)="addClientOrder()"><i class="fa fa-plus"></i> Add New</button>
-
-                        <button type="button" class="btn btn-dark" (click)="refresh()"><i class="fa fa-refresh"></i> Refresh</button>
-
-                        <button type="button" class="btn btn-success" (click)="completedOrders()"><i class="fa fa-check"></i>Completed</button>	
                     </div>
                     <!-- Copy -->
                     <div class="col-md-12 text-nowrap" style="padding: 1%;">
@@ -39,7 +34,6 @@
                                 <th>Description</th>
                                 <th>Client Name</th>
                                 <th>Client Email</th>
-                                <th>Current Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,12 +46,8 @@
                             </ng-container>
                             <td>{{order.contactPersonName}}</td>
                             <td>{{order.emailAddress}}</td>
-                            <td class="underline-on-hover"><a [routerLink]="" (click)="openPopup(order)" style="cursor: pointer; color: blue;">{{order.status}}</a></td>
                             <td class = "icon-adjust">
                                 <a [routerLink]="" style="cursor: pointer;" class="download" title="Download" data-toggle="tooltip"><i class="fa fa-arrow-down" style="font-size: 16px;" (click)="download(order)" aria-hidden="true"></i></a>
-                                <a [routerLink]="" style="cursor: pointer;" class="add" title="Add inventory to order" data-toggle="tooltip"><i class="fa fa-shopping-cart fa-xs" (click)="addInventory(order)"  style="font-size: 17px;" aria-hidden="true"></i></a>
-                                <a [routerLink]="" style="cursor: pointer;" class="edit" title="Edit" data-toggle="tooltip"><i  (click)="editClientOrder(order)"  style="font-size: 17px;" class="material-icons">&#xE254;</i></a>
-                                <a [routerLink]="" style="cursor: pointer;" class="delete" title="Delete" data-toggle="tooltip"><i (click)="deleteClientOrder(order)"  style="font-size: 17px;" class="material-icons">&#xE872;</i></a>
                             </td>  
                         </tr>
                         </tbody>
@@ -72,46 +62,6 @@
             </div>  
         </div>   
     </div> 
-
-
-</div> 
-
-
-<!-- Display Status -->
-<div
-class="modal"
-tabindex="-1"
-role="dialog"
-[ngStyle]="{'display':displayStyle}">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title">{{orderstatus.description}} Status History</h4>
-    </div>
-    <div class="modal-body">
-        <div class="row"  *ngFor="let status of statuses">
-            <div class="col-4">
-                <ul style="list-style-type:none">
-                    <li style="font-weight: bold;">{{status.description}}</li>
-                 </ul>
-            </div>
-            <div class="col-8">
-                <ul style="list-style-type:none; text-align: center;">
-                    <li>{{status.date | extension}}</li>
-                 </ul>
-            </div>
-          </div>
-        <br>
-        <br>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-danger" 
-                (click)="closePopup()">
-        Close
-        </button>
-    </div>
-</div>
-</div> 
 </div> 
 
 <!-- Display Client Order Line -->

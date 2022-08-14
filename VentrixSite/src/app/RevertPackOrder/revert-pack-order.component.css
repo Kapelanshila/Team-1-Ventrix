@@ -2,14 +2,13 @@
     font-family: 'Roboto', sans-serif;
     background: linear-gradient( rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55) ), url("Ventrix.jpg");
     background-size: cover;
-    min-height: 2000px;
+    height: 1500px;
     width:100%;
     position: absolute;
-    overflow-x:hidden;
-    overflow-y:hidden;
+    overflow-x: hidden;
 }
 
-.table {
+.table-responsive {
     margin: 12% 0;
     box-shadow: 0 30px 30px rgba(0, 0, 0, 0.292);
     background: #fff;
@@ -70,11 +69,11 @@ table.table td a {
     display: inline-block;
     margin: 0 5px;
 }
-table.table td a.edit {
-    color: #3F70CA;
+table.table td a.undo {
+    color: #ff0000;
 }
-table.table td a.delete {
-    color: #E34724;
+table.table td a.download {
+    color: #000000;
 }
 table.table td i {
     font-size: 19px;
@@ -97,28 +96,28 @@ table.table td i {
     float: right;
     margin: 0 0 5px;
 }
-table.table td a.view {
-    color: #000000;
-}
 .custom-pagination /deep/ .ngx-pagination .current 
 {
     background:#077bff;
 }
-li
+
+.container-fluid
 {
-   font-size: 17px; 
+    width: 90%;
 }
-.loading
+.underline-on-hover a:hover {
+    text-decoration: underline;
+}
+
+.modal
 {
-    position: absolute;
-    width: 100vw;
-    height: 2000px;
-    background-color: #ffffffa2;
+  background: linear-gradient( rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55) )  
 }
-.loadingimage
-{
-    width:20vw;
-    height: 20vw;
-    margin-left: 40vw;
-    margin-top: 40vh;
-}
+
+.modal-content {
+    -ms-transform: translate(0,50%);
+    -moz-transform: translate(0,50%);
+    -webkit-transform: translate(0,50%);
+    transform: translate(0,50%);
+    width:100%;
+  }

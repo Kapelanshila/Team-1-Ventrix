@@ -4,7 +4,7 @@
     <app-navigation></app-navigation>
     <div class="asset-card">
         <form class="form-user"  [formGroup]="assetform" (ngSubmit)="editAssetRepair()"><span class="reauth-email"> </span>
-            <h4 class="card-title">Update {{assetitem!.name!}} for Repairs </h4>
+            <h4 class="card-title">Log {{assetitem!.name!}} for Repairs </h4>
             <hr>
             <label>Asset Repair Reason</label>
             <div *ngIf="submitted">
