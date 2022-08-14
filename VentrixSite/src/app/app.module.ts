@@ -227,7 +227,7 @@ import { BackupRestoreComponent } from './Backup-Restore/backup-restore.componen
     AssetWriteoffReportComponent,
     DepreciationReportComponent,
     EmployeesReportComponent,
-    ManagementReportComponent
+    ManagementReportComponent,
     BackupRestoreComponent
   ],
   imports: [
