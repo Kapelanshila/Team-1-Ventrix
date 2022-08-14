@@ -110,7 +110,6 @@ import { TimeslotComponent } from './Timeslot/timeslot.component';
 import { CreateTimeslotComponent } from './Timeslot/CreateTimeslot/create-timeslot.component';
 import { ReadTimeslotComponent } from './Timeslot/ReadTimeslot/read-timeslot.component';
 import { UpdateTimeslotComponent } from './Timeslot/UpdateTimeslot/update-timeslot.component';
-import { CompletedOrdersComponent } from './ClientOrder/completed-orders/completed-orders.component';
 
 @NgModule({
   declarations: [
@@ -208,7 +207,6 @@ import { CompletedOrdersComponent } from './ClientOrder/completed-orders/complet
     CreateTimeslotComponent,
     ReadTimeslotComponent,
     UpdateTimeslotComponent,
-    CompletedOrdersComponent
   ],
   imports: [
     GaugeChartModule,

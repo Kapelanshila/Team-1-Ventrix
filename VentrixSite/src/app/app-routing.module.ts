@@ -89,7 +89,6 @@ import { TimeslotComponent } from './Timeslot/timeslot.component';
 import { CreateTimeslotComponent } from './Timeslot/CreateTimeslot/create-timeslot.component';
 import { ReadTimeslotComponent } from './Timeslot/ReadTimeslot/read-timeslot.component';
 import { UpdateTimeslotComponent } from './Timeslot/UpdateTimeslot/update-timeslot.component';
-import { CompletedOrdersComponent } from './ClientOrder/completed-orders/completed-orders.component';
 import { AdminAuthGuard } from './_helpers/admin.auth.guard';
 import { InventoryAuthGuard } from './_helpers/inventory.auth.guard';
 import { AssetAuthGuard } from './_helpers/asset.auth.guard';
@@ -185,7 +184,6 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 {path: 'read-timeslot', component:ReadTimeslotComponent, canActivate: [InventoryAuthGuard]  },
 {path: 'update-timeslot', component:UpdateTimeslotComponent, canActivate: [InventoryAuthGuard]  },
 {path: 'timeslot', component:TimeslotComponent, canActivate: [InventoryAuthGuard]  },
-{path: 'completed-orders', component:CompletedOrdersComponent, canActivate: [DriverAuthGuard]  },
 {path: '', redirectTo: 'login', pathMatch: 'full' }];
 
 @NgModule({
