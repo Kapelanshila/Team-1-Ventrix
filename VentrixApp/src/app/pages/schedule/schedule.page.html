@@ -69,7 +69,7 @@
               ease-in-out
               m-0
               focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput7"  formControlName="slotID">
-                <ion-select-option  *ngFor="let time of timesSlots" [value]="time.timeslot" >{{time.date.slotDate | date:"yyyy-MM-dd"}} | {{time.timeslot.startTime | date:"hh:mm"}} - {{time.timeslot.endTime | date:"hh:mm"}}</ion-select-option>
+                <ion-select-option  *ngFor="let time of timesSlots" [value]="time.timeslot" >{{time.date.slotDate | date:"yyyy-MM-dd"}} | {{time.timeslot.startTime | date:"HH:mm"}} - {{time.timeslot.endTime | date:"HH:mm"}}</ion-select-option>
 
               </ion-select>
         </div>

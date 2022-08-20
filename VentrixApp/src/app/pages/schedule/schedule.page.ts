@@ -54,6 +54,7 @@ export class SchedulePage implements OnInit {
           if (Date.parse(this.currentDate) <= Date.parse(this.slotdate))
           {
             this.timesSlots.push(element);
+            console.log(this.timesSlots)
           }
         });
         this.clientInfo = data.UserInfo;
