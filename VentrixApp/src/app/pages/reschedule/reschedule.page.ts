@@ -69,6 +69,7 @@ export class ReschedulePage implements OnInit {
             if (Date.parse(this.currentDate) <= Date.parse(this.slotdate))
             {
               this.timesSlots.push(element);
+              console.log(this.timesSlots)
             }
           }
           else
