@@ -50,9 +50,14 @@ const routes: Routes = [
   {
     path: 'vieworder/:clientOrderId',
     loadChildren: () => import('./vieworder/vieworder.module').then( m => m.VieworderPageModule)
-  },  {
+  },
+  {
     path: 'searchorder',
     loadChildren: () => import('./searchorder/searchorder.module').then( m => m.SearchorderPageModule)
+  },
+  {
+    path: 'help',
+    loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule)
   },
 
 
