@@ -84,7 +84,7 @@ export class ReadAssetRepairReasonComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             this.ventrixdbservice.deleteAssetRepairReason(selectedassetrepairreason).subscribe();
-            this.router.navigate(['/read-writeoffreason']).then(() => {
+            this.router.navigate(['/read-asset-repair-reason']).then(() => {
             window.location.reload();
             });
           }
@@ -93,8 +93,9 @@ export class ReadAssetRepairReasonComponent implements OnInit {
         else
         {
           Swal.fire({
-            icon: 'error',
-            title: 'Asset Repair Reason Assoiciated to other entries',
+            icon: 'warning',
+            title: 'Asset Repair Reason Associated to other entries',
+            text:'Asset Repair Reason associated to asset repairs',
             showDenyButton: false,
             confirmButtonText: 'Ok',
             confirmButtonColor: '#077bff',

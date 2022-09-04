@@ -12,22 +12,33 @@
                         </div>
                         <div class="col-sm-4">
                         </div>
+    
+                    </div>
+                    <div *ngIf="inventoryItems.length != 0" >
+                        <button (click)="download()" style="width: 150px; margin-top: 1%;" class="btn btn-dark btn-block"><i class="fa fa-arrow-down" aria-hidden="true"></i> Download PDF</button>
+                    </div>
+                    
+                    <!-- Copy -->
+                    <div class="col-md-12 text-nowrap" style="margin-top: 15px; margin-left: -10px;">
+                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;
+                            <select class="d-inline-block form-select form-select-sm" [(ngModel)]="noOfRows">
+                                    <option value="5" selected="">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>&nbsp;</label></div>
+                    </div>
+                    
+                    <div class="col-md-12">
                     </div>
                     <!-- Copy -->
-                    <div  *ngIf="inventoryItems.length != 0" >
-                    <button (click)="openPDF()" style="width: 150px; margin-top: 1%; float: left;" class="btn btn-dark btn-block"><i class="fa fa-arrow-down" aria-hidden="true"></i> Download PDF</button>
-                    <br>
-                    <br>
-                    <button (click)="generateExcel()" style="width: 150px; margin-top: 1%;" class="btn btn-success btn-block"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Report</button>
-                    </div> 
 
-                    <div class="col-md-12">
-                    <div>
+                    <div *ngIf="inventoryItems.length == 0">
                         <br>
                         <br>
-                        <h6 *ngIf="inventoryItems.length == 0" style="text-align: center; color: red;">No inventory items found</h6>
+                        <h6  style="text-align: center; color: red;">No inventory items found</h6>
                     </div>
-                </div>
+         
                 <div *ngIf="inventoryItems.length != 0" id="htmlData">
                 <h5 style="text-align: center;">Inventory List Report</h5>
                 <br>                    
@@ -55,12 +66,18 @@
                     </tr>
                     </tbody>
                 </table>
+                <div class="hint-text">Showing <b> {{inventoryItems.length}}</b> entries</div>
+                <div class="pagination">
+                    <div id="pagination" class="custom-pagination">
+                        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                    </div>    
+                </div>		
                 <br>
-                <div style="text-align: center;"><img src="assets/images/Akquize.png"></div>
 
             </div>
             </div>
-        </div>  
+        </div> 
+        <div style="text-align: center; margin-bottom: 15px;"><img src="assets/images/Akquize.png"></div>
     </div>   
 </div>
 </div>   
@@ -91,7 +108,24 @@
                 </mat-tree>	
             </div>
         </div>  
+    </div>  
+    
+    <div class="container-xl">
+        <div style="margin-top: -25%;">
+            <div class="table-wrapper" style="margin-top: 23%;">
+                <mat-tree [dataSource]="wdataSource" [treeControl]="treeControl">
+                    <!-- This is the tree node template for leaf nodes -->
+                    <mat-tree-node (mwlClick)="warehouseclicked(node.name)" *matTreeNodeDef="let node" matTreeNodePadding>
+                    <!-- use a disabled button to provide padding for tree leaf -->
+                    <button mat-icon-button disabled></button>
+                    <span class="txtColor" >{{node.name}}</span>
+                    </mat-tree-node>
+
+                </mat-tree>	
+            </div>
+        </div>  
     </div>   
 </div>
+
 </div>
 </div>

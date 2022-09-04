@@ -36,6 +36,7 @@
                                 <li>Manufacturer: {{assetitem!.manufacturer}}</li>
                                 <li>Type: {{assetitem!.type}}</li>
                                 <li>Category: {{assetitem!.category}}</li>
+                                <li>Value: {{assetitem!.value |currency:'R'}}</li>
                                 <ng-container *ngIf="assetitem!.assetStatus! == 'Repairing'">
                                     <br>
                                     <li style="color: red; font-weight: bold; font-size: 25px;">Repairing</li>

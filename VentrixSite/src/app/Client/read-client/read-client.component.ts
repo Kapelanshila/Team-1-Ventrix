@@ -20,7 +20,7 @@ export class ReadClientComponent implements OnInit {
   p: number = 1;
   config: any; 
   noOfRows = 10;
-
+  clientorders:any = [];
 
   //Search query 
   query:string = '';
@@ -65,23 +65,44 @@ export class ReadClientComponent implements OnInit {
   deleteClient(selectedclient: Client)
   { 
       //Sweet alerts are used as notifications
-      Swal.fire({
-        icon: 'warning',
-        title: 'Are you sure you want to delete this client?',
-        showDenyButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: `No`,
-        confirmButtonColor: '#077bff',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.ventrixdbservice.deleteClient(selectedclient).subscribe();
-          this.router.navigate(['/read-client']).then(() => {
-          window.location.reload();
-          });
-        }
-      })  
+      this.ventrixdbservice.readClientOrder().subscribe(response => {
+        this.clientorders = response;
+  
+        if (this.clientorders.find((x: { clientId: Number; }) => x.clientId == selectedclient.clientId) == undefined)
+        {
+            //Sweet alerts are used as notifications
+            Swal.fire({
+              icon: 'warning',
+              title: 'Are you sure you want to delete this client?',
+              showDenyButton: true,
+              confirmButtonText: 'Yes',
+              denyButtonText: `No`,
+              confirmButtonColor: '#077bff',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.ventrixdbservice.deleteClient(selectedclient).subscribe();
+                this.router.navigate(['/read-client']).then(() => {
+                window.location.reload();
+                });
+              }
+            })  
+            }
+            else
+            {
+              Swal.fire({
+                icon: 'warning',
+                title: 'Client Associated to other entries',
+                text: 'Client associated to client orders',
+                showDenyButton: false,
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#077bff',
+                allowOutsideClick: false,
+                allowEscapeKey: false
+              })
+            }
+          })
   }
 
   //Searches through client first validates if there is spaace or no search was add then call api to search

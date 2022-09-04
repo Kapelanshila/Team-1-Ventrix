@@ -15,10 +15,12 @@ export class ReadEmployeeComponent implements OnInit {
   employees:any[] = [];
   users:any[] = [];
   roles:any[] = [];
+  trails:any[] = [];
   role:any;
   user:any;
   data:Employee[] = [];
-
+  histories:any = [];
+  collectedorders:any = [];
   p: number = 1;
   config: any;
   noOfRows = 10;
@@ -81,25 +83,53 @@ export class ReadEmployeeComponent implements OnInit {
   //Delete Client Function 
   deleteEmployee(selectedEmployee: Employee)
   {
-    Swal.fire({
-      icon: 'warning',
-      title: 'Are you sure you want to delete this employee?',
-      text: 'Deleting this employee will remove user information',
-      showDenyButton: true,
-      confirmButtonText: 'Yes',
-      denyButtonText: 'No',
-      confirmButtonColor: '#077bff',
-      allowOutsideClick: false,
-      allowEscapeKey: false
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.ventrixdbservice.deleteEmployee(selectedEmployee).subscribe();
-        this.router.navigate(['/read-employee']).then(() => {
-          window.location.reload();
-        });
-      }
+    this.ventrixdbservice.readAssetsLocations().subscribe(response => {
+      this.histories = response;
+
+      this.ventrixdbservice.readCollectedorders().subscribe(response => {
+        this.collectedorders = response;
+
+        this.ventrixdbservice.readAssetTrails().subscribe(response => {
+          this.trails = response;
+          console.log(this.trails)
+
+      if (this.histories.find((x: { employeeId: Number; }) => x.employeeId == selectedEmployee.employeeId) == undefined && this.collectedorders.find((x: { employeeId: Number; }) => x.employeeId == selectedEmployee.employeeId) == undefined && this.trails.find((x: { userId: Number; }) => x.userId == selectedEmployee.userId ) == undefined) 
+      {
+          //Sweet alerts are used as notifications
+          Swal.fire({
+            icon: 'warning',
+            title: 'Are you sure you want to delete this employee?',
+            showDenyButton: true,
+            confirmButtonText: 'Yes',
+            denyButtonText: `No`,
+            confirmButtonColor: '#077bff',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.ventrixdbservice.deleteEmployee(selectedEmployee).subscribe();
+              this.router.navigate(['/read-employee']).then(() => {
+              window.location.reload();
+              });
+            }
+          })  
+          }
+          else
+          {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Employee Associated to other entries',
+              text: 'Employee associated to asset entries, order entries or is involved with asset transactions',
+              showDenyButton: false,
+              confirmButtonText: 'Ok',
+              confirmButtonColor: '#077bff',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+            })
+          }
+        })
+      })
     })
-    
   }
 
   searchEmployee()

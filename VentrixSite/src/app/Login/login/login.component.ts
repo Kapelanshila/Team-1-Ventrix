@@ -157,7 +157,7 @@ export class LoginComponent implements OnInit {
                 hashedPassword: ''
               }
               this.ventrixdbservice.setAccount(this.account);
-              this.router.navigate(['/read-client']);
+              this.router.navigate(['/dashboard']);
             }
           })
       }

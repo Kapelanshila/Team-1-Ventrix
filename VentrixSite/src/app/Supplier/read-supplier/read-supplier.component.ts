@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class ReadSupplierComponent implements OnInit {
   suppliers:any[] = [];
+  supplierorders:any = [];
+  inventories:any = [];
   query:string = '';
     // Copy
     p: number = 1;
@@ -43,24 +45,48 @@ export class ReadSupplierComponent implements OnInit {
   //Delete Supplier Function 
   deleteSupplier(selectedsupplier: Supplier)
   { 
-      //Sweet alerts are used as notifications
-      Swal.fire({
-        icon: 'warning',
-        title: 'Are you sure you want to delete this supplier?',
-        showDenyButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: `No`,
-        confirmButtonColor: '#077bff',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.ventrixdbservice.deleteSupplier(selectedsupplier).subscribe();
-          this.router.navigate(['/read-supplier']).then(() => {
-          window.location.reload();
-          });
-        }
-      })  
+    this.ventrixdbservice.readSupplierOrder().subscribe(response => {
+      this.supplierorders = response;
+
+      this.ventrixdbservice.readInventory().subscribe(response => {
+        this.inventories = response;
+
+      if (this.supplierorders.find((x: { supplierId: Number; }) => x.supplierId == selectedsupplier.supplierId) == undefined && this.inventories.find((x: { supplierId: Number; }) => x.supplierId == selectedsupplier.supplierId) == undefined)
+      {
+          //Sweet alerts are used as notifications
+          Swal.fire({
+            icon: 'warning',
+            title: 'Are you sure you want to delete this supplier?',
+            showDenyButton: true,
+            confirmButtonText: 'Yes',
+            denyButtonText: `No`,
+            confirmButtonColor: '#077bff',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.ventrixdbservice.deleteSupplier(selectedsupplier).subscribe();
+              this.router.navigate(['/read-supplier']).then(() => {
+              window.location.reload();
+              });
+            }
+          })  
+          }
+          else
+          {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Supplier Associated to other entries',
+              text: 'Supplier associated to inventory items or supplier orders',
+              showDenyButton: false,
+              confirmButtonText: 'Ok',
+              confirmButtonColor: '#077bff',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+            })
+          }
+        })
+      })
   }
 
   searchSupplier()

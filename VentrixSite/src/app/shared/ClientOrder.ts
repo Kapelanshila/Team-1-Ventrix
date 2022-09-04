@@ -3,4 +3,5 @@ export interface ClientOrder {
     clientId: Number
     description :String 
     clientInvoice: String
+    encrypted:string
 }

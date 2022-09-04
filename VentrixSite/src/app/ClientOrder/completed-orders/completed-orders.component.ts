@@ -87,7 +87,8 @@ export class CompletedOrdersComponent implements OnInit {
       contactPersonName : '',
       contactPersonSurname: '',
       emailAddress: '',
-      status: ''
+      status: '',
+      encrypted:''
     }
 
     this.ventrixdbservice.clearClientOrder();
@@ -143,7 +144,8 @@ export class CompletedOrdersComponent implements OnInit {
                     contactPersonName : element.contactPersonName!,
                     contactPersonSurname: element.contactPersonSurname!,
                     emailAddress: element.emailAddress!,
-                    status: this.temp.description
+                    status: this.temp.description,
+                    encrypted:''
                   }
                   this.clientOrderVM.push(this.order)
                 }
@@ -250,7 +252,8 @@ export class CompletedOrdersComponent implements OnInit {
                         contactPersonName : element.contactPersonName!,
                         contactPersonSurname: element.contactPersonSurname!,
                         emailAddress: element.emailAddress!,
-                        status: this.temp.description
+                        status: this.temp.description,
+                        encrypted:''
                       }
                       this.clientOrderVM.push(this.order)
                     }

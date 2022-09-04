@@ -26,12 +26,14 @@
                         <tr>
                             <th>Asset</th>
                             <th>Repair Reason</th>
+                            <th>Descritpion</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let repairItem of repairItems | paginate:{itemsPerPage: noOfRows, currentPage:p}">
-                        <td class="underline-on-hover"><a [routerLink]="" (click)="openPopup(repairItem)" style="cursor: pointer; color: blue;">{{repairItem.assetname}}</a></td>
+                        <td class="underline-on-hover"><a [routerLink]="" style="cursor: pointer; color: black;">{{repairItem.assetname}}</a></td>
                         <td>{{repairItem.reason}}</td>
+                        <td>{{repairItem.description}}</td>
                         <td class = "icon-adjust">
                             <a [routerLink]="" style="cursor: pointer;" class="repair" title="Asset Repaired" (click)="repairAsset(repairItem)" data-toggle="tooltip"><i class="fa fa-check-square-o fa-5x" aria-hidden="true"></i></a>
                             <a [routerLink]="" style="cursor: pointer;" class="edit" title="Edit" data-toggle="tooltip" (click)="editAssetRepair(repairItem)"><i class="material-icons">&#xE254;</i></a>
@@ -52,7 +54,7 @@
 </div>
 
 <!-- Display Status -->
-<div
+<!-- <div
 class="modal"
 tabindex="-1"
 role="dialog"
@@ -69,10 +71,10 @@ role="dialog"
             {{itemSelected.description}}
 
             <br>
-            <!-- <ng-container *ngIf="itemSelected.date != undefined">
+            <ng-container *ngIf="itemSelected.date != undefined">
                 <h6>Repaired Date</h6>
                 {{itemSelected.date | extension}}
-            </ng-container> -->
+            </ng-container>
         </ng-container>
 
 
@@ -87,4 +89,4 @@ role="dialog"
     </div>
 </div>
 </div> 
-</div> 
+</div>  -->

@@ -15,6 +15,8 @@ import { saveAs } from 'file-saver';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
 import { InventoryPopup } from 'src/app/shared/InventoryPopUp';
+import { Inventory } from 'src/app/shared/Inventory';
+import { InventoryVM } from 'src/app/shared/InventoryVM';
 
 @Component({
   selector: 'app-read-client-order',
@@ -38,11 +40,31 @@ export class ReadClientOrderComponent implements OnInit {
   orderstatus!:ClientOrderVM;
   statuses: ClientOrderStatus[] = [];
   inventories: any[] =[];
-  item!: InventoryPopup;
   clientorderlines: any[] = [];
   orders: any[] = [];
+  filterOrder:ClientOrderVM[] = [];
+  status: string = "";
+  readstatuses: any[] = [];
+  invetoryselected=false;
+  clientselected=false;
+  statusselected=false;
+  inventoryitems:Inventory[] = [];
+  idselected!:any;
+  Iitem!:InventoryVM;
+  warehouses:any[] = [];
+  suppliers:any[] = [];
+  types:any[] = [];
+  supplierorderline:any[] = [];
+  clientorderline:any[] = [];
+  categories:any[] = [];
+  item!:InventoryVM;
+  type:any;
+  inventoryItems:any[] = [];
+  inventorywriteoffs!:any;
+  clientorders!:any;
+  supplierorders!:any;
+  inventory:any;
   
-
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
   { }
   //Modal
@@ -51,6 +73,15 @@ export class ReadClientOrderComponent implements OnInit {
 
       //Modal Open and Close Functions
       openPopup(selectedClientOrder: ClientOrderVM) {
+        this.idselected = selectedClientOrder.clientOrderId;
+        this.statuses = [];
+
+        if(this.statusselected == false)
+        {
+          this.invetoryselected = false;
+          this.clientselected = false;
+          this.statusselected = true;
+          
         this.orderstatus = selectedClientOrder;
         this.ventrixdbservice.readClientOrderStatuses()
         .subscribe(response => {
@@ -63,44 +94,112 @@ export class ReadClientOrderComponent implements OnInit {
               this.statuses.push(element)
             }
           });
-          this.displayStyle = "block";
         })
- 
       }
-
-      closePopup() {
-        this.displayStyle = "none";
+      else
+      {
+        this.statusselected = false;
+        this.statuses = [];
       }
-
+      }
 
 
       //Modal Open and Close Functions
       //Dispays Inventory for a Client Order but only for client orders that have been proccessed 
       openInventoryPopup(selectedClientOrder: ClientOrderVM) {
+        this.idselected = selectedClientOrder.clientOrderId;
+        this.inventoryitems = [];
         this.orders = [];
-        this.ventrixdbservice.readClientOrderLine()
-        .subscribe(response => {
-          this.clientorderlines = response;
-          console.log(this.clientorderlines)
-          this.ventrixdbservice.readInventory()
+
+        if(this.invetoryselected == false)
+        {
+          this.invetoryselected = true;
+          this.clientselected = false;
+          this.statusselected = false;
+          
+          this.ventrixdbservice.readClientOrderLine()
           .subscribe(response => {
-            this.inventories = response;
-       
-            this.clientorderlines.forEach(element => {
-              if (element.clientOrderId == selectedClientOrder.clientOrderId)
-              {
-                this.item =
-                {
-                  name: this.inventories.find(x => x.inventoryId == element.inventoryId).name,
-                  date: element.date,
-                  quantity: element.quantity
-                }
-                this.orders.push(this.item);
-              }
-            });
-            this.idisplayStyle = "block";
+            this.clientorderlines = response;
+
+            this.ventrixdbservice.readInventory()
+            .subscribe(response => {
+              this.inventories = response;
+
+                                  this.ventrixdbservice.readInventoryType()
+                    .subscribe(response => {
+                      this.types = response;
+    
+                        this.ventrixdbservice.readInventoryCategory()
+                        .subscribe(response => {
+                          this.categories = response;
+    
+                          this.ventrixdbservice.readWarehouse()
+                          .subscribe(response => {
+                            this.warehouses = response;
+    
+                            this.ventrixdbservice.readSupplier()
+                            .subscribe(response => {
+                              this.suppliers = response;
+                      
+                            this.clientorderlines.forEach(element => {
+                              if (element.clientOrderId == selectedClientOrder.clientOrderId)
+                              {
+                                this.inventory = this.inventories.find(x => x.inventoryId == element.inventoryId);
+                                console.log(this.inventory)
+                                  //Types,Category,Supplier and Warehouse is also retrived from the api in order to present relevant information realting to that inventory item
+
+                  
+                              this.type = this.types.find(x => x.inventoryTypeId == this.inventory.inventoryTypeId);
+                                console.log(this.inventory)
+
+                                //New inventory view model is assigned the retrived values from the api
+                                this.Iitem = 
+                                {
+                                  inventoryId: this.inventory.inventoryId,
+                                  warehouse :this.warehouses.find(x => x.warehouseId == this.inventory.warehouseId),
+                                  type:this.types.find(x => x.inventoryTypeId == this.inventory.inventoryTypeId),
+                                  category :this.categories.find(x => x.inventoryCategoryId == this.type.inventoryCategoryId),
+                                  supplier:this.suppliers.find(x => x.supplierId == this.inventory.supplierId),
+                                  name: this.inventory.name,
+                                  quantityOnHand: element.quantity
+                                }
+                                console.log(this.Iitem)
+                                this.inventoryItems.push(this.Iitem)                    
+                        }
+                      })
+                    })
+                  })
+                })   
+              })
+            })
+          }); 
+        }
+        else
+        {
+          this.invetoryselected = false;
+          this.inventoryItems = [];
+        }
+      }
+
+      openClientPopup(selectedClientOrder: ClientOrderVM) 
+      {
+        this.idselected = selectedClientOrder.clientOrderId;
+
+        if(this.clientselected == false)
+        {
+          this.invetoryselected = false;
+          this.clientselected = true;
+          this.statusselected = false;
+          this.ventrixdbservice.readClient()
+          .subscribe(response => {
+            this.client = response.find( x => x.clientId == selectedClientOrder.clientId)!;
           })
-        })
+        }
+        else
+        {
+          this.clientselected = false;
+        }
+        
       }
 
       closeInventoryPopup() {
@@ -118,7 +217,8 @@ export class ReadClientOrderComponent implements OnInit {
       contactPersonName : '',
       contactPersonSurname: '',
       emailAddress: '',
-      status: ''
+      status: '',
+      encrypted:''
     }
 
     this.ventrixdbservice.clearClientOrder();
@@ -172,11 +272,13 @@ export class ReadClientOrderComponent implements OnInit {
                   contactPersonName : element.contactPersonName!,
                   contactPersonSurname: element.contactPersonSurname!,
                   emailAddress: element.emailAddress!,
-                  status: this.temp.description
+                  status: this.temp.description,
+                  encrypted:''
                 }
                 this.clientOrderVM.push(this.order);
                 console.log(this.clientOrderVM)
             })
+            this.filterOrder = this.clientOrderVM;
              }
            });
 
@@ -185,6 +287,44 @@ export class ReadClientOrderComponent implements OnInit {
       }
     })
   }
+
+  filter()
+  {
+    this.filterOrder = [];
+    if (this.status == "")
+    {
+      this.filterOrder = this.clientOrderVM;
+    }
+    else
+    {
+      this.clientOrderVM.forEach(element => {
+        if (element.status == this.status)
+        {
+          this.filterOrder.push(element)
+        }
+      });
+      if (this.filterOrder.length == 0)
+      {
+        Swal.fire({
+          icon: 'info',
+          title: 'No orders found',
+          showDenyButton: false,
+          confirmButtonText: 'Ok',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/read-clientorder']).then(() => {
+            window.location.reload();
+            });
+          }
+        })  
+      }
+    }
+  }
+
+
 
   refresh()
   {
@@ -224,7 +364,7 @@ export class ReadClientOrderComponent implements OnInit {
     else
     {
       Swal.fire({
-        icon: 'error',
+        icon: 'warning',
         title: 'Client Order Associated to other entries',
         showDenyButton: false,
         confirmButtonText: 'Ok',
@@ -278,6 +418,7 @@ export class ReadClientOrderComponent implements OnInit {
   searchClientOrder()
   { 
     this.clientOrderVM = []
+
       if (this.query != '' && this.query.replace(/\s/g, '').length == 0)
       {
         Swal.fire({
@@ -306,19 +447,20 @@ export class ReadClientOrderComponent implements OnInit {
             {
               this.clientOrders.forEach(clientorder => {
               this.clientOrdersStatuses = [];
+
+              this.ventrixdbservice.readClientOrderStatuses()
+              .subscribe(response => {
+                this.readstatuses = response
     
               this.ventrixdbservice.readClient()
               .subscribe(response => {
-                response.forEach(element => {
+
+                  response.forEach(element => {
                  if (element.clientId == clientorder.clientId)
                  {
-              
-                  this.ventrixdbservice.readClientOrderStatuses()
-                  .subscribe(response => {
-                    console.log(this.client)
                     //Uses earliest date of status to get current status
                     this.clientOrdersStatuses = [];
-                    response.forEach(element => {
+                    this.readstatuses.forEach(element => {
                       if (element.clientOrderId == clientorder.clientOrderId)
                       {
                         this.clientOrdersStatuses.push(element)
@@ -346,14 +488,49 @@ export class ReadClientOrderComponent implements OnInit {
                       contactPersonName : element.contactPersonName!,
                       contactPersonSurname: element.contactPersonSurname!,
                       emailAddress: element.emailAddress!,
-                      status: this.temp.description
+                      status: this.temp.description,
+                      encrypted:''
                     }
                     this.clientOrderVM.push(this.order);
-                    console.log(this.clientOrderVM)
-                })
                  }
                });
-    
+                
+               if (this.status == "")
+               {
+                console.log(this.clientOrderVM)
+                this.filterOrder = [];
+                 this.filterOrder = this.clientOrderVM;
+               }
+               else
+               {
+                this.filterOrder = [];
+                 this.clientOrderVM.forEach(element => {
+                   if (element.status == this.status)
+                   {
+                     this.filterOrder.push(element)
+                   }
+                 });
+                 if (this.filterOrder.length == 0)
+                 {
+                   Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Search',
+                     showDenyButton: false,
+                     confirmButtonText: 'Ok',
+                     confirmButtonColor: '#077bff',
+                     allowOutsideClick: false,
+                     allowEscapeKey: false
+                   }).then((result) => {
+                     if (result.isConfirmed) {
+                       this.router.navigate(['/read-clientorder']).then(() => {
+                       window.location.reload();
+                       });
+                     }
+                   })  
+                 }
+               }
+              })
+               //
               });
             });
           }      

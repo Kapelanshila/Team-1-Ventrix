@@ -42,12 +42,12 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let inventoryItem of inventoryItems | paginate:{itemsPerPage: noOfRows, currentPage:p}">
-                        <td>{{inventoryItem.name}}</td>
-                        <td>{{inventoryItem.category.description}}</td>
-                        <td>{{inventoryItem.type.description}}</td>
-                        <td>{{inventoryItem.warehouse.name}}</td>
-                        <td>{{inventoryItem.supplier.supplierName}}</td>
-                        <td>{{inventoryItem.quantityOnHand}}</td>
+                            <td>{{inventoryItem.name}}</td>
+                            <td>{{inventoryItem.category.description}}</td>
+                            <td>{{inventoryItem.type.description}}</td>
+                            <td>{{inventoryItem.warehouse.name}}</td>
+                            <td>{{inventoryItem.supplier.supplierName}}</td>
+                            <td>{{inventoryItem.quantityOnHand}}</td>
                         <td class = "icon-adjust">
                             <!--Add cursor pointer so that the links seem clickable -->
                             <a [routerLink]="" style="cursor: pointer;" class="edit" title="Edit" data-toggle="tooltip" (click)="editInventory(inventoryItem)"><i class="material-icons">&#xE254;</i></a>

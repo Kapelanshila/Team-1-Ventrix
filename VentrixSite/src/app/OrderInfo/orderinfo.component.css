@@ -1,0 +1,23 @@
+.body{
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(#4e73de,#106cfc);
+    background-size: contain;
+    height: 155%;
+    width:100%;
+    position: absolute;
+    overflow-x: hidden;
+}
+
+.modal-content {
+    -ms-transform: translate(0,30%);
+    -moz-transform: translate(0,30%);
+    -webkit-transform: translate(0,30%);
+    transform: translate(0,30%);
+    width:100%;
+  }
+
+  .modal
+  {
+    background: linear-gradient( rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55) )  
+  }
+

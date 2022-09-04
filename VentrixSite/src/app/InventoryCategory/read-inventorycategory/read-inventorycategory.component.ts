@@ -80,7 +80,7 @@ export class ReadInventorycategoryComponent implements OnInit {
       {
         //Sweet alerts are used as notifications
         Swal.fire({
-          icon: 'warning',
+          icon: 'info',
           title: 'Are you sure you want to delete this inventory category?',
           showDenyButton: true,
           confirmButtonText: 'Yes',
@@ -101,7 +101,7 @@ export class ReadInventorycategoryComponent implements OnInit {
       {
         //Sweet alerts are used as notifications
         Swal.fire({
-          icon: 'error',
+          icon: 'warning',
           title: 'Cannot Delete',
           text: 'Delete associated types first',
           confirmButtonText: 'OK',

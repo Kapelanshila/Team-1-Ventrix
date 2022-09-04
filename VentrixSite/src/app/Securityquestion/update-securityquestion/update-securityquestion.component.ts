@@ -53,7 +53,7 @@ export class UpdateSecurityquestionComponent implements OnInit {
         this.find = true;
         Swal.fire({
           icon: 'error',
-          title: 'Security Question Altready Exsists',
+          title: 'Security Question Already Exists',
           confirmButtonText: 'OK',
           confirmButtonColor: '#077bff',
           allowOutsideClick: false,

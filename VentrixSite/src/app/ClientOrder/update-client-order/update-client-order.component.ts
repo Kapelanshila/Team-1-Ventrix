@@ -162,7 +162,8 @@ export class UpdateClientOrderComponent implements OnInit {
                   clientOrderId: this.selectedorder.clientOrderId,
                   clientId : this.selectedClient,
                   description: this.clientorderform.get('description')?.value,
-                  clientInvoice: fileToUpload.name
+                  clientInvoice: fileToUpload.name,
+                  encrypted: ''
                 }
                 this.ventrixdbservice.updateClientOrder(this.order).subscribe();
 
@@ -231,7 +232,8 @@ export class UpdateClientOrderComponent implements OnInit {
         clientOrderId: this.selectedorder.clientOrderId,
         clientId : this.selectedClient,
         description: this.clientorderform.get('description')?.value,
-        clientInvoice: this.selectedorder.clientInvoice
+        clientInvoice: this.selectedorder.clientInvoice,
+        encrypted: ''
       }
       this.ventrixdbservice.updateClientOrder(this.order).subscribe();
       Swal.fire({

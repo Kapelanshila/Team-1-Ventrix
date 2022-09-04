@@ -29,6 +29,8 @@ export class ReadUserComponent implements OnInit {
   employee!:Employee;
   user:any;
   role:any;
+  registered: boolean = false;
+  filteruserroles:any[] = [];
 
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
   { 
@@ -96,7 +98,7 @@ export class ReadUserComponent implements OnInit {
                   }
               });
                 //Populates it in view model for it to be read in the table 
-         
+                this.filteruserroles = this.userroles;
             });
           })
         })
@@ -112,6 +114,32 @@ export class ReadUserComponent implements OnInit {
   {
       this.ventrixdbservice.setUser(selecteduser);
       this.router.navigate(['/update-user']);
+  }
+
+  register()
+  {
+    this.filteruserroles = [];
+    if (this.registered == false)
+    {
+      this.registered = true;
+      this.userroles.forEach(element => {
+        if(element.registered == true)
+        {
+          this.filteruserroles.push(element)
+        }
+      });
+    }
+    else
+    {
+      this.registered = false;
+
+      this.userroles.forEach(element => {
+        if(element.registered == false)
+        {
+          this.filteruserroles.push(element)
+        }
+      });
+    }
   }
 
   //Delete User Function 
@@ -163,6 +191,7 @@ export class ReadUserComponent implements OnInit {
   searchUser()
   {
     this.userroles = [];
+    this.filteruserroles = [];
     if (this.query != '' && this.query.replace(/\s/g,'').length == 0)
     {
       Swal.fire({
@@ -211,6 +240,7 @@ export class ReadUserComponent implements OnInit {
           this.ventrixdbservice.readEmployee()
             .subscribe(response => {
               this.employees = response;
+              console.log(this.employees)
                 //Possibility no employees exist on the system yet 
                 //So an if statement is used to check for this if this was ommited if-else statement would be undefined 
                 if (this.employees.length != 0)
@@ -218,9 +248,10 @@ export class ReadUserComponent implements OnInit {
                   this.users.forEach(user => {   
                     this.added = false;
                     this.employees.forEach(element => {
-                      this.employee = this.employees.find(x => x.userId == element.userId);
+                      this.employee = this.employees.find(x => x.userId == user.userId);
                     });
-
+                    
+                    console.log(this.employee)
                     this.roles.forEach(role => {
 
                         if (user.userRoleId == role.userRoleId && user.hashedPassword != '' && this.added == false)
@@ -285,6 +316,47 @@ export class ReadUserComponent implements OnInit {
                       this.userroles.push(this.uservm);
                   });
                 }
+                console.log(this.userroles)
+                
+
+                if (this.registered == false)
+                {
+                  this.userroles.forEach(element => {
+                    if(element.registered == false)
+                    {
+                      this.filteruserroles.push(element)
+                    }
+                  });
+                }
+                else
+                {
+                  this.userroles.forEach(element => {
+                    if(element.registered == true)
+                    {
+                      this.filteruserroles.push(element)
+                    }
+                  });
+                }
+
+                if (this.filteruserroles.length == 0)
+                {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'No Results Found',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#077bff',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      this.router.navigate(['read-user']).then(() => {
+                        window.location.reload();
+                      });
+                    }
+                  })
+                }
+
+                
               });
           })
         }     

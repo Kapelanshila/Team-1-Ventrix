@@ -163,7 +163,7 @@ monthChange()
     
           if(this.found != 0)
           {
-          if (this.items.length < 5)
+          if (this.items.length <= 5)
           {
             //Only displays top 5 results 
             for (var i = 0; i < this.items.length ; i++)
@@ -174,16 +174,17 @@ monthChange()
           }
           else
           {
-            for (var i = 0; i < 5; i++)
+            for (var i = 0; i <= 4; i++)
             {
               this.data.push(Number(this.items[i].Quantity));
               this.labels.push(this.items[i].Name);
             }
-          }
+   
         }
+      }
           this.barChartLabels = this.labels;
           this.barChartData = [this.data];
-          console.log(this.data)
+          console.log(this.data.length)
         });
       });
     }
@@ -245,13 +246,15 @@ monthChange()
           }
           else
           {
-            for (var i = 0; i < 5; i++)
+            for (var i = 0; i <= 4; i++)
             {
+              console.log(i)
               this.data.push(Number(this.items[i].Quantity));
               this.labels.push(this.items[i].Name);
             }
           }
-        }
+          }
+
           this.doughnutChartLabels = this.labels;
           this.doughnutChartData = [this.data];
         });
@@ -271,17 +274,20 @@ monthChange()
 
     const contentDataUrl = canvas.toDataURL('image/png');
 
-    let PDF = new jsPDF({
-      orientation: 'p',
-      unit: 'mm',
-      format: 'a4'
-    });
+    this.report = 
+    {
+      items: this.labels,
+      values: this.data,
+      account: this.account.name+' '+this.account.surname,
+      month: this.selectedMonth.Name,
+      image:contentDataUrl
+    }
 
-    let topPosition = 10;
-    let leftPosition = 0;
-
-    PDF.addImage(contentDataUrl, 'PNG', leftPosition, topPosition, fileWidth, fileHeight);
-    PDF.save('Demand Report.pdf');
+    this.ventrixdbservice.generateDemandPDFReport(this.report)
+    .subscribe(res => {
+      const data = new Blob([res] , { type: 'application/pdf' });
+     saveAs(data,"Demand Report "+this.report.month+" "+ new Date().getFullYear());
+   });
   }
 
   )
@@ -295,22 +301,39 @@ monthChange()
     let fileHeight = canvas.height * fileWidth / canvas.width;
 
     const contentDataUrl = canvas.toDataURL('image/png');
+    console.log(contentDataUrl)
 
-    let PDF = new jsPDF({
-      orientation: 'p',
-      unit: 'mm',
-      format: 'a4'
+    this.report = 
+    {
+      items: this.labels,
+      values: this.data,
+      account: this.account.name+' '+this.account.surname,
+      month: this.selectedMonth.Name,
+      image:contentDataUrl
+    }
+
+    this.ventrixdbservice.generateSupplyPDFReport(this.report)
+    .subscribe(res => {
+      const data = new Blob([res] , { type: 'application/pdf' });
+      saveAs(data,"Supply Report "+this.report.month+" "+ new Date().getFullYear());
     });
+    // let PDF = new jsPDF({
+    //   orientation: 'p',
+    //   unit: 'mm',
+    //   format: 'a4'
+    // });
 
-    let topPosition = 10;
-    let leftPosition = 0;
+    // let topPosition = 10;
+    // let leftPosition = 0;
 
-    PDF.addImage(contentDataUrl, 'PNG', leftPosition, topPosition, fileWidth, fileHeight);
-    PDF.save('Supply Report.pdf');
+    // PDF.addImage(contentDataUrl, 'PNG', leftPosition, topPosition, fileWidth, fileHeight);
+    
   }
 
   )
 }
+
+
 
 generateExcel()
 {
@@ -322,6 +345,7 @@ generateExcel()
       values: this.data,
       account: this.account.name+' '+this.account.surname,
       month: this.selectedMonth.Name,
+      image:''
     }
     this.ventrixdbservice.generateExcelDemandReport(this.report).subscribe(res => {
       const data = new Blob([res] , { type: 'application/vnd.ms-excel' });
@@ -337,6 +361,7 @@ generateExcel()
       values: this.data,
       account: this.account.name+' '+this.account.surname,
       month: this.selectedMonth.Name,
+      image:''
     }
     this.ventrixdbservice.generateExcelSupplyReport(this.report).subscribe(res => {
       const data = new Blob([res] , { type: 'application/vnd.ms-excel' });

@@ -11,7 +11,7 @@
                 <div *ngIf="submitted">
                     <span *ngIf="f['description'].errors?.['required'] || f['description'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter an asset repair reason</span>
                 </div>
-                <input maxlength="64" type="text" class="form-control" formControlName="description" placeholder="Enter Inventory Category description" required (keypress)="keyPressAlphabet($event)">
+                <input maxlength="64" type="text" class="form-control" formControlName="description" placeholder="Enter Asset Repair Reason description" required (keypress)="keyPressAlphabet($event)">
             </div>
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" (click)="returnDataTable()">
             <input type="submit" class="btn btn-primary" value="Save">

@@ -29,6 +29,17 @@
                                     <option value="15">15</option>
                                     <option value="20">20</option>
                                 </select>&nbsp;</label></div>
+                                <label class="form-label">Status&nbsp;</label>
+                                <select [(ngModel)]="status" (change)="filter()" >
+                                    <option selected=""> </option>
+                                    <option value="Added">Added</option>
+                                    <option value="Processed">Processed</option>
+                                    <option value="Packed">Packed</option>
+                                    <option value="Collected">Collected</option>
+                                    <option value="Scheduled">Scheduled</option>
+                                    <option value="Rescheduled">Rescheduled</option>
+                                    <option value="Delivered">Delivered</option>
+                                </select>
                         </div>
                     <div class="col-md-12">
                     <!-- Copy -->
@@ -37,32 +48,101 @@
                         <thead>
                             <tr>
                                 <th>Description</th>
-                                <th>Client Name</th>
                                 <th>Client Email</th>
                                 <th>Current Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let order of clientOrderVM| paginate:{itemsPerPage: noOfRows, currentPage:p}">           
-                            <ng-container *ngIf="order.status != 'Added'">
-                                <td class="underline-on-hover"><a [routerLink]="" (click)="openInventoryPopup(order)" style="cursor: pointer; color: blue;">{{order.description}}</a></td>
-                            </ng-container>
-                            <ng-container *ngIf="order.status == 'Added'">
-                                <td class="underline-on-hover">&nbsp;{{order.description}}</td>
-                            </ng-container>
-                            <td>{{order.contactPersonName}}</td>
-                            <td>{{order.emailAddress}}</td>
-                            <td class="underline-on-hover"><a [routerLink]="" (click)="openPopup(order)" style="cursor: pointer; color: blue;">{{order.status}}</a></td>
-                            <td class = "icon-adjust">
-                                <a [routerLink]="" style="cursor: pointer;" class="download" title="Download" data-toggle="tooltip"><i class="fa fa-arrow-down" style="font-size: 16px;" (click)="download(order)" aria-hidden="true"></i></a>
-                                <a [routerLink]="" style="cursor: pointer;" class="add" title="Add inventory to order" data-toggle="tooltip"><i class="fa fa-shopping-cart fa-xs" (click)="addInventory(order)"  style="font-size: 17px;" aria-hidden="true"></i></a>
-                                <a [routerLink]="" style="cursor: pointer;" class="edit" title="Edit" data-toggle="tooltip"><i  (click)="editClientOrder(order)"  style="font-size: 17px;" class="material-icons">&#xE254;</i></a>
-                                <a [routerLink]="" style="cursor: pointer;" class="delete" title="Delete" data-toggle="tooltip"><i (click)="deleteClientOrder(order)"  style="font-size: 17px;" class="material-icons">&#xE872;</i></a>
-                            </td>  
-                        </tr>
+                            <ng-container *ngFor="let order of filterOrder| paginate:{itemsPerPage: noOfRows, currentPage:p}">
+                                <!--Table for inventory items for order-->
+
+                            <tr>           
+                                <ng-container  *ngIf="order.status != 'Added'">
+                                    <td class="underline-on-hover activated"><a [routerLink]="" (click)="openInventoryPopup(order)" style="cursor: pointer; color: black;">{{order.description}}</a></td>
+                                </ng-container>
+                                <ng-container *ngIf="order.status == 'Added'">
+                                    <td class="underline-on-hover activated">&nbsp;{{order.description}}</td>
+                                </ng-container>
+                                <td class="underline-on-hover activated"><a [routerLink]="" (click)="openClientPopup(order)" style="cursor: pointer; color: black;">{{order.emailAddress}}</a></td>
+                                <td class="underline-on-hover activated"><a [routerLink]="" (click)="openPopup(order)" style="cursor: pointer; color: black;">{{order.status}}</a></td>
+                                <td class = "icon-adjust">
+                                    <a [routerLink]="" style="cursor: pointer;" class="download" title="Download" data-toggle="tooltip"><i class="fa fa-arrow-down" style="font-size: 16px;" (click)="download(order)" aria-hidden="true"></i></a>
+                                    <a [routerLink]="" style="cursor: pointer;" class="add" title="Add inventory to order" data-toggle="tooltip"><i class="fa fa-shopping-cart fa-xs" (click)="addInventory(order)"  style="font-size: 17px;" aria-hidden="true"></i></a>
+                                    <a [routerLink]="" style="cursor: pointer;" class="edit" title="Edit" data-toggle="tooltip"><i  (click)="editClientOrder(order)"  style="font-size: 17px;" class="material-icons">&#xE254;</i></a>
+                                    <a [routerLink]="" style="cursor: pointer;" class="delete" title="Delete" data-toggle="tooltip"><i (click)="deleteClientOrder(order)"  style="font-size: 17px;" class="material-icons">&#xE872;</i></a>
+                                </td>  
+                            </tr>
+                            <th *ngIf="invetoryselected == true && clientselected == false && statusselected == false && idselected == order.clientOrderId" colspan="5">
+                                <h5 style="text-align: center; color: blue;">Loaded Inventory Items</h5>
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Warehouse</th>
+                                        <th scope="col">Supplier</th>
+                                        <th scope="col">Quantity</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let inventory of inventoryItems">
+                                        <td>{{inventory.name}}</td>
+                                        <td>{{inventory.category.description}}</td>
+                                        <td>{{inventory.type.description}}</td>
+                                        <td>{{inventory.warehouse.name}}</td>
+                                        <td>{{inventory.supplier.supplierName}}</td>
+                                        <td>{{inventory.quantityOnHand}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </th>
+
+                            <th *ngIf="invetoryselected == false && clientselected == true && statusselected == false && idselected == order.clientOrderId" colspan="5">
+                                <h5 style="text-align: center; color: blue;">Client Information</h5>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Surname</th>
+                                            <th>Contact Number</th>
+                                            <th>Email</th>
+                                            <th>Address</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        <td>{{client!.contactPersonName}}</td>
+                                        <td>{{client!.contactPersonSurname}}</td>
+                                        <td>{{client!.contactPersonNumber}}</td>
+                                        <td>{{client!.emailAddress}}</td>
+                                        <td style="width: 350px;">{{client!.workAddress}}</td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                            </th>
+
+                            <th *ngIf="invetoryselected == false && clientselected == false && statusselected == true && idselected == order.clientOrderId" colspan="5">
+                                <h5 style="text-align: center; color: blue;">Status History</h5>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let status of statuses">
+                                        <td>{{status.description}}</td>
+                                        <td style="width: 600px;">{{status.date | extension}}</td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                            </th>
+                        </ng-container>
                         </tbody>
                         </table>
-                    <div class="hint-text">Showing <b>  {{clientOrderVM.length}} </b> entries</div>
+                    <div class="hint-text">Showing <b>  {{filterOrder.length}} </b> entries</div>
                     <div class="pagination">
                         <div id="pagination" class="custom-pagination">
                             <pagination-controls (pageChange)="p=$event"></pagination-controls>
@@ -77,8 +157,7 @@
 </div> 
 
 
-<!-- Display Status -->
-<div
+<!-- <div
 class="modal"
 tabindex="-1"
 role="dialog"
@@ -112,9 +191,9 @@ role="dialog"
     </div>
 </div>
 </div> 
-</div> 
+</div>  -->
 
-<!-- Display Client Order Line -->
+<!-- 
 <div
 class="modal"
 tabindex="-1"
@@ -154,4 +233,4 @@ role="dialog"
     </div>
 </div>
 </div> 
-</div> 
+</div>  -->

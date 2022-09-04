@@ -82,7 +82,7 @@ export class ReadInventoryTypeComponent implements OnInit {
       if (this.inventories.find(x => x.inventoryTypeId == selectedinventorytype.inventoryTypeId))
       {
         Swal.fire({
-          icon: 'error',
+          icon: 'warning',
           title: 'Cannot Delete Type',
           text: 'Delete associated inventory item first',
           confirmButtonText: 'Ok',
@@ -95,7 +95,7 @@ export class ReadInventoryTypeComponent implements OnInit {
       {
       //Sweet alerts are used as notifications
       Swal.fire({
-        icon: 'warning',
+        icon: 'info',
         title: 'Are you sure you want to delete this inventory type?',
         showDenyButton: true,
         confirmButtonText: 'Yes',

@@ -14,6 +14,9 @@ import Swal from 'sweetalert2';
 })
 export class ReadwarrantyperiodComponent implements OnInit {
   warrantyPeriods:any[] = [];
+  warranty!:any;
+  assets:any[] = [];
+  warranties:any[] = [];
   p: number = 1;
   config: any; 
   noOfRows = 10;
@@ -54,23 +57,49 @@ export class ReadwarrantyperiodComponent implements OnInit {
   //Delete WarrantyPeriod 
   deleteWarrantyPeriod(selectedWarrantyPeriod: WarrantyPeriod)
   {
-    
-    Swal.fire({
-      icon: 'warning',
-      title: 'Are you sure you would like to delete this warranty period?',
-      showDenyButton: true,
-      confirmButtonText: 'Yes',
-      denyButtonText: `No`,
-      confirmButtonColor: '#077bff',
-      allowOutsideClick: false,
-      allowEscapeKey: false
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.ventrixdbservice.deleteWarrantyPeriod(selectedWarrantyPeriod).subscribe();
-        this.router.navigate(['/read-warranty-period']).then(() => {
+this.ventrixdbservice.readAsset().subscribe(response => {
+  this.assets = response;
+
+  this.ventrixdbservice.readWarranty().subscribe(response => {
+    this.warranties = response;
+
+    this.warranty = this.warranties.find(x => x.warrantyPeriodId == selectedWarrantyPeriod.warrantyPeriodId);
+
+  if (this.warranty == undefined)
+  {
+      //Sweet alerts are used as notifications
+      Swal.fire({
+        icon: 'warning',
+        title: 'Are you sure you would like to delete this warranty period?',
+        showDenyButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+        confirmButtonColor: '#077bff',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.ventrixdbservice.deleteWarrantyPeriod(selectedWarrantyPeriod).subscribe();
+          this.router.navigate(['/read-warranty-period']).then(() => {
           window.location.reload();
-  });
-}
-})  
+          });
+        }
+      })  
+      }
+      else
+      {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Warranty Period Associated to other entries',
+          text: 'Warranty Period associated to asset items',
+          showDenyButton: false,
+          confirmButtonText: 'Ok',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+      }
+    })
+  })
 }
 }

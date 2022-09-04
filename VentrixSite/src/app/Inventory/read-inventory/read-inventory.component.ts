@@ -135,7 +135,7 @@ export class ReadInventoryComponent implements OnInit {
             allowEscapeKey: false
             }).then((result) => {
               if (result.isConfirmed) {
-                this.router.navigate(['/read-client']).then(() => {
+                this.router.navigate(['/read-inventory']).then(() => {
                   window.location.reload();
                 });
               }
@@ -227,8 +227,9 @@ export class ReadInventoryComponent implements OnInit {
         else
         {
           Swal.fire({
-            icon: 'error',
+            icon: 'warning',
             title: 'Inventory Assoiciated to other entries',
+            text:'Inventory items associated to supplier orders, client orders or write-offs',
             showDenyButton: false,
             confirmButtonText: 'Ok',
             confirmButtonColor: '#077bff',

@@ -16,6 +16,7 @@ export class ReadSecurityquestionComponent implements OnInit {
   p: number = 1;
   config: any; 
   noOfRows = 10;
+  usersecurityquestions:any[] = [];
 
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
   { 
@@ -52,24 +53,45 @@ export class ReadSecurityquestionComponent implements OnInit {
   { 
     if (this.securityquestions.length > 3)
     {
-      //Sweet alerts are used as notifications
-      Swal.fire({
-        icon: 'warning',
-        title: 'Are you sure you want to delete this security question?',
-        showDenyButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: `No`,
-        confirmButtonColor: '#077bff',
-        allowOutsideClick: false,
-        allowEscapeKey: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.ventrixdbservice.deleteSecurityquestion(selectedSecurityquestion).subscribe();
-          this.router.navigate(['/read-securityquestion']).then(() => {
-          window.location.reload();
-          });
-        }
-      })  
+        this.ventrixdbservice.readUserSecurityQuestion().subscribe(response => {
+          this.usersecurityquestions = response;
+          console.log(this.usersecurityquestions)
+  
+        if (this.usersecurityquestions.find((x: { securityQuestionId: Number; }) => x.securityQuestionId == selectedSecurityquestion.securityQuestionId) == undefined)
+        {
+            //Sweet alerts are used as notifications
+            Swal.fire({
+              icon: 'warning',
+              title: 'Are you sure you want to delete this security question?',
+              showDenyButton: true,
+              confirmButtonText: 'Yes',
+              denyButtonText: `No`,
+              confirmButtonColor: '#077bff',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['/read-securityquestion']).then(() => {
+                  this.ventrixdbservice.deleteSecurityquestion(selectedSecurityquestion).subscribe();
+                  window.location.reload();
+                });
+              }
+            })  
+            }
+            else
+            {
+              Swal.fire({
+                icon: 'warning',
+                title: 'Security Question to other entries',
+                text: 'Security Question associated to User Security Question entries',
+                showDenyButton: false,
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#077bff',
+                allowOutsideClick: false,
+                allowEscapeKey: false
+              })
+            }
+          })
     }
     else
     {

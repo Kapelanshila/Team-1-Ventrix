@@ -71,7 +71,7 @@
             </select>
             <br>
 
-            <label>Value
+            <label>Value (R)
                 <span>
                     <i class="fa fa-info-circle" title="Enter the value of the asset."></i>
                 </span>
@@ -80,7 +80,7 @@
                 <span *ngIf="f['value'].errors?.['value'] || f['value'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a asset value</span>
             </div>
             <div>
-                <input class="form-control" type="number" formControlName="value">
+                <input class="form-control" type="number" formControlName="value" step="0.1">
             </div>
             <br>
 

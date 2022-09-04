@@ -18,6 +18,8 @@ export class ReadAssetComponent implements OnInit {
   assets:any[] = [];
   warranties:any[] = [];
   types:any[] = [];
+  trails:any[] = [];
+  locations:any[] = [];
   categories:any[] = [];
   p: number = 1;
   config: any; 
@@ -270,41 +272,45 @@ deleteAsset(selecteditem: AssetVM)
   this.ventrixdbservice.readAssetRepair()
   .subscribe(response => {
     this.repairs = response;
-
-      if (this.repairs.find((x: { assetId: Number; }) => x.assetId == selecteditem.assetId) == undefined)
-      {
-        //Sweet alerts are used as notifications
-        Swal.fire({
-          icon: 'warning',
-          title: 'Are you sure you want to delete this asset item?',
-          showDenyButton: true,
-          confirmButtonText: 'Yes',
-          denyButtonText: `No`,
-          confirmButtonColor: '#077bff',
-          allowOutsideClick: false,
-          allowEscapeKey: false
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.ventrixdbservice.deleteInventory(selecteditem).subscribe();
-            this.router.navigate(['/read-asset']).then(() => {
-            window.location.reload();
-            });
-          }
-        })  
-        }
-        else
+  
+        this.ventrixdbservice.readAssetsLocations().subscribe(response => {
+          this.locations = response;
+  
+        if (this.trails.find((x: { assetId: Number; }) => x.assetId == selecteditem.assetId) == undefined && this.repairs.find((x: { assetId: Number; }) => x.assetId == selecteditem.assetId) == undefined)
         {
-          Swal.fire({
-            icon: 'error',
-            title: 'Asset Associated to Asset Repairs',
-            text:'Please remove associated asset repairs',
-            showDenyButton: false,
-            confirmButtonText: 'Ok',
-            confirmButtonColor: '#077bff',
-            allowOutsideClick: false,
-            allowEscapeKey: false
-          })
-        }
+            //Sweet alerts are used as notifications
+            Swal.fire({
+              icon: 'warning',
+              title: 'Are you sure you want to delete this asset?',
+              showDenyButton: true,
+              confirmButtonText: 'Yes',
+              denyButtonText: `No`,
+              confirmButtonColor: '#077bff',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.ventrixdbservice.deleteAsset(selecteditem).subscribe();
+                this.router.navigate(['/read-asset']).then(() => {
+                window.location.reload();
+                });
+              }
+            })  
+            }
+            else
+            {
+              Swal.fire({
+                icon: 'warning',
+                title: 'Asset Associated to other entries',
+                text:'Asset information associated to other entries',
+                showDenyButton: false,
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#077bff',
+                allowOutsideClick: false,
+                allowEscapeKey: false
+              })
+            }
+        })
       })
       }
     }

@@ -26,6 +26,11 @@ export class NavigationComponent implements OnInit {
     this.location.back();
   }
 
+  dashboard()
+  {
+    this.router.navigate(['/dashboard']);  }
+
+
   logout()
   {
     this.ventrixdbservice.clearInventoryCategory();

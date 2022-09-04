@@ -3,4 +3,5 @@ export interface DemandReport {
     values :number[]
     account:string
     month: string
+    image: string
 }

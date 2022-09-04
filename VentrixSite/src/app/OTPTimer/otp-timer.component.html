@@ -21,7 +21,6 @@
                         </div>
                         <input type = "number" style = "width:20%; padding: 4.85px;" formControlName="Time" required step="10" mr-1 formControlName="time">
                     <input type="button" class="btn btn-secondary" style="margin: 0.25%;" value="Update" (click)="updateOtpTimer(otpTimer)">
-                    <input type="button" class="btn btn-danger" style="margin: 0.25%;" value="Delete" (click)="deleteOtpTimer(otpTimer)">
                     </div>
                 </div>
                 <div *ngIf="otpTimers.length == 0">

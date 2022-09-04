@@ -120,7 +120,7 @@ export class ReadTimeslotComponent implements OnInit {
         else
         {
           Swal.fire({
-            icon: 'error',
+            icon: 'warning',
             title: 'Timeslot associated to deliveries',
             showDenyButton: false,
             confirmButtonText: 'Ok',

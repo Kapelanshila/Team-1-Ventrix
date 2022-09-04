@@ -24,4 +24,5 @@ export interface AssetReport {
     warehouse:string
     value: number
     account:string
+    selectedWarehouse: string
 }

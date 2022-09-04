@@ -124,6 +124,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { SupplyDemandReportComponent } from './Reporting/supply-demand-report/supply-demand-report.component';
+import { OrderinfoComponent } from './orderinfo/orderinfo.component';
 
 @NgModule({
   declarations: [
@@ -230,7 +231,8 @@ import { SupplyDemandReportComponent } from './Reporting/supply-demand-report/su
     DepreciationReportComponent,
     EmployeesReportComponent,
     ManagementReportComponent,
-    BackupRestoreComponent
+    BackupRestoreComponent,
+    OrderinfoComponent
   ],
   imports: [
     ChartsModule,
