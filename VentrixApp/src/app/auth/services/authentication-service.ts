@@ -9,7 +9,7 @@ import { TokenStorageService } from './interceptors/TokenStorageService';
 export class AuthenticationService {
     constructor(private http: HttpClient, private tokenStorageService: TokenStorageService) { }
     login(obj: any){
-        return this.http.post('https://localhost:44324/api/Login',obj, { responseType: 'text' });
+        return this.http.post('https://localhost:44324/api/Login/LoginApp',obj, { responseType: 'text' });
     }
 
     logout()
