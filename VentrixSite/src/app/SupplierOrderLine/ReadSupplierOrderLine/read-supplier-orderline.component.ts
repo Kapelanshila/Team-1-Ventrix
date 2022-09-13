@@ -67,7 +67,6 @@ export class ReadSupplierOrderlineComponent implements OnInit {
     this.ventrixdbservice.readInventory()
     .subscribe(response => {
       this.inventories = response;
-      this.inventories.forEach(inventory => {
         
         //Types,Category,Supplier and Warehouse is also retrived from the api in order to present relevant information realting to that inventory item
         this.ventrixdbservice.readInventoryType()
@@ -85,6 +84,8 @@ export class ReadSupplierOrderlineComponent implements OnInit {
                 this.ventrixdbservice.readSupplier()
                 .subscribe(response => {
                   this.suppliers = response;
+
+                  this.inventories.forEach(inventory => {
 
                   this.type = this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId);
                   
@@ -106,10 +107,34 @@ export class ReadSupplierOrderlineComponent implements OnInit {
                   }
                   this.inventoryItems.push(this.item)
                   this.filteritems.push(this.item)
-
                   }
+
    
                 })
+
+                console.log(this.filteritems.length)
+                if (this.filteritems.length == 0)
+                {
+                  Swal.fire({
+                    icon: 'info',
+                    title: 'No Items',
+                    text: 'No inventory items loaded on the system based on the selcted supplier',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#077bff',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                  })
+                  .then((result) => {
+                    if (result.isConfirmed) {
+                      this.ventrixdbservice.createSupplierOrderLine(this.response).subscribe();
+                      this.router.navigate(['/read-supplierorder']).then(() => {
+                        window.location.reload();
+                      });
+                    }
+                  })   
+            
+                }
+
 
               })
 
