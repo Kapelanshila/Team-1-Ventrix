@@ -261,6 +261,7 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
       Swal.fire({
         icon: 'warning',
         title: 'Invalid Quantity Entered',
+        text: 'Quantity less than or equal to zero',
         confirmButtonText: 'OK',
         confirmButtonColor: '#077bff',
         allowOutsideClick: false,
