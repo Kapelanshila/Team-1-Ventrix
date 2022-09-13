@@ -78,11 +78,11 @@
 
                         <td style="width: 3%"><input type="checkbox" [disabled]="inventoryItem.stored" (click)="selected($event, inventoryItem)" [checked]="inventoryItem.selected" style="transform: scale(1.3);" ></td>
                         
-                        <ng-container  *ngIf="inventoryItem.stored == true">
+                        <!-- <ng-container  *ngIf="inventoryItem.stored == true">
                             <td class = "icon-adjust" style="width: 1%">
                                 <a [routerLink]="" style="cursor: pointer;" class="delete" title="Delete" data-toggle="tooltip" (click)="deleteSupplierOrderLine(inventoryItem)"><i style="font-size: 17px;" class="material-icons">&#xE872;</i></a>
                             </td>  
-                         </ng-container>
+                         </ng-container> -->
                     </tr>
                     </tbody>
                 </table>

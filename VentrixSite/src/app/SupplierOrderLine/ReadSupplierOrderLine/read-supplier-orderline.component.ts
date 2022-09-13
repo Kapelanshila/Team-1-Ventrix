@@ -88,7 +88,7 @@ export class ReadSupplierOrderlineComponent implements OnInit {
 
                   this.type = this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId);
                   
-                  if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)
+                  if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined && this.selectedorder.supplierId == inventory.supplierId)
                   {
                   //New inventory view model is assigned the retrived values from the api
                   this.item = 
@@ -203,7 +203,7 @@ export class ReadSupplierOrderlineComponent implements OnInit {
       this.selectedinventories.find(x => x.inventoryId == selectedinventory.inventoryId)!.added = true;
       Swal.fire({
         icon: 'warning',
-        title: 'Invalid Number Entered',
+        title: 'Invalid Quantity Entered',
         confirmButtonText: 'OK',
         confirmButtonColor: '#077bff',
         allowOutsideClick: false,
@@ -276,7 +276,7 @@ export class ReadSupplierOrderlineComponent implements OnInit {
 
                   this.type = this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId);
                   
-                  if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)
+                  if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined && this.selectedorder.supplierId == inventory.supplierId)
                   {
                   //New inventory view model is assigned the retrived values from the api
                   this.item = 
@@ -351,7 +351,7 @@ export class ReadSupplierOrderlineComponent implements OnInit {
                   if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)
                   {
               
-                    if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)                    
+                    if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined && this.selectedorder.supplierId == inventory.supplierId)
                     {
                     //New inventory view model is assigned the retrived values from the api
                     this.item = 
@@ -542,7 +542,8 @@ export class ReadSupplierOrderlineComponent implements OnInit {
            
                           //New inventory view model is assigned the retrived values from the api
                  
-                          if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)                          {
+                          if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined && this.selectedorder.supplierId == inventory.supplierId)
+                          {
                           //New inventory view model is assigned the retrived values from the api
                           this.item = 
                           {

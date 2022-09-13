@@ -280,7 +280,8 @@ export class UpdateClientOrderlineComponent implements OnInit {
       this.selectedinventories.find(x => x.inventoryId == selectedinventory.inventoryId)!.added = true;
       Swal.fire({
         icon: 'warning',
-        title: 'Invalid Number Entered',
+        title: 'Invalid Quantity Entered',
+        text: 'Quantity is higher than stock on hand',
         confirmButtonText: 'OK',
         confirmButtonColor: '#077bff',
         allowOutsideClick: false,
