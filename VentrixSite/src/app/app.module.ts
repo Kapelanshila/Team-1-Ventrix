@@ -125,6 +125,8 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { SupplyDemandReportComponent } from './Reporting/supply-demand-report/supply-demand-report.component';
 import { OrderinfoComponent } from './orderinfo/orderinfo.component';
+import { HelpComponent } from './Help/help.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -232,7 +234,8 @@ import { OrderinfoComponent } from './orderinfo/orderinfo.component';
     EmployeesReportComponent,
     ManagementReportComponent,
     BackupRestoreComponent,
-    OrderinfoComponent
+    OrderinfoComponent,
+    HelpComponent
   ],
   imports: [
     ChartsModule,
@@ -251,6 +254,7 @@ import { OrderinfoComponent } from './orderinfo/orderinfo.component';
     MatIconModule,
     NgCircleProgressModule.forRoot({}),
     TimelineModule,
+    PdfViewerModule,
     NgbModalModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({

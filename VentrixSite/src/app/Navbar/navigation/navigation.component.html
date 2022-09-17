@@ -111,6 +111,9 @@
                     <a class="nav-link" routerLink="/profile" id="smallerscreenmenu"> Profile </a>
                 </li>
                 <li class="nav-item dropdown d-sm-block d-md-none">
+                    <a class="nav-link" routerLink="/help" id="smallerscreenmenu"> Help </a>
+                </li>
+                <li class="nav-item dropdown d-sm-block d-md-none">
                     <a class="nav-link" href="#" id="smallerscreenmenu"> Logout </a>
                 </li>
             </ul>
@@ -300,13 +303,22 @@
                         </a>
                     </div>
                 </ng-container>
+    
                     <a routerLink="/profile" href="#submenu6" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-user fa-fw mr-3"></span>
                             <span class="menu-collapsed">Profile</span>
                         </div>
                     </a>
-                    <a routerLink="/login" (click)="logout()" href="#submenu6" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
+
+                    <a routerLink="/help" href="#submenu7" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start bg-primary">
+                        <div class="d-flex w-100 justify-content-start align-items-center" >
+                            <span class="fa fa-question-circle fa-fw mr-3"></span>
+                            <span class="menu-collapsed" >Help</span>
+                        </div>
+                    </a>
+
+                    <a routerLink="/login" (click)="logout()" href="#submenu8" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-sign-out fa-fw mr-3"></span>
                             <span class="menu-collapsed">Logout</span>

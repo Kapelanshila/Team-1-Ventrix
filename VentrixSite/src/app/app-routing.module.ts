@@ -107,6 +107,7 @@ import { ReportAuthGuard } from './_helpers/report.auth.guard';
 import { SupplyDemandReportComponent } from './Reporting/supply-demand-report/supply-demand-report.component';
 import { OrderinfoComponent } from './orderinfo/orderinfo.component';
 import { AssignAuthGuard } from './_helpers/assign.auth.guard';
+import { HelpComponent } from './Help/help.component';
 
 const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'create-client', component: CreateClientComponent, canActivate: [AdminAuthGuard]  },
@@ -233,6 +234,7 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 {path: 'completed-orders', component:CompletedOrdersComponent, canActivate: [DriverAuthGuard]  },
 {path: 'backup-restore', component:BackupRestoreComponent, canActivate: [AdminAuthGuard]  },
 {path: 'orderinfo', component:OrderinfoComponent, canActivate: [GeneralAuthGuard],},
+{path: 'help', component:HelpComponent, canActivate: [GeneralAuthGuard],},
 {path: '', redirectTo: 'login', pathMatch: 'full' }];
 
 @NgModule({
