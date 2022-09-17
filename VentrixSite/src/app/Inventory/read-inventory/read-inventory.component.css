@@ -88,6 +88,12 @@ table.table td i {
     margin: 0 13px;
     margin-top: 1%;
   }
+
+  .btn-success{
+    border: none;
+    margin: 0 13px;
+    margin-top: 1%;
+  }
 .icon-adjust 
 {
     text-align: center;

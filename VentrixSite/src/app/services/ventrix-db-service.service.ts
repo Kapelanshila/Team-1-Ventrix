@@ -1430,6 +1430,13 @@ createDeliveredOrderPDF(obj:any){
    }
    //
 
+   //Export Inventory Stock Take 
+  
+   exportInventoryStockTake(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/exportInventoryStockTake',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
    //Reporting 
    generateInventoryPDFReport(obj:any){
     return this.http.post<any>(environment.apiUrl+'pdfcreator/createInventoryReportPDF',obj,  {responseType: 'blob' as 'json'})
@@ -1450,7 +1457,6 @@ createDeliveredOrderPDF(obj:any){
    generateDemandPDFReport(obj:any){
     return this.http.post<any>(environment.apiUrl+'pdfcreator/createDemandReportPDF',obj,  {responseType: 'blob' as 'json'})
    }
-
    
    generateDepreciationPDFReport(obj:any){
     return this.http.post<any>(environment.apiUrl+'pdfcreator/createDepreciationReportPDF',obj,  {responseType: 'blob' as 'json'})

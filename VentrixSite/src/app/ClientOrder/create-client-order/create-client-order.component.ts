@@ -9,6 +9,7 @@ import { HttpClient, HttpErrorResponse, HttpEventType, HttpResponse } from '@ang
 import { saveAs } from 'file-saver';
 import { ClientOrder } from 'src/app/shared/ClientOrder';
 import * as CryptoJS from 'crypto-js';
+import { environment } from 'src/environments/environment';
 // import { ThemeService } from 'ng2-charts';
 
 @Component({
@@ -89,7 +90,7 @@ export class CreateClientOrderComponent implements OnInit {
           formData.append('file', fileToUpload, fileToUpload.name);
   
           //Send file to api to be stored
-          this.http.post('https://localhost:44324/api/File/uploadClientOrderInvoice', formData).subscribe();
+          this.http.post(environment.apiUrl+'File/uploadClientOrderInvoice', formData).subscribe();
     
           this.clicked = true;
         }
