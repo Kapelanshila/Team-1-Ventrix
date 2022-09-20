@@ -21,6 +21,9 @@ import { SupplierOrderLineR } from 'src/app/shared/SupplierOrderLineR';
 import { Account } from 'src/app/shared/Account';
 import { saveAs } from 'file-saver';
 import { DemandReport } from 'src/app/shared/DemandReport';
+import { InventoryType } from 'src/app/shared/InventoryType';
+import { InventoryCategory } from 'src/app/shared/InventoryCategory';
+import { TransactionReport } from 'src/app/shared/TransactionReport';
 
 @Component({
   selector: 'app-supply-demand-report',
@@ -43,17 +46,30 @@ months: Month[] = [
   {Name: 'December', Value: 12}
   ];  
 
+  filters: Month[] = [
+    {Name: 'Category', Value: 1},
+    {Name: 'Type', Value: 2},
+    {Name: 'Inventory Items', Value: 3},
+    ];  
+
   inventories:Inventory[] = [];
   inventory!:Inventory;
+  types:InventoryType[] = [];
   clientorderlines:ClientOrderLineR[] = [];
   items:InventoryManagmenet[] = [];
+  filteritems:InventoryManagmenet[] = [];
   itemclientorderlines:ClientOrderLineR[] = [];
   data:number[] = [];
   labels:string[] = [];
   total!: number;
+  type!:InventoryType;
+  categories:InventoryCategory[] = [];
+  Fulltotal!: number;
   selectedMonth!:Month;
+  selectedFilter!:Month;
   clientlines: any[] = [];
   found!: number;
+  vm:TransactionReport[] = [];
   year!: Number;
   account!:Account;
   date!:Date;
@@ -110,158 +126,1108 @@ supplyclick()
   this.monthChange();
 }
 
+filterChange()
+{
+  this.items = [];
+  this.filteritems = [];
+  this.found = 0;
+  this.data = [];
+  this.labels = [];
+  this.Fulltotal = 0;
+  this.vm = [];
+  if (this.selectedFilter.Value == 1)
+  {
+    if(this.demandselected == true)
+    {
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+
+          this.ventrixdbservice.readInventoryCategory()
+          .subscribe(response => {
+            this.categories = response;
+
+            this.ventrixdbservice.readInventoryType()
+            .subscribe(response => {
+              this.types = response;
+      
+          this.ventrixdbservice.readClientOrderLine()
+          .subscribe(response => { 
+            this.clientorderlines = response;   
+      
+          this.categories.forEach(category => {
+            this.total = 0;
+
+            this.inventories.forEach(element => {
+              this.inventory = element;
+              this.type = this.types.find(x => x.inventoryTypeId == this.inventory.inventoryTypeId)!;
+              
+              if(this.type.inventoryCategoryId == category.inventoryCategoryId)
+              {
+                this.clientorderlines.forEach(element => {
+                      if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                      {
+                        this.found = this.found + 1;
+                        this.total = this.total + Number(element.quantity);     
+                      }
+                  });
+                }
+              });
+                this.items.push({Name: category.description.toString(), Quantity: this.total});
+                this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            console.log(this.items)
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
+              }
+             }
+
+
+            this.barChartLabels = this.labels;
+            this.barChartData = [this.data];
+            console.log(this.data.length)
+          });
+        });
+      });
+    });
+      }
+    }
+  
+    if (this.demandselected == false)
+    {
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+
+          this.ventrixdbservice.readInventoryCategory()
+          .subscribe(response => {
+            this.categories = response;
+
+            this.ventrixdbservice.readInventoryType()
+            .subscribe(response => {
+              this.types = response;
+      
+          this.ventrixdbservice.readClientOrderLine()
+          .subscribe(response => { 
+            this.clientorderlines = response;   
+      
+          this.categories.forEach(category => {
+            this.total = 0;
+
+            this.inventories.forEach(element => {
+              this.inventory = element;
+              this.type = this.types.find(x => x.inventoryTypeId == this.inventory.inventoryTypeId)!;
+              
+              if(this.type.inventoryCategoryId == category.inventoryCategoryId)
+              {
+                this.clientorderlines.forEach(element => {
+                      if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                      {
+                        this.found = this.found + 1;
+                        this.total = this.total + Number(element.quantity);     
+                      }
+                  });
+                }
+              });
+                this.items.push({Name: category.description.toString(), Quantity: this.total});
+                this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            console.log(this.items)
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
+              }
+             }
+
+            this.doughnutChartLabels = this.labels;
+            this.doughnutChartData = [this.data];
+            console.log(this.data.length)
+          });
+        });
+      });
+    });
+      }
+    }
+  }
+
+  if (this.selectedFilter.Value == 2)
+  {
+    if(this.demandselected == true)
+    {
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+
+          this.ventrixdbservice.readInventoryType()
+          .subscribe(response => {
+            this.types = response;
+      
+          this.ventrixdbservice.readClientOrderLine()
+          .subscribe(response => { 
+            this.clientorderlines = response;   
+      
+          this.types.forEach(type => {
+            this.total = 0;
+
+            this.inventories.forEach(element => {
+              this.inventory = element;
+
+              
+              if(this.inventory.inventoryTypeId == type.inventoryTypeId)
+              {
+                this.clientorderlines.forEach(element => {
+                      if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                      {
+                        this.found = this.found + 1;
+                        this.total = this.total + Number(element.quantity);     
+                      }
+                  });
+                }
+              });
+                this.items.push({Name: type.description.toString(), Quantity: this.total});
+                this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            console.log(this.items)
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+       
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
+              }
+             }
+
+            this.barChartLabels = this.labels;
+            this.barChartData = [this.data];
+            console.log(this.data.length)
+          });
+        });
+      });
+      }
+    }
+  
+    if (this.demandselected == false)
+    {
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+
+          this.ventrixdbservice.readInventoryType()
+          .subscribe(response => {
+            this.types = response;
+      
+          this.ventrixdbservice.readClientOrderLine()
+          .subscribe(response => { 
+            this.clientorderlines = response;   
+      
+          this.types.forEach(type => {
+            this.total = 0;
+
+            this.inventories.forEach(element => {
+              this.inventory = element;
+
+              
+              if(this.inventory.inventoryTypeId == type.inventoryTypeId)
+              {
+                this.clientorderlines.forEach(element => {
+                      if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                      {
+                        this.found = this.found + 1;
+                        this.total = this.total + Number(element.quantity);     
+                      }
+                  });
+                }
+              });
+                this.items.push({Name: type.description.toString(), Quantity: this.total});
+                this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            console.log(this.items)
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+         
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
+              }
+             }
+
+            this.doughnutChartLabels = this.labels;
+            this.doughnutChartData = [this.data];
+            console.log(this.data.length)
+          });
+        });
+      });
+      }
+    }
+  }
+
+  
+  if (this.selectedFilter.Value == 3)
+  {
+    if(this.demandselected == true)
+    {
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+      
+          this.ventrixdbservice.readClientOrderLine()
+          .subscribe(response => { 
+            this.clientorderlines = response;   
+      
+          this.inventories.forEach(element => {
+          this.inventory = element;
+      
+          this.total = 0;
+          
+              this.clientorderlines.forEach(element => {
+                if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                {
+                  this.found = this.found + 1;
+                  this.total = this.total + Number(element.quantity);     
+                }
+              });
+              this.items.push({Name: this.inventory.name, Quantity: this.total});
+              this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+        
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
+              }
+             }
+
+            this.barChartLabels = this.labels;
+            this.barChartData = [this.data];
+            console.log(this.data.length)
+          });
+        });
+      }
+    }
+  
+    if (this.demandselected == false)
+    {
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+      
+          this.ventrixdbservice.readSupplierOrderLine()
+          .subscribe(response => { 
+            this.supplierorderlines = response;   
+      
+          this.inventories.forEach(element => {
+          this.inventory = element;
+      
+          this.total = 0;
+          
+              this.supplierorderlines.forEach(element => {
+                if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                {
+                  this.found = this.found + 1;
+                  this.total = this.total + Number(element.quantity);     
+                }
+              });
+              this.items.push({Name: this.inventory.name, Quantity: this.total});
+              this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+    
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
+              }
+             }
+
+  
+            this.doughnutChartLabels = this.labels;
+            this.doughnutChartData = [this.data];
+          });
+        });
+      }
+    }
+  
+  }
+  
+}
 
 monthChange()
 {
   this.items = [];
+  this.filteritems = [];
   this.found = 0;
   this.data = [];
   this.labels = [];
-
-  if(this.demandselected == true)
+  this.Fulltotal = 0;
+  this.vm = [];
+  console.log(this.selectedFilter)
+  
+  if (this.selectedFilter == undefined)
   {
-    if (this.selectedMonth != undefined)
+    if(this.demandselected == true)
     {
-      //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
-      this.ventrixdbservice.readInventory()
-      .subscribe(response => {
-        this.inventories = response;
-    
-        this.ventrixdbservice.readClientOrderLine()
-        .subscribe(response => { 
-          this.clientorderlines = response;   
-    
-        this.inventories.forEach(element => {
-        this.inventory = element;
-    
-        this.total = 0;
-        
-            this.clientorderlines.forEach(element => {
-              if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
-              {
-                this.found = this.found + 1;
-                this.total = this.total + Number(element.quantity);     
-              }
-            });
-            this.items.push({Name: this.inventory.name, Quantity: this.total});
-          });
-    
-          if(this.found != 0)
-          {
-            //Orders in ascending orders
-            this.items.sort(function(x,y) {
-              if (x.Quantity < y.Quantity) {
-                  return 1;
-              }
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+      
+          this.ventrixdbservice.readClientOrderLine()
+          .subscribe(response => { 
+            this.clientorderlines = response;   
+      
+          this.inventories.forEach(element => {
+          this.inventory = element;
+      
+          this.total = 0;
           
-              if (x.Quantity > y.Quantity) {
-                  return -1;
+              this.clientorderlines.forEach(element => {
+                if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                {
+                  this.found = this.found + 1;
+                  this.total = this.total + Number(element.quantity);     
+                }
+              });
+              this.items.push({Name: this.inventory.name, Quantity: this.total});
+              this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+        
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
               }
-              return 0;
+             }
+
+            this.barChartLabels = this.labels;
+            this.barChartData = [this.data];
+            console.log(this.data.length)
           });
-          }
-    
-          if(this.found != 0)
-          {
-          if (this.items.length <= 5)
-          {
-            //Only displays top 5 results 
-            for (var i = 0; i < this.items.length ; i++)
-            {
-              this.data.push(Number(this.items[i].Quantity));
-              this.labels.push(this.items[i].Name);
-            }
-          }
-          else
-          {
-            for (var i = 0; i <= 4; i++)
-            {
-              this.data.push(Number(this.items[i].Quantity));
-              this.labels.push(this.items[i].Name);
-            }
-   
-        }
+        });
       }
-          this.barChartLabels = this.labels;
-          this.barChartData = [this.data];
-          console.log(this.data.length)
-        });
-      });
     }
-  }
-
-  if (this.demandselected == false)
-  {
-    if (this.selectedMonth != undefined)
+  
+    if (this.demandselected == false)
     {
-      //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
-      this.ventrixdbservice.readInventory()
-      .subscribe(response => {
-        this.inventories = response;
-    
-        this.ventrixdbservice.readSupplierOrderLine()
-        .subscribe(response => { 
-          this.supplierorderlines = response;   
-    
-        this.inventories.forEach(element => {
-        this.inventory = element;
-    
-        this.total = 0;
-        
-            this.supplierorderlines.forEach(element => {
-              if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
-              {
-                this.found = this.found + 1;
-                this.total = this.total + Number(element.quantity);     
-              }
-            });
-            this.items.push({Name: this.inventory.name, Quantity: this.total});
-          });
-    
-          if(this.found != 0)
-          {
-            //Orders in ascending orders
-            this.items.sort(function(x,y) {
-              if (x.Quantity < y.Quantity) {
-                  return 1;
-              }
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+      
+          this.ventrixdbservice.readSupplierOrderLine()
+          .subscribe(response => { 
+            this.supplierorderlines = response;   
+      
+          this.inventories.forEach(element => {
+          this.inventory = element;
+      
+          this.total = 0;
           
-              if (x.Quantity > y.Quantity) {
-                  return -1;
-              }
-              return 0;
-          });
-          }
+              this.supplierorderlines.forEach(element => {
+                if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                {
+                  this.found = this.found + 1;
+                  this.total = this.total + Number(element.quantity);     
+                }
+              });
+              this.items.push({Name: this.inventory.name, Quantity: this.total});
+              this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
     
-          if(this.found != 0)
-          {
-          if (this.items.length < 5)
-          {
-            //Only displays top 5 results 
-            for (var i = 0; i < this.items.length ; i++)
+            if(this.found != 0)
             {
-              this.data.push(Number(this.items[i].Quantity));
-              this.labels.push(this.items[i].Name);
-            }
-          }
-          else
-          {
-            for (var i = 0; i <= 4; i++)
-            {
-              console.log(i)
-              this.data.push(Number(this.items[i].Quantity));
-              this.labels.push(this.items[i].Name);
-            }
-          }
-          }
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
 
-          this.doughnutChartLabels = this.labels;
-          this.doughnutChartData = [this.data];
+                }
+              }
+             }
+
+  
+            this.doughnutChartLabels = this.labels;
+            this.doughnutChartData = [this.data];
+          });
+        });
+      }
+    }
+  
+  }
+  else
+  {
+  if (this.selectedFilter.Value == 1)
+  {
+    if(this.demandselected == true)
+    {
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+
+          this.ventrixdbservice.readInventoryCategory()
+          .subscribe(response => {
+            this.categories = response;
+
+            this.ventrixdbservice.readInventoryType()
+            .subscribe(response => {
+              this.types = response;
+      
+          this.ventrixdbservice.readClientOrderLine()
+          .subscribe(response => { 
+            this.clientorderlines = response;   
+      
+          this.categories.forEach(category => {
+            this.total = 0;
+
+            this.inventories.forEach(element => {
+              this.inventory = element;
+              this.type = this.types.find(x => x.inventoryTypeId == this.inventory.inventoryTypeId)!;
+              
+              if(this.type.inventoryCategoryId == category.inventoryCategoryId)
+              {
+                this.clientorderlines.forEach(element => {
+                      if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                      {
+                        this.found = this.found + 1;
+                        this.total = this.total + Number(element.quantity);     
+                      }
+                  });
+                }
+              });
+                this.items.push({Name: category.description.toString(), Quantity: this.total});
+                this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            console.log(this.items)
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
+              }
+             }
+
+
+            this.barChartLabels = this.labels;
+            this.barChartData = [this.data];
+            console.log(this.data.length)
+          });
         });
       });
+    });
+      }
+    }
+  
+    if (this.demandselected == false)
+    {
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+
+          this.ventrixdbservice.readInventoryCategory()
+          .subscribe(response => {
+            this.categories = response;
+
+            this.ventrixdbservice.readInventoryType()
+            .subscribe(response => {
+              this.types = response;
+      
+          this.ventrixdbservice.readClientOrderLine()
+          .subscribe(response => { 
+            this.clientorderlines = response;   
+      
+          this.categories.forEach(category => {
+            this.total = 0;
+
+            this.inventories.forEach(element => {
+              this.inventory = element;
+              this.type = this.types.find(x => x.inventoryTypeId == this.inventory.inventoryTypeId)!;
+              
+              if(this.type.inventoryCategoryId == category.inventoryCategoryId)
+              {
+                this.clientorderlines.forEach(element => {
+                      if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                      {
+                        this.found = this.found + 1;
+                        this.total = this.total + Number(element.quantity);     
+                      }
+                  });
+                }
+              });
+                this.items.push({Name: category.description.toString(), Quantity: this.total});
+                this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            console.log(this.items)
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
+              }
+             }
+
+            this.doughnutChartLabels = this.labels;
+            this.doughnutChartData = [this.data];
+            console.log(this.data.length)
+          });
+        });
+      });
+    });
+      }
     }
   }
 
+  if (this.selectedFilter.Value == 2)
+  {
+    if(this.demandselected == true)
+    {
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+
+          this.ventrixdbservice.readInventoryType()
+          .subscribe(response => {
+            this.types = response;
+      
+          this.ventrixdbservice.readClientOrderLine()
+          .subscribe(response => { 
+            this.clientorderlines = response;   
+      
+          this.types.forEach(type => {
+            this.total = 0;
+
+            this.inventories.forEach(element => {
+              this.inventory = element;
+
+              
+              if(this.inventory.inventoryTypeId == type.inventoryTypeId)
+              {
+                this.clientorderlines.forEach(element => {
+                      if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                      {
+                        this.found = this.found + 1;
+                        this.total = this.total + Number(element.quantity);     
+                      }
+                  });
+                }
+              });
+                this.items.push({Name: type.description.toString(), Quantity: this.total});
+                this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            console.log(this.items)
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+       
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
+              }
+             }
+
+            this.barChartLabels = this.labels;
+            this.barChartData = [this.data];
+            console.log(this.data.length)
+          });
+        });
+      });
+      }
+    }
+  
+    if (this.demandselected == false)
+    {
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+
+          this.ventrixdbservice.readInventoryType()
+          .subscribe(response => {
+            this.types = response;
+      
+          this.ventrixdbservice.readClientOrderLine()
+          .subscribe(response => { 
+            this.clientorderlines = response;   
+      
+          this.types.forEach(type => {
+            this.total = 0;
+
+            this.inventories.forEach(element => {
+              this.inventory = element;
+
+              
+              if(this.inventory.inventoryTypeId == type.inventoryTypeId)
+              {
+                this.clientorderlines.forEach(element => {
+                      if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                      {
+                        this.found = this.found + 1;
+                        this.total = this.total + Number(element.quantity);     
+                      }
+                  });
+                }
+              });
+                this.items.push({Name: type.description.toString(), Quantity: this.total});
+                this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            console.log(this.items)
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+         
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
+              }
+             }
+
+            this.doughnutChartLabels = this.labels;
+            this.doughnutChartData = [this.data];
+            console.log(this.data.length)
+          });
+        });
+      });
+      }
+    }
+  }
+
+  
+  if (this.selectedFilter.Value == 3)
+  {
+    if(this.demandselected == true)
+    {
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+      
+          this.ventrixdbservice.readClientOrderLine()
+          .subscribe(response => { 
+            this.clientorderlines = response;   
+      
+          this.inventories.forEach(element => {
+          this.inventory = element;
+      
+          this.total = 0;
+          
+              this.clientorderlines.forEach(element => {
+                if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                {
+                  this.found = this.found + 1;
+                  this.total = this.total + Number(element.quantity);     
+                }
+              });
+              this.items.push({Name: this.inventory.name, Quantity: this.total});
+              this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+        
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
+              }
+             }
+
+            this.barChartLabels = this.labels;
+            this.barChartData = [this.data];
+            console.log(this.data.length)
+          });
+        });
+      }
+    }
+  
+    if (this.demandselected == false)
+    {
+      if (this.selectedMonth != undefined)
+      {
+        //Loops through each inventory item and calculates total amount for that inventory item used for that specific month for the current year
+        this.ventrixdbservice.readInventory()
+        .subscribe(response => {
+          this.inventories = response;
+      
+          this.ventrixdbservice.readSupplierOrderLine()
+          .subscribe(response => { 
+            this.supplierorderlines = response;   
+      
+          this.inventories.forEach(element => {
+          this.inventory = element;
+      
+          this.total = 0;
+          
+              this.supplierorderlines.forEach(element => {
+                if (new Date().getFullYear() == new Date(element.date).getFullYear() && this.selectedMonth.Value == new Date(element.date).getMonth()+1 && element.inventoryId == this.inventory.inventoryId)
+                {
+                  this.found = this.found + 1;
+                  this.total = this.total + Number(element.quantity);     
+                }
+              });
+              this.items.push({Name: this.inventory.name, Quantity: this.total});
+              this.Fulltotal = this.Fulltotal + this.total;     
+            });
+      
+            if(this.found != 0)
+            {
+              //Orders in ascending orders
+              this.items.sort(function(x,y) {
+                if (x.Quantity < y.Quantity) {
+                    return 1;
+                }
+            
+                if (x.Quantity > y.Quantity) {
+                    return -1;
+                }
+                return 0;
+            });
+            }
+      
+    
+            if(this.found != 0)
+            {
+              for (var i = 0; i < 5 ; i++)
+              {
+                if (this.items[i].Quantity != 0)
+                {
+                  this.data.push(Number(this.items[i].Quantity));
+                     this.labels.push(this.items[i].Name);
+                  this.vm.push({Label: this.items[i].Name.toString(), Quantity: Number(this.items[i].Quantity)});
+
+                }
+              }
+             }
+
+  
+            this.doughnutChartLabels = this.labels;
+            this.doughnutChartData = [this.data];
+          });
+        });
+      }
+    }
+  }
+  }
 }
 
 // PDF Options
@@ -274,14 +1240,33 @@ monthChange()
 
     const contentDataUrl = canvas.toDataURL('image/png');
 
-    this.report = 
+    if (this.selectedFilter == undefined)
     {
-      items: this.labels,
-      values: this.data,
-      account: this.account.name+' '+this.account.surname,
-      month: this.selectedMonth.Name,
-      image:contentDataUrl
+      this.report = 
+      {
+        items: this.labels,
+        values: this.data,
+        account: this.account.name+' '+this.account.surname,
+        month: this.selectedMonth.Name,
+        image:contentDataUrl, 
+        filter: 0,
+        total: this.Fulltotal
+      }
     }
+    else
+    {
+      this.report = 
+      {
+        items: this.labels,
+        values: this.data,
+        account: this.account.name+' '+this.account.surname,
+        month: this.selectedMonth.Name,
+        image:contentDataUrl, 
+        filter: this.selectedFilter.Value,
+        total: this.Fulltotal
+      }
+    }
+
 
     this.ventrixdbservice.generateDemandPDFReport(this.report)
     .subscribe(res => {
@@ -303,15 +1288,32 @@ monthChange()
     const contentDataUrl = canvas.toDataURL('image/png');
     console.log(contentDataUrl)
 
-    this.report = 
+    if (this.selectedFilter == undefined)
     {
-      items: this.labels,
-      values: this.data,
-      account: this.account.name+' '+this.account.surname,
-      month: this.selectedMonth.Name,
-      image:contentDataUrl
+      this.report = 
+      {
+        items: this.labels,
+        values: this.data,
+        account: this.account.name+' '+this.account.surname,
+        month: this.selectedMonth.Name,
+        image:contentDataUrl, 
+        filter: 0,
+        total: this.Fulltotal
+      }
     }
-
+    else
+    {
+      this.report = 
+      {
+        items: this.labels,
+        values: this.data,
+        account: this.account.name+' '+this.account.surname,
+        month: this.selectedMonth.Name,
+        image:contentDataUrl, 
+        filter: this.selectedFilter.Value,
+        total: this.Fulltotal
+      }
+    }
     this.ventrixdbservice.generateSupplyPDFReport(this.report)
     .subscribe(res => {
       const data = new Blob([res] , { type: 'application/pdf' });
@@ -339,14 +1341,33 @@ generateExcel()
 {
   if (this.demandselected == true && this.data.length != 0)
   {
-    this.report = 
+    if (this.selectedFilter == undefined)
     {
-      items: this.labels,
-      values: this.data,
-      account: this.account.name+' '+this.account.surname,
-      month: this.selectedMonth.Name,
-      image:''
+      this.report = 
+      {
+        items: this.labels,
+        values: this.data,
+        account: this.account.name+' '+this.account.surname,
+        month: this.selectedMonth.Name,
+        image:'',
+        filter: 0,
+        total: this.Fulltotal
+      }
     }
+    else
+    {
+      this.report = 
+      {
+        items: this.labels,
+        values: this.data,
+        account: this.account.name+' '+this.account.surname,
+        month: this.selectedMonth.Name,
+        image:'',
+        filter: this.selectedFilter.Value,
+        total: this.Fulltotal
+      }
+    }
+
     this.ventrixdbservice.generateExcelDemandReport(this.report).subscribe(res => {
       const data = new Blob([res] , { type: 'application/vnd.ms-excel' });
      saveAs(data,"Demand Report");
@@ -361,7 +1382,9 @@ generateExcel()
       values: this.data,
       account: this.account.name+' '+this.account.surname,
       month: this.selectedMonth.Name,
-      image:''
+      image:'',
+      filter: this.selectedFilter.Value,
+      total: this.Fulltotal
     }
     this.ventrixdbservice.generateExcelSupplyReport(this.report).subscribe(res => {
       const data = new Blob([res] , { type: 'application/vnd.ms-excel' });

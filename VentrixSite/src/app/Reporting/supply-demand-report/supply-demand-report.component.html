@@ -11,10 +11,19 @@
               <br>
               <div class="row">
                 <div class="col-6" *ngIf="selectedMonth != null">
-                    <label>Select Month:</label>
-                    <ng-select style="width: 300px;" [(ngModel)]="selectedMonth" (change)="monthChange()">
-                        <ng-option *ngFor="let month of months" [value]="month">{{month.Name}}</ng-option>
-                    </ng-select>
+                    <div >
+                        <label>Select Month:</label>
+                        <ng-select style="width: 300px;" [(ngModel)]="selectedMonth" (change)="monthChange()">
+                            <ng-option *ngFor="let month of months" [value]="month">{{month.Name}}</ng-option>
+                        </ng-select>
+                    </div>
+                    <br>
+                    <div>
+                        <label>Filter:</label>
+                        <ng-select style="width: 300px;" [(ngModel)]="selectedFilter" (change)="filterChange()">
+                            <ng-option *ngFor="let filter of filters" [value]="filter">{{filter.Name}}</ng-option>
+                        </ng-select>
+                    </div>
                 </div>
                 <div style="margin:auto" *ngIf="selectedMonth == null">
                     <label>Select Month:</label>
@@ -75,6 +84,80 @@
                 [colors]="barChartColor">
             </canvas>
             <br>
+            <table *ngIf="selectedFilter == undefined" class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Items</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of vm">
+                        <td>{{item.Label}}</td>
+                        <td>{{item.Quantity}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Total</td>
+                        <td style="font-weight: bold;">{{Fulltotal}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table *ngIf="selectedFilter != undefined && selectedFilter.Value == 1"  class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of vm">
+                        <td>{{item.Label}}</td>
+                        <td>{{item.Quantity}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Total</td>
+                        <td style="font-weight: bold;">{{Fulltotal}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table *ngIf="selectedFilter != undefined && selectedFilter.Value == 2"  class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Types</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of vm">
+                        <td>{{item.Label}}</td>
+                        <td>{{item.Quantity}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Total</td>
+                        <td style="font-weight: bold;">{{Fulltotal}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table *ngIf="selectedFilter != undefined && selectedFilter.Value == 3"  class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Items</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of vm">
+                        <td>{{item.Label}}</td>
+                        <td>{{item.Quantity}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Total</td>
+                        <td style="font-weight: bold;">{{Fulltotal}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
             <div style="text-align: center;"><img src="assets/images/Akquize.png"></div>
             </div>
 
@@ -90,6 +173,80 @@
                 [chartType]="doughnutChartType"
                 [colors]="pieChartColor">
               </canvas>
+              <br>
+              <table *ngIf="selectedFilter == undefined" class="table table-striped table-hover table-bordered">
+                  <thead>
+                      <tr>
+                          <th>Items</th>
+                          <th>Quantity</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let item of vm">
+                          <td>{{item.Label}}</td>
+                          <td>{{item.Quantity}}</td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight: bold;">Total</td>
+                        <td style="font-weight: bold;">{{Fulltotal}}</td>
+                        </tr>
+                  </tbody>
+              </table>
+  
+              <table *ngIf="selectedFilter != undefined && selectedFilter.Value == 1"  class="table table-striped table-hover table-bordered">
+                  <thead>
+                      <tr>
+                          <th>Category</th>
+                          <th>Quantity</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let item of vm">
+                          <td>{{item.Label}}</td>
+                          <td>{{item.Quantity}}</td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight: bold;">Total</td>
+                        <td style="font-weight: bold;">{{Fulltotal}}</td>
+                    </tr>
+                  </tbody>
+              </table>
+              <table *ngIf="selectedFilter != undefined && selectedFilter.Value == 2"  class="table table-striped table-hover table-bordered">
+                  <thead>
+                      <tr>
+                          <th>Types</th>
+                          <th>Quantity</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let item of vm">
+                          <td>{{item.Label}}</td>
+                          <td>{{item.Quantity}}</td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight: bold;">Total</td>
+                        <td style="font-weight: bold;">{{Fulltotal}}</td>
+                    </tr>
+                  </tbody>
+              </table>
+              <table *ngIf="selectedFilter != undefined && selectedFilter.Value == 3"  class="table table-striped table-hover table-bordered">
+                  <thead>
+                      <tr>
+                          <th>Items</th>
+                          <th>Quantity</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let item of vm">
+                          <td>{{item.Label}}</td>
+                          <td>{{item.Quantity}}</td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight: bold;">Total</td>
+                        <td style="font-weight: bold;">{{Fulltotal}}</td>
+                    </tr>
+                  </tbody>
+              </table>
               <br>
               <div style="text-align: center;"><img src="assets/images/Akquize.png"></div>
             </div>
