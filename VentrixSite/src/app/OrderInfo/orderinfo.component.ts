@@ -52,7 +52,6 @@ export class OrderinfoComponent implements OnInit {
         this.data = params['order'];
       });
   
-      console.log(this.data)
       //Decrypt the ID 
       this.data = this.data.toString().replaceAll(" ", "+"); 
    
@@ -60,6 +59,7 @@ export class OrderinfoComponent implements OnInit {
 
       this.clientOrders = response;
       this.order = this.clientOrders.find(x => x.description == this.id);
+      console.log(this.order)
       this.ventrixdbservice.readClientOrderStatuses()
       .subscribe(response => {
         //Uses earliest date of status to get current status

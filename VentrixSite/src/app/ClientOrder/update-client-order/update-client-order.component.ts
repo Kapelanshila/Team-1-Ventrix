@@ -10,6 +10,7 @@ import { saveAs } from 'file-saver';
 import { ClientOrder } from 'src/app/shared/ClientOrder';
 // import { ThemeService } from 'ng2-charts';
 import { ClientOrderVM } from 'src/app/shared/ClientOrderVM';
+import * as CryptoJS from 'crypto-js';
 
 
 @Component({
@@ -233,7 +234,7 @@ export class UpdateClientOrderComponent implements OnInit {
         clientId : this.selectedClient,
         description: this.clientorderform.get('description')?.value,
         clientInvoice: this.selectedorder.clientInvoice,
-        encrypted: ''
+        encrypted: CryptoJS.AES.encrypt(this.clientorderform.get('description')?.value.trim(), "coffee".trim()).toString(),
       }
       this.ventrixdbservice.updateClientOrder(this.order).subscribe();
       Swal.fire({
