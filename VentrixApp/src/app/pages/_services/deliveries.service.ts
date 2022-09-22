@@ -86,4 +86,8 @@ GoogleMaps(destinations: string){
 }
 //
 
+ScheduleSMS(schedule: ScheduleVM){
+  return this.http.post(environment.apiUrl+'Delivery/sendScheduleSMS?schedule=', schedule )
+}
+
 }

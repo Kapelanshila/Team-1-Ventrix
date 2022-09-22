@@ -71,10 +71,10 @@ export class SchedulePage implements OnInit {
       (data: any) => {
         console.log(data);
         this.successfulSchedule(true);
+        this.deliveryService.ScheduleSMS(schedule).subscribe();
         this.router.navigate(['/deliveries']).then(() => {
           window.location.reload();
         });
-
       },
       (error: any) => {
         this.successfulSchedule(false);
