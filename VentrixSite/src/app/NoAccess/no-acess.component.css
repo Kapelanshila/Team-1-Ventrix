@@ -1,15 +1,19 @@
-h1 {
+h1 
+{
     font-size: 15vmin;
-    margin-bottom: 0;
-  }
-  h2 {
-    font-size: 5vmin;
-    margin-top: 0;
-    margin-bottom: 40px;
-    margin: auto;
-  }
+    margin-top: auto;
+}
+
+h2 
+{
+  font-size: 5vmin;
+  margin: auto;
+  margin-top: 0;
+  font-weight: normal;
+  color: red;
+}
   
-  .behind{
+  #behind{
     height: 100vh;
     display: flex;
     flex-direction: column;

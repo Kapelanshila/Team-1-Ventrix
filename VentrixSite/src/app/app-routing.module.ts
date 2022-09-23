@@ -111,7 +111,7 @@ import { HelpComponent } from './Help/help.component';
 import { NoAcessComponent } from './NoAccess/no-acess.component';
 const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'create-client', component: CreateClientComponent, canActivate: [AdminAuthGuard]  },
-{ path: 'read-client', component: ReadClientComponent},
+{ path: 'read-client', component: ReadClientComponent,  canActivate: [AdminAuthGuard] },
 { path: 'update-client', component: ClientUpdateComponent, canActivate: [AdminAuthGuard]  },
 { path: 'create-assetcategory', component: CreateAssetcategoryComponent , canActivate: [AssetAuthGuard]  },
 { path: 'read-assetcategory', component: ReadAssetcategoryComponent, canActivate: [AssetAuthGuard]  },

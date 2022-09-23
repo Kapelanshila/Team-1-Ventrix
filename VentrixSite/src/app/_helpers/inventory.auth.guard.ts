@@ -26,7 +26,7 @@ export class InventoryAuthGuard implements CanActivate {
       }
       else
       {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/forbidden']);
         return false;
       }
     }
