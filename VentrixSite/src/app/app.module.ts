@@ -127,6 +127,7 @@ import { SupplyDemandReportComponent } from './Reporting/supply-demand-report/su
 import { OrderinfoComponent } from './orderinfo/orderinfo.component';
 import { HelpComponent } from './Help/help.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { NoAcessComponent } from './NoAccess/no-acess.component';
 
 @NgModule({
   declarations: [
@@ -235,7 +236,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ManagementReportComponent,
     BackupRestoreComponent,
     OrderinfoComponent,
-    HelpComponent
+    HelpComponent,
+    NoAcessComponent
   ],
   imports: [
     ChartsModule,
