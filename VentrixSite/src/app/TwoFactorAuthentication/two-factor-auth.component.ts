@@ -51,7 +51,7 @@ ngOnInit(): void
   this.mail = 
   {
     OTP: this.number.toString(),
-    email: this.account.emailAddress.toString()
+    email: this.account.phoneNumber.toString()
   }
   this.ventrixdbservice.sendOTP(this.mail).subscribe();
 

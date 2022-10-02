@@ -6,5 +6,6 @@ export interface ClientOrderVM {
     contactPersonName :String 
     contactPersonSurname: String
     emailAddress: String
-    status: String
+    status: String,
+    encrypted:string
 }

@@ -28,6 +28,7 @@ interface child {
 }
 
 const TREE_DATA: AssetNode[] =[];
+const WTREE_DATA: AssetNode[] =[];
 
 /** Flat node with expandable and level information */
 interface ExampleFlatNode {
@@ -48,12 +49,13 @@ export class AssetReportComponent implements OnInit {
   types:AssetType[] = [];
   categories:AssetCategory[] = [];
   p: number = 1;
+  warehouse:any;
   new!:AssetNode;
   config: any; 
   noOfRows = 10;
   item!:AssetReport;
   type:any;
-  assetItems:AssetVM[] = [];
+  assetItems:any[] = [];
   conditions:any[] = [];
   warrantyperiods:any[] = [];
   warranty!: any;
@@ -61,7 +63,8 @@ export class AssetReportComponent implements OnInit {
   repairs:any[] = [];
   account!:Account;
   date!:Date;
-  
+  selectedwarehouse:string = "All";
+
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) { }
 
   //Search query 
@@ -96,6 +99,7 @@ export class AssetReportComponent implements OnInit {
                     name: 'All',
                   }
                   TREE_DATA.push(this.new)
+                  WTREE_DATA.push(this.new)
 
                   //Add Categories and types to nodes 
                   this.categories.forEach(category => {
@@ -113,6 +117,9 @@ export class AssetReportComponent implements OnInit {
                         }
                         TREE_DATA.push(this.new)
                     });
+
+           
+  
                   this.dataSource.data = TREE_DATA;
 
                   console.log(TREE_DATA)
@@ -133,6 +140,12 @@ export class AssetReportComponent implements OnInit {
                         this.ventrixdbservice.readWarehouse()
                         .subscribe(response => {
                           this.warehouses = response;
+
+                          this.warehouses.forEach(element => {
+                            WTREE_DATA.push(element)
+                          });
+
+                          this.wdataSource.data = WTREE_DATA;
                         
                         this.assets.forEach(asset => {
                         if (asset.assetStatus != "Written Off")
@@ -161,7 +174,8 @@ export class AssetReportComponent implements OnInit {
                           assetCategoryId: this.type.assetCategoryId,
                           assetStatus: asset.assetStatus,
                           value: asset.value,
-                          account: this.account.name+' '+this.account.surname
+                          account: this.account.name+' '+this.account.surname,
+                          selectedWarehouse: this.selectedwarehouse
                         }
                         this.assetItems.push(this.item)
                       }
@@ -176,6 +190,179 @@ export class AssetReportComponent implements OnInit {
           console.log(this.assetItems)
         }
     })
+  }
+
+  warehouseclicked(selectednode:string)
+  {
+    this.selectedwarehouse = selectednode;
+    this.assetItems = [];
+
+    if (selectednode == "All")
+    {
+      //Get asset from api
+      this.ventrixdbservice.readAsset()
+      .subscribe(response => {
+        this.assets = response;
+
+          //In the event there no assets
+          if (this.assets.length != 0)
+          {
+              //Types,Category,Supplier and Warehouse is also retrived from the api in order to present relevant information realting to that inventory item
+              this.ventrixdbservice.readAssetType()
+              .subscribe(response => {
+                this.types = response;
+
+                  this.ventrixdbservice.readAssetCategory()
+                  .subscribe(response => {
+                    this.categories = response;
+
+                    this.ventrixdbservice.readWarrantyPeriod()
+                    .subscribe(response => {
+                      this.warrantyperiods = response;
+
+                      this.ventrixdbservice.readCondition()
+                      .subscribe(response => {
+                        this.conditions = response;
+
+                        this.ventrixdbservice.readWarranty()
+                        .subscribe(response => {
+                          this.warranties = response;
+
+
+                          this.ventrixdbservice.readWarehouse()
+                          .subscribe(response => {
+                            this.warehouses = response;
+                          
+                          this.assets.forEach(asset => {
+                            this.type = this.types.find(x => x.assetTypeId == asset.assetTypeId);
+
+                          if (asset.assetStatus != "Written Off")
+                          {
+                          this.warranty = this.warranties.find(x => x.warrantyId == asset.warrantyId);
+
+                          //New asset view model is assigned the retrived values from the api
+                          this.item = 
+                          {
+                            assetId: asset.assetId,
+                            conditionId: asset.conditionId,
+                            warrantyId :asset.warrantyId,
+                            assetTypeId:asset.assetTypeId,
+                            warehouseId:asset.warehouseId,
+                            manufacturer:asset.manufacturer,
+                            name: asset.name,
+                            type: this.types.find(x => x.assetTypeId == this.type.assetTypeId)!.description.toString(),
+                            category :this.categories.find(x => x.assetCategoryId == this.type.assetCategoryId)!.description.toString(),
+                            warrantyperiod: this.warrantyperiods.find(x => x.warrantyPeriodId == this.warranty.warrantyPeriodId).value,
+                            condition: this.conditions.find(x => x.conditionId == asset.conditionId).description,
+                            warehouse:this.warehouses.find(x => x.warehouseId == asset.warehouseId).name,
+                            warrantyDate: this.warranty.date,
+                            assetImage: asset.assetImage,
+                            warrantyPeriodId: this.warranty.warrantyPeriodId,
+                            assetCategoryId: this.type.assetCategoryId,
+                            assetStatus: asset.assetStatus,
+                            value: asset.value,
+                            account: this.account.name+' '+this.account.surname,
+                            selectedWarehouse: this.selectedwarehouse
+
+                          }
+                          this.assetItems.push(this.item)
+                        }
+                        })
+                        
+                    })
+                  })
+                  })
+                })       
+              })       
+            });
+            console.log(this.assetItems)
+          }
+      })
+    }
+    else
+    {
+ //Get asset from api
+ this.ventrixdbservice.readAsset()
+ .subscribe(response => {
+   this.assets = response;
+
+     //In the event there no assets
+     if (this.assets.length != 0)
+     {
+         //Types,Category,Supplier and Warehouse is also retrived from the api in order to present relevant information realting to that inventory item
+         this.ventrixdbservice.readAssetType()
+         .subscribe(response => {
+           this.types = response;
+
+             this.ventrixdbservice.readAssetCategory()
+             .subscribe(response => {
+               this.categories = response;
+
+               this.ventrixdbservice.readWarrantyPeriod()
+               .subscribe(response => {
+                 this.warrantyperiods = response;
+
+                 this.ventrixdbservice.readCondition()
+                 .subscribe(response => {
+                   this.conditions = response;
+
+                   this.ventrixdbservice.readWarranty()
+                   .subscribe(response => {
+                     this.warranties = response;
+
+
+                     this.ventrixdbservice.readWarehouse()
+                     .subscribe(response => {
+                       this.warehouses = response;
+                     
+                     this.assets.forEach(asset => {
+                       this.type = this.types.find(x => x.assetTypeId == asset.assetTypeId);
+                       this.warehouse = this.warehouses.find(x => x.warehouseId == asset.warehouseId);
+
+                       if (asset.assetStatus != "Written Off" && selectednode == this.warehouse.name)
+                     {
+                     this.warranty = this.warranties.find(x => x.warrantyId == asset.warrantyId);
+
+                     //New asset view model is assigned the retrived values from the api
+                     this.item = 
+                     {
+                       assetId: asset.assetId,
+                       conditionId: asset.conditionId,
+                       warrantyId :asset.warrantyId,
+                       assetTypeId:asset.assetTypeId,
+                       warehouseId:asset.warehouseId,
+                       manufacturer:asset.manufacturer,
+                       name: asset.name,
+                       type: this.types.find(x => x.assetTypeId == this.type.assetTypeId)!.description.toString(),
+                       category :this.categories.find(x => x.assetCategoryId == this.type.assetCategoryId)!.description.toString(),
+                       warrantyperiod: this.warrantyperiods.find(x => x.warrantyPeriodId == this.warranty.warrantyPeriodId).value,
+                       condition: this.conditions.find(x => x.conditionId == asset.conditionId).description,
+                       warehouse:this.warehouses.find(x => x.warehouseId == asset.warehouseId).name,
+                       warrantyDate: this.warranty.date,
+                       assetImage: asset.assetImage,
+                       warrantyPeriodId: this.warranty.warrantyPeriodId,
+                       assetCategoryId: this.type.assetCategoryId,
+                       assetStatus: asset.assetStatus,
+                       value: asset.value,
+                       account: this.account.name+' '+this.account.surname,
+                       selectedWarehouse: this.selectedwarehouse
+
+                     }
+                     this.assetItems.push(this.item)
+                   }
+                   })
+                   
+               })
+             })
+             })
+           })       
+         })       
+       });
+       console.log(this.assetItems)
+     }
+ })
+    }
+   
   }
 
   generateExcel()
@@ -251,7 +438,8 @@ export class AssetReportComponent implements OnInit {
                           assetCategoryId: this.type.assetCategoryId,
                           assetStatus: asset.assetStatus,
                           value: asset.value,
-                          account: this.account.name+' '+this.account.surname
+                          account: this.account.name+' '+this.account.surname,
+                          selectedWarehouse: this.selectedwarehouse
 
                         }
                         this.assetItems.push(this.item)
@@ -268,6 +456,16 @@ export class AssetReportComponent implements OnInit {
         }
     })
   }
+
+  download()
+  {
+    this.ventrixdbservice.generateAssetPDFReport(this.assetItems)
+    .subscribe(res => {
+      const data = new Blob([res] , { type: 'application/pdf' });
+     saveAs(data,"Asset Report");
+   });
+  }
+  
 
   childClick(selectednode: string)
   {
@@ -337,7 +535,8 @@ export class AssetReportComponent implements OnInit {
                             assetCategoryId: this.type.assetCategoryId,
                             assetStatus: asset.assetStatus,
                             value: asset.value,
-                            account: this.account.name+' '+this.account.surname
+                            account: this.account.name+' '+this.account.surname,
+                            selectedWarehouse: this.selectedwarehouse
 
                           }
                           this.assetItems.push(this.item)
@@ -418,7 +617,8 @@ export class AssetReportComponent implements OnInit {
                        assetCategoryId: this.type.assetCategoryId,
                        assetStatus: asset.assetStatus,
                        value: asset.value,
-                       account: this.account.name+' '+this.account.surname
+                       account: this.account.name+' '+this.account.surname,
+                       selectedWarehouse: this.selectedwarehouse
 
                      }
                      this.assetItems.push(this.item)
@@ -460,6 +660,7 @@ export class AssetReportComponent implements OnInit {
   );
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  wdataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 

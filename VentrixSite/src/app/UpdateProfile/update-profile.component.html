@@ -37,7 +37,11 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
-                        <label>Title</label>  
+                        <label>Title
+                            <span>
+                                <i class="fa fa-info-circle" title="Select your title (the prefix to your name)."></i>
+                            </span>
+                        </label>  
                         <div *ngIf="submitted">
                             <span *ngIf="f['titleId'].errors?.['required'] || f['titleId'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please select a title</span>
                         </div>   

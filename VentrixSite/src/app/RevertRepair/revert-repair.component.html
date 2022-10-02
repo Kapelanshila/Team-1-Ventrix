@@ -25,16 +25,17 @@
                     <thead>
                         <tr>
                             <th>Asset</th>
-                            <th>Repair Reason</th>
+                            <th>Repair Reason</th>        
+                            <th>Description</th>      
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let repairItem of repairItems | paginate:{itemsPerPage: noOfRows, currentPage:p}">
-                        <td class="underline-on-hover"><a [routerLink]="" (click)="openPopup(repairItem)" style="cursor: pointer; color: blue;">{{repairItem.assetname}}</a></td>
+                        <td class="underline-on-hover"><a [routerLink]="" style="color: black;">{{repairItem.assetname}}</a></td>
                         <td>{{repairItem.reason}}</td>
-                        <td class = "icon-adjust">
-                            <a [routerLink]="" style="cursor: pointer;" class="undo" title="Undo Repair" (click)="undoRepair(repairItem)" data-toggle="tooltip"><i class="fa fa-undo" aria-hidden="true"></i></a>
-                        </td>  
+                        <td>{{repairItem.description}}</td>
+                        <td>{{repairItem.date | extension}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -50,7 +51,7 @@
 </div>
 
 <!-- Display Status -->
-<div
+<!-- <div
 class="modal"
 tabindex="-1"
 role="dialog"
@@ -84,4 +85,4 @@ role="dialog"
     </div>
 </div>
 </div> 
-</div> 
+</div>  -->

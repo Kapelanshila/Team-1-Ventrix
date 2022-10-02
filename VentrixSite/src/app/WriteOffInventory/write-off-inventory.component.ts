@@ -156,7 +156,7 @@ writeOffInventory(selectedinvnetory: InventoryVM)
           else 
           {
               this.inventoryItems = [];
-             
+              this.inventories.forEach(inventory => {
                 //Types,Category,Supplier and Warehouse is also retrived from the api in order to present relevant information realting to that inventory item
                 this.ventrixdbservice.readInventoryType()
                 .subscribe(response => {
@@ -174,51 +174,28 @@ writeOffInventory(selectedinvnetory: InventoryVM)
                         .subscribe(response => {
                           this.suppliers = response;
 
-                          this.inventories.forEach(inventory => {
                           this.type = this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId);
           
                           //New inventory view model is assigned the retrived values from the api
-                          if (inventory.quantityOnHand != 0)
+                          this.item = 
                           {
-                            //New inventory view model is assigned the retrived values from the api
-                            this.item = 
-                            {
-                              inventoryId: inventory.inventoryId,
-                              warehouse :this.warehouses.find(x => x.warehouseId == inventory.warehouseId),
-                              type:this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId),
-                              category :this.categories.find(x => x.inventoryCategoryId == this.type.inventoryCategoryId),
-                              supplier:this.suppliers.find(x => x.supplierId == inventory.supplierId),
-                              name: inventory.name,
-                              quantityOnHand: inventory.quantityOnHand
-                            }
-                            this.inventoryItems.push(this.item)
-                          }                
+                            inventoryId: inventory.inventoryId,
+                            warehouse :this.warehouses.find(x => x.warehouseId == inventory.warehouseId),
+                            type:this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId),
+                            category :this.categories.find(x => x.inventoryCategoryId == this.type.inventoryCategoryId),
+                            supplier:this.suppliers.find(x => x.supplierId == inventory.supplierId),
+                            name: inventory.name,
+                            quantityOnHand: inventory.quantityOnHand
+                          }
+                          this.inventoryItems.push(this.item)
                         })
-                        
-                        //In the event the inventory item does exsist but the quantity on hand is 0
-                        if (this.inventoryItems.length == 0)
-                        {
-                          Swal.fire({
-                            icon: 'error',
-                            title: 'No Results Found',
-                            confirmButtonText: 'OK',
-                            confirmButtonColor: '#077bff',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false
-                            }).then((result) => {
-                              if (result.isConfirmed) {
-                                this.router.navigate(['/write-off-inventory']).then(() => {
-                                  window.location.reload();
-                                });
-                              }
-                            })  
-                        }
                       })
                     })   
                  })
                 });
+                   console.log(this.inventoryItems)
               }
             })
           }  
-  }
+}
 }

@@ -75,7 +75,12 @@ table.table td i {
     margin-top: 6px;
     font-size: 95%;
 }    
-.btn-primary{
+.btn-success{
+    border: none;
+    margin: 0 13px;
+    margin-top: 1%;
+  }
+  .btn-dark{
     border: none;
     margin: 0 13px;
     margin-top: 1%;

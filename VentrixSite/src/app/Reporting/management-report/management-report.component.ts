@@ -202,8 +202,15 @@ monthChange()
           console.log(this.totalallocatedtime)
           console.log(this.totalactualtime)
 
-            this.effiency = this.totalactualtime/this.totalallocatedtime*100;
-            this.effiency = Math.round(this.effiency);
+            if (this.totalactualtime == undefined)
+            {
+              this.effiency = 0;
+            }
+            else
+            {
+              this.effiency = this.totalactualtime/this.totalallocatedtime*100;
+              this.effiency = Math.round(this.effiency);
+            }
 
       //Gets total client and supplier orders processed for that current month
       this.ventrixdbservice.readSupplierOrder()
@@ -285,17 +292,21 @@ openPDF(){
 
     const contentDataUrl = canvas.toDataURL('image/png');
 
-    let PDF = new jsPDF({
-      orientation: 'p',
-      unit: 'mm',
-      format: 'a4'
-    });
+    this.report = 
+    {
+      client: this.client,
+      supplier: this.supplier,
+      account: this.account.name+' '+this.account.surname,
+      month: this.selectedMonth.Name,
+      effciency: this.effiency,
+      image:contentDataUrl
+    }
 
-    let topPosition = 10;
-    let leftPosition = 0;
-
-    PDF.addImage(contentDataUrl, 'PNG', leftPosition, topPosition, fileWidth, fileHeight);
-    PDF.save('Management Report.pdf');
+    this.ventrixdbservice.generateManagmenetPDFReport(this.report)
+    .subscribe(res => {
+      const data = new Blob([res] , { type: 'application/pdf' });
+     saveAs(data,"Management Report "+this.report.month+" "+ new Date().getFullYear());
+   });
   }
 
   )
@@ -312,7 +323,8 @@ generateExcel()
       supplier: this.supplier,
       account: this.account.name+' '+this.account.surname,
       month: this.selectedMonth.Name,
-      effciency: this.effiency
+      effciency: this.effiency,
+      image:''
     }
     this.ventrixdbservice.generateExcelManagementReport(this.report).subscribe(res => {
       const data = new Blob([res] , { type: 'application/vnd.ms-excel' });

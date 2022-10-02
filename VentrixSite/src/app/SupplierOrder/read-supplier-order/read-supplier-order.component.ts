@@ -15,6 +15,11 @@ import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
 import { InventoryPopup } from 'src/app/shared/InventoryPopUp';
 import { Supplier } from 'src/app/shared/Supplier';
+import { ClientOrder } from 'src/app/shared/ClientOrder';
+import { ClientOrderVM } from 'src/app/shared/ClientOrderVM';
+import { ClientOrderStatus } from 'src/app/shared/ClientOrderStatus';
+import { Inventory } from 'src/app/shared/Inventory';
+import { InventoryVM } from 'src/app/shared/InventoryVM';
 
 @Component({
   selector: 'app-read-supplier-order',
@@ -30,6 +35,7 @@ export class ReadSupplierOrderComponent implements OnInit {
   supplierOrders:SupplierOrder[] = [];
   supplierOrderVM:SupplierOrderVM[] = [];
   suppliers:Supplier[] = [];
+  supplierorderline:any[] = [];
   supplier:Supplier|undefined;
   order!: SupplierOrderVM;
   orderstatus!:SupplierOrderVM;
@@ -39,6 +45,36 @@ export class ReadSupplierOrderComponent implements OnInit {
   orders: any[] = [];
   Supplierorderlines: any[] = [];
   value: any[] = [];
+  //Search query 
+  clientOrders:ClientOrder[] = [];
+  completed:ClientOrderVM[] = [];
+  clientOrderVM:ClientOrderVM[] = [];
+  temp!:ClientOrderStatus;
+  clientOrdersStatuses:ClientOrderStatus[] = [];
+  clients:Client[] = [];
+  client:Client|undefined;
+  statuses: ClientOrderStatus[] = [];
+  clientorderlines: any[] = [];
+  filterOrder:ClientOrderVM[] = [];
+  status: string = "";
+  readstatuses: any[] = [];
+  invetoryselected=false;
+  clientselected=false;
+  statusselected=false;
+  inventoryitems:Inventory[] = [];
+  idselected!:any;
+  Iitem!:InventoryVM;
+  warehouses:any[] = [];
+  types:any[] = [];
+  clientorderline:any[] = [];
+  categories:any[] = [];
+  type:any;
+  inventoryItems:any[] = [];
+  inventorywriteoffs!:any;
+  clientorders!:any;
+  supplierorders!:any;
+  inventory:any;
+
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
   { }
   //Modal
@@ -46,41 +82,81 @@ export class ReadSupplierOrderComponent implements OnInit {
   idisplayStyle = "none";
 
   
-      //Modal Open and Close Functions
-      //Dispays Inventory for a Supplier Order but only for Supplier orders that have been proccessed 
-      openInventoryPopup(selectedSupplierOrder: SupplierOrderVM) {
+     openInventoryPopup(selectedSupplierOrder: SupplierOrderVM) {
+        this.idselected = selectedSupplierOrder.supplierOrderId;
+        this.inventoryitems = [];
         this.orders = [];
-        this.ventrixdbservice.readSupplierOrderLine()
-        .subscribe(response => {
-          this.Supplierorderlines = response;
-    
 
-          this.ventrixdbservice.readInventory()
+        if(this.invetoryselected == false)
+        {
+          this.invetoryselected = true;
+          this.clientselected = false;
+          this.statusselected = false;
+          
+          this.ventrixdbservice.readSupplierOrderLine()
           .subscribe(response => {
-            this.inventories = response;
-       
-            this.Supplierorderlines.forEach(element => {
-              if (element.supplierOrderId == selectedSupplierOrder.supplierOrderId)
-              {
+            this.supplierorderlines = response;
 
-                this.item =
-                {
-                  name: this.inventories.find(x => x.inventoryId == element.inventoryId).name,
-                  date: element.date,
-                  quantity: element.quantity
-                }
-               this.orders.push(this.item)
-              }
-       
-            });
-            this.idisplayStyle = "block";
-          })
-        })
+            this.ventrixdbservice.readInventory()
+            .subscribe(response => {
+              this.inventories = response;
+
+                                  this.ventrixdbservice.readInventoryType()
+                    .subscribe(response => {
+                      this.types = response;
+    
+                        this.ventrixdbservice.readInventoryCategory()
+                        .subscribe(response => {
+                          this.categories = response;
+    
+                          this.ventrixdbservice.readWarehouse()
+                          .subscribe(response => {
+                            this.warehouses = response;
+    
+                            this.ventrixdbservice.readSupplier()
+                            .subscribe(response => {
+                              this.suppliers = response;
+                      
+                            this.supplierorderlines.forEach(element => {
+                              if (element.supplierOrderId == selectedSupplierOrder.supplierOrderId)
+                              {
+                                this.inventory = this.inventories.find(x => x.inventoryId == element.inventoryId);
+                                console.log(this.inventory)
+                                  //Types,Category,Supplier and Warehouse is also retrived from the api in order to present relevant information realting to that inventory item
+
+                  
+                              this.type = this.types.find(x => x.inventoryTypeId == this.inventory.inventoryTypeId);
+                                console.log(this.inventory)
+
+                                //New inventory view model is assigned the retrived values from the api
+                                this.Iitem = 
+                                {
+                                  inventoryId: this.inventory.inventoryId,
+                                  warehouse :this.warehouses.find(x => x.warehouseId == this.inventory.warehouseId),
+                                  type:this.types.find(x => x.inventoryTypeId == this.inventory.inventoryTypeId),
+                                  category :this.categories.find(x => x.inventoryCategoryId == this.type.inventoryCategoryId),
+                                  supplier:this.suppliers.find(x => x.supplierId == this.inventory.supplierId),
+                                  name: this.inventory.name,
+                                  quantityOnHand: element.quantity
+                                }
+                                console.log(this.Iitem)
+                                this.inventoryItems.push(this.Iitem)                    
+                        }
+                      })
+                    })
+                  })
+                })   
+              })
+            })
+          }); 
+        }
+        else
+        {
+          this.invetoryselected = false;
+          this.inventoryItems = [];
+        }
       }
 
-      closeInventoryPopup() {
-        this.idisplayStyle = "none";
-      }
     
   ngOnInit(): void
   {
@@ -149,23 +225,45 @@ export class ReadSupplierOrderComponent implements OnInit {
 
   deleteSupplierOrder(selectedSupplierOrder: SupplierOrderVM)
   {
-    Swal.fire({
-      icon: 'warning',
-      title: 'Are you sure you want to delete this supplier order?',
-      showDenyButton: true,
-      confirmButtonText: 'Yes',
-      confirmButtonColor: '#077bff',
-      allowOutsideClick: false,
-      allowEscapeKey: false
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.ventrixdbservice.deleteSupplierOrderInvoice(selectedSupplierOrder.supplierInvoice.toString()).subscribe();
-        this.ventrixdbservice.deleteSupplierOrder(selectedSupplierOrder).subscribe();
-        this.router.navigate(['/read-supplierorder']).then(() => {
-        window.location.reload();
-        });
-      }
-    })  
+    this.ventrixdbservice.readSupplierOrderLine().subscribe(response => {
+      this.supplierorderlines = response;
+      console.log(this.supplierorderlines)
+
+      if (this.supplierorderlines.find((x: { supplierOrderId: Number; }) => x.supplierOrderId == selectedSupplierOrder.supplierOrderId) == undefined)
+      {
+          //Sweet alerts are used as notifications
+          Swal.fire({
+            icon: 'warning',
+            title: 'Are you sure you want to delete this supplier order?',
+            showDenyButton: true,
+            confirmButtonText: 'Yes',
+            confirmButtonColor: '#077bff',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.ventrixdbservice.deleteSupplierOrderInvoice(selectedSupplierOrder.supplierInvoice.toString()).subscribe();
+              this.ventrixdbservice.deleteSupplierOrder(selectedSupplierOrder).subscribe();
+              this.router.navigate(['/read-supplierorder']).then(() => {
+              window.location.reload();
+              });
+            }
+          })  
+          }
+          else
+          {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Supplier Order Associated to other entries',
+              text: 'Inventory Items associated to Supplier Order',
+              showDenyButton: false,
+              confirmButtonText: 'Ok',
+              confirmButtonColor: '#077bff',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+            })
+          }
+        })
   }
   
   download(selectedSupplierOrder: SupplierOrderVM)
@@ -229,7 +327,7 @@ export class ReadSupplierOrderComponent implements OnInit {
           this.ventrixdbservice.searchSupplierOrder(this.query.toString()).subscribe(response => {
             //Same Read as intializer
             this.supplierOrders = response;
-      
+            console.log(this.supplierOrders)
             this.ventrixdbservice.readSupplierOrderLine()
             .subscribe(response => {
               this.Supplierorderlines = response;
@@ -251,7 +349,7 @@ export class ReadSupplierOrderComponent implements OnInit {
                       supplierInvoice: supplierorder.supplierInvoice,
                       contactPersonName : element.contactPersonName!,
                       emailAddress: element.emailAddress!,
-                      inventories: this.supplierorderlines.find(x => x.supplierOrderId == supplierorder.supplierOrderId).length
+                      inventories: true
                     }
                     this.supplierOrderVM.push(this.order);
                     console.log(this.supplierOrderVM)

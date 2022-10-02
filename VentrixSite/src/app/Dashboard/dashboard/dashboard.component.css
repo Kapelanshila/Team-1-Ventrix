@@ -2,8 +2,10 @@
     font-family: 'Roboto', sans-serif;
     background: linear-gradient( rgba(0, 0, 0,0.55), rgba(0, 0, 0, 0.55) ), url("Ventrix.jpg");
     background-size: cover;
-    height: 1500px;
+    height: 260vh;
     width:100%;
     position: absolute;
-    overflow-x: hidden;
+}
+canvas{
+    margin: 0 auto;
 }

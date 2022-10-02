@@ -14,6 +14,7 @@ import { style } from '@angular/animations';
 import { SupplierOrderLineVM } from 'src/app/shared/SupplierOrderLineVM';
 import { SupplierOrderLine } from 'src/app/shared/SupplierOrderLine';
 import { SupplierResponse } from 'src/app/shared/SupplierResponse';
+import { InventoryCategory } from 'src/app/shared/InventoryCategory';
 @Component({
   selector: 'app-read-Supplier-orderline',
   templateUrl: './read-Supplier-orderline.component.html',
@@ -34,7 +35,10 @@ export class ReadSupplierOrderlineComponent implements OnInit {
   noOfRows = 10;
   item!:SupplierOrderLineVM;
   type:any;
+  filtertypes:any;
   inventoryItems:any[] = [];
+  filteritems:any[] = [];
+
   selectedorder!:SupplierOrderVM;
   selectedinventories: SupplierOrderLineVM[] = [];
   quantity!: number;
@@ -46,6 +50,9 @@ export class ReadSupplierOrderlineComponent implements OnInit {
   selectedOrders: SupplierOrderLine[] = [];
   order!:SupplierOrderLine;
   response!:SupplierResponse;
+  categoryselected!:any;
+  typeselected!:any;
+
   ngOnInit(): void {
 
     this.selectedinventories = [];
@@ -60,7 +67,6 @@ export class ReadSupplierOrderlineComponent implements OnInit {
     this.ventrixdbservice.readInventory()
     .subscribe(response => {
       this.inventories = response;
-      this.inventories.forEach(inventory => {
         
         //Types,Category,Supplier and Warehouse is also retrived from the api in order to present relevant information realting to that inventory item
         this.ventrixdbservice.readInventoryType()
@@ -79,9 +85,11 @@ export class ReadSupplierOrderlineComponent implements OnInit {
                 .subscribe(response => {
                   this.suppliers = response;
 
+                  this.inventories.forEach(inventory => {
+
                   this.type = this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId);
                   
-                  if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)
+                  if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined && this.selectedorder.supplierId == inventory.supplierId)
                   {
                   //New inventory view model is assigned the retrived values from the api
                   this.item = 
@@ -98,9 +106,35 @@ export class ReadSupplierOrderlineComponent implements OnInit {
                     added:false           
                   }
                   this.inventoryItems.push(this.item)
+                  this.filteritems.push(this.item)
                   }
+
    
                 })
+
+                console.log(this.filteritems.length)
+                if (this.filteritems.length == 0)
+                {
+                  Swal.fire({
+                    icon: 'info',
+                    title: 'No Items',
+                    text: 'No inventory items loaded on the system based on the selcted supplier',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#077bff',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                  })
+                  .then((result) => {
+                    if (result.isConfirmed) {
+                      this.ventrixdbservice.createSupplierOrderLine(this.response).subscribe();
+                      this.router.navigate(['/read-supplierorder']).then(() => {
+                        window.location.reload();
+                      });
+                    }
+                  })   
+            
+                }
+
 
               })
 
@@ -113,6 +147,76 @@ export class ReadSupplierOrderlineComponent implements OnInit {
     })
   }
 
+  filtercategory()
+  {
+    this.filteritems = [];
+    if (this.categoryselected == "")
+    {
+      this.filteritems = this.inventoryItems;
+    }
+    else
+    {
+      this.inventoryItems.forEach(element => {
+        if (element.selected == true)
+        {
+          this.filteritems.push(element);
+        }
+  
+        else if (element.category.inventoryCategoryId == this.categoryselected)
+        {
+          this.filteritems.push(element);
+        }
+      });
+    }
+  }
+
+  filtertype()
+  {
+    this.filteritems = [];
+    if (this.typeselected == "")
+    {
+      this.filtercategory();
+    }
+    else
+    {
+      this.inventoryItems.forEach(element => {
+        if (element.selected == true)
+        {
+          this.filteritems.push(element);
+        }
+  
+        else if (element.type.inventoryTypeId == this.typeselected)
+        {
+          this.filteritems.push(element);
+        }
+      });
+    }
+  }
+
+  getTypes()
+  {
+    //Populate Select Box
+    this.filtertypes = [];
+    if(this.categoryselected != "")
+    {
+      this.filtercategory()
+      this.ventrixdbservice.readInventoryType()
+      .subscribe(response => {
+        response.forEach(element => {
+          if (element.inventoryCategoryId == this.categoryselected)
+          {
+            this.filtertypes.push(element);
+          }
+        });
+      })    
+    }
+    else
+    {
+      this.filtercategory()
+    }
+  }
+
+
   addQuantity(event:any, selectedinventory:SupplierOrderLineVM)
   {  
     this.selectedinventories.find(x => x.inventoryId == selectedinventory.inventoryId)!.added = false;
@@ -124,7 +228,8 @@ export class ReadSupplierOrderlineComponent implements OnInit {
       this.selectedinventories.find(x => x.inventoryId == selectedinventory.inventoryId)!.added = true;
       Swal.fire({
         icon: 'warning',
-        title: 'Invalid Number Entered',
+        title: 'Invalid Quantity Entered',
+        text: 'Quantity less than or equal to zero',
         confirmButtonText: 'OK',
         confirmButtonColor: '#077bff',
         allowOutsideClick: false,
@@ -146,6 +251,8 @@ export class ReadSupplierOrderlineComponent implements OnInit {
   }
 
   selected(event:any, selectedinventory:SupplierOrderLineVM) {
+    this.categoryselected = "";
+    this.filtertypes = [];
     if ( event.target.checked ) {
       this.item = 
       {
@@ -162,9 +269,12 @@ export class ReadSupplierOrderlineComponent implements OnInit {
       }
       this.selectedinventories.push(this.item);
       this.inventoryItems =[];
-      
+      this.filteritems = [];
+
       this.selectedinventories.forEach(element => {
         this.inventoryItems.push(element)
+        this.filteritems.push(element)
+
       });
     
        //Get inventory from api
@@ -192,7 +302,7 @@ export class ReadSupplierOrderlineComponent implements OnInit {
 
                   this.type = this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId);
                   
-                  if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)
+                  if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined && this.selectedorder.supplierId == inventory.supplierId)
                   {
                   //New inventory view model is assigned the retrived values from the api
                   this.item = 
@@ -209,6 +319,8 @@ export class ReadSupplierOrderlineComponent implements OnInit {
                     added:false                       
                   }
                     this.inventoryItems.push(this.item)
+                    this.filteritems.push(this.item)
+
                     
                   }  
                 })
@@ -227,9 +339,12 @@ export class ReadSupplierOrderlineComponent implements OnInit {
    {
     this.selectedinventories.splice(this.selectedinventories.indexOf(selectedinventory), 1);
     this.inventoryItems = [];
+    this.filteritems = [];
 
     this.selectedinventories.forEach(element => {
       this.inventoryItems.push(element)
+      this.filteritems.push(element)
+
     });
   
 
@@ -262,7 +377,7 @@ export class ReadSupplierOrderlineComponent implements OnInit {
                   if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)
                   {
               
-                    if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)                    
+                    if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined && this.selectedorder.supplierId == inventory.supplierId)
                     {
                     //New inventory view model is assigned the retrived values from the api
                     this.item = 
@@ -276,9 +391,11 @@ export class ReadSupplierOrderlineComponent implements OnInit {
                       quantityOnHand: inventory.quantityOnHand,
                       quantity: 0,
                       selected:false,    
-              added:false                        
+                      added:false                        
                     }
                     this.inventoryItems.push(this.item)
+                    this.filteritems.push(this.item)
+
                     }
   
                   }
@@ -387,6 +504,8 @@ export class ReadSupplierOrderlineComponent implements OnInit {
 
   searchInventory()
   { 
+    this.categoryselected = "";
+    this.filtertypes = [];
       if (this.query != '' && this.query.replace(/\s/g, '').length == 0)
       {
         Swal.fire({
@@ -449,7 +568,8 @@ export class ReadSupplierOrderlineComponent implements OnInit {
            
                           //New inventory view model is assigned the retrived values from the api
                  
-                          if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)                          {
+                          if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined && this.selectedorder.supplierId == inventory.supplierId)
+                          {
                           //New inventory view model is assigned the retrived values from the api
                           this.item = 
                           {
@@ -465,6 +585,8 @@ export class ReadSupplierOrderlineComponent implements OnInit {
                             added:false                        
                           }
                           this.inventoryItems.push(this.item)
+                          this.filteritems.push(this.item)
+
                           }
         
                  

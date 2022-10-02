@@ -34,6 +34,7 @@ export class CreateAssetComponent implements OnInit {
   clicked = false;
   asset!:any;
   warehouses:any[] = [];
+  price!: number;
 
   constructor(fbuilder: FormBuilder, private router: Router,private ventrixdbservice:VentrixDBServiceService, private http: HttpClient)
   {
@@ -148,6 +149,7 @@ export class CreateAssetComponent implements OnInit {
 
   addAsset()
     {
+    this.price = this.assetform.get('value')?.value;
     this.submitted = true;
     this.find = false;
     if (this.filename =='')
@@ -205,7 +207,8 @@ export class CreateAssetComponent implements OnInit {
         //Gets User Id for asset trail
         this.assetform.patchValue({
           userId: this.ventrixdbservice.getAccount().userId,
-          assetImage: this.filename
+          assetImage: this.filename,
+          value: this.price.toString()
         })
         
         this.ventrixdbservice.createAsset(this.assetform.value).subscribe();

@@ -42,7 +42,7 @@ export class CreateAssetRepairReasonComponent implements OnInit {
         this.find = true;
         Swal.fire({
           icon: 'error',
-          title: 'Asset Repair Reason Already Exsists',
+          title: 'Asset Repair Reason Already Exists',
           confirmButtonText: 'OK',
           confirmButtonColor: '#077bff',
           allowOutsideClick: false,

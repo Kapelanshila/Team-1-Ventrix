@@ -31,6 +31,7 @@ export class UpdateAssetComponent implements OnInit {
   currentDate!:any;
   disabled = false;
   filename: string = '';
+  price!: number;
   selected!: FileList;
   clicked = false;
   asset!:any;
@@ -227,6 +228,8 @@ export class UpdateAssetComponent implements OnInit {
 
   editAsset()
     {
+      this.price = this.assetform.get('value')?.value;
+
     this.submitted = true;
     //Check if asset item does not already exsist
       this.assets.forEach(element => {
@@ -264,8 +267,10 @@ export class UpdateAssetComponent implements OnInit {
         else
         {
         //Gets User Id for asset trail
+
         this.assetform.patchValue({
           userId: this.ventrixdbservice.getAccount().userId,
+          value: this.price.toString()
         })
         this.ventrixdbservice.updateAsset(this.assetform.value).subscribe();
         console.log(this.assetform.get('userId')?.value);

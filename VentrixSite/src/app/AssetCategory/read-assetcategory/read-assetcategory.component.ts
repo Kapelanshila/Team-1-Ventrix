@@ -78,7 +78,7 @@ export class ReadAssetcategoryComponent implements OnInit {
       {
         //Sweet alerts are used as notifications
         Swal.fire({
-          icon: 'error',
+          icon: 'info',
           title: 'Are you sure you want to delete this asset category?',
           showDenyButton: true,
           confirmButtonText: 'Yes',
@@ -99,7 +99,7 @@ export class ReadAssetcategoryComponent implements OnInit {
       {
         //Sweet alerts are used as notifications
         Swal.fire({
-          icon: 'error',
+          icon: 'warning',
           title: 'Cannot Delete',
           text: 'Delete associated types first',
           confirmButtonText: 'OK',

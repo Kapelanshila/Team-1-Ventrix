@@ -6,14 +6,22 @@
         <form class="form-user"  [formGroup]="assetform" (ngSubmit)="editAsset()"><span class="reauth-email"> </span>
             <h4 class="card-title">Update Asset Item </h4>
             <hr>
-            <label>Name</label>
+            <label>Name
+                <span>
+                    <i class="fa fa-info-circle" title="Enter the name of the asset."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
                 <span *ngIf="f['name'].errors?.['required'] || f['name'].errors?.['noWhiteSpaceValidator']" class="text-danger">Please enter an asset name</span>
             </div>
             <input maxlength="32" type="text" class="form-control" formControlName="name" placeholder="Enter Asset Name" required>
             <br>
 
-            <label>Manufacturer</label>
+            <label>Manufacturer
+                <span>
+                    <i class="fa fa-info-circle" title="Enter the manufacturer of the asset."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
                 <span *ngIf="f['manufacturer'].errors?.['manufacturer'] || f['manufacturer'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a manufacturer name</span>
             </div>
@@ -21,7 +29,11 @@
             <input maxlength="32" type="text" class="form-control" formControlName="manufacturer" placeholder="Enter Manufacturer Name" required (keypress)="keyPressAlphabet($event)">
             </div>
 
-            <label>Asset Category</label>
+            <label>Asset Category
+                <span>
+                    <i class="fa fa-info-circle" title="Select the category that the asset falls under."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
                 <span *ngIf="f['assetCategoryId'].errors?.['assetCategoryId'] || f['assetCategoryId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a category</span>
             </div>
@@ -31,7 +43,11 @@
             </select>
             <br>
 
-            <label>Asset Type</label>
+            <label>Asset Type
+                <span>
+                    <i class="fa fa-info-circle" title="Select the type that the asset falls under."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
                 <span *ngIf="f['assetTypeId'].errors?.['assetTypeId'] || f['assetTypeId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a type</span>
             </div>
@@ -41,7 +57,11 @@
             </select>
             <br>
 
-            <label>Asset condition</label>
+            <label>Asset condition
+                <span>
+                    <i class="fa fa-info-circle" title="Select the condition that the asset is in."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
                 <span *ngIf="f['conditionId'].errors?.['conditionId'] || f['conditionId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a condition</span>
             </div>
@@ -51,7 +71,11 @@
             </select>
             <br>
 
-            <label>Warranty Period</label>
+            <label>Warranty Period
+                <span>
+                    <i class="fa fa-info-circle" title="Select the number of years that the asset has a warranty for."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
                 <span *ngIf="f['warrantyPeriodId'].errors?.['warrantyPeriodId'] || f['warrantyPeriodId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a warranty period</span>
             </div>
@@ -61,7 +85,11 @@
             </select>
             <br>
 
-            <label>Warehouse</label>
+            <label>Warehouse
+                <span>
+                    <i class="fa fa-info-circle" title="Select the warehouse in which the asset is being stored."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
                 <span *ngIf="f['warehouseId'].errors?.['warehouseId'] || f['warehouseId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a condition</span>
             </div>
@@ -71,7 +99,7 @@
             </select>
             <br>
 
-            <label>Value
+            <label>Value (R)
                 <span>
                     <i class="fa fa-info-circle" title="Enter the value of the asset."></i>
                 </span>
@@ -80,11 +108,15 @@
                 <span *ngIf="f['value'].errors?.['value'] || f['value'].errors?.['noWhitespaceValidator']" class="text-danger" >Please enter a asset value</span>
             </div>
             <div>
-                <input class="form-control" type="number" formControlName="value">
+                <input class="form-control" type="number" formControlName="value" step="0.1">
             </div>
             <br>
 
-            <label>Warranty Date</label>   
+            <label>Warranty Date
+                <span>
+                    <i class="fa fa-info-circle" title="Select the date on which the warranty begins."></i>
+                </span>
+            </label>   
             <div *ngIf="submitted">
                 <span *ngIf="f['warrantyDate'].errors?.['warrantyDate'] || f['warrantyDate'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select a warranty date</span>
             </div>

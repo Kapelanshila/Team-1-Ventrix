@@ -4,4 +4,5 @@ export interface ManagementReport {
     effciency: number
     account:string
     month: string
+    image:string
 }

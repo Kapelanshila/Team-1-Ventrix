@@ -7,8 +7,8 @@
         
         <div class="navbar navbar-expand-sm justify-content-between">
             <ul class="navbar-nav ">
-                <li class="nav-item active">
-                    <i class="fa fa-home fa-2x" aria-hidden="true" style="color: white;"></i>
+                <li  style="cursor: pointer;" class="nav-item active">
+                    <i (click)="dashboard()" class="fa fa-home fa-2x" aria-hidden="true" style="color: white;"></i>
                 </li>
             </ul>
         </div>
@@ -43,7 +43,6 @@
                         <a class="dropdown-item" routerLink="/read-warranty-period">Warranty Period</a>
                         <a class="dropdown-item" routerLink="/read-warehouse">Warehouse</a>
                         <a class="dropdown-item" href="#">Asset Repair Reason</a>
-                        <a class="dropdown-item" href="#">Asset Condition</a>
                         <a class="dropdown-item" routerLink="/read-securityquestion">Security Question</a>
                         <a class="dropdown-item" href="/read-timeslot">Time slots</a>
                     </div>
@@ -112,6 +111,9 @@
                     <a class="nav-link" routerLink="/profile" id="smallerscreenmenu"> Profile </a>
                 </li>
                 <li class="nav-item dropdown d-sm-block d-md-none">
+                    <a class="nav-link" routerLink="/help" id="smallerscreenmenu"> Help </a>
+                </li>
+                <li class="nav-item dropdown d-sm-block d-md-none">
                     <a class="nav-link" href="#" id="smallerscreenmenu"> Logout </a>
                 </li>
             </ul>
@@ -124,7 +126,7 @@
             <div id="sidebar-container" class="sidebar-expanded d-none d-md-block bg-primary shadow ">
                 <ul class="list-group">
                     <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start bg-primary">
-                        <div class="d-flex w-100 justify-content-start align-items-center" >
+                        <div (click)="dashboard()" class="d-flex w-100 justify-content-start align-items-center" >
                             <span class="fa fa-dashboard fa-fw mr-3"></span>
                             <span class="menu-collapsed" >Dashboard</span>
                         </div>
@@ -171,9 +173,6 @@
                         </a>
                         <a routerLink="/read-assetrepairreason" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Asset Repair Reason</span>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
-                            <span class="menu-collapsed">Asset Condition</span>
                         </a>
                         <a routerLink="/read-securityquestion" class="list-group-item list-group-item-action  bg-primary text-white bg-primary">
                             <span class="menu-collapsed">Security Question</span>
@@ -255,9 +254,11 @@
                         <a routerLink="/asset-repair" class="list-group-item list-group-item-action text-white bg-primary">
                             <span class="menu-collapsed">Asset Repair</span>
                         </a>
-                        <a routerLink="/read-assigned-asset" class="list-group-item list-group-item-action text-white bg-primary">
-                            <span class="menu-collapsed">Assign Asset</span>
-                        </a>
+                        <ng-container *ngIf="account.role != 'Warehouse'">
+                            <a routerLink="/read-assigned-asset"  class="list-group-item list-group-item-action text-white bg-primary">
+                                <span class="menu-collapsed">Assign Asset</span>
+                            </a>
+                        </ng-container>
                         <a routerLink="/read-checkin" class="list-group-item list-group-item-action text-white bg-primary">
                             <span class="menu-collapsed">Checkin Asset</span>
                         </a>
@@ -302,13 +303,22 @@
                         </a>
                     </div>
                 </ng-container>
+    
                     <a routerLink="/profile" href="#submenu6" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-user fa-fw mr-3"></span>
                             <span class="menu-collapsed">Profile</span>
                         </div>
                     </a>
-                    <a routerLink="/login" (click)="logout()" href="#submenu6" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
+
+                    <a routerLink="/help" href="#submenu7" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start bg-primary">
+                        <div class="d-flex w-100 justify-content-start align-items-center" >
+                            <span class="fa fa-question-circle fa-fw mr-3"></span>
+                            <span class="menu-collapsed" >Help</span>
+                        </div>
+                    </a>
+
+                    <a routerLink="/login" (click)="logout()" href="#submenu8" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start  bg-primary">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-sign-out fa-fw mr-3"></span>
                             <span class="menu-collapsed">Logout</span>

@@ -47,6 +47,12 @@ export class ReadClientOrderlineComponent implements OnInit {
   selectedOrders: ClientOrderLine[] = [];
   order!:ClientOrderLine;
   response!:ClientResponse;
+
+  categoryselected!:any;
+  typeselected!:any;
+  filtertypes:any;
+  filteritems:any[] = [];
+  
   ngOnInit(): void {
 
     this.selectedinventories = [];
@@ -100,6 +106,8 @@ export class ReadClientOrderlineComponent implements OnInit {
                     added:false           
                   }
                   this.inventoryItems.push(this.item)
+                  this.filteritems.push(this.item)
+
                   }
    
                 })
@@ -134,7 +142,8 @@ export class ReadClientOrderlineComponent implements OnInit {
       this.selectedinventories.find(x => x.inventoryId == selectedinventory.inventoryId)!.added = true;
       Swal.fire({
         icon: 'warning',
-        title: 'Invalid Number Entered',
+        title: 'Invalid Quantity Entered',
+        text: 'Quantity is higher than stock on hand',
         confirmButtonText: 'OK',
         confirmButtonColor: '#077bff',
         allowOutsideClick: false,
@@ -156,6 +165,8 @@ export class ReadClientOrderlineComponent implements OnInit {
   }
 
   selected(event:any, selectedinventory:ClientOrderLineVM) {
+    this.categoryselected = "";
+    this.filtertypes = [];
     if ( event.target.checked ) {
       this.item = 
       {
@@ -173,9 +184,11 @@ export class ReadClientOrderlineComponent implements OnInit {
       this.selectedinventories.push(this.item);
       console.log(selectedinventory)
       this.inventoryItems =[];
-      
+      this.filteritems = [];
+
       this.selectedinventories.forEach(element => {
         this.inventoryItems.push(element)
+        this.filteritems.push(element)
       });
     
        //Get inventory from api
@@ -220,6 +233,7 @@ export class ReadClientOrderlineComponent implements OnInit {
                     added:false                       
                   }
                   this.inventoryItems.push(this.item)
+                  this.filteritems.push(this.item)
                   }
 
 
@@ -240,9 +254,12 @@ export class ReadClientOrderlineComponent implements OnInit {
    {
     this.selectedinventories.splice(this.selectedinventories.indexOf(selectedinventory), 1);
     this.inventoryItems = [];
+    this.filteritems = [];
 
     this.selectedinventories.forEach(element => {
       this.inventoryItems.push(element)
+      this.filteritems.push(element)
+
     });
   
 
@@ -291,6 +308,8 @@ export class ReadClientOrderlineComponent implements OnInit {
               added:false                        
                     }
                     this.inventoryItems.push(this.item)
+                    this.filteritems.push(this.item)
+
                     }
   
                   }
@@ -409,8 +428,82 @@ export class ReadClientOrderlineComponent implements OnInit {
     }
   }
 
+  
+  filtercategory()
+  {
+    this.filteritems = [];
+    if (this.categoryselected == "")
+    {
+      this.filteritems = this.inventoryItems;
+    }
+    else
+    {
+      this.inventoryItems.forEach(element => {
+        if (element.selected == true)
+        {
+          this.filteritems.push(element);
+        }
+  
+        else if (element.category!.inventoryCategoryId == this.categoryselected)
+        {
+          this.filteritems.push(element);
+        }
+      });
+    }
+  }
+
+  filtertype()
+  {
+    this.filteritems = [];
+    if (this.typeselected == "")
+    {
+      this.filtercategory();
+    }
+    else
+    {
+      this.inventoryItems.forEach(element => {
+        if (element.selected == true)
+        {
+          this.filteritems.push(element);
+        }
+  
+        else if (element.type!.inventoryTypeId == this.typeselected)
+        {
+          this.filteritems.push(element);
+        }
+      });
+    }
+  }
+
+  getTypes()
+  {
+    //Populate Select Box
+    this.filtertypes = [];
+    if(this.categoryselected != "")
+    {
+      this.filtercategory()
+      this.ventrixdbservice.readInventoryType()
+      .subscribe(response => {
+        response.forEach(element => {
+          if (element.inventoryCategoryId == this.categoryselected)
+          {
+            this.filtertypes.push(element);
+          }
+        });
+        console.log(this.filtertypes)
+      })    
+    }
+    else
+    {
+      this.filtercategory()
+    }
+  }
+
+
   searchInventory()
   { 
+    this.categoryselected = "";
+    this.filtertypes = [];
       if (this.query != '' && this.query.replace(/\s/g, '').length == 0)
       {
         Swal.fire({
@@ -441,9 +534,11 @@ export class ReadClientOrderlineComponent implements OnInit {
           {
             this.selectedorder = this.ventrixdbservice.getClientOrder()!;
             this.inventoryItems =[];
+            this.filteritems = []
               
             this.selectedinventories.forEach(element => {
               this.inventoryItems.push(element)
+              this.filteritems.push(element)
             });
           
             //Get inventory from api
@@ -490,6 +585,8 @@ export class ReadClientOrderlineComponent implements OnInit {
                             added:false                        
                           }
                           this.inventoryItems.push(this.item)
+                          this.filteritems.push(this.item)
+
                           }
         
                  

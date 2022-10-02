@@ -13,4 +13,5 @@ export interface InventoryReport {
     name:string | undefined
     quantityOnHand:number | undefined
     account: string
+    selectedWarehouse: string
 }

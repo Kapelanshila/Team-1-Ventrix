@@ -71,7 +71,7 @@ export class ReadWriteoffreasonComponent implements OnInit {
       .subscribe(response => {
         this.assetwriteoff = response;
 
-      if (this.writeoff.find((x: { writeOffReasonId: Number; }) => x.writeOffReasonId == selectedwriteoffreason.writeOffReasonId) && undefined || this.assetwriteoff.find((x: { writeOffReasonId: Number; }) => x.writeOffReasonId == selectedwriteoffreason.writeOffReasonId) == undefined)
+      if (this.writeoff.find((x: { writeOffReasonId: Number; }) => x.writeOffReasonId == selectedwriteoffreason.writeOffReasonId) == undefined && this.assetwriteoff.find((x: { writeOffReasonId: Number; }) => x.writeOffReasonId == selectedwriteoffreason.writeOffReasonId) == undefined)
       {
         //Sweet alerts are used as notifications
         Swal.fire({
@@ -95,8 +95,9 @@ export class ReadWriteoffreasonComponent implements OnInit {
         else
         {
           Swal.fire({
-            icon: 'error',
-            title: 'Write Off Reason Assoiciated to other entries',
+            icon: 'warning',
+            title: 'Write Off Reason associated to other entries',
+            text: 'Write Off Reason associated to assets or inventory write-offs',
             showDenyButton: false,
             confirmButtonText: 'Ok',
             confirmButtonColor: '#077bff',

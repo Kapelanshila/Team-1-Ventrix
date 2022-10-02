@@ -82,8 +82,12 @@ readOrderDeliveries(): Observable<OrderDelivery[]> {
 
 //Read Distances from Google
 GoogleMaps(destinations: string){
-  return this.h.get(environment.apiUrl+'Delivery/distanceMatrixRequest?Destination='+destinations)
+  return this.http.get(environment.apiUrl+'Delivery/distanceMatrixRequest?Destination='+destinations)
 }
 //
+
+ScheduleSMS(schedule: ScheduleVM){
+  return this.http.post(environment.apiUrl+'Delivery/sendScheduleSMS?schedule=', schedule )
+}
 
 }

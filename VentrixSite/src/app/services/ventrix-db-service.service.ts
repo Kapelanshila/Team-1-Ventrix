@@ -52,6 +52,7 @@ import { DeliveryTimeslot } from '../shared/DeliveryTimeslot';
 import { TimeslotVM } from '../shared/TimeslotVM';
 import { OrderDelivery } from '../shared/OrderDelivery';
 import { environment } from 'src/environments/environment';
+import { CollectedOrder } from '../shared/CollectedOrder';
 
 @Injectable({
   providedIn: 'root'
@@ -830,7 +831,7 @@ export class VentrixDBServiceService {
    //2FA 
    //Send OTP
    sendOTP(obj:Mail){
-    return this.http.get<any>('https://localhost:44324/sendOTP?OTP='+obj.OTP+'&emailaddress='+obj.email)
+    return this.http.get<any>('https://localhost:44324/sendOTP?OTP='+obj.OTP+'&phonenumber='+obj.email)
   }
 
    //Deletes Asset from API
@@ -1054,7 +1055,7 @@ deleteSupplierOrder(obj:any): Observable<any[]> {
 
  //Search SupplierOrder
  searchSupplierOrder(value:string){
-   return this.http.get<any>(environment.apiUrl+'SupplierOrder/searchSupplierOrders'+value)
+   return this.http.get<any>(environment.apiUrl+'SupplierOrder/searchSupplierOrders?search='+value)
  }     
  //
 
@@ -1176,6 +1177,11 @@ readAssetRepair(): Observable<AssetRepair[]> {
   return JSON.parse(localStorage.getItem('AssetRepair')!);
 }
 
+//Get Collected Orders
+readCollectedorders(): Observable<CollectedOrder[]> {
+  return this.http.get<CollectedOrder[]>(environment.apiUrl+'Delivery/getCollectedOrdersDB')
+}
+
  //Clears AssetRepair value so it ready to read again
  clearAssetRepair()
  {
@@ -1193,6 +1199,15 @@ undoRepair(obj:any): Observable<any[]> {
 //Assigned Asset 
 readAssignedAssets(): Observable<AssignedAsset[]> {
   return this.http.get<AssignedAsset[]>(environment.apiUrl+'AssignAsset/getAssignedAssets')
+ }
+
+ readUserSecurityQuestion(): Observable<any[]> {
+  return this.http.get<any[]>(environment.apiUrl+'VentrixUser/getUserSecurityQuestion')
+ }
+
+
+ readAssetsLocations(): Observable<any[]> {
+  return this.http.get<any[]>(environment.apiUrl+'VentrixUser/getUserSecurityQuestion')
  }
 
 createAssigned(obj:any): Observable<any[]> {
@@ -1412,6 +1427,43 @@ createDeliveredOrderPDF(obj:any){
        //Export Demand Report
   generateExcelManagementReport(obj:any){
     return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/CreateManagementReport',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
+   //Export Inventory Stock Take 
+  
+   exportInventoryStockTake(obj:any){
+    return this.http.post<any>(environment.apiUrl+'ExcelSpreadsheet/exportInventoryStockTake',obj,  {responseType: 'blob' as 'json'})
+   }
+   //
+
+   //Reporting 
+   generateInventoryPDFReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'pdfcreator/createInventoryReportPDF',obj,  {responseType: 'blob' as 'json'})
+   }
+
+   generateAssetPDFReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'pdfcreator/createAssetReportPDF',obj,  {responseType: 'blob' as 'json'})
+   }
+
+   generateEmployeePDFReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'pdfcreator/createEmployeeReportPDF',obj,  {responseType: 'blob' as 'json'})
+   }
+
+   generateSupplyPDFReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'pdfcreator/createSupplyReportPDF',obj,  {responseType: 'blob' as 'json'})
+   }
+
+   generateDemandPDFReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'pdfcreator/createDemandReportPDF',obj,  {responseType: 'blob' as 'json'})
+   }
+   
+   generateDepreciationPDFReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'pdfcreator/createDepreciationReportPDF',obj,  {responseType: 'blob' as 'json'})
+   }
+
+   generateManagmenetPDFReport(obj:any){
+    return this.http.post<any>(environment.apiUrl+'pdfcreator/createManagementReportPDF',obj,  {responseType: 'blob' as 'json'})
    }
    //
 }

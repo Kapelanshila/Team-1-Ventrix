@@ -113,6 +113,25 @@ export class ErrorInterceptor implements HttpInterceptor {
                   })
                   }
 
+                  if (err.status === 477) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed to import excel spreadsheet',
+                        text: 'Possible cause being invalid quantites less than 0 specified',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#077bff',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          this.router.navigate(['/read-inventory-stocktake']).then(() => {
+                            window.location.reload();
+                          });
+                        }
+                      })  
+                      }
+    
+
 
             return throwError(() => new Error('Invalid Request\n' + err.status));
         }))

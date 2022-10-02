@@ -8,6 +8,8 @@ import Swal from 'sweetalert2';
 import { HttpClient, HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import { ClientOrder } from 'src/app/shared/ClientOrder';
+import * as CryptoJS from 'crypto-js';
+import { environment } from 'src/environments/environment';
 // import { ThemeService } from 'ng2-charts';
 
 @Component({
@@ -27,6 +29,7 @@ export class CreateClientOrderComponent implements OnInit {
   orders:ClientOrder[] = [];
   clientorder: ClientOrder|undefined;
   disabled = false;
+  conversionEncryptOutput!: string;  
 
   @Output() public onUploadFinished = new EventEmitter();
 
@@ -87,7 +90,7 @@ export class CreateClientOrderComponent implements OnInit {
           formData.append('file', fileToUpload, fileToUpload.name);
   
           //Send file to api to be stored
-          this.http.post('https://localhost:44324/api/File/uploadClientOrderInvoice', formData).subscribe();
+          this.http.post(environment.apiUrl+'File/uploadClientOrderInvoice', formData).subscribe();
     
           this.clicked = true;
         }
@@ -141,15 +144,16 @@ export class CreateClientOrderComponent implements OnInit {
 
     if (this.clientorderform.valid && this.filename != '' && this.disabled == false && this.orders.find(x => x.description.toLowerCase() == this.clientorderform.get('description')?.value.toLowerCase()) == undefined )
     {
-     
+
       this.order =
       {
         clientOrderId: 0,
         clientId : this.selectedClient,
         description: this.clientorderform.get('description')?.value,
-        clientInvoice: this.filename
+        clientInvoice: this.filename,
+        encrypted: CryptoJS.AES.encrypt(this.clientorderform.get('description')?.value.trim(), "coffee".trim()).toString(),
       }
-   
+
       Swal.fire({
         icon: 'success',
         title: 'Client Order Successfully Added',

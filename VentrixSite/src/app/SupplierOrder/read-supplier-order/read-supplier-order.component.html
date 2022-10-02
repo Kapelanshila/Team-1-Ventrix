@@ -38,12 +38,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let order of supplierOrderVM| paginate:{itemsPerPage: noOfRows, currentPage:p}">    
+                            <ng-container *ngFor="let order of supplierOrderVM| paginate:{itemsPerPage: noOfRows, currentPage:p}">
+
+                            <tr>    
                             <ng-container *ngIf="order.inventories == true">
-                                <td class="underline-on-hover"><a [routerLink]="" (click)="openInventoryPopup(order)" style="cursor: pointer; color: blue;">{{order.description}}</a></td>
+                                <td class="underline-on-hover activated"><a [routerLink]="" (click)="openInventoryPopup(order)" style="cursor: pointer; color: black;">{{order.description}}</a></td>
                             </ng-container>
                             <ng-container *ngIf="order.inventories == false">
-                                <td class="underline-on-hover">&nbsp;{{order.description}}</td>
+                                <td class="underline-on-hover activated">&nbsp;{{order.description}}</td>
                             </ng-container>
                             <td>{{order.contactPersonName}}</td>
                             <td>{{order.emailAddress}}</td>
@@ -54,6 +56,34 @@
                                 <a [routerLink]="" style="cursor: pointer;" class="delete" title="Delete" data-toggle="tooltip"><i (click)="deleteSupplierOrder(order)"  style="font-size: 17px;" class="material-icons">&#xE872;</i></a>
                             </td>  
                         </tr>
+
+                        <th *ngIf="invetoryselected == true && order.supplierOrderId && idselected == order.supplierOrderId" colspan="5">
+                            <h5 style="text-align: center; color: blue;">Loaded Inventory Items</h5>
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Warehouse</th>
+                                    <th scope="col">Supplier</th>
+                                    <th scope="col">Quantity</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let inventory of inventoryItems">
+                                    <td>{{inventory.name}}</td>
+                                    <td>{{inventory.category.description}}</td>
+                                    <td>{{inventory.type.description}}</td>
+                                    <td>{{inventory.warehouse.name}}</td>
+                                    <td>{{inventory.supplier.supplierName}}</td>
+                                    <td>{{inventory.quantityOnHand}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </th>
+
+                         </ng-container>
                         </tbody>
                         </table>
                     <div class="hint-text">Showing <b>  {{supplierOrderVM.length}} </b> entries</div>
@@ -68,6 +98,8 @@
     </div> 
 </div> 
 
+
+<!-- 
 <div
 class="modal"
 tabindex="-1"
@@ -107,4 +139,4 @@ role="dialog"
     </div>
 </div>
 </div> 
-</div> 
+</div>  -->

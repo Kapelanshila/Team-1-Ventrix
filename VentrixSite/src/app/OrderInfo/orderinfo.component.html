@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+<div class = "body">
+    <div class="container" style="width:65%;">
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-12 col-xl-10" style="margin-top: 10px;">
+                <div class="card shadow-lg o-hidden border-0 my-5" >
+                    <div class="card-body p-0">
+                    <div class="p-5">
+                        <h2 class="text-dark text-center">Order Tracking</h2>
+                        <hr>
+                        <div class="text-center">
+                            <h5 style = " font-weight:normal;" class="text-dark mb-4">{{order.description}} Status History</h5>
+                        </div>
+                        <br>
+                        <table class="table" style="text-align: center;">
+                            <thead>
+                              <tr>
+                                <th scope="col">Status</th>
+                                <th scope="col">Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let status of statuses">
+                                <td>{{status.description}}</td>
+                                <td>{{status.date | extension}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script src="assets/theme.js"></script>
+<script src="assets/bootstrap.min.js"></script>

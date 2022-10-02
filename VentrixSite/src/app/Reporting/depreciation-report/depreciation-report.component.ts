@@ -30,6 +30,7 @@ export class DepreciationReportComponent implements OnInit {
     values:number[] = [];
     assetvalue!:number;
     year = 0;
+    hide = false;
     residual!: number;
     label!: string;
     labels: string[] = [];
@@ -92,6 +93,7 @@ export class DepreciationReportComponent implements OnInit {
 // PDF Options
 
 public openPDF():void {
+  this.hide = true;
   let Data = document.getElementById('htmlData')!;
 
 // Canvas Options
@@ -101,12 +103,22 @@ public openPDF():void {
 
       const contentDataURL = canvas.toDataURL('image/png')
 
+      this.report = 
+      {
+        years: this.labels,
+        values: this.values,
+        account: this.account.name+' '+this.account.surname,
+        asset: this.selectedAsset.name,
+        depreciation: Number(this.depreciation.percentage),
+        image: contentDataURL
+      }
 
-      let PDF = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4',});
-      let topPosition = 10;
-      let leftPosition = 0;
-      PDF.addImage(contentDataURL, 'PNG', leftPosition, topPosition, fileWidth, fileHeight)
-      PDF.save('Depreciation Report.pdf');
+      this.ventrixdbservice.generateDepreciationPDFReport(this.report)
+      .subscribe(res => {
+        const data = new Blob([res] , { type: 'application/pdf' });
+       saveAs(data,"Demand Report "+this.report.asset);
+     });
+     this.hide = false;
   });
 }
 
@@ -162,7 +174,8 @@ gatherdata()
         values: this.values,
         account: this.account.name+' '+this.account.surname,
         asset: this.selectedAsset.name,
-        depreciation: Number(this.depreciation.percentage)
+        depreciation: Number(this.depreciation.percentage),
+        image: ''
       }
     });
   }

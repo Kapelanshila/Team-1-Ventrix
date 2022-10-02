@@ -14,7 +14,22 @@
                                 <input type="text" class="form-control" placeholder="Search&hellip;" (keyup.enter)="searchInventory()" [(ngModel)]="query">
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="addInventory()"><i class="fa fa-shopping-cart fa-xs"></i> Add Inventory</button>
+                    </div>
+                    <div style="width: 100%;">
+                        <button style="float: left;" type="button" class="btn btn-primary" (click)="addInventory()"><i class="fa fa-shopping-cart fa-xs"></i> Load Inventory</button>
+                        <br>
+                        <select style="float: right; margin-top: -10px; margin-right: 13px; width: 150px;" [(ngModel)]="categoryselected" (change)="getTypes()" >
+                            <option selected="" value=""> </option>
+                            <option *ngFor="let category of categories" value="{{category.inventoryCategoryId}}">{{category.description}}</option>
+                        </select>
+                        <label style="float: right; margin-top: -10px;"class="form-label">Category&nbsp;</label>
+                        <br>
+                        <select style="float: right; margin-top: -10px; margin-right: 13px; width: 150px; margin-top: 0.1px;" [(ngModel)]="typeselected" (change)="filtertype()" >
+                            <option selected=""> </option>
+                            <option *ngFor="let type of filtertypes" value="{{type.inventoryTypeId}}">{{type.description}}</option>
+                        </select>
+                        <label style="float: right; margin-top: -10px; margin-top: 0.1px;"class="form-label">Type&nbsp;</label>
+                        </div>
                     </div>
                     <!-- Copy -->
                     <div class="col-md-12 text-nowrap" style="padding: 1%;">
@@ -41,7 +56,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let inventoryItem of inventoryItems | paginate:{itemsPerPage: noOfRows, currentPage:p}">
+                        <tr *ngFor="let inventoryItem of filteritems | paginate:{itemsPerPage: noOfRows, currentPage:p}">
                         <ng-container>
                             <td>{{inventoryItem.name}}</td>
                         </ng-container>
@@ -67,7 +82,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <div class="hint-text">Showing <b> {{inventoryItems.length}}</b> entries</div>
+                <div class="hint-text">Showing <b> {{filteritems.length}}</b> entries</div>
                 <div class="pagination">
                     <div id="pagination" class="custom-pagination">
                         <pagination-controls (pageChange)="p=$event"></pagination-controls>

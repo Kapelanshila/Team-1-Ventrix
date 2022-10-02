@@ -4,4 +4,5 @@ export interface DepreciationReport {
     account:string
     asset: string
     depreciation: Number
+    image: string
 }

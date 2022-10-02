@@ -14,8 +14,21 @@
                                 <input type="text" class="form-control" placeholder="Search&hellip;" (keyup.enter)="searchInventory()" [(ngModel)]="query">
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary" (click)="addInventory()"><i class="fa fa-shopping-cart fa-xs"></i> Edit Inventory</button>
-                    </div>
+                        <div style="width: 100%;">
+                            <button style="float: left;" type="button" class="btn btn-primary" (click)="addInventory()"><i class="fa fa-shopping-cart fa-xs"></i> Load Inventory</button>
+                            <br>
+                            <select style="float: right; margin-top: -10px; margin-right: 13px; width: 150px;" [(ngModel)]="categoryselected" (change)="getTypes()" >
+                                <option selected="" value=""> </option>
+                                <option *ngFor="let category of categories" value="{{category.inventoryCategoryId}}">{{category.description}}</option>
+                            </select>
+                            <label style="float: right; margin-top: -10px;"class="form-label">Category&nbsp;</label>
+                            <br>
+                            <select style="float: right; margin-top: -10px; margin-right: 13px; width: 150px; margin-top: 0.1px;" [(ngModel)]="typeselected" (change)="filtertype()" >
+                                <option selected=""> </option>
+                                <option *ngFor="let type of filtertypes" value="{{type.inventoryTypeId}}">{{type.description}}</option>
+                            </select>
+                            <label style="float: right; margin-top: -10px; margin-top: 0.1px;"class="form-label">Type&nbsp;</label>
+                            </div>                    </div>
                     <!-- Copy -->
                     <div class="col-md-12 text-nowrap" style="padding: 1%;">
                         <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;
@@ -35,13 +48,13 @@
                             <th>Name</th>
                             <th>Category</th>
                             <th>Type</th>
-                            <th>Supplier</th>
                             <th>Warehouse</th>
+                            <th>Supplier</th>
                             <th>Quantity on Hand</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let inventoryItem of inventoryItems | paginate:{itemsPerPage: noOfRows, currentPage:p}">
+                        <tr *ngFor="let inventoryItem of filteritems | paginate:{itemsPerPage: noOfRows, currentPage:p}">
                         <ng-container>
                             <td>{{inventoryItem.name}}</td>
                         </ng-container>
@@ -65,15 +78,15 @@
 
                         <td style="width: 3%"><input type="checkbox" [disabled]="inventoryItem.stored" (click)="selected($event, inventoryItem)" [checked]="inventoryItem.selected" style="transform: scale(1.3);" ></td>
                         
-                        <ng-container  *ngIf="inventoryItem.stored == true">
+                        <!-- <ng-container  *ngIf="inventoryItem.stored == true">
                             <td class = "icon-adjust" style="width: 1%">
                                 <a [routerLink]="" style="cursor: pointer;" class="delete" title="Delete" data-toggle="tooltip" (click)="deleteSupplierOrderLine(inventoryItem)"><i style="font-size: 17px;" class="material-icons">&#xE872;</i></a>
                             </td>  
-                         </ng-container>
+                         </ng-container> -->
                     </tr>
                     </tbody>
                 </table>
-                <div class="hint-text">Showing <b> {{inventoryItems.length}}</b> entries</div>
+                <div class="hint-text">Showing <b> {{filteritems.length}}</b> entries</div>
                 <div class="pagination">
                     <div id="pagination" class="custom-pagination">
                         <pagination-controls (pageChange)="p=$event"></pagination-controls>

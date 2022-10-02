@@ -1,0 +1,25 @@
+h1 
+{
+    font-size: 15vmin;
+    margin-top: auto;
+}
+
+h2 
+{
+  font-size: 5vmin;
+  margin: auto;
+  margin-top: 0;
+  font-weight: normal;
+  color: red;
+}
+  
+  #behind{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    cursor: none;
+    overflow: hidden;
+  }

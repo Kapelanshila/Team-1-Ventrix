@@ -81,11 +81,10 @@ export class EmployeesReportComponent implements OnInit {
             this.eassets = [];
 
             //Gets Assigned Assets currently in use by the Employee
-            this.assets.forEach(asset => {
-              if (asset.assetStatus == "In use" && this.assignedassets.find(x => x.employeeId == element.employeeId && x.assetId == asset.assetId) != undefined)
+            this.assignedassets.forEach(assignment => {
+              if (assignment.checkedIn == false && assignment.checkedOut == true && assignment.employeeId == element.employeeId)
               {
-                console.log(this.assignedassets.find(x => x.employeeId == element.employeeId && x.assetId == asset.assetId));
-                this.eassets.push(asset);
+                this.eassets.push(this.assets.find(x => x.assetId  == assignment.assetId));
               }
             });
   
@@ -237,4 +236,14 @@ export class EmployeesReportComponent implements OnInit {
     
       )
     }
+
+    download()
+  {
+    this.ventrixdbservice.generateEmployeePDFReport(this.employees)
+    .subscribe(res => {
+      const data = new Blob([res] , { type: 'application/pdf' });
+     saveAs(data,"Employee Report");
+   });
+  }
+  
 }

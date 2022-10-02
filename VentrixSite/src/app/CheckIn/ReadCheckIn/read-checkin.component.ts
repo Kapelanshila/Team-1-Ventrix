@@ -232,6 +232,7 @@ export class ReadCheckinComponent implements OnInit {
         this.ventrixdbservice.searchAssignment(this.query.toString()).subscribe(response => {
           //Same Read as intializer
           this.readassignments = response;
+          console.log(this.readassignments)
 
             //Neccessary to get the most up-to-date status
             if (this.readassignments.length != 0)
@@ -246,6 +247,7 @@ export class ReadCheckinComponent implements OnInit {
 
                
                   this.readassignments.forEach(element => {
+
                     if (element.checkedIn == false && element.checkedOut == true)
                     {
                       this.item = 
@@ -262,6 +264,8 @@ export class ReadCheckinComponent implements OnInit {
                         checkedIn: element.checkedIn,
                         checkedOut: element.checkedOut
                       }
+                      console.log(this.item)
+
                       this.assignedAssets.push(this.item);
                     }
                 });

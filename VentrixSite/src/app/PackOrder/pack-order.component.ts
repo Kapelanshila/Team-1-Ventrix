@@ -55,7 +55,8 @@ export class PackOrderComponent implements OnInit {
       contactPersonName : '',
       contactPersonSurname: '',
       emailAddress: '',
-      status: ''
+      status: '',
+      encrypted:''
     }
 
     this.ventrixdbservice.clearClientOrder();
@@ -110,7 +111,8 @@ export class PackOrderComponent implements OnInit {
                     contactPersonName : element.contactPersonName!,
                     contactPersonSurname: element.contactPersonSurname!,
                     emailAddress: element.emailAddress!,
-                    status: this.temp.description
+                    status: this.temp.description,
+                    encrypted:''
                   }
                   this.clientOrderVM.push(this.order);
                 }
@@ -272,7 +274,8 @@ export class PackOrderComponent implements OnInit {
                           contactPersonName : element.contactPersonName!,
                           contactPersonSurname: element.contactPersonSurname!,
                           emailAddress: element.emailAddress!,
-                          status: this.temp.description
+                          status: this.temp.description,
+                          encrypted:''
                         }
                         this.clientOrderVM.push(this.order);
                       }     

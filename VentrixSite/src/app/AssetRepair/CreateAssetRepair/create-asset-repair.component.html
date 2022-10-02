@@ -6,7 +6,11 @@
         <form class="form-user"  [formGroup]="assetform" (ngSubmit)="addAssetRepair()"><span class="reauth-email"> </span>
             <h4 class="card-title">Log {{assetitem!.name!}} for Repairs </h4>
             <hr>
-            <label>Asset Repair Reason</label>
+            <label>Asset Repair Reason
+                <span>
+                    <i class="fa fa-info-circle" title="Select the reason you are logging the asset for repairs."></i>
+                </span>
+            </label>
             <div *ngIf="submitted">
                 <span *ngIf="f['assetRepairReasonId'].errors?.['assetRepairReasonId'] || f['assetRepairReasonId'].errors?.['noWhitespaceValidator']" class="text-danger" >Please select an Asset Repair Reason</span>
             </div>

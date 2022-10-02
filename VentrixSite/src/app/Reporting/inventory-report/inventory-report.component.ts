@@ -16,6 +16,7 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import { Account } from 'src/app/shared/Account';
 import { InventoryReport } from 'src/app/shared/InventoryReport';
 import { saveAs } from 'file-saver';
+import { Warehouse } from 'src/app/shared/Warehouse';
 interface InventoryNode {
   name: string;
   children?: InventoryNode[];
@@ -26,6 +27,7 @@ interface child {
 }
 
 const TREE_DATA: InventoryNode[] =[];
+const WTREE_DATA: InventoryNode[] =[];
 
 /** Flat node with expandable and level information */
 interface ExampleFlatNode {
@@ -44,6 +46,8 @@ export class InventoryReportComponent implements OnInit {
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router)  { }
   inventories:any[] = [];
   warehouses:any[] = [];
+  nodeselected:any;
+  wnodeselected:any;
   suppliers:any[] = [];
   types:any[] = [];
   supplierorderline:any[] = [];
@@ -57,9 +61,11 @@ export class InventoryReportComponent implements OnInit {
   inventoryItems:any[] = [];
   inventorywriteoffs!:any;
   clientorders!:any;
+  warehouse!:Warehouse;
   supplierorders!:any;
   new!:InventoryNode;
   specifictypes:child[] = [];
+  selectedwarehouse:string = "All";
   account!:Account;
   date!:Date;
   //Search query 
@@ -107,7 +113,8 @@ export class InventoryReportComponent implements OnInit {
                     supplier:this.suppliers.find(x => x.supplierId == inventory.supplierId),
                     name: inventory.name,
                     quantityOnHand: inventory.quantityOnHand,
-                    account: this.account.name+' '+this.account.surname
+                    account: this.account.name+' '+this.account.surname,
+                    selectedWarehouse: this.selectedwarehouse
                   }
                   this.inventoryItems.push(this.item)
        
@@ -118,6 +125,7 @@ export class InventoryReportComponent implements OnInit {
                   name: 'All',
                 }
                 TREE_DATA.push(this.new)
+                WTREE_DATA.push(this.new)
 
                   //Add Categories and types to nodes 
                   this.categories.forEach(category => {
@@ -134,9 +142,14 @@ export class InventoryReportComponent implements OnInit {
                           children: this.specifictypes
                         }
                         TREE_DATA.push(this.new)
-                    });
+                  });
+
+                  this.warehouses.forEach(element => {
+                    WTREE_DATA.push(element)
+                  });
 
                   this.dataSource.data = TREE_DATA;
+                  this.wdataSource.data = WTREE_DATA;
 
                   console.log(TREE_DATA)
 
@@ -192,7 +205,8 @@ export class InventoryReportComponent implements OnInit {
                       supplier:this.suppliers.find(x => x.supplierId == inventory.supplierId),
                       name: inventory.name,
                       quantityOnHand: inventory.quantityOnHand,
-                      account: this.account.name+' '+this.account.surname
+                      account: this.account.name+' '+this.account.surname,
+                      selectedWarehouse: this.selectedwarehouse
                     }
                     this.inventoryItems.push(this.item)
                   })
@@ -246,7 +260,8 @@ export class InventoryReportComponent implements OnInit {
                       supplier:this.suppliers.find(x => x.supplierId == inventory.supplierId),
                       name: inventory.name,
                       quantityOnHand: inventory.quantityOnHand,
-                      account: this.account.name+' '+this.account.surname
+                      account: this.account.name+' '+this.account.surname,
+                      selectedWarehouse: this.selectedwarehouse
                     }
                     this.inventoryItems.push(this.item)
                    }
@@ -313,7 +328,8 @@ export class InventoryReportComponent implements OnInit {
                   supplier:this.suppliers.find(x => x.supplierId == inventory.supplierId),
                   name: inventory.name,
                   quantityOnHand: inventory.quantityOnHand,
-                  account: this.account.name+' '+this.account.surname
+                  account: this.account.name+' '+this.account.surname,
+                  selectedWarehouse: this.selectedwarehouse
                 }
                 this.inventoryItems.push(this.item)
                }
@@ -328,6 +344,135 @@ export class InventoryReportComponent implements OnInit {
     });
     console.log(this.inventoryItems)
   })
+  }
+
+   
+  download()
+  {
+    this.ventrixdbservice.generateInventoryPDFReport(this.inventoryItems)
+    .subscribe(res => {
+      const data = new Blob([res] , { type: 'application/pdf' });
+     saveAs(data,"Inventory Report");
+   });
+  }
+  
+
+  warehouseclicked(selectednode:string)
+  {
+    this.selectedwarehouse = selectednode;
+    this.inventoryItems = [];
+    if (selectednode == 'All')
+    {
+      //Get inventory from api
+      this.ventrixdbservice.readInventory()
+      .subscribe(response => {
+        this.inventories = response;
+  
+          //Types,Category,Supplier and Warehouse is also retrived from the api in order to present relevant information realting to that inventory item
+          this.ventrixdbservice.readInventoryType()
+          .subscribe(response => {
+            this.types = response;
+  
+              this.ventrixdbservice.readInventoryCategory()
+              .subscribe(response => {
+                this.categories = response;
+  
+                this.ventrixdbservice.readWarehouse()
+                .subscribe(response => {
+                  this.warehouses = response;
+  
+                  this.ventrixdbservice.readSupplier()
+                  .subscribe(response => {
+                    this.suppliers = response;
+  
+                    this.inventories.forEach(inventory => {
+                    this.type = this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId);
+                     
+
+                    //New inventory view model is assigned the retrived values from the api
+                    this.item = 
+                    {
+                      inventoryId: inventory.inventoryId,
+                      warehouse :this.warehouses.find(x => x.warehouseId == inventory.warehouseId),
+                      type:this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId),
+                      category :this.categories.find(x => x.inventoryCategoryId == this.type.inventoryCategoryId),
+                      supplier:this.suppliers.find(x => x.supplierId == inventory.supplierId),
+                      name: inventory.name,
+                      quantityOnHand: inventory.quantityOnHand,
+                      account: this.account.name+' '+this.account.surname,
+                      selectedWarehouse: this.selectedwarehouse
+                    }
+                    this.inventoryItems.push(this.item)
+                  })
+  
+                })
+  
+              })
+              
+          })
+  
+        });
+        console.log(this.inventoryItems)
+      })
+    }
+    else
+    {
+      //Get inventory from api
+      this.ventrixdbservice.readInventory()
+      .subscribe(response => {
+        this.inventories = response;
+  
+          //Types,Category,Supplier and Warehouse is also retrived from the api in order to present relevant information realting to that inventory item
+          this.ventrixdbservice.readInventoryType()
+          .subscribe(response => {
+            this.types = response;
+  
+              this.ventrixdbservice.readInventoryCategory()
+              .subscribe(response => {
+                this.categories = response;
+  
+                this.ventrixdbservice.readWarehouse()
+                .subscribe(response => {
+                  this.warehouses = response;
+  
+                  this.ventrixdbservice.readSupplier()
+                  .subscribe(response => {
+                    this.suppliers = response;
+  
+                    this.inventories.forEach(inventory => {
+                    this.type = this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId);
+                    this.warehouse = this.warehouses.find(x => x.warehouseId == inventory.warehouseId);
+
+                    if (this.warehouse.name == selectednode)
+                    {
+                    //New inventory view model is assigned the retrived values from the api
+                    this.item = 
+                    {
+                      inventoryId: inventory.inventoryId,
+                      warehouse :this.warehouses.find(x => x.warehouseId == inventory.warehouseId),
+                      type:this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId),
+                      category :this.categories.find(x => x.inventoryCategoryId == this.type.inventoryCategoryId),
+                      supplier:this.suppliers.find(x => x.supplierId == inventory.supplierId),
+                      name: inventory.name,
+                      quantityOnHand: inventory.quantityOnHand,
+                      account: this.account.name+' '+this.account.surname,
+                      selectedWarehouse: this.selectedwarehouse
+                    }
+                    this.inventoryItems.push(this.item)
+                   }
+                  })
+  
+                })
+  
+              })
+              
+          })
+  
+        });
+        console.log(this.inventoryItems)
+      })
+    }
+  
   }
 
   //Data Tree
@@ -352,6 +497,7 @@ export class InventoryReportComponent implements OnInit {
   );
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  wdataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 

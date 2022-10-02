@@ -12,13 +12,23 @@
                         <br>
                     </div>
                     <div>
-                        <button (click)="openPDF()" style="width: 150px; margin-top: 1%; float: left;" class="btn btn-dark btn-block"><i class="fa fa-arrow-down" aria-hidden="true"></i> Download PDF</button>
-                        <br>
-                        <br>
-                        <button (click)="generateExcel()" style="width: 150px; margin-top: 1%;" class="btn btn-success btn-block"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Report</button>
+                        <button (click)="download()" style="width: 150px; margin-top: 1%;" class="btn btn-dark btn-block"><i class="fa fa-arrow-down" aria-hidden="true"></i> Download PDF</button>
                     </div> 
-                    <div class="col-md-12">
-                </div>
+                        <!-- Copy -->
+                        <div class="col-md-12 text-nowrap" style="margin-top: 15px; margin-left: -10px;">
+                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;
+                            <select class="d-inline-block form-select form-select-sm" [(ngModel)]="noOfRows">
+                                    <option value="5" selected="">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                        </select>&nbsp;</label>
+                        </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                        </div>
+                        <!-- Copy -->
                 <br>
                 <div id="htmlData">
                     <h5 style="text-align: center;">Employee List Report</h5>
@@ -31,24 +41,22 @@
                             <th>Name</th>
                             <th>Surname</th>
                             <th>Phone Number</th>
-                            <th>Home Address</th>
                             <th>Email Address</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let employee of employees">
-                            <tr style="background-color: rgba(164, 161, 255, 0.322);">
+                        <ng-container *ngFor="let employee of employees | paginate:{itemsPerPage: noOfRows, currentPage:p}">
+                            <tr style="background-color: rgba(164, 161, 255, 0.152);">
                             <td>{{employee.name}}</td>
                             <td>{{employee.surname}}</td>
                             <td>{{employee.phoneNumber}}</td>
-                            <td>{{employee.homeAddress}}</td>
                             <td>{{employee.emailAddress}}</td>
                             </tr>
                             <tr  style="background-color: rgba(0, 0, 0, 0.096);" *ngIf="employee.assets.length !=0" >
                                 <td style="padding: 0px 12px 0; font-size: 12px; font-weight: bold;"  colspan="5"> Asset(s) In Use </td> 
                             </tr> 
                             <ng-container *ngFor="let asset of employee.assets">
-                                <tr *ngIf="asset != undefined">
+                                <tr style="text-align: center;" *ngIf="asset != undefined">
                                     <td colspan="5" style="padding-bottom: 0;"> 
                                         <ul style="list-style-type:none; padding: 0;">
                                         <li style="color: blue;">{{asset.name}}</li>
@@ -59,10 +67,16 @@
                         </ng-container>
                     </tbody>
                 </table>
+                <div class="hint-text">Showing <b> {{employees.length}}</b> entries</div>
+                <div class="pagination">
+                    <div id="pagination" class="custom-pagination">
+                        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                    </div>    
+                </div>		
                 <br>
-                <div style="text-align: center;"><img src="assets/images/Akquize.png"></div>
             </div>
             </div>
         </div>  
+        <div style="text-align: center; margin-bottom: 15px;"><img src="assets/images/Akquize.png"></div>
     </div>   
 </div>

@@ -52,7 +52,7 @@
      
             <label class="form-label inline-block mb-2" style="color: blue;">Current Timeslot</label>
             <label class="form-label inline-block mb-4" style="color: black; font-size: 14px;">{{orderdate | date:"yyyy-MM-dd"}} | {{startTime | date:"HH:mm"}} - {{endTime | date:"HH:mm"}}</label>
-
+            <br>
             <ion-label style="color: purple;">Time Slots Available</ion-label>
               <br>
               <ion-select  class="form-control block
@@ -69,7 +69,7 @@
               ease-in-out
               m-0
               focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput7"  formControlName="slotID">
-                <ion-select-option  *ngFor="let time of timesSlots" [value]="time.timeslot" >{{time.date.slotDate | date:"yyyy-MM-dd"}} | {{startTime | date:"hh:mm"}} - {{endTime | date:"hh:mm"}}</ion-select-option>
+                <ion-select-option  *ngFor="let time of timesSlots" [value]="time.timeslot" >{{time.date.slotDate | date:"yyyy-MM-dd"}} | {{time.timeslot.startTime  | date:"HH:mm"}} - {{time.timeslot.endTime  | date:"HH:mm"}}</ion-select-option>
               </ion-select>
               <br>
               <div class="form-group mb-6">

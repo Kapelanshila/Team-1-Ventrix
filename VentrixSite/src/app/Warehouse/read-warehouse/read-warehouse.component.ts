@@ -17,6 +17,9 @@ export class ReadWarehouseComponent implements OnInit {
   p: number = 1;
   config: any; 
   noOfRows = 10;
+  inventories: any[] = [];
+  assets: any[] = [];
+
   constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
   {
     this.config = {
@@ -53,23 +56,47 @@ export class ReadWarehouseComponent implements OnInit {
   //Delete Warehouse Function 
   deleteWarehouse(selectedWarehouse: Warehouse)
   {
-    
-    Swal.fire({
-      icon: 'warning',
-      title: 'Are you sure you would like to delete this warehouse?',
-      showDenyButton: true,
-      confirmButtonText: 'Yes',
-      denyButtonText: `No`,
-      confirmButtonColor: '#077bff',
-      allowOutsideClick: false,
-      allowEscapeKey: false
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.ventrixdbservice.deleteWarehouse(selectedWarehouse).subscribe();
-        this.router.navigate(['/read-warehouse']).then(() => {
-          window.location.reload();
-  });
-}
-})  
+this.ventrixdbservice.readInventory().subscribe(response => {
+  this.inventories = response;
+
+  this.ventrixdbservice.readAsset().subscribe(response => {
+    this.assets = response;
+
+  if (this.assets.find((x: { warehouseId: Number; }) => x.warehouseId == selectedWarehouse.warehouseId) == undefined && this.inventories.find((x: { warehouseId: Number; }) => x.warehouseId == selectedWarehouse.warehouseId) == undefined)
+  {
+      //Sweet alerts are used as notifications
+      Swal.fire({
+        icon: 'warning',
+        title: 'Are you sure you want to delete this warehouse?',
+        showDenyButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+        confirmButtonColor: '#077bff',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.ventrixdbservice.deleteWarehouse(selectedWarehouse).subscribe();
+          this.router.navigate(['/read-warehouse']).then(() => {
+            window.location.reload();
+          });
+        }
+      })  
+      }
+      else
+      {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Warehouse Associated to other entries',
+          text: 'Warehouse associated to inventory items or asset items',
+          showDenyButton: false,
+          confirmButtonText: 'Ok',
+          confirmButtonColor: '#077bff',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+      }
+    })
+  })
 }
 }

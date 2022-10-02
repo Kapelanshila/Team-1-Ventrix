@@ -105,10 +105,13 @@ import { GeneralAuthGuard } from './_helpers/general.auth.guard';
 import { BackupRestoreComponent } from './Backup-Restore/backup-restore.component';
 import { ReportAuthGuard } from './_helpers/report.auth.guard';
 import { SupplyDemandReportComponent } from './Reporting/supply-demand-report/supply-demand-report.component';
-
+import { OrderinfoComponent } from './orderinfo/orderinfo.component';
+import { AssignAuthGuard } from './_helpers/assign.auth.guard';
+import { HelpComponent } from './Help/help.component';
+import { NoAcessComponent } from './NoAccess/no-acess.component';
 const routes: Routes = [{ path: 'app', component: AppComponent },
 { path: 'create-client', component: CreateClientComponent, canActivate: [AdminAuthGuard]  },
-{ path: 'read-client', component: ReadClientComponent},
+{ path: 'read-client', component: ReadClientComponent,  canActivate: [AdminAuthGuard] },
 { path: 'update-client', component: ClientUpdateComponent, canActivate: [AdminAuthGuard]  },
 { path: 'create-assetcategory', component: CreateAssetcategoryComponent , canActivate: [AssetAuthGuard]  },
 { path: 'read-assetcategory', component: ReadAssetcategoryComponent, canActivate: [AssetAuthGuard]  },
@@ -183,8 +186,8 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 {path: 'read-asset-repair', component:ReadAssetRepairComponent, canActivate: [AssetAuthGuard]},
 {path: 'update-asset-repair', component:UpdateAssetRepairComponent, canActivate: [AssetAuthGuard]},
 {path: 'revert-repair', component:RevertRepairComponent, canActivate: [AssetAuthGuard]},
-{path: 'read-assigned-asset', component:ReadAssignedAssetComponent, canActivate: [AssetAuthGuard]},
-{path: 'undo-assigned-asset', component:UndoAssignedAssetComponent},
+{path: 'read-assigned-asset', component:ReadAssignedAssetComponent, canActivate: [AssignAuthGuard]},
+{path: 'undo-assigned-asset', component:UndoAssignedAssetComponent, canActivate: [AssignAuthGuard]},
 {path: 'read-checkout', component:ReadCheckoutComponent, canActivate: [AssetAuthGuard]},
 {path: 'view-checkout', component:ViewCheckoutsComponent, canActivate: [AssetAuthGuard]},
 {path: 'read-checkin', component:ReadCheckinComponent, canActivate: [AssetAuthGuard]},
@@ -230,6 +233,9 @@ const routes: Routes = [{ path: 'app', component: AppComponent },
 {path: 'timeslot', component:TimeslotComponent, canActivate: [InventoryAuthGuard]  },
 {path: 'completed-orders', component:CompletedOrdersComponent, canActivate: [DriverAuthGuard]  },
 {path: 'backup-restore', component:BackupRestoreComponent, canActivate: [AdminAuthGuard]  },
+{path: 'orderinfo', component:OrderinfoComponent, canActivate: [GeneralAuthGuard],},
+{path: 'help', component:HelpComponent, canActivate: [GeneralAuthGuard],},
+{path: 'forbidden', component:NoAcessComponent},
 {path: '', redirectTo: 'login', pathMatch: 'full' }];
 
 @NgModule({

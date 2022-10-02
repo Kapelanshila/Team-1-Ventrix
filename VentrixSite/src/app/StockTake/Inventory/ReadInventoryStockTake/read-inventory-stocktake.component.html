@@ -14,6 +14,10 @@
                                 <input type="text" class="form-control" placeholder="Search&hellip;" (keyup.enter)="searchInventory()" [(ngModel)]="query">
                             </div>
                         </div>
+                        <button type="button" class="btn btn-dark" (click)="exportInventoryStockTake()"><i class="fa fa-file-excel-o"></i> Export Stocktake</button>
+                        <button type="button" class="btn btn-success"><i class="fa fa-file-excel-o"></i> <label for="file-upload" style="margin: 0; margin-left: 4px;" class="custom-file-upload">Import Stocktake</label> </button>
+                        <input id="file-upload" #file style="display: none" (change)="uploadFile(file.files!)" accept=".xls" type="file"/>
+
                     </div>
                     <!-- Copy -->
                     <div class="col-md-12 text-nowrap" style="padding: 1%;">

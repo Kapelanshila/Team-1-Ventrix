@@ -54,6 +54,11 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
   storedinventories: SupplierOrderLineUVM[] = [];
   notstoredinventories: SupplierOrderLineUVM[] = [];
 
+  categoryselected!:any;
+  typeselected!:any;
+  filtertypes:any;
+  filteritems:SupplierOrderLineUVM[] = [];
+  
   ngOnInit(): void {
       this.selectedorder = this.ventrixdbservice.getSupplierOrder()!;
       this.inventoryItems =[];
@@ -88,7 +93,6 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
                   this.supplierorderlines.forEach(element => {    
                   this.inventoryitem = this.inventories.find(x => x.inventoryId == element.inventoryId)
                   this.type = this.types.find(x => x.inventoryTypeId == this.inventoryitem.inventoryTypeId);
-
                       if (this.selectedorder.supplierOrderId == element.supplierOrderId)
                       {
                         this.item = 
@@ -108,17 +112,21 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
                         }
                       
                       this.selectedinventories.push(this.item)
+
                     }
                 });
                 
                 //Here it is put into another array as selected inventories array is strictly for inventory selected to be loaded
                 this.selectedinventories.forEach(element => {
                   this.inventoryItems.push(element)
+                  this.filteritems.push(element)
+
                 });
               
                 this.inventories.forEach(inventory => {
-                  if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)
+                  if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined && this.selectedorder.supplierId == inventory.supplierId)
                   {
+                    this.type = this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId);
 
                   //New inventory view model is assigned the retrived values from the api
                   this.item = 
@@ -137,6 +145,8 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
                     stored: false
                   }
                   this.inventoryItems.push(this.item)
+                  this.filteritems.push(this.item)
+
                   }
                 });
       
@@ -168,6 +178,77 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
     })
   }
 
+  
+  filtercategory()
+  {
+    this.filteritems = [];
+    if (this.categoryselected == "")
+    {
+      this.filteritems = this.inventoryItems;
+    }
+    else
+    {
+      this.inventoryItems.forEach(element => {
+        if (element.selected == true)
+        {
+          this.filteritems.push(element);
+        }
+  
+        else if (element.category!.inventoryCategoryId == this.categoryselected)
+        {
+          this.filteritems.push(element);
+        }
+      });
+    }
+  }
+
+  filtertype()
+  {
+    this.filteritems = [];
+    if (this.typeselected == "")
+    {
+      this.filtercategory();
+    }
+    else
+    {
+      this.inventoryItems.forEach(element => {
+        if (element.selected == true)
+        {
+          this.filteritems.push(element);
+        }
+  
+        else if (element.type!.inventoryTypeId == this.typeselected)
+        {
+          this.filteritems.push(element);
+        }
+      });
+    }
+  }
+
+  getTypes()
+  {
+    //Populate Select Box
+    this.filtertypes = [];
+    if(this.categoryselected != "")
+    {
+      this.filtercategory()
+      this.ventrixdbservice.readInventoryType()
+      .subscribe(response => {
+        response.forEach(element => {
+          if (element.inventoryCategoryId == this.categoryselected)
+          {
+            this.filtertypes.push(element);
+          }
+        });
+      })    
+    }
+    else
+    {
+      this.filtercategory()
+    }
+  }
+
+
   addQuantity(event:any, selectedinventory:SupplierOrderLineUVM)
   {  
     this.selectedinventories.find(x => x.inventoryId == selectedinventory.inventoryId)!.added = false;
@@ -179,7 +260,8 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
       this.selectedinventories.find(x => x.inventoryId == selectedinventory.inventoryId)!.added = true;
       Swal.fire({
         icon: 'warning',
-        title: 'Invalid Number Entered',
+        title: 'Invalid Quantity Entered',
+        text: 'Quantity less than or equal to zero',
         confirmButtonText: 'OK',
         confirmButtonColor: '#077bff',
         allowOutsideClick: false,
@@ -201,6 +283,8 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
   }
 
   selected(event:any, selectedinventory:SupplierOrderLineUVM) {
+    this.categoryselected = "";
+    this.filtertypes = [];
     if ( event.target.checked ) {
       this.item = 
       {
@@ -220,9 +304,11 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
       this.selectedinventories.push(this.item);
       console.log(selectedinventory)
       this.inventoryItems =[];
-      
+      this.filteritems =[];
+
       this.selectedinventories.forEach(element => {
         this.inventoryItems.push(element)
+        this.filteritems.push(element)
       });
     
        //Get inventory from api
@@ -250,7 +336,7 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
 
                   this.type = this.types.find(x => x.inventoryTypeId == inventory.inventoryTypeId);
                   
-                  if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)
+                  if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined && this.selectedorder.supplierId == inventory.supplierId)
                   {
                   //New inventory view model is assigned the retrived values from the api
                   this.item = 
@@ -269,6 +355,8 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
                     stored: false                 
                   }
                   this.inventoryItems.push(this.item)
+                  this.filteritems.push(this.item)
+
                   }
 
 
@@ -289,9 +377,12 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
    {
     this.selectedinventories.splice(this.selectedinventories.indexOf(selectedinventory), 1);
     this.inventoryItems = [];
+    this.filteritems = [];
 
     this.selectedinventories.forEach(element => {
       this.inventoryItems.push(element)
+      this.filteritems.push(element)
+
     });
   
 
@@ -323,7 +414,7 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
                   //New inventory view model is assigned the retrived values from the api
                   if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)
                   {
-                    if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined)                    
+                    if (this.selectedinventories.find(x => x.inventoryId == inventory.inventoryId) == undefined && this.selectedorder.supplierId == inventory.supplierId)
                     {
                     //New inventory view model is assigned the retrived values from the api
                     this.item = 
@@ -342,6 +433,8 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
                       stored: false    
                     }
                     this.inventoryItems.push(this.item)
+                    this.filteritems.push(this.item)
+
                     }
   
                   }
@@ -487,6 +580,8 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
 
   searchInventory()
   { 
+    this.categoryselected = "";
+    this.filtertypes = [];
       if (this.query != '' && this.query.replace(/\s/g, '').length == 0)
       {
         Swal.fire({

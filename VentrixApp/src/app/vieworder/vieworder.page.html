@@ -51,21 +51,6 @@
      
             <label class="form-label inline-block mb-2" style="color: blue;">Timeslot</label>
             <label class="form-label inline-block mb-4" style="color: black; font-size: 14px;">{{orderdate | date:"yyyy-MM-dd"}} | {{startTime | date:"hh:mm"}} - {{endTime | date:"hh:mm"}}</label>
-            <label for="exampleInputEmail1" class="form-label inline-block mb-2" style="color: purple;">Order Items</label>
-            <br>
-            <div class="row" style="color: black;" *ngFor="let item of vieworder">
-              <div class="col-4">
-                  <ul style="list-style-type:none">
-                      <li style="font-weight: bold;">{{item.name}}</li>
-                   </ul>
-              </div>
-              <div class="col-1">
-                  <ul style="list-style-type:none">
-                      <li>Quantity: {{item.quantity}}</li>
-                   </ul>
-              </div>
-            </div>
-           
             
           </div>
 
