@@ -92,7 +92,11 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
                   //On initialization inventory item stored in Supplier order line are put into an array so that the user can edit already stored data
                   this.supplierorderlines.forEach(element => {    
                   this.inventoryitem = this.inventories.find(x => x.inventoryId == element.inventoryId)
+                  
+                  if (this.inventoryitem != undefined)
+                  {
                   this.type = this.types.find(x => x.inventoryTypeId == this.inventoryitem.inventoryTypeId);
+
                       if (this.selectedorder.supplierOrderId == element.supplierOrderId)
                       {
                         this.item = 
@@ -114,7 +118,9 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
                       this.selectedinventories.push(this.item)
 
                     }
+                  }
                 });
+                
                 
                 //Here it is put into another array as selected inventories array is strictly for inventory selected to be loaded
                 this.selectedinventories.forEach(element => {
@@ -149,7 +155,7 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
 
                   }
                 });
-      
+              
               })
             })
           })
