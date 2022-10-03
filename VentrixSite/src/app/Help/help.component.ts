@@ -16,6 +16,7 @@ import { PdfViewerComponent } from 'ng2-pdf-viewer';
 })
 export class HelpComponent implements OnInit {
   query:string = '';
+  page = 55;
   pdfSrc = "assets/Help.pdf";
   constructor() { }
   
