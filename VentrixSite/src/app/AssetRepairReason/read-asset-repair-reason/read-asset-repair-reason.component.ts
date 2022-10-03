@@ -40,7 +40,6 @@ export class ReadAssetRepairReasonComponent implements OnInit {
     this.ventrixdbservice.readAssetRepairReason()
     .subscribe(response => {
       this.assetrepairreasons = response;
-      console.log(this.assetrepairreasons)
     })
   }
 

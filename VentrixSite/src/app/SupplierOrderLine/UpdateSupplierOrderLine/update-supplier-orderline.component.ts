@@ -308,7 +308,6 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
         stored: false                
       }
       this.selectedinventories.push(this.item);
-      console.log(selectedinventory)
       this.inventoryItems =[];
       this.filteritems =[];
 
@@ -505,7 +504,6 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
 
     //Validation to all inventory selected has values
     this.selectedinventories.forEach(element => {
-      console.log(element)
       if (element.quantity == 0)
       {   
         this.novalue++;
@@ -626,7 +624,6 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
             //Get inventory from api
             this.ventrixdbservice.searchInventory(this.query.toString())
             .subscribe(response => {
-              console.log(response)
               this.inventories = response;
               this.inventories.forEach(inventory => {
                 

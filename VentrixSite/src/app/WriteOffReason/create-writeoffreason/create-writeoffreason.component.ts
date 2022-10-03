@@ -29,7 +29,6 @@ export class CreateWriteoffreasonComponent implements OnInit {
     this.ventrixdbservice.readWriteOffReason()
     .subscribe(response => {
       this.writeoffreasons = response;
-      console.log(this.writeoffreasons)
     })
   }
   //Form submit calls add write-off reason function
@@ -59,7 +58,6 @@ export class CreateWriteoffreasonComponent implements OnInit {
     });
 
     if (this.writeoffreasonform.valid && this.find == false) {
-      console.log(this.writeoffreasonform.value);
       this.ventrixdbservice.createWriteOffReason(this.writeoffreasonform.value).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications

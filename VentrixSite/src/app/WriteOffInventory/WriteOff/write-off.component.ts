@@ -73,7 +73,6 @@ export class WriteOffComponent implements OnInit {
           this.types.push(element);
         }
       });
-      console.log(this.types)
     }) 
 
     this.ventrixdbservice.readSupplier()

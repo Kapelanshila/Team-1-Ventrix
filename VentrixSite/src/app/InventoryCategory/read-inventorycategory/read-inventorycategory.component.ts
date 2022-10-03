@@ -39,7 +39,6 @@ export class ReadInventorycategoryComponent implements OnInit {
     this.ventrixdbservice.readInventoryCategory()
     .subscribe(response => {
       this.inventorycategories = response;
-      console.log(this.inventorycategories)
     })
     this.ventrixdbservice.clearInventoryCategory();
   }
@@ -154,7 +153,6 @@ export class ReadInventorycategoryComponent implements OnInit {
             }
           })  
           }
-          console.log(this.inventorycategories)
         })
       }  
   }

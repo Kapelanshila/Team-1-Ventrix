@@ -87,7 +87,6 @@ export class TimeslotComponent implements OnInit {
         allowEscapeKey: false
       }).then((result) => {
         if (result.isConfirmed) {
-          console.log(this.item)
           this.router.navigate(['/timeslot']).then(() => {
             window.location.reload();
           });
@@ -118,7 +117,6 @@ export class TimeslotComponent implements OnInit {
         allowEscapeKey: false
       }).then((result) => {
         if (result.isConfirmed) {
-          console.log(this.item)
           this.router.navigate(['/timeslot']).then(() => {
             window.location.reload();
           });
@@ -138,7 +136,6 @@ export class TimeslotComponent implements OnInit {
         allowEscapeKey: false
       }).then((result) => {
         if (result.isConfirmed) {
-          console.log(this.item)
           this.router.navigate(['/timeslot']).then(() => {
             window.location.reload();
           });
@@ -174,7 +171,6 @@ export class TimeslotComponent implements OnInit {
               allowEscapeKey: false
             }).then((result) => {
               if (result.isConfirmed) {
-                console.log(this.item)
                 this.router.navigate(['/timeslot']).then(() => {
                   window.location.reload();
                 });
@@ -235,8 +231,6 @@ export class TimeslotComponent implements OnInit {
           //Timeslots that are not being used but are for a previous date are purple
           this.timeslotVM.forEach(element => {
             this.date =  formatDate(new Date(element.slotDate), 'yyyy-MM-dd', 'en');
-            console.log(this.date)
-
 
             if ((this.orderdeliveries.find((x: { timeslotId: Number; }) => x.timeslotId == element.timeslotId) == undefined) && (this.orderdeliveries.find((x: { dateId: Number; }) => x.dateId == element.dateId) == undefined))
             {

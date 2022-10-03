@@ -41,7 +41,6 @@ export class UpdatewarrantyperiodComponent implements OnInit {
       this.ventrixdbservice.readWarrantyPeriod()
       .subscribe(response => {
         this.warrantyPeriods = response;
-        console.log(this.warrantyPeriods )
       })
     }
 

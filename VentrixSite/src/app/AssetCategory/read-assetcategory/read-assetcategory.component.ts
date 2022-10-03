@@ -65,13 +65,11 @@ export class ReadAssetcategoryComponent implements OnInit {
     this.ventrixdbservice.readAssetType()
     .subscribe(response => {
       this.assettypes = response;
-      console.log( this.assetcategories)
       this.assettypes.forEach(element => {
         if (selectedassetcategory.assetCategoryId == element.assetCategoryId)
         {
           this.found = true;
         }
-        console.log(this.found)
       });
 
       if (this.found == false || this.assettypes.length == 0)
@@ -152,7 +150,6 @@ export class ReadAssetcategoryComponent implements OnInit {
           }
         })  
         }
-        console.log(this.assetcategories)
       })
     }  
   }

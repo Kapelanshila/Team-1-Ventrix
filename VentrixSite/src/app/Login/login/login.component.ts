@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.logout();
     this.ventrixdbservice.clearAccount();
     this.ventrixdbservice.clearEmail();
+    this.ventrixdbservice.clearPage();
   }
 
   pdisplayStyle = "none";
@@ -96,7 +97,6 @@ export class LoginComponent implements OnInit {
   login()
   {
     this.pathService.setPath('/login');
-    console.log(this.pathService.getPath());
     this.ventrixdbservice.readEmployee()
     .subscribe(response => {
       this.employees = response;
@@ -254,7 +254,6 @@ export class LoginComponent implements OnInit {
     updateDetails()
     {
       this.pathService.setPath('/login');
-      console.log(this.pathService.getPath());
       this.router.navigate(['/question']).then(() => {
       })
     }

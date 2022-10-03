@@ -38,17 +38,14 @@ export class ReadAssettypeComponent implements OnInit {
   ngOnInit(): void 
   {
     this.assetcategory = this.ventrixdbservice.getAssetCategory()!;
-    console.log(this.assetcategory)
     this.ventrixdbservice.readAssetType()
     .subscribe(response => {
       this.assettypes = response;
-      console.log(this.assettypes)
       this.assettypes.forEach(element => {
         if (element.assetCategoryId == this.assetcategory.assetCategoryId)
         {
           this.specifictypes.push(element);
         }
-        console.log(this.specifictypes);
       });
     })
   }

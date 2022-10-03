@@ -130,7 +130,6 @@ export class CreateAssetComponent implements OnInit {
           this.types.push(element);
         }
       });
-      console.log(this.types)
     }) 
 
     this.ventrixdbservice.readWarrantyPeriod()
@@ -164,8 +163,7 @@ export class CreateAssetComponent implements OnInit {
       })
     }
     else{
-    console.log(this.assets)
-    //Check if asset item does not already exsist
+      //Check if asset item does not already exsist
     if (this.assets.length != 0)
     {
       this.assets.forEach(element => {
@@ -188,7 +186,6 @@ export class CreateAssetComponent implements OnInit {
 
     if (this.assetform.valid && this.find == false && this.assetform.get('value')?.value > 0) 
       { 
-        console.log(this.assetform.value)
         this.currentDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
         //Warranty Date cannot be in the future
         if ((Date.parse(this.currentDate) < Date.parse(this.assetform.get('warrantyDate')?.value)) && (Date.parse(this.currentDate) !=  Date.parse(this.assetform.get('warrantyDate')?.value)))
@@ -212,7 +209,6 @@ export class CreateAssetComponent implements OnInit {
         })
         
         this.ventrixdbservice.createAsset(this.assetform.value).subscribe();
-        console.log(this.assetform.get('userId')?.value);
         Swal.fire({
           icon: 'success',
           title: 'Asset Item Created Successfully',
@@ -253,7 +249,6 @@ export class CreateAssetComponent implements OnInit {
       if (this.assetform.get('assetCategoryId')?.value.length != 0 )
       {
         this.types = [];
-        console.log(this.types)
         this.ventrixdbservice.readAssetType()
         .subscribe(response => {
           response.forEach(element => {

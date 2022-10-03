@@ -23,7 +23,6 @@ export class ViewUserDetailsComponent implements OnInit {
     this.ventrixdbservice.readEmployee()
     .subscribe(response => {
       this.employees = response;
-      console.log(this.employees)
     })
   }
 

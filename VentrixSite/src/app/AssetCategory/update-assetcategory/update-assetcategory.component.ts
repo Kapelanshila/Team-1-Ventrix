@@ -34,7 +34,6 @@ export class UpdateAssetcategoryComponent implements OnInit {
       description: this.assetcategory?.description
       })
       
-      console.log(this.assetcategory)
       this.ventrixdbservice.clearAssetCategory();
 
       this.ventrixdbservice.readAssetCategory()

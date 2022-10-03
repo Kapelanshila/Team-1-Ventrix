@@ -30,7 +30,6 @@ export class ReadSecurityquestionComponent implements OnInit {
     this.ventrixdbservice.readSecurityquestion()
     .subscribe(response => {
       this.securityquestions = response;
-      console.log(this.securityquestions)
     })
   }
   addSecurityquestion()
@@ -55,7 +54,6 @@ export class ReadSecurityquestionComponent implements OnInit {
     {
         this.ventrixdbservice.readUserSecurityQuestion().subscribe(response => {
           this.usersecurityquestions = response;
-          console.log(this.usersecurityquestions)
   
         if (this.usersecurityquestions.find((x: { securityQuestionId: Number; }) => x.securityQuestionId == selectedSecurityquestion.securityQuestionId) == undefined)
         {

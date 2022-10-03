@@ -90,7 +90,6 @@ export class UpdateAssetRepairComponent implements OnInit {
     })
     if (this.assetform.valid) 
       { 
-        console.log(this.assetform.value)
         this.ventrixdbservice.updateAssetRepair(this.assetform.value).subscribe();
         Swal.fire({
           icon: 'success',

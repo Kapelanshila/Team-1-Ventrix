@@ -133,7 +133,6 @@ export class UpdateProfileComponent implements OnInit {
       .subscribe(response => {
         this.employees = response;
         this.checkemployee = this.employees.find(x => x.emailAddress == this.employeeform.get('emailAddress')?.value)!;
-        console.log(this.checkemployee);
       if (this.checkemployee == undefined || (this.checkemployee.employeeId == this.account.employeeId && this.checkemployee != undefined))
       {
 

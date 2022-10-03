@@ -43,7 +43,6 @@ export class UpdateAssettypeComponent implements OnInit {
     this.ventrixdbservice.readAssetType()
     .subscribe(response => {
       this.assettypes = response;
-      console.log(this.assettypes)
     })
   }
 
@@ -68,7 +67,6 @@ export class UpdateAssettypeComponent implements OnInit {
     });
   if (this.assettypeform.valid && this.find == false) 
     { 
-      console.log(this.assettypeform.value)
       this.ventrixdbservice.updateAssetType(this.assettypeform.value).subscribe();
       //redirects back to data table and refreshes page
       //Sweet alerts are used as notifications

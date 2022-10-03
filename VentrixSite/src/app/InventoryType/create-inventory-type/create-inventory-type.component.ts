@@ -34,7 +34,6 @@ export class CreateInventoryTypeComponent implements OnInit {
     this.ventrixdbservice.readInventoryType()
     .subscribe(response => {
       this.inventorytypes = response;
-      console.log(this.inventorytypes)
     })
   }
   //Form submit calls add inventory category function
@@ -72,7 +71,6 @@ export class CreateInventoryTypeComponent implements OnInit {
         description: this.inventorytypeform.get('description')?.value
       }
 
-      console.log( this.addType);
       this.ventrixdbservice.createInventoryType(this.addType).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications

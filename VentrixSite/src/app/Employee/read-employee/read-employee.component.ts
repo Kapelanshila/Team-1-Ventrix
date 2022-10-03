@@ -91,7 +91,6 @@ export class ReadEmployeeComponent implements OnInit {
 
         this.ventrixdbservice.readAssetTrails().subscribe(response => {
           this.trails = response;
-          console.log(this.trails)
 
       if (this.histories.find((x: { employeeId: Number; }) => x.employeeId == selectedEmployee.employeeId) == undefined && this.collectedorders.find((x: { employeeId: Number; }) => x.employeeId == selectedEmployee.employeeId) == undefined && this.trails.find((x: { userId: Number; }) => x.userId == selectedEmployee.userId ) == undefined) 
       {
@@ -172,7 +171,6 @@ export class ReadEmployeeComponent implements OnInit {
             }
           })
         }
-        console.log(this.employees)
       })
     }
   }

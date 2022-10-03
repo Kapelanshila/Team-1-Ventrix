@@ -54,7 +54,6 @@ export class RegisterComponent implements OnInit {
     this.ventrixdbservice.readTitle()
     .subscribe(response => {
       this.titles = response;
-      console.log(this.titles)
     })
 
     this.ventrixdbservice.clearAccount();
@@ -110,7 +109,6 @@ export class RegisterComponent implements OnInit {
     this.ventrixdbservice.readEmployee()
       .subscribe(async response => {
         this.employees = response;
-          console.log(this.employees)
           //Possibility no employees exist on the system yet 
           //So an if statement is used to check for this if this was ommited if-else statement would be undefined 
           //Validation for user ID and check if userID is available and not registered yet with an account

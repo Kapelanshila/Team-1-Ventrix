@@ -25,6 +25,11 @@ export class NavigationComponent implements OnInit {
   {
     this.location.back();
   }
+  
+  help()
+  {
+    this.ventrixdbservice.setPage(1);
+  }
 
   dashboard()
   {

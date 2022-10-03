@@ -29,7 +29,6 @@ export class CreateInventorycategoryComponent implements OnInit {
     this.ventrixdbservice.readInventoryCategory()
     .subscribe(response => {
       this.inventorycategories = response;
-      console.log(this.inventorycategories)
     })
   }
   //Form submit calls add inventory category function
@@ -59,7 +58,6 @@ export class CreateInventorycategoryComponent implements OnInit {
     });
 
     if (this.inventorycategoryform.valid && this.find == false) {
-      console.log(this.inventorycategoryform.value);
       this.ventrixdbservice.createInventoryCategory(this.inventorycategoryform.value).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications

@@ -39,17 +39,14 @@ export class ReadInventoryTypeComponent implements OnInit {
   ngOnInit(): void 
   {
     this.inventorycategory = this.ventrixdbservice.getInventoryCategory()!;
-    console.log(this.inventorycategory)
     this.ventrixdbservice.readInventoryType()
     .subscribe(response => {
       this.inventorytypes = response;
-      console.log(this.inventorytypes)
       this.inventorytypes.forEach(element => {
         if (element.inventoryCategoryId == this.inventorycategory.inventoryCategoryId)
         {
           this.specifictypes.push(element);
         }
-        console.log(this.specifictypes);
       });
     })
 

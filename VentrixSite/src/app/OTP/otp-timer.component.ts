@@ -31,7 +31,6 @@ export class OtpTimerComponent implements OnInit {
      this.ventrixdbservice.readOtpTimer()
      .subscribe(response => {
        this.otpTimers = response
-       console.log(this.otpTimers)
      })
  }
 
@@ -44,7 +43,6 @@ export class OtpTimerComponent implements OnInit {
      time: this.otpTimerform.get('time')?.value,
    }
    if(this.otpTimerform.valid) {
-     console.log(this.newOtpTimer);
      this.ventrixdbservice.createOtpTimer(this.newOtpTimer).subscribe()
 
       Swal.fire({
@@ -86,7 +84,6 @@ export class OtpTimerComponent implements OnInit {
         otpTimeId: selectedOtpTimer.otpTimeId,
          time: this.otpTimerform.get('time')?.value,
        }
-       console.log(this.newOtpTimer);
        this.ventrixdbservice.updateOtpTimer(this.newOtpTimer).subscribe()
 
         Swal.fire({

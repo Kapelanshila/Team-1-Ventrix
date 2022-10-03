@@ -82,7 +82,6 @@ export class ViewWriteOffsComponent implements OnInit {
                   quantity: element.quantity,
                   reason: this.reasons.find(x => x.writeOffReasonId == element.writeOffReasonId).description
                 }
-                console.log(this.item );
                 this.inventoryItems.push(this.item)
               }
             });

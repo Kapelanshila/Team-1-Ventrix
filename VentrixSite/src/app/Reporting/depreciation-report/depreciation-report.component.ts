@@ -166,8 +166,7 @@ gatherdata()
       this.lineChartData = [{ data: this.values, label: this.selectedAsset.name}];
       this.lineChartLabels = this.labels;
 
-      console.log(this.values);
-      console.log(this.labels);
+
       this.report = 
       {
         years: this.labels,

@@ -151,7 +151,6 @@ export class InventoryReportComponent implements OnInit {
                   this.dataSource.data = TREE_DATA;
                   this.wdataSource.data = WTREE_DATA;
 
-                  console.log(TREE_DATA)
 
               })
 
@@ -160,7 +159,6 @@ export class InventoryReportComponent implements OnInit {
         })
 
       });
-      console.log(this.inventoryItems)
     })
   }
 
@@ -218,7 +216,6 @@ export class InventoryReportComponent implements OnInit {
           })
   
         });
-        console.log(this.inventoryItems)
       })
     }
     else
@@ -274,7 +271,6 @@ export class InventoryReportComponent implements OnInit {
           })
   
         });
-        console.log(this.inventoryItems)
       })
     }
    
@@ -342,7 +338,6 @@ export class InventoryReportComponent implements OnInit {
       })
 
     });
-    console.log(this.inventoryItems)
   })
   }
 
@@ -412,7 +407,6 @@ export class InventoryReportComponent implements OnInit {
           })
   
         });
-        console.log(this.inventoryItems)
       })
     }
     else
@@ -469,7 +463,6 @@ export class InventoryReportComponent implements OnInit {
           })
   
         });
-        console.log(this.inventoryItems)
       })
     }
   

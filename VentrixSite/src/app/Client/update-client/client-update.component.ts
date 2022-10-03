@@ -49,7 +49,6 @@ export class ClientUpdateComponent implements OnInit {
       this.ventrixdbservice.readClient()
       .subscribe(response => {
         this.clients = response;
-        console.log(this.clients)
       })
     }
 

@@ -39,7 +39,6 @@ export class UpdateInventorycategoryComponent implements OnInit {
       this.ventrixdbservice.readInventoryCategory()
       .subscribe(response => {
         this.inventorycategories = response;
-        console.log(this.inventorycategories)
       })
   }
 

@@ -34,7 +34,6 @@ export class DepreciationComponent implements OnInit {
     this.ventrixdbservice.readDepreciation()
     .subscribe(response => {
        this.depreciations = response
-       console.log(this.depreciations)
     })
   }
 
@@ -48,7 +47,6 @@ export class DepreciationComponent implements OnInit {
       date: new Date(0)
     }
     if (this.depreciationform.valid) {
-      console.log(this.newDepreciation);
       this.ventrixdbservice.createDepreciation(this.newDepreciation).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications
@@ -93,7 +91,6 @@ export class DepreciationComponent implements OnInit {
           percentage: this.depreciationform.get('percentage')?.value,
           date: new Date(0)
         }
-        console.log(this.newDepreciation);
         this.ventrixdbservice.updateDepreciation(this.newDepreciation).subscribe()
           //redirects back to data table and refreshes
           //Sweet alerts are used as notifications

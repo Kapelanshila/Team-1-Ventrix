@@ -67,7 +67,6 @@ export class UpdateClientOrderlineComponent implements OnInit {
       .subscribe(response => {
         this.clientorderlines = response;
 
-        console.log(this.clientorderlines)
 
         this.ventrixdbservice.readInventory()
         .subscribe(response => {
@@ -259,7 +258,6 @@ export class UpdateClientOrderlineComponent implements OnInit {
             this.filtertypes.push(element);
           }
         });
-        console.log(this.filtertypes)
       })    
     }
     else
@@ -322,7 +320,6 @@ export class UpdateClientOrderlineComponent implements OnInit {
         stored: false                
       }
       this.selectedinventories.push(this.item);
-      console.log(selectedinventory)
       this.inventoryItems =[];
       this.filteritems = [];
       
@@ -514,7 +511,6 @@ export class UpdateClientOrderlineComponent implements OnInit {
 
     //Validation to all inventory selected has values
     this.selectedinventories.forEach(element => {
-      console.log(element)
       if (element.quantity == 0)
       {   
         this.novalue++;
@@ -637,7 +633,6 @@ export class UpdateClientOrderlineComponent implements OnInit {
             //Get inventory from api
             this.ventrixdbservice.searchInventory(this.query.toString())
             .subscribe(response => {
-              console.log(response)
               this.inventories = response;
               this.inventories.forEach(inventory => {
                 

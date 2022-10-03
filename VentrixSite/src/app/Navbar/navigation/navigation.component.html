@@ -111,7 +111,7 @@
                     <a class="nav-link" routerLink="/profile" id="smallerscreenmenu"> Profile </a>
                 </li>
                 <li class="nav-item dropdown d-sm-block d-md-none">
-                    <a class="nav-link" routerLink="/help" id="smallerscreenmenu"> Help </a>
+                    <a class="nav-link" routerLink="/help" (click)="help()" id="smallerscreenmenu"> Help </a>
                 </li>
                 <li class="nav-item dropdown d-sm-block d-md-none">
                     <a class="nav-link" href="#" id="smallerscreenmenu"> Logout </a>
@@ -311,7 +311,7 @@
                         </div>
                     </a>
 
-                    <a routerLink="/help" href="#submenu7" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start bg-primary">
+                    <a routerLink="/help" (click)="help()" href="#submenu7" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start bg-primary">
                         <div class="d-flex w-100 justify-content-start align-items-center" >
                             <span class="fa fa-question-circle fa-fw mr-3"></span>
                             <span class="menu-collapsed" >Help</span>

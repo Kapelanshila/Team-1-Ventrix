@@ -31,7 +31,6 @@ export class CreateSupplierComponent implements OnInit {
   ngOnInit(): void {
     this.ventrixdbservice.readSupplier().subscribe(response => {
       this.suppliers = response;
-      console.log(this.suppliers)
     })
   }
 
@@ -66,7 +65,6 @@ export class CreateSupplierComponent implements OnInit {
     });
 
     if (this.supplierform.valid && this.find == false) {
-      console.log(this.supplierform.value);
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications
         Swal.fire({

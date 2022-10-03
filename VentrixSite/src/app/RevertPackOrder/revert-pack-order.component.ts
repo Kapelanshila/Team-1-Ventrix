@@ -301,7 +301,6 @@ export class RevertPackOrderComponent implements OnInit {
                   })
                   }) 
 
-                  console.log(this.clientOrderVM.length)
                   //If the API did indeed return an order but the current status is not "Packed"
                   if (this.clientOrders.length != 0 && this.clientOrderVM.length == 0 && this.query != '')
                   {

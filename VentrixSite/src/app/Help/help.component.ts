@@ -16,21 +16,54 @@ import { PdfViewerComponent } from 'ng2-pdf-viewer';
 })
 export class HelpComponent implements OnInit {
   query:string = '';
-  page = 55;
   pdfSrc = "assets/Help.pdf";
-  constructor() { }
+  page!: number;
+  test = 1;
+
+  pageinput = 1;
+  constructor(private ventrixdbservice:VentrixDBServiceService, private router: Router) 
+  { }
   
   @ViewChild(PdfViewerComponent)
   private pdfComponent!: PdfViewerComponent;
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+    this.page = this.ventrixdbservice.getPage();
+    this.pageinput = this.ventrixdbservice.getPage();
+  }
+
+  pagechange()
+  {
+    this.page = this.pageinput;
+  }
+
+  next()
+  {
+    this.page++;
+  }
+
+  previous()
+  {
+    this.page--;
+  }
+ 
+  pageRendered(e: any) {
+    this.page = e;
   }
 
   searchPDF()
   {
-    this.pdfComponent.eventBus.dispatch('find', {
-      query: this.query, type: 'again', caseSensitive: false, findPrevious: undefined, highlightAll: true, phraseSearch: true
-    });
+    if(this.query == "")
+    {
+      this.page = 1;
+    }
+    else
+    {
+      this.pdfComponent.eventBus.dispatch('find', {
+        query: this.query, type: 'again', caseSensitive: false, findPrevious: undefined, highlightAll: true, phraseSearch: true
+      });
+    }
   }
 
 }

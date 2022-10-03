@@ -157,7 +157,6 @@ export class CreateTimeslotComponent implements OnInit {
             slotDate: this.timeslotform.get('slotDate')?.value,
           }
 
-          console.log(this.item)  
           this.ventrixdbservice.createTimeslot(this.response).subscribe();
           Swal.fire({
             icon: 'success',
@@ -168,7 +167,6 @@ export class CreateTimeslotComponent implements OnInit {
             allowEscapeKey: false
           }).then((result) => {
             if (result.isConfirmed) {
-              console.log(this.item)
               this.router.navigate(['/read-timeslot']).then(() => {
                 window.location.reload();
               });

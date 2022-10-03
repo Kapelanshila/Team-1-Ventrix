@@ -44,9 +44,9 @@ export class UpdateWarehouseComponent implements OnInit {
       this.ventrixdbservice.readWarehouse()
       .subscribe(response => {
         this.warehouses = response;
-        console.log(this.warehouses)
+
       })
-      console.log(this.warehouseForm.value)
+
     }
     
 
@@ -83,8 +83,8 @@ export class UpdateWarehouseComponent implements OnInit {
 
     if (this.warehouseForm.valid && this.find == false) 
     { 
-      console.log(this.warehouseForm.value)
 
+      
       this.ventrixdbservice.updateWarehouse(this.warehouseForm.value).subscribe();
       //redirects back to data table and refreshes page
       //Sweet alerts are used as notifications

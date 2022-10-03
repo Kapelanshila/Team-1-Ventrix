@@ -107,6 +107,7 @@ barChartData : SingleDataSet[] = [];
 
   ngOnInit(): void 
   {
+    this.ventrixdbservice.setPage(1);
     this.account = this.ventrixdbservice.getAccount();
     this.assignedassets = 0;
     this.unassignedassets = 0;
@@ -150,7 +151,6 @@ barChartData : SingleDataSet[] = [];
                   this.categories.forEach(category => {
                     this.totalcategory = 0;
                     this.filtertypes = this.types.filter(x => x.assetCategoryId == category.assetCategoryId);
-                    console.log(this.filtertypes)
                     this.filtertypes.forEach(type => {
 
                       this.assets.forEach(element => {
@@ -165,7 +165,6 @@ barChartData : SingleDataSet[] = [];
                     {
                       this.items.push({Name: category.description, Quantity: this.totalcategory});
                     }
-                    console.log(this.items)
                   });
 
 
@@ -348,8 +347,6 @@ barChartData : SingleDataSet[] = [];
         }
       })
           //Count amount of client order
-          console.log(this.clientOrderVM)
-
           this.clientOrderVM.forEach(element => {
           if (element.status == "Delivered")
           {

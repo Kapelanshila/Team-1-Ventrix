@@ -86,7 +86,6 @@ export class ViewCheckoutsComponent implements OnInit {
 
   download(selected: CheckOutAsset)
   {
-    console.log(selected.document)
     this.ventrixdbservice.getCheckOutDocument(selected.document.toString())
     .subscribe(res => {
       const data = new Blob([res] , { type: 'application/pdf' });

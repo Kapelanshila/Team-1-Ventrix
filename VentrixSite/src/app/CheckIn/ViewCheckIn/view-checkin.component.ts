@@ -86,7 +86,6 @@ export class ViewCheckinComponent implements OnInit {
 
   download(selected: CheckInAsset)
   {
-    console.log(selected.document)
     this.ventrixdbservice.getCheckInDocument(selected.document.toString())
     .subscribe(res => {
       const data = new Blob([res] , { type: 'application/pdf' });

@@ -65,7 +65,6 @@ export class UpdateSupplierOrderComponent implements OnInit {
       }
 
       this.selectedSupplier = this.selectedorder.supplierId;
-      console.log(this.selectedorder)
   }
 
   uploadFile = (files: FileList) => {
@@ -200,8 +199,7 @@ export class UpdateSupplierOrderComponent implements OnInit {
       this.orders = response;
 
       this.orders.forEach(element => {
-        console.log(element.description.toLowerCase())
-        console.log(this.supplierorderform.get('description')?.value.toLowerCase())
+
         if (this.found == false && element.description.toLowerCase() == this.supplierorderform.get('description')?.value.toLowerCase() && element.supplierOrderId != this.selectedorder.supplierOrderId)
         {
           this.found = true;
@@ -230,7 +228,6 @@ export class UpdateSupplierOrderComponent implements OnInit {
         description: this.supplierorderform.get('description')?.value,
         supplierInvoice: this.selectedorder.supplierInvoice
       }
-      console.log(this.order)
       this.ventrixdbservice.updateSupplierOrder(this.order).subscribe();
       Swal.fire({
         icon: 'success',

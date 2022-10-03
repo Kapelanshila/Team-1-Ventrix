@@ -67,7 +67,6 @@ export class UpdateInventoryComponent implements OnInit {
           this.types.push(element);
         }
       });
-      console.log(this.types)
     }) 
 
     this.ventrixdbservice.readSupplier()
@@ -152,7 +151,6 @@ export class UpdateInventoryComponent implements OnInit {
       if (this.inventoryform.get('inventoryCategoryId')?.value.length != 0 )
       {
         this.types = [];
-        console.log(this.types)
         this.ventrixdbservice.readInventoryType()
         .subscribe(response => {
           response.forEach(element => {

@@ -38,7 +38,6 @@ export class UpdateSecurityquestionComponent implements OnInit {
       this.ventrixdbservice.readSecurityquestion()
       .subscribe(response => {
         this.securityquestions = response;
-        console.log(this.securityquestions)
       })
       this.ventrixdbservice.clearSecurityquestion();
     }
@@ -63,7 +62,6 @@ export class UpdateSecurityquestionComponent implements OnInit {
     });
 
     if (this.Securityquestionform.valid && this.find == false) {
-      console.log(this.Securityquestionform.value);
       this.ventrixdbservice.updateSecurityquestion(this.Securityquestionform.value).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications

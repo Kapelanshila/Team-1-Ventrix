@@ -34,7 +34,6 @@ export class ReadWarehouseComponent implements OnInit {
     this.ventrixdbservice.readWarehouse()
     .subscribe(response => {
       this.warehouses = response;
-      console.log(this.warehouses)
     })
   }
 

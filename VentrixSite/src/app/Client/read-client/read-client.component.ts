@@ -40,7 +40,6 @@ export class ReadClientComponent implements OnInit {
     this.ventrixdbservice.readClient()
     .subscribe(response => {
       this.clients = response;
-      console.log(this.clients)
     })
   }
 
@@ -146,7 +145,6 @@ export class ReadClientComponent implements OnInit {
             }
           })  
           }
-          console.log(this.clients)
         })
       }  
   }

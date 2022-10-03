@@ -59,15 +59,12 @@ export class QuestionComponent implements OnInit {
   {
 
     this.check = this.pathService.getPath();
-    console.log(this.pathService.getPath())
     this.qIDs= [];
     this.ventrixdbservice.readSecurityquestion()
     .subscribe(response => {
       this.questions = response;
-      console.log(this.questions)
     })
     this.account = this.ventrixdbservice.getAccount()!;
-    console.log(this.ventrixdbservice.getAccount());
 
     if (this.check == '/register')
     {
@@ -98,7 +95,6 @@ export class QuestionComponent implements OnInit {
 
   addResponse()
   {
-    console.log(this.check)
         //Checks if the user entered selected the same question
         this.submitted = true;
         if (this.questionform.get('question1')?.value == 
@@ -162,7 +158,6 @@ export class QuestionComponent implements OnInit {
               }
             })  
         }
-        console.log(this.questions)
         if (this.check == '/login')
         {
       

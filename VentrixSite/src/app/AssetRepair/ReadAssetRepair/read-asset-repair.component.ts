@@ -87,7 +87,6 @@ export class ReadAssetRepairComponent implements OnInit {
               
                   })
           });
-          console.log(this.repairItems)
         }
     })
   }

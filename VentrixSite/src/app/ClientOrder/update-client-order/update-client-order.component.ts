@@ -60,7 +60,6 @@ export class UpdateClientOrderComponent implements OnInit {
       })
 
       this.selectedClient = this.selectedorder.clientId;
-      console.log(this.selectedorder)
 
       if (this.selectedorder.status == "Added" || this.selectedorder.status == "Packed" || this.selectedorder.status == "Delivered" || this.selectedorder.status == "En Route" || this.selectedorder.status == "Scheduled")
       {

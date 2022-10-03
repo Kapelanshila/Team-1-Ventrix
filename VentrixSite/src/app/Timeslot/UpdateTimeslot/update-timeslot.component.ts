@@ -121,7 +121,6 @@ export class UpdateTimeslotComponent implements OnInit {
     this.submitted = true;
     this.find = false;
 
-   console.log(this.timeslotform.get('slotDate')?.value) 
 
     //Check if asset item does not already exsist
     if (this.timeslotVM.length != 0)
@@ -185,7 +184,6 @@ export class UpdateTimeslotComponent implements OnInit {
             slotDate: this.timeslotform.get('slotDate')?.value,
           }
 
-          console.log(this.item)  
           this.ventrixdbservice.updateTimeslot(this.response).subscribe();
           Swal.fire({
             icon: 'success',
@@ -196,7 +194,6 @@ export class UpdateTimeslotComponent implements OnInit {
             allowEscapeKey: false
           }).then((result) => {
             if (result.isConfirmed) {
-              console.log(this.item)
               this.router.navigate(['/read-timeslot']).then(() => {
                 window.location.reload();
               });

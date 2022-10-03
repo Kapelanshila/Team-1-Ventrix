@@ -46,7 +46,6 @@ export class UpdateInventoryTypeComponent implements OnInit {
     this.ventrixdbservice.readInventoryType()
     .subscribe(response => {
       this.inventorytypes = response;
-      console.log(this.inventorytypes)
     })
   }
   //Form submit calls add inventory category function

@@ -110,7 +110,6 @@ export class ReadAssetComponent implements OnInit {
               })       
             })       
           });
-          console.log(this.assetItems)
         }
     })
   }
@@ -151,7 +150,6 @@ export class ReadAssetComponent implements OnInit {
       {
           this.ventrixdbservice.searchAsset(this.query.toString()).subscribe(response => {
           this.assets = response;
-          console.log(response)
           if (this.assets.length == 0)
           {
             Swal.fire({
@@ -253,7 +251,6 @@ export class ReadAssetComponent implements OnInit {
              })       
            })       
          });
-         console.log(this.assetItems)
           }
           })
         }  

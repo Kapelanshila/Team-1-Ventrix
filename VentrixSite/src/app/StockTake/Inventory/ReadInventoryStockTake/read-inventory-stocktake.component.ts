@@ -95,7 +95,6 @@ export class ReadInventoryStocktakeComponent implements OnInit {
         })
 
       });
-      console.log(this.inventoryItems)
     })
   }
 
@@ -158,7 +157,6 @@ export class ReadInventoryStocktakeComponent implements OnInit {
         })
 
       });
-      console.log(this.inventoryItems)
     })
 
   }
@@ -232,7 +230,6 @@ export class ReadInventoryStocktakeComponent implements OnInit {
       {
           this.ventrixdbservice.searchInventory(this.query.toString()).subscribe(response => {
           this.inventories = response;
-          console.log(response)
           if (this.inventories.length == 0)
           {
             Swal.fire({

@@ -30,7 +30,6 @@ export class CreatewarrantyperiodComponent implements OnInit {
     this.ventrixdbservice.readWarrantyPeriod()
     .subscribe(response => {
       this.warrantyPeriods = response;
-      console.log(this.warrantyPeriods)
     })
   }
     
@@ -80,7 +79,6 @@ export class CreatewarrantyperiodComponent implements OnInit {
       }
 
     if (this.warrantyPeriodForm.valid && this.find == false) {
-      console.log(this.warrantyPeriodForm.value);
       this.ventrixdbservice.createWarrantyPeriod(this.warrantyPeriodForm.value).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications

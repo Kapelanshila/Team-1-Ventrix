@@ -110,7 +110,7 @@ export class EmployeesReportComponent implements OnInit {
             }
             this.vassets.push(this.eassets);
           });
-          console.log(this.vassets)
+
         })
   
       })
@@ -206,7 +206,6 @@ export class EmployeesReportComponent implements OnInit {
             }
           })
         }
-        console.log(this.employees)
       })
     }
   }

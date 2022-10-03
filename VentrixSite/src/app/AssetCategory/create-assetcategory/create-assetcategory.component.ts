@@ -29,7 +29,6 @@ export class CreateAssetcategoryComponent implements OnInit {
     this.ventrixdbservice.readAssetCategory()
     .subscribe(response => {
       this.assetcategories = response;
-      console.log(this.assetcategories)
     })
     
   }
@@ -55,7 +54,6 @@ export class CreateAssetcategoryComponent implements OnInit {
   });
 
     if (this.assetcategoryform.valid && this.find == false) {
-      console.log(this.assetcategoryform.value);
       this.ventrixdbservice.createAssetCategory(this.assetcategoryform.value).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications

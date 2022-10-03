@@ -52,7 +52,6 @@ export class UpdateUserComponent implements OnInit {
     })
 
     this.user = this.ventrixdbservice.getUser()
-    console.log(this.user);
 
     this.ventrixdbservice.readEmployee()
     .subscribe(response => {

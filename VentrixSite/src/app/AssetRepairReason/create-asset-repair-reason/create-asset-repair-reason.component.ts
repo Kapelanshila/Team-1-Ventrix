@@ -58,7 +58,6 @@ export class CreateAssetRepairReasonComponent implements OnInit {
     });
 
     if (this.assetrepairreasonsform.valid && this.find == false) {
-      console.log(this.assetrepairreasonsform.value);
       this.ventrixdbservice.createAssetRepairReason(this.assetrepairreasonsform.value).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications

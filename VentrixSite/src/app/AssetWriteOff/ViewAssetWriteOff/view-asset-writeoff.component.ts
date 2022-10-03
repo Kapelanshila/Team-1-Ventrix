@@ -52,10 +52,8 @@ export class ViewAssetWriteoffComponent implements OnInit {
       this.ventrixdbservice.readAssetWriteOff()
       .subscribe(response => {
         this.assetWriteOffs = response;
-        console.log(this.assetWriteOffs)
         
         this.writeoff = this.assetWriteOffs.find(x => x.assetId == selecteditem.assetId) 
-        console.log(this.writeoff)
         this.ventrixdbservice.readWriteOffReason()
         .subscribe(response => {
           this.reasons = response
@@ -146,7 +144,6 @@ export class ViewAssetWriteoffComponent implements OnInit {
               
             })       
           });
-          console.log(this.assetItems)
         }
     })
   }
@@ -199,7 +196,6 @@ export class ViewAssetWriteoffComponent implements OnInit {
       {
           this.ventrixdbservice.searchAsset(this.query.toString()).subscribe(response => {
           this.assets = response;
-          console.log(response)
           if (this.assets.length == 0)
           {
             Swal.fire({
@@ -301,7 +297,6 @@ export class ViewAssetWriteoffComponent implements OnInit {
              })       
            })       
          });
-         console.log(this.assetItems)
           }
           })
         }  

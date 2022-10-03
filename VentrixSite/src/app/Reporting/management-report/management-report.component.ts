@@ -178,10 +178,7 @@ monthChange()
                 this.time = this.timeslots.find(x => x.timeslotId == this.delivery.timeslotId)!;
                 this.date = this.timeslotdates.find(x => x.dateId == this.delivery.dateId)!;
                 this.count = this.count + 1;
-                console.log(new Date(this.time.endTime))
-                console.log(new Date(this.time.endTime).getTime())
-                console.log(new Date(new Date(status.date)))
-                console.log(new Date(new Date(status.date)).getTime())
+
 
                 //Calculate total time
                 this.totalallocatedtime = this.totalallocatedtime + (new Date(this.time.endTime).getTime() - new Date(this.time.startTime).getTime());
@@ -189,7 +186,6 @@ monthChange()
 
                 if (new Date(this.time.endTime).getTime() < new Date(status.date).getTime()) 
                 {
-                  console.log(new Date(this.time.endTime).getTime() - new Date(status.date).getTime())
                   this.totalactualtime = + this.totalactualtime + (new Date(this.time.endTime).getTime() - new Date(status.date).getTime());
                 }
                 else
@@ -199,8 +195,7 @@ monthChange()
               } 
             });
           });
-          console.log(this.totalallocatedtime)
-          console.log(this.totalactualtime)
+
 
             if (this.totalactualtime == undefined)
             {
@@ -269,7 +264,7 @@ monthChange()
 
           this.doughnutChartLabels = this.labels;
           this.doughnutChartData = [this.data];
-          console.log(this.data)
+   
         });
       });
     });

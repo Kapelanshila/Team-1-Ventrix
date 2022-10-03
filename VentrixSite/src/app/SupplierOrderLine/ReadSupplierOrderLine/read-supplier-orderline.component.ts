@@ -112,7 +112,6 @@ export class ReadSupplierOrderlineComponent implements OnInit {
    
                 })
 
-                console.log(this.filteritems.length)
                 if (this.filteritems.length == 0)
                 {
                   Swal.fire({

@@ -27,7 +27,6 @@ export class ReadSupplierComponent implements OnInit {
     this.ventrixdbservice.readSupplier()
     .subscribe(response => {
       this.suppliers = response;
-      console.log(this.suppliers)
     })
   }
 
@@ -129,7 +128,6 @@ export class ReadSupplierComponent implements OnInit {
             }
           })
         }
-        console.log(this.suppliers)
       })
     }
   }

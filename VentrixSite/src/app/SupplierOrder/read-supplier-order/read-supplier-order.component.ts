@@ -121,12 +121,10 @@ export class ReadSupplierOrderComponent implements OnInit {
                               if (element.supplierOrderId == selectedSupplierOrder.supplierOrderId)
                               {
                                 this.inventory = this.inventories.find(x => x.inventoryId == element.inventoryId);
-                                console.log(this.inventory)
                                   //Types,Category,Supplier and Warehouse is also retrived from the api in order to present relevant information realting to that inventory item
 
                   
                               this.type = this.types.find(x => x.inventoryTypeId == this.inventory.inventoryTypeId);
-                                console.log(this.inventory)
 
                                 //New inventory view model is assigned the retrived values from the api
                                 this.Iitem = 
@@ -139,7 +137,6 @@ export class ReadSupplierOrderComponent implements OnInit {
                                   name: this.inventory.name,
                                   quantityOnHand: element.quantity
                                 }
-                                console.log(this.Iitem)
                                 this.inventoryItems.push(this.Iitem)                    
                         }
                       })
@@ -192,7 +189,6 @@ export class ReadSupplierOrderComponent implements OnInit {
                   inventories: false
                 }
                 this.supplierOrderVM.push(this.order);
-                console.log(this.supplierOrderVM)
              }
              else if (element.supplierId == supplierorder.supplierId && this.Supplierorderlines.find(x => x.supplierOrderId == supplierorder.supplierOrderId) != undefined)
              {
@@ -227,7 +223,6 @@ export class ReadSupplierOrderComponent implements OnInit {
   {
     this.ventrixdbservice.readSupplierOrderLine().subscribe(response => {
       this.supplierorderlines = response;
-      console.log(this.supplierorderlines)
 
       if (this.supplierorderlines.find((x: { supplierOrderId: Number; }) => x.supplierOrderId == selectedSupplierOrder.supplierOrderId) == undefined)
       {
@@ -327,7 +322,6 @@ export class ReadSupplierOrderComponent implements OnInit {
           this.ventrixdbservice.searchSupplierOrder(this.query.toString()).subscribe(response => {
             //Same Read as intializer
             this.supplierOrders = response;
-            console.log(this.supplierOrders)
             this.ventrixdbservice.readSupplierOrderLine()
             .subscribe(response => {
               this.Supplierorderlines = response;
@@ -352,7 +346,6 @@ export class ReadSupplierOrderComponent implements OnInit {
                       inventories: true
                     }
                     this.supplierOrderVM.push(this.order);
-                    console.log(this.supplierOrderVM)
         
                  }
      

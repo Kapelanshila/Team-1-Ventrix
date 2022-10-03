@@ -38,7 +38,6 @@ export class ReadWriteoffreasonComponent implements OnInit {
     this.ventrixdbservice.readWriteOffReason()
     .subscribe(response => {
       this.writeoffreasons = response;
-      console.log(this.writeoffreasons)
     })
   }
 

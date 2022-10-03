@@ -33,7 +33,6 @@ export class CreateClientComponent implements OnInit {
     this.ventrixdbservice.readClient()
     .subscribe(response => {
       this.clients = response;
-      console.log(this.clients)
     })
   }
   
@@ -60,7 +59,6 @@ export class CreateClientComponent implements OnInit {
     });
 
     if (this.clientform.valid && this.find == false) {
-      console.log(this.clientform.value);
       this.ventrixdbservice.createClient(this.clientform.value).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications

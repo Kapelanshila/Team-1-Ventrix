@@ -48,7 +48,6 @@ export class UpdateSupplierComponent implements OnInit {
 
     this.ventrixdbservice.readSupplier().subscribe(response => {
       this.suppliers = response;
-      console.log(this.suppliers)
     })
   }
 

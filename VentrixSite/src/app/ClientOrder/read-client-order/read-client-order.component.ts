@@ -85,7 +85,6 @@ export class ReadClientOrderComponent implements OnInit {
         this.orderstatus = selectedClientOrder;
         this.ventrixdbservice.readClientOrderStatuses()
         .subscribe(response => {
-          console.log(this.client)
           //Uses earliest date of status to get current status
           this.statuses = [];
           response.forEach(element => {
@@ -145,12 +144,10 @@ export class ReadClientOrderComponent implements OnInit {
                               if (element.clientOrderId == selectedClientOrder.clientOrderId)
                               {
                                 this.inventory = this.inventories.find(x => x.inventoryId == element.inventoryId);
-                                console.log(this.inventory)
                                   //Types,Category,Supplier and Warehouse is also retrived from the api in order to present relevant information realting to that inventory item
 
                   
                               this.type = this.types.find(x => x.inventoryTypeId == this.inventory.inventoryTypeId);
-                                console.log(this.inventory)
 
                                 //New inventory view model is assigned the retrived values from the api
                                 this.Iitem = 
@@ -163,7 +160,6 @@ export class ReadClientOrderComponent implements OnInit {
                                   name: this.inventory.name,
                                   quantityOnHand: element.quantity
                                 }
-                                console.log(this.Iitem)
                                 this.inventoryItems.push(this.Iitem)                    
                         }
                       })
@@ -179,6 +175,13 @@ export class ReadClientOrderComponent implements OnInit {
           this.invetoryselected = false;
           this.inventoryItems = [];
         }
+      }
+
+      help()
+      {
+        this.ventrixdbservice.setPage(45);
+        this.router.navigate(['/help']).then(() => {
+          });
       }
 
       openClientPopup(selectedClientOrder: ClientOrderVM) 
@@ -240,7 +243,6 @@ export class ReadClientOrderComponent implements OnInit {
           
               this.ventrixdbservice.readClientOrderStatuses()
               .subscribe(response => {
-                console.log(this.client)
                 //Uses earliest date of status to get current status
                 this.clientOrdersStatuses = [];
                 response.forEach(element => {
@@ -276,7 +278,6 @@ export class ReadClientOrderComponent implements OnInit {
                   encrypted:''
                 }
                 this.clientOrderVM.push(this.order);
-                console.log(this.clientOrderVM)
             })
             this.filterOrder = this.clientOrderVM;
              }
@@ -497,7 +498,6 @@ export class ReadClientOrderComponent implements OnInit {
                 
                if (this.status == "")
                {
-                console.log(this.clientOrderVM)
                 this.filterOrder = [];
                  this.filterOrder = this.clientOrderVM;
                }

@@ -180,7 +180,6 @@ filterChange()
                 this.Fulltotal = this.Fulltotal + this.total;     
             });
       
-            console.log(this.items)
             if(this.found != 0)
             {
               //Orders in ascending orders
@@ -214,7 +213,6 @@ filterChange()
 
             this.barChartLabels = this.labels;
             this.barChartData = [this.data];
-            console.log(this.data.length)
           });
         });
       });
@@ -265,7 +263,6 @@ filterChange()
                 this.Fulltotal = this.Fulltotal + this.total;     
             });
       
-            console.log(this.items)
             if(this.found != 0)
             {
               //Orders in ascending orders
@@ -297,7 +294,6 @@ filterChange()
 
             this.doughnutChartLabels = this.labels;
             this.doughnutChartData = [this.data];
-            console.log(this.data.length)
           });
         });
       });
@@ -347,7 +343,6 @@ filterChange()
                 this.Fulltotal = this.Fulltotal + this.total;     
             });
       
-            console.log(this.items)
             if(this.found != 0)
             {
               //Orders in ascending orders
@@ -380,7 +375,6 @@ filterChange()
 
             this.barChartLabels = this.labels;
             this.barChartData = [this.data];
-            console.log(this.data.length)
           });
         });
       });
@@ -426,7 +420,6 @@ filterChange()
                 this.Fulltotal = this.Fulltotal + this.total;     
             });
       
-            console.log(this.items)
             if(this.found != 0)
             {
               //Orders in ascending orders
@@ -459,7 +452,6 @@ filterChange()
 
             this.doughnutChartLabels = this.labels;
             this.doughnutChartData = [this.data];
-            console.log(this.data.length)
           });
         });
       });
@@ -531,7 +523,6 @@ filterChange()
 
             this.barChartLabels = this.labels;
             this.barChartData = [this.data];
-            console.log(this.data.length)
           });
         });
       }
@@ -617,7 +608,6 @@ monthChange()
   this.labels = [];
   this.Fulltotal = 0;
   this.vm = [];
-  console.log(this.selectedFilter)
   
   if (this.selectedFilter == undefined)
   {
@@ -682,7 +672,6 @@ monthChange()
 
             this.barChartLabels = this.labels;
             this.barChartData = [this.data];
-            console.log(this.data.length)
           });
         });
       }
@@ -803,7 +792,6 @@ monthChange()
                 this.Fulltotal = this.Fulltotal + this.total;     
             });
       
-            console.log(this.items)
             if(this.found != 0)
             {
               //Orders in ascending orders
@@ -837,7 +825,6 @@ monthChange()
 
             this.barChartLabels = this.labels;
             this.barChartData = [this.data];
-            console.log(this.data.length)
           });
         });
       });
@@ -888,7 +875,6 @@ monthChange()
                 this.Fulltotal = this.Fulltotal + this.total;     
             });
       
-            console.log(this.items)
             if(this.found != 0)
             {
               //Orders in ascending orders
@@ -920,7 +906,6 @@ monthChange()
 
             this.doughnutChartLabels = this.labels;
             this.doughnutChartData = [this.data];
-            console.log(this.data.length)
           });
         });
       });
@@ -970,7 +955,6 @@ monthChange()
                 this.Fulltotal = this.Fulltotal + this.total;     
             });
       
-            console.log(this.items)
             if(this.found != 0)
             {
               //Orders in ascending orders
@@ -1003,7 +987,6 @@ monthChange()
 
             this.barChartLabels = this.labels;
             this.barChartData = [this.data];
-            console.log(this.data.length)
           });
         });
       });
@@ -1049,7 +1032,6 @@ monthChange()
                 this.Fulltotal = this.Fulltotal + this.total;     
             });
       
-            console.log(this.items)
             if(this.found != 0)
             {
               //Orders in ascending orders
@@ -1082,7 +1064,6 @@ monthChange()
 
             this.doughnutChartLabels = this.labels;
             this.doughnutChartData = [this.data];
-            console.log(this.data.length)
           });
         });
       });
@@ -1154,7 +1135,6 @@ monthChange()
 
             this.barChartLabels = this.labels;
             this.barChartData = [this.data];
-            console.log(this.data.length)
           });
         });
       }
@@ -1286,7 +1266,6 @@ monthChange()
     let fileHeight = canvas.height * fileWidth / canvas.width;
 
     const contentDataUrl = canvas.toDataURL('image/png');
-    console.log(contentDataUrl)
 
     if (this.selectedFilter == undefined)
     {

@@ -37,7 +37,6 @@ export class CreateEmployeeComponent implements OnInit {
     this.ventrixdbservice.readTitle()
     .subscribe(response => {
       this.titles = response;
-      console.log(this.titles)
     })
   }
   
@@ -77,7 +76,6 @@ export class CreateEmployeeComponent implements OnInit {
     }); 
     
     if(this.employeeform.valid && this.find == false) {
-      console.log(this.employeeform.value);
       this.ventrixdbservice.createEmployee(this.employeeform.value).subscribe()
 
         Swal.fire({

@@ -89,7 +89,6 @@ export class RevertRepairComponent implements OnInit {
               
                   })
           });
-          console.log(this.repairItems)
         }
     })
   }

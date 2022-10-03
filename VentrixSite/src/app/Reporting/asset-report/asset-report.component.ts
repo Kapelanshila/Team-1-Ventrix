@@ -122,7 +122,6 @@ export class AssetReportComponent implements OnInit {
   
                   this.dataSource.data = TREE_DATA;
 
-                  console.log(TREE_DATA)
 
                   this.ventrixdbservice.readWarrantyPeriod()
                   .subscribe(response => {
@@ -187,7 +186,6 @@ export class AssetReportComponent implements OnInit {
               })       
             })       
           });
-          console.log(this.assetItems)
         }
     })
   }
@@ -275,7 +273,6 @@ export class AssetReportComponent implements OnInit {
                 })       
               })       
             });
-            console.log(this.assetItems)
           }
       })
     }
@@ -358,7 +355,6 @@ export class AssetReportComponent implements OnInit {
            })       
          })       
        });
-       console.log(this.assetItems)
      }
  })
     }
@@ -452,7 +448,6 @@ export class AssetReportComponent implements OnInit {
               })       
             })       
           });
-          console.log(this.assetItems)
         }
     })
   }
@@ -549,7 +544,6 @@ export class AssetReportComponent implements OnInit {
                 })       
               })       
             });
-            console.log(this.assetItems)
           }
       })
     }
@@ -631,7 +625,6 @@ export class AssetReportComponent implements OnInit {
            })       
          })       
        });
-       console.log(this.assetItems)
      }
  })
     }

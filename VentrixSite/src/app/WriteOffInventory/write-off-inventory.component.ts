@@ -82,7 +82,6 @@ export class WriteOffInventoryComponent implements OnInit {
         })
 
       });
-      console.log(this.inventoryItems)
     })
   }
 

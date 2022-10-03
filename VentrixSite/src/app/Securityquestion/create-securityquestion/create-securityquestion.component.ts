@@ -30,7 +30,6 @@ export class CreateSecurityquestionComponent implements OnInit {
     this.ventrixdbservice.readSecurityquestion()
     .subscribe(response => {
       this.securityquestions = response;
-      console.log(this.securityquestions)
     })
   }
   //Form submit calls add security question
@@ -54,7 +53,6 @@ export class CreateSecurityquestionComponent implements OnInit {
     });
 
     if (this.Securityquestionform.valid && this.find == false) {
-      console.log(this.Securityquestionform.value);
       this.ventrixdbservice.createSecurityquestion(this.Securityquestionform.value).subscribe()
         //redirects back to data table and refreshes
         //Sweet alerts are used as notifications

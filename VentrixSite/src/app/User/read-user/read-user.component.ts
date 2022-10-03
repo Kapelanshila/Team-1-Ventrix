@@ -59,7 +59,6 @@ export class ReadUserComponent implements OnInit {
             this.user = this.users.find(x => x.userId == user.userId);
             this.role = this.roles.find(x => x.userRoleId == this.user.userRoleId);
 
-            console.log(this.role)
               this.employees = response;
               this.employee = this.employees.find(x => x.userId == user.userId);
 

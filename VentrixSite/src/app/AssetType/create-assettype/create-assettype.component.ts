@@ -33,7 +33,6 @@ export class CreateAssettypeComponent implements OnInit {
     this.ventrixdbservice.readInventoryType()
     .subscribe(response => {
       this.assettypes = response;
-      console.log(this.assettypes)
     })
   }
 
@@ -72,7 +71,6 @@ addAssetType()
       description: this.assettypeform.get('description')?.value
     }
 
-    console.log( this.addType);
     this.ventrixdbservice.createAssetType(this.addType).subscribe()
       //redirects back to data table and refreshes
       //Sweet alerts are used as notifications

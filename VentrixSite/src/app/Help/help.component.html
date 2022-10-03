@@ -15,6 +15,21 @@
                                 <input type="text" class="form-control" placeholder="Search&hellip;" (keyup.enter)="searchPDF()" [(ngModel)]="query">
                             </div>
                         </div>
+                        <div class="col-12" style="text-align: center;">
+                        <div class="btn-group">
+                            <div
+                            class="btn btn-primary" style="margin: 0px 0px 0px -1px;" (click)="previous()">
+                            Previous
+                            </div>
+                            <div>
+                            <input style="height: 36px; width: 50px;"   [(ngModel)]= "pageinput" (change)="pagechange()" type="number" value={{page}} name="quantity" min="1">
+                            </div>
+                            <div
+                            class="btn btn-primary" style="margin: 0px 0px 0px -1px;" (click)="next()">
+                            Next
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>        
             </div>
@@ -23,8 +38,10 @@
         <div class="pdf">
             <pdf-viewer [src]="pdfSrc"
             [render-text]="true"
+            (pageChange)="pageRendered($event)"
             [original-size]="false"
-            [page]="55"
+            [show-all]="false"
+            [page]="page"
             style="width: 80%; height: 130vh; margin: 0 auto;"
             ></pdf-viewer>
         </div>

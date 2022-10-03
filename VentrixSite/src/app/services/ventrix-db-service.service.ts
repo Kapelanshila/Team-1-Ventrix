@@ -923,6 +923,26 @@ export class VentrixDBServiceService {
       localStorage.removeItem('File');
     } 
 
+    
+    //Get Selected Account
+    setPage(page: number)
+    {
+      localStorage.setItem('Page',JSON.stringify(page));
+    }
+  
+    //Returns selected Account
+    getPage()
+    {
+      return JSON.parse(localStorage.getItem('Page')!);
+  
+    }
+  
+    //Clears Account
+    clearPage()
+    {
+      localStorage.removeItem('Page');
+    } 
+
     //Deletes Asset from API
     dowloadFile(path:string){
       return this.http.get(environment.apiUrl+'File/getClientOrderFile?path='+path, {responseType : 'blob'})

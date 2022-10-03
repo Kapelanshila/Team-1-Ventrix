@@ -137,7 +137,6 @@ export class UpdateAssetComponent implements OnInit {
                   assetImage: fileToUpload.name,
                   userId: this.ventrixdbservice.getAccount().userId
                 })
-                console.log(this.assetform.value)
         
                 this.router.navigate(['/read-asset']).then(() => {
                   window.location.reload();
@@ -181,7 +180,6 @@ export class UpdateAssetComponent implements OnInit {
           this.types.push(element);
         }
       });
-      console.log(this.types)
     }) 
 
     this.ventrixdbservice.readWarrantyPeriod()
@@ -250,7 +248,6 @@ export class UpdateAssetComponent implements OnInit {
 
     if (this.assetform.valid && this.find == false && this.assetform.get('value')?.value > 0) 
       { 
-        console.log(this.assetform.value)
         this.currentDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
         //Warranty Date cannot be in the future
         if ((Date.parse(this.currentDate) < Date.parse(this.assetform.get('warrantyDate')?.value)) && (Date.parse(this.currentDate) !=  Date.parse(this.assetform.get('warrantyDate')?.value)))
@@ -273,7 +270,6 @@ export class UpdateAssetComponent implements OnInit {
           value: this.price.toString()
         })
         this.ventrixdbservice.updateAsset(this.assetform.value).subscribe();
-        console.log(this.assetform.get('userId')?.value);
         Swal.fire({
           icon: 'success',
           title: 'Asset Item Updated Successfully',
@@ -314,7 +310,6 @@ export class UpdateAssetComponent implements OnInit {
       if (this.assetform.get('assetCategoryId')?.value.length != 0 )
       {
         this.types = [];
-        console.log(this.types)
         this.ventrixdbservice.readAssetType()
         .subscribe(response => {
           response.forEach(element => {

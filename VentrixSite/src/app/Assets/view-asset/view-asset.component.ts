@@ -97,25 +97,20 @@ export class ViewAssetComponent implements OnInit {
       this.image= 'data:image/jpeg;base64,' + response;
     })
 
-    console.log(this.assetitem?.warrantyDate);
-    console.log(this.assetitem?.warrantyperiod);
+
 
     //Adds Speciefied Years to Warranty
     const warrantyEndDate = new Date();
     const warrantyCurrentDate = new Date();
     const warrantyStartDate = new Date(this.assetitem!.warrantyDate!);
     warrantyEndDate.setFullYear(warrantyStartDate.getFullYear() + this.assetitem?.warrantyperiod!);
-    console.log(warrantyStartDate);
-    console.log(warrantyEndDate);
-    console.log(warrantyCurrentDate);
+
 
     //Calculate days between start of warranty and end of warranty 
     this.intialdays = Math.floor((Date.UTC(warrantyEndDate.getFullYear(), warrantyEndDate.getMonth(), warrantyEndDate.getDate()) - Date.UTC(warrantyStartDate.getFullYear(), warrantyStartDate.getMonth(), warrantyStartDate.getDate()) ) /(1000 * 60 * 60 * 24));
-    console.log(this.intialdays);
 
     //To get progress we first calculate the warranty end date based on when the warranty started then we calculate the days left by comparing the current date and the warranty end date 
     this.daysleft = Math.floor((Date.UTC(warrantyEndDate.getFullYear(), warrantyEndDate.getMonth(), warrantyEndDate.getDate()) - Date.UTC(warrantyCurrentDate.getFullYear(), warrantyCurrentDate.getMonth(), warrantyCurrentDate.getDate()) ) /(1000 * 60 * 60 * 24));
-    console.log(this.daysleft);
     this.percent = Math.round(this.daysleft/this.intialdays*100).toFixed(2);;
 
     //This now tells us the total days of the warranty we had intially and the amount of days we have left 
@@ -207,7 +202,6 @@ export class ViewAssetComponent implements OnInit {
         //If the warehouseId has a value but employeeId has a value we assume the asset was checked in
 
         this.locations.forEach(element => {
-          console.log(element)
           if (element.warehouseId != null && element.employeeId == null)
           {
             this.events = [
@@ -249,7 +243,6 @@ export class ViewAssetComponent implements OnInit {
           } 
         });
 
-        console.log(this.events)
         })
       })
     })

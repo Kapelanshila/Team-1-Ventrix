@@ -71,7 +71,6 @@ export class CreateInventoryComponent implements OnInit {
           this.types.push(element);
         }
       });
-      console.log(this.types)
     }) 
 
     this.ventrixdbservice.readSupplier()
@@ -116,7 +115,6 @@ export class CreateInventoryComponent implements OnInit {
 
       if (this.inventoryform.valid && this.find == false) 
       { 
-        console.log(this.inventoryform.value)
         this.ventrixdbservice.createInventory(this.inventoryform.value).subscribe();
         //redirects back to data table and refreshes page
         //Sweet alerts are used as notifications
@@ -146,7 +144,6 @@ export class CreateInventoryComponent implements OnInit {
       if (this.inventoryform.get('inventoryCategoryId')?.value.length != 0 )
       {
         this.types = [];
-        console.log(this.types)
         this.ventrixdbservice.readInventoryType()
         .subscribe(response => {
           response.forEach(element => {

@@ -86,7 +86,6 @@ export class CreateUserComponent implements OnInit {
           emailAddress: this.userform.get('emailAddress')?.value,
         }
         if (this.userform.valid) {
-          console.log(this.createUser);
           this.ventrixdbservice.createUser(this.createUser).subscribe();
             //redirects back to data table and refreshes
             //Sweet alerts are used as notifications

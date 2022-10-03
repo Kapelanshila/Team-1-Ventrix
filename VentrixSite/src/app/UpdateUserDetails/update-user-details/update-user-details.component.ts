@@ -42,7 +42,6 @@ export class UpdateUserDetailsComponent implements OnInit {
   ngOnInit(): void 
   {
     this.employee = this.ventrixdbservice.getEmployee();
-    console.log(this.employee);
     this.userdetailsform.patchValue({
     employeeId: this.employee?.employeeId,
     name: this.employee?.name,
@@ -54,13 +53,11 @@ export class UpdateUserDetailsComponent implements OnInit {
     titleId: this.employee?.titleId,
     userId: this.employee?.userId,
     })
-    console.log(this.userdetailsform.value)
     this.ventrixdbservice.clearEmployee();
 
     this.ventrixdbservice.readTitle()
     .subscribe(response => {
       this.titles = response;
-      console.log(this.titles)
     })
   }
 
