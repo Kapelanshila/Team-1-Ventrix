@@ -58,7 +58,6 @@ export class VieworderPage implements OnInit {
     this.ventrixdbservice.readClientOrderLine()
     .subscribe(response => {
       this.clientorderlines = response;
-      console.log(this.clientorderlines)
       this.ventrixdbservice.readInventory()
       .subscribe(response => {
         this.inventories = response;
