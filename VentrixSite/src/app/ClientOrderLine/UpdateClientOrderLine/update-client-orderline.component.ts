@@ -589,6 +589,14 @@ export class UpdateClientOrderlineComponent implements OnInit {
     })
   }
 
+  
+  help()
+  {
+    this.ventrixdbservice.setPage(152);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
   searchInventory()
   { 
     this.categoryselected = "";

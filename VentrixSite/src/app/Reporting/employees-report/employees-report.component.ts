@@ -210,6 +210,14 @@ export class EmployeesReportComponent implements OnInit {
     }
   }
 
+  
+help()
+{
+  this.ventrixdbservice.setPage(224);
+  this.router.navigate(['/help']).then(() => {
+    });
+}
+
     // PDF Options
     openPDF(){
       let Data = document.getElementById('htmlData')!;

@@ -200,6 +200,12 @@ export class ReadInventoryStocktakeComponent implements OnInit {
     })  
   }
 
+  help()
+  {
+    this.ventrixdbservice.setPage(124);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
 
   editStock(selectedinvnetory: InventoryVM)
   {

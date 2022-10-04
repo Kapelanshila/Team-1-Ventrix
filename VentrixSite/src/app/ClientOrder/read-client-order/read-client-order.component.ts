@@ -179,7 +179,7 @@ export class ReadClientOrderComponent implements OnInit {
 
       help()
       {
-        this.ventrixdbservice.setPage(45);
+        this.ventrixdbservice.setPage(107);
         this.router.navigate(['/help']).then(() => {
           });
       }

@@ -116,6 +116,13 @@ export class AssetRepairComponent implements OnInit {
     this.router.navigate(['/read-asset-repair']);
   }
 
+  help()
+  {
+    this.ventrixdbservice.setPage(195);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+ 
   logAsset(selectedasset: AssetVM)
   {
       this.ventrixdbservice.setAsset(selectedasset);

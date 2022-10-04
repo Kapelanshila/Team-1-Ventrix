@@ -146,6 +146,13 @@ export class ReadSupplierOrderlineComponent implements OnInit {
     })
   }
 
+  help()
+  {
+    this.ventrixdbservice.setPage(151);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
   filtercategory()
   {
     this.filteritems = [];

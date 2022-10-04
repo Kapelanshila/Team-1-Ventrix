@@ -300,4 +300,11 @@ export class TimeslotComponent implements OnInit {
    })
   }
 
+  help()
+  {
+    this.ventrixdbservice.setPage(69);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
 }

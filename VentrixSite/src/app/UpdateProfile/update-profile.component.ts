@@ -124,6 +124,14 @@ export class UpdateProfileComponent implements OnInit {
     this.displayStyle = "none";
   }
 
+  help()
+{
+  this.ventrixdbservice.setPage(79);
+  this.router.navigate(['/help']).then(() => {
+    });
+}
+
+
   updateEmployee()
   {
     this.submitted = true;

@@ -631,6 +631,14 @@ export class AssetReportComponent implements OnInit {
    
   }
 
+  help()
+  {
+    this.ventrixdbservice.setPage(220);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
+
   //Data Tree
   private _transformer = (node: AssetNode, level: number) => {
     return {

@@ -496,6 +496,12 @@ export class ReadClientOrderlineComponent implements OnInit {
     }
   }
 
+  help()
+  {
+    this.ventrixdbservice.setPage(127);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
 
   searchInventory()
   { 

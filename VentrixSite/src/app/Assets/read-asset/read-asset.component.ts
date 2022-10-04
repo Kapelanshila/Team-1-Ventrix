@@ -114,6 +114,13 @@ export class ReadAssetComponent implements OnInit {
     })
   }
 
+  help()
+ {
+   this.ventrixdbservice.setPage(162);
+   this.router.navigate(['/help']).then(() => {
+     });
+ }
+
   addAsset()
   {
     this.router.navigate(['/create-asset']);

@@ -104,6 +104,13 @@ export class ReadUserComponent implements OnInit {
     })
   }
 
+  help()
+  {
+    this.ventrixdbservice.setPage(9);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
   addUser()
   {
     this.router.navigate(['/create-user']);

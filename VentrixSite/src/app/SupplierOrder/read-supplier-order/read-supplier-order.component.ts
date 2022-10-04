@@ -213,6 +213,14 @@ export class ReadSupplierOrderComponent implements OnInit {
     })
   }
 
+  help()
+  {
+    this.ventrixdbservice.setPage(112);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
+
   editSupplierOrder(selectedSupplierOrder: SupplierOrderVM)
   {
     this.ventrixdbservice.setSupplierOrder(selectedSupplierOrder);

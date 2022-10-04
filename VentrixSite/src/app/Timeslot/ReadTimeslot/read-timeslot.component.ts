@@ -79,6 +79,14 @@ export class ReadTimeslotComponent implements OnInit {
     this.router.navigate(['/create-timeslot']);
   }
 
+  
+  help()
+  {
+    this.ventrixdbservice.setPage(67);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
   editTimeslot(selectedTimeslot: TimeslotVM)
   {
       this.ventrixdbservice.setTimeslot(selectedTimeslot);

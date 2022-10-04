@@ -118,6 +118,14 @@ export class ReadCheckoutComponent implements OnInit {
      this.displayStyle = "none";
    }
 
+   
+   help()
+   {
+     this.ventrixdbservice.setPage(169);
+     this.router.navigate(['/help']).then(() => {
+       });
+   }
+
    checkOut()
    {
     Swal.fire({

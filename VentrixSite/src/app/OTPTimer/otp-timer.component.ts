@@ -154,4 +154,11 @@ export class OtpTimerComponent implements OnInit {
    })
  }
 
+ help()
+ {
+   this.ventrixdbservice.setPage(37);
+   this.router.navigate(['/help']).then(() => {
+     });
+ }
+
 }

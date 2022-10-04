@@ -103,6 +103,13 @@ export class ReadAssetRepairComponent implements OnInit {
       this.router.navigate(['/revert-repair']);
   }
 
+  help()
+  {
+    this.ventrixdbservice.setPage(179);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
   deleteAssetRepair(selectedRepair: AssetRepair)
   {
     //Sweet alerts are used as notifications

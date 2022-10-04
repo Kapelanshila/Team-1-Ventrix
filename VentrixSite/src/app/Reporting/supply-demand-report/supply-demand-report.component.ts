@@ -103,7 +103,7 @@ doughnutChartData: SingleDataSet[] = [];
 
 doughnutChartType: ChartType = 'doughnut';
 
-constructor(public ventrixdbservice: VentrixDBServiceService,) { }
+constructor(public ventrixdbservice: VentrixDBServiceService, private router: Router ) { }
 ngOnInit(): void 
 {
   //Inorder to display who generated it 
@@ -1257,6 +1257,14 @@ monthChange()
 
   )
 }
+
+help()
+{
+  this.ventrixdbservice.setPage(221);
+  this.router.navigate(['/help']).then(() => {
+    });
+}
+
 
  openSupplyPDF(){
   let Data = document.getElementById('htmlData2')!;

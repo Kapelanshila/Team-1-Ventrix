@@ -161,6 +161,14 @@ export class InventoryReportComponent implements OnInit {
       });
     })
   }
+  
+  help()
+  {
+    this.ventrixdbservice.setPage(219);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
 
   childClick(selectednode: string)
   {

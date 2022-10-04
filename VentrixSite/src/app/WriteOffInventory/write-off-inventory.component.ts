@@ -85,6 +85,15 @@ export class WriteOffInventoryComponent implements OnInit {
     })
   }
 
+  
+    
+  help()
+  {
+    this.ventrixdbservice.setPage(96);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
   viewInventoryWriteOffLines(selectedinvnetory: InventoryVM)
   {
     this.ventrixdbservice.setInventory(selectedinvnetory);

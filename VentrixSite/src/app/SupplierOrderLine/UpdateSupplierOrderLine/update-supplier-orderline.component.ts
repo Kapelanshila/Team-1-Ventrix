@@ -582,6 +582,13 @@ export class UpdateSupplierOrderlineComponent implements OnInit {
     })
   }
 
+  help()
+  {
+    this.ventrixdbservice.setPage(140);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
   searchInventory()
   { 
     this.categoryselected = "";

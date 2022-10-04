@@ -21,7 +21,11 @@
                     <h6>{{account.emailAddress}}</h6>
                 </div>
                 <div class="about">
-                    <h4 >{{role?.description}}</h4>
+                    <h4 >{{role?.description}}
+                        <span>
+                            <a [routerLink]="" style="cursor: pointer;" (click)="help()"><i class="fa fa-info-circle"></i></a>
+                        </span>
+                    </h4>
                 </div>
             </div>
         </div>

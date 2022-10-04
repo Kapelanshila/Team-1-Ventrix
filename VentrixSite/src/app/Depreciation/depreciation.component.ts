@@ -138,6 +138,13 @@ export class DepreciationComponent implements OnInit {
     }
   }
 
+  help()
+  {
+    this.ventrixdbservice.setPage(32);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
   deleteDepreciation(selectedDepreciation: Depreciation)
   {
     //Sweet alerts are used as notifications

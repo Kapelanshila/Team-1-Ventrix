@@ -5,10 +5,16 @@
             <div class="table-wrapper" >
                 <br>
                 <div *ngIf="selectedAsset == null" class="table-title">
-                    <h2 style="text-align: center;">Asset Depreciation Report</h2>
+                    <h2 style="text-align: center;">Asset Depreciation Report
+                        <span>
+                            <a [routerLink]="" style="cursor: pointer;" (click)="help()"><i class="fa fa-info-circle"></i></a>
+                        </span></h2>
                 </div>	
                 <div *ngIf="selectedAsset != null" class="table-title">
-                    <h2 style="text-align: center;">Asset Depreciation Report</h2>
+                    <h2 style="text-align: center;">Asset Depreciation Report
+                        <span>
+                            <a [routerLink]="" style="cursor: pointer;" (click)="help()"><i class="fa fa-info-circle"></i></a>
+                        </span></h2>
                 </div>	
               <br>
               <div class="row">

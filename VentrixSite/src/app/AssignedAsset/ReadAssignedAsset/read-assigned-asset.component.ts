@@ -88,6 +88,13 @@ export class ReadAssignedAssetComponent implements OnInit {
       this.displayStyle = "none";
     }
 
+    help()
+  {
+    this.ventrixdbservice.setPage(163);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
   assignAsset()
   {
     if (this.selectedEmployee == null)

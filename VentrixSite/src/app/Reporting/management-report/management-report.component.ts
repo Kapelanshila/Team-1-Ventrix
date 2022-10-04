@@ -104,7 +104,7 @@ doughnutChartData: SingleDataSet[] = [];
 
 doughnutChartType: ChartType = 'pie';
 
-constructor(public ventrixdbservice: VentrixDBServiceService,) { }
+constructor(public ventrixdbservice: VentrixDBServiceService,  private router: Router) { }
 ngOnInit(): void 
 {
     //Inorder to display who generated it 
@@ -275,6 +275,13 @@ monthChange()
 });
 });
   }
+}
+
+help()
+{
+  this.ventrixdbservice.setPage(225);
+  this.router.navigate(['/help']).then(() => {
+    });
 }
 
 // PDF Options

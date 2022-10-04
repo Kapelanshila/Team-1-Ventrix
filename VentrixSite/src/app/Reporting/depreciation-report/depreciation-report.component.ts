@@ -76,7 +76,7 @@ export class DepreciationReportComponent implements OnInit {
   lineChartPlugins = [];
   lineChartType: ChartType = 'line';
 
-  constructor(public ventrixdbservice: VentrixDBServiceService,) { }
+  constructor(public ventrixdbservice: VentrixDBServiceService,  private router: Router) { }
   ngOnInit(): void {
           //Inorder to display who generated it 
           this.account = this.ventrixdbservice.getAccount();
@@ -178,6 +178,13 @@ gatherdata()
       }
     });
   }
+}
+
+help()
+{
+  this.ventrixdbservice.setPage(223);
+  this.router.navigate(['/help']).then(() => {
+    });
 }
 
 generateExcel()

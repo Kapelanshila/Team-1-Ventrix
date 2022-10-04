@@ -195,6 +195,14 @@ export class PackOrderComponent implements OnInit {
     }
   }
 
+    
+  help()
+  {
+    this.ventrixdbservice.setPage(106);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
   searchClientOrder()
   { 
     this.clientOrderVM = []

@@ -167,6 +167,14 @@ export class CompletedOrdersComponent implements OnInit {
     });
   }
 
+  help()
+  {
+    this.ventrixdbservice.setPage(129);
+    this.router.navigate(['/help']).then(() => {
+      });
+  }
+
+
   download(selectedClientOrder: ClientOrderVM)
   {
     this.ventrixdbservice.createDeliveredOrderPDF(selectedClientOrder)

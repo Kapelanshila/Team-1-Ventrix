@@ -158,6 +158,13 @@ export class ReadCheckinComponent implements OnInit {
     })  
    }
 
+   help()
+   {
+     this.ventrixdbservice.setPage(167);
+     this.router.navigate(['/help']).then(() => {
+       });
+   }
+ 
    viewCheckIns()
    {
     this.router.navigate(['/view-checkin']);
