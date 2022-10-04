@@ -80,7 +80,6 @@ export class RoutePage implements OnInit {
   getTotalDistance() {
     this.deliveryService.getEnRouteOrders().subscribe(response => {
       this.routes =  response;
-      console.log(this.routes)
       this.routesdisplay = this.routes.filter((v,i,a)=>a.findIndex(v2=>(v2.clientId===v.clientId))===i)
 
       this.destinations = '';

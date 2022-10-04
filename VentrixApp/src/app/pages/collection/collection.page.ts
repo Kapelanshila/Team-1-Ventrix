@@ -25,7 +25,6 @@ export class CollectionPage implements OnInit {
     this.collectionService.getOrderCollections().subscribe(
       (data: any) => {
         this.collections = data;
-        console.log(data);
       }
     );
   }

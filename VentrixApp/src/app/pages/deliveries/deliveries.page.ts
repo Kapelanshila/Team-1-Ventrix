@@ -99,7 +99,6 @@ export class DeliveriesPage implements OnInit {
                 rescheduled: this.odelivery.rescheduled
               }
               this.deliveries.push(this.order);
-              console.log(this.deliveries)
             }
             }
             else
@@ -120,7 +119,6 @@ export class DeliveriesPage implements OnInit {
                 rescheduled: null
               }
               this.deliveries.push(this.order);
-              console.log(this.deliveries)
             }
             }
 
@@ -129,7 +127,6 @@ export class DeliveriesPage implements OnInit {
       })
       });
     })
-      console.log(this.deliveries)
       });
   }
   help() {

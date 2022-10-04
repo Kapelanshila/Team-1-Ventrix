@@ -43,7 +43,6 @@ export class CompleteOrderPage implements OnInit {
   }
 
   startDrawing(event: Event) {
-    console.log(event);
     // works in device not in browser
   }
 

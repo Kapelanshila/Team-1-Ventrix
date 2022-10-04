@@ -54,7 +54,6 @@ export class SchedulePage implements OnInit {
           if (Date.parse(this.currentDate) <= Date.parse(this.slotdate))
           {
             this.timesSlots.push(element);
-            console.log(this.timesSlots)
           }
         });
         this.clientInfo = data.UserInfo;
@@ -69,7 +68,6 @@ export class SchedulePage implements OnInit {
     };
     this.deliveryService.scheduleDelivery(schedule).subscribe(
       (data: any) => {
-        console.log(data);
         this.successfulSchedule(true);
         this.deliveryService.ScheduleSMS(schedule).subscribe();
         this.router.navigate(['/deliveries']).then(() => {
