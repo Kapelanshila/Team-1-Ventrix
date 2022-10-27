@@ -10,6 +10,7 @@ import { saveAs } from 'file-saver';
 import { ClientOrder } from 'src/app/shared/ClientOrder';
 import * as CryptoJS from 'crypto-js';
 import { environment } from 'src/environments/environment';
+import { ClientOrderVM } from 'src/app/shared/ClientOrderVM';
 // import { ThemeService } from 'ng2-charts';
 
 @Component({
@@ -30,7 +31,7 @@ export class CreateClientOrderComponent implements OnInit {
   clientorder: ClientOrder|undefined;
   disabled = false;
   conversionEncryptOutput!: string;  
-
+  setOrder!:ClientOrderVM;
   @Output() public onUploadFinished = new EventEmitter();
 
 
@@ -164,7 +165,22 @@ export class CreateClientOrderComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           this.ventrixdbservice.createClientOrder(this.order).subscribe();
-          this.router.navigate(['/read-clientorder']).then(() => {
+
+          this.setOrder = 
+          {
+            clientId: this.order.clientId,
+            clientInvoice: this.order.clientInvoice,
+            description: this.order.description,
+            clientOrderId: this.order.clientOrderId,
+            encrypted: this.order.encrypted,
+            contactPersonName:'',
+            contactPersonSurname:'',
+            emailAddress:'',
+            status:''
+          }
+          
+          this.ventrixdbservice.setClientOrder(this.setOrder);
+          this.router.navigate(['/read-clientorderline']).then(() => {
             window.location.reload();
           });
         }

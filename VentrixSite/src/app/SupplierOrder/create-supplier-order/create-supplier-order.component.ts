@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { HttpClient, HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import { SupplierOrder } from 'src/app/shared/SupplierOrder';
+import { SupplierOrderVM } from 'src/app/shared/SupplierOrderVM';
 // import { ThemeService } from 'ng2-charts';
 
 @Component({
@@ -27,6 +28,7 @@ export class CreateSupplierOrderComponent implements OnInit {
   selected!: FileList;
   orders:SupplierOrder[] = [];
   supplierorder: SupplierOrder|undefined;
+  setorder!:SupplierOrderVM;
   disabled = false;
 
   @Output() public onUploadFinished = new EventEmitter();
@@ -161,7 +163,18 @@ export class CreateSupplierOrderComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           this.ventrixdbservice.createSupplierOrder(this.order).subscribe();
-          this.router.navigate(['/read-supplierorder']).then(() => {
+          this.setorder =
+          {
+            contactPersonName:'',
+            description:this.order.description,
+            emailAddress:'',
+            inventories:false,
+            supplierId:this.order.supplierId,
+            supplierInvoice:this.order.supplierInvoice,
+            supplierOrderId:this.order.supplierOrderId
+          }
+          this.ventrixdbservice.setSupplierOrder(this.setorder);
+          this.router.navigate(['/read-supplierorderline']).then(() => {
             window.location.reload();
           });
         }
